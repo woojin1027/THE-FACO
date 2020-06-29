@@ -18,6 +18,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/*
+* activity_main에서 리스트 개수에 맞게 이미지 띄우는 방법 찾기
+* activity_main에서 리스트 옆의 동그라미 없애는 방법 찾기
+* splash 색이 맘에 안든다 불편ㅡㅡ
+* 버스 번호 누르면 bus_detail.xml로 넘어가게 해야함
+* */
+
 public class MainActivity extends AppCompatActivity {
     TextView textView1;
     ListView Bus_List;
@@ -48,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         data = new ArrayList<String>();
-        data.add("7000");
-        data.add("7001");
-        data.add("7002");
+        data.add("M4102");
+        data.add("8100");
         //https://gtothe1.tistory.com/entry/%EB%A6%AC%EC%8A%A4%ED%8A%B8%EB%B7%B0-%ED%95%AD%EB%AA%A9-%EC%B6%94%EA%B0%80-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0
         //위에 링크 참고
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, data);
