@@ -19,30 +19,40 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /*
+* 나중에 패키지 이름 바꾸기  https://c10106.tistory.com/2268  <참고
 * activity_main에서 리스트 개수에 맞게 이미지 띄우는 방법 찾기
 * activity_main에서 리스트 옆의 동그라미 없애는 방법 찾기
 * splash 색이 맘에 안든다 불편ㅡㅡ
 * 버스 번호 누르면 bus_detail.xml로 넘어가게 해야함
-* */
+*
+*/
 
 public class MainActivity extends AppCompatActivity {
+
     TextView textView1;
     ListView Bus_List;
     ArrayList<String> data;
     ArrayAdapter<String> adapter;
+    private BackPressCloseHandler backPressCloseHandler;
+
+    @Override
+    public void onBackPressed() { //'뒤로' 두번누르면 종료
+        backPressCloseHandler.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         /*ActionBar ab = getSupportActionBar() ;
-
         ab.setIcon(R.drawable.icon_pink);
         ab.setDisplayUseLogoEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
         왜 아이콘이랑 글자랑 동시에 표현이 안되는거야ㅠ-ㅠ
         */
+
 
         // 권한 요청
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -53,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     {Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET}, 1000);
         }
+
 
         data = new ArrayList<String>();
         data.add("M4102");
@@ -73,9 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 /*putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값*/
                 String item = data.get(position);
                 Toast.makeText(MainActivity.this, item + "번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
+                openActivity2(); //새로운 창 열기
             }
-
         });
+    }
+
+    public void openActivity2() { //버스 고르면 bus_detail창 여는 함수
+        Intent bus_detail_Intent = new Intent(this, bus_detail_class.class);
+        startActivity(bus_detail_Intent);
     }
 
     @Override
@@ -86,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { // ''' 메뉴 설정
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.navigation_menu1:
@@ -94,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_menu2: //TheFaCo란?
                 Intent descript_Intent = new Intent(this, app_Description.class);
                 startActivity(descript_Intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
                 return true;
             case R.id.navigation_menu3:
                 return true;
@@ -101,4 +119,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-}
+
+}//class end

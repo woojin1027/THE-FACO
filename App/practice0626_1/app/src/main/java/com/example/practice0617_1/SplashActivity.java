@@ -17,8 +17,8 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_splash);
         LinearLayout view = (LinearLayout) findViewById(R.id.viewcontainer);
-        ImageView imageView=findViewById(R.id.pinkbus);
-        imageView.setImageResource(R.drawable.icon_pink);
+        ImageView imageView = findViewById(R.id.mainIcon);
+        imageView.setImageResource(R.drawable.bus);
 
 
         animDrawable = (AnimationDrawable) (view.getBackground() != null && view.getBackground() instanceof AnimationDrawable ?
