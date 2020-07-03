@@ -1,0 +1,2 @@
+rootProject.name='TheFaco'
+include ':app'
