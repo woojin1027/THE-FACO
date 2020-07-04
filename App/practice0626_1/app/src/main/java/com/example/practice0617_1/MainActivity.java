@@ -2,29 +2,39 @@ package com.example.practice0617_1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
 * 나중에 패키지 이름 바꾸기  https://c10106.tistory.com/2268  <참고
 * activity_main에서 리스트 개수에 맞게 이미지 띄우는 방법 찾기
 * activity_main에서 리스트 옆의 동그라미 없애는 방법 찾기
 * splash 색이 맘에 안든다 불편ㅡㅡ
-* 버스 번호 누르면 bus_detail.xml로 넘어가게 해야함
-*
+* bus_detail.xml UI바꾸기
 */
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> data;
     ArrayAdapter<String> adapter;
     private BackPressCloseHandler backPressCloseHandler;
+
 
     @Override
     public void onBackPressed() { //'뒤로' 두번누르면 종료
@@ -53,15 +64,10 @@ public class MainActivity extends AppCompatActivity {
         왜 아이콘이랑 글자랑 동시에 표현이 안되는거야ㅠ-ㅠ
         */
 
-
         // 권한 요청
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]
-                    {Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET}, 1000);
+                    {Manifest.permission.INTERNET}, 1000);
         }
 
 

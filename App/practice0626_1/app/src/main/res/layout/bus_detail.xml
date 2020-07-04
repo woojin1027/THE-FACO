@@ -4,28 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#85FFFFFF"
     android:orientation="vertical"
-    tools:background="#DCA3A3">
+    android:weightSum="10"
+    tools:context=".bus_detail_class">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/busNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="테스트"
-            tools:layout_weight="6"
-            tools:textSize="30sp" />
-
-        <ImageView
-            android:id="@+id/F5"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_weight="1"
-            app:srcCompat="@android:drawable/ic_popup_sync" />
+            android:text="언제 도착하지?"
+            android:textColor="#ffffffff"
+            android:textSize="40dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:weightSum="5">
+
+        <EditText
+            android:id="@+id/busNum"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="#8500BCD4"
+            android:ems="10"
+            android:hint="버스 번호를 입력해주세요."
+            android:inputType="textPersonName"
+            android:text=""
+            android:textColor="#000000"
+            android:textColorHint="#D5D5D5" />
+
+        <EditText
+            android:id="@+id/stationNum"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="#8800BCD4"
+            android:ems="10"
+            android:hint="정류장 번호를 입력해주세요."
+            android:inputType="textPersonName"
+            android:text=""
+            android:textColor="#000000"
+            android:textColorHint="#D5D5D5" />
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:onClick="search"
+            android:text="검색하기" />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="#433FB568">
+
+        <TextView
+            android:id="@+id/showInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+    </ScrollView>
+
 </LinearLayout>
+
+
