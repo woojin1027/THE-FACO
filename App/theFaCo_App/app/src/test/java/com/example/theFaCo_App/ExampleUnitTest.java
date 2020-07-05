@@ -1,4 +1,4 @@
-package com.example.practice0617_1;
+package com.example.theFaCo_App;
 
 import org.junit.Test;
 

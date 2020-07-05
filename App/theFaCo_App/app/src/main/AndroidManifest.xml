@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.practice0617_1">
+    package="com.example.theFaCo_App">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,11 +13,11 @@
         android:roundIcon="@mipmap/ic_pink_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.theFaCo_App.MainActivity">
         </activity>
-        <activity android:name=".bus_detail_class"/>
+        <activity android:name="com.example.theFaCo_App.bus_detail_class"/>
 
-        <activity android:name=".SplashActivity"
+        <activity android:name="com.example.theFaCo_App.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".app_Description"/>
+        <activity android:name="com.example.theFaCo_App.app_Description"/>
 
         <meta-data
             android:name="preloaded_fonts"

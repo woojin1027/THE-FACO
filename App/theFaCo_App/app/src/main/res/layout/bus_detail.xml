@@ -7,7 +7,7 @@
     android:background="#85FFFFFF"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".bus_detail_class">
+    tools:context="com.example.theFaCo_App.bus_detail_class">
 
     <LinearLayout
         android:layout_width="match_parent"

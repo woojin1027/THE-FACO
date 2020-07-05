@@ -1,4 +1,4 @@
-package com.example.practice0617_1;
+package com.example.theFaCo_App;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.theFaCo_App.R;
 
 public class SplashActivity extends Activity {
     AnimationDrawable animDrawable;
