@@ -12,7 +12,6 @@ import com.example.theFaCo_App.R;
 
 public class SplashActivity extends Activity {
     AnimationDrawable animDrawable;
-    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
