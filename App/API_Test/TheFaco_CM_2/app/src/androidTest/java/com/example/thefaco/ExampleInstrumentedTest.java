@@ -1,4 +1,4 @@
-package com.example.theFaCo_App;
+package com.example.thefaco;
 
 import android.content.Context;
 
@@ -21,6 +21,7 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.theFaCo_App", appContext.getPackageName());
+
+        assertEquals("com.example.thefaco", appContext.getPackageName());
     }
 }
