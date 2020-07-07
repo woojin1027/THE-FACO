@@ -29,8 +29,7 @@ class ped():
             a1 = (x2 - x1)
             b1 = (y2 - y1)
             c = a1*a1 + b1*b1
-            if a1 > 0:
-                if d < c:
+            if a1 > 0 and d < c:
                     d = c
                     d1 = abs(a1)
                     d2 = abs(b1)
