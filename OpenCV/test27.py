@@ -47,7 +47,7 @@ class ped():
     cv2.destroyAllWindows()
     
     def main(self):
-        cap=cv2.VideoCapture("123.mp4")
+        cap=cv2.VideoCapture("test.mp4")
         fgbg=cv2.createBackgroundSubtractorMOG2(detectShadows=False,history=200,varThreshold = 90)
 
         kernalOp = np.ones((3,3),np.uint8)

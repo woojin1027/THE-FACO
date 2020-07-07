@@ -3,7 +3,7 @@ import numpy as np
 import time
 import test19 as vehicles
 
-cap=cv2.VideoCapture("123.mp4")
+cap=cv2.VideoCapture("test.mp4")
 fgbg=cv2.createBackgroundSubtractorMOG2(detectShadows=False,history=200,varThreshold = 90)
 
 kernalOp = np.ones((3,3),np.uint8)
@@ -111,7 +111,6 @@ while(cap.isOpened()):
         #frame = cv2.line(frame, (315, 0), (900, 410), (255, 0,0), 3, 8)
         #frame = cv2.line(frame, (420, 0), (350, 500), (255, 0,0), 3, 8)
 
-
         cv2.putText(frame, str_up, (10, 40), font, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
         cv2.putText(frame, str_down, (10, 90), font, 0.5, (255, 0, 0), 1, cv2.LINE_AA)
         cv2.imshow('Frame',frame)
@@ -119,12 +118,9 @@ while(cap.isOpened()):
         print("오른쪽으로 가는 인원은 : ",str(cnt_down)," 명 입니다." )
 
         key = cv2.waitKey(1)
-
         if key == 27:
             break
-
     else:
         break
-
 cap.release()
 cv2.destroyAllWindows()
