@@ -1,5 +1,6 @@
 package com.example.practice;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+//M4102 번 버스의 자바 파일
 public class showActivity extends AppCompatActivity
 {
 
@@ -62,8 +64,8 @@ public class showActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setTitle("M4102");
         setContentView(R.layout.activity_show);
-
         getXmlId();
         buffer = new StringBuffer();
     }
@@ -99,7 +101,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("정자역(숭례문 방면)\n");
                             buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car1 + " \n");
                             buffer.append("남은 시간 : " + min1 + " 분 \n");
                             buffer.append("남은 구간 : " + station1 + "정거장\n");
                             buffer.append("빈 좌석수 : " + seat1 + "\n");
@@ -109,7 +110,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("-------------------------\n");
                             buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car2 + " \n");
                             buffer.append("남은 시간 : " + min2 + "분 \n");
                             buffer.append("남은 구간 : " + station2 + "정거장 \n");
                             buffer.append("빈 좌석수 : " + seat2 + "\n");
@@ -153,7 +153,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("서현역.AK플라자(숭례문 방면)\n");
                             buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car1 + " \n");
                             buffer.append("남은 시간 : " + min1 + " 분 \n");
                             buffer.append("남은 구간 : " + station1 + "정거장\n");
                             buffer.append("빈 좌석수 : " + seat1 + "\n");
@@ -163,7 +162,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("-------------------------\n");
                             buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car2 + " \n");
                             buffer.append("남은 시간 : " + min2 + "분 \n");
                             buffer.append("남은 구간 : " + station2 + "정거장 \n");
                             buffer.append("빈 좌석수 : " + seat2 + "\n");
@@ -206,7 +204,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("남대문세무서.국가인권위원회 (숭례문 방면)\n");
                             buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car1 + " \n");
                             buffer.append("남은 시간 : " + min1 + " 분 \n");
                             buffer.append("남은 구간 : " + station1 + "정거장\n");
                             buffer.append("빈 좌석수 : " + seat1 + "\n");
@@ -216,7 +213,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("-------------------------\n");
                             buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car2 + " \n");
                             buffer.append("남은 시간 : " + min2 + "분 \n");
                             buffer.append("남은 구간 : " + station2 + "정거장 \n");
                             buffer.append("빈 좌석수 : " + seat2 + "\n");
@@ -259,7 +255,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("명동국민은행앞 (미금역.청솔마을.2001아울렛 방면)\n");
                             buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car1 + " \n");
                             buffer.append("남은 시간 : " + min1 + " 분 \n");
                             buffer.append("남은 구간 : " + station1 + "정거장\n");
                             buffer.append("빈 좌석수 : " + seat1 + "\n");
@@ -269,7 +264,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("-------------------------\n");
                             buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car2 + " \n");
                             buffer.append("남은 시간 : " + min2 + "분 \n");
                             buffer.append("남은 구간 : " + station2 + "정거장 \n");
                             buffer.append("빈 좌석수 : " + seat2 + "\n");
@@ -312,7 +306,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("남대문세무서.서울백병원(중) (미금역.청솔마을.2001아울렛 방면)\n");
                             buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car1 + " \n");
                             buffer.append("남은 시간 : " + min1 + " 분 \n");
                             buffer.append("남은 구간 : " + station1 + "정거장\n");
                             buffer.append("빈 좌석수 : " + seat1 + "\n");
@@ -322,7 +315,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("-------------------------\n");
                             buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car2 + " \n");
                             buffer.append("남은 시간 : " + min2 + "분 \n");
                             buffer.append("남은 구간 : " + station2 + "정거장 \n");
                             buffer.append("빈 좌석수 : " + seat2 + "\n");
@@ -365,7 +357,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("서현역.AK플라자 (미금역.청솔마을.2001아울렛 방면)\n");
                             buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car1 + " \n");
                             buffer.append("남은 시간 : " + min1 + " 분 \n");
                             buffer.append("남은 구간 : " + station1 + "정거장\n");
                             buffer.append("빈 좌석수 : " + seat1 + "\n");
@@ -375,7 +366,6 @@ public class showActivity extends AppCompatActivity
                         {
                             buffer.append("-------------------------\n");
                             buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("차량 번호 : " + car2 + " \n");
                             buffer.append("남은 시간 : " + min2 + "분 \n");
                             buffer.append("남은 구간 : " + station2 + "정거장 \n");
                             buffer.append("빈 좌석수 : " + seat2 + "\n");
