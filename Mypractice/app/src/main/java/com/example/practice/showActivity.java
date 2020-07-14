@@ -43,7 +43,7 @@ public class showActivity extends AppCompatActivity
     private String stationId_seohyun1;
     private String stationId_namdaemoon1;
     private String stationId_myeongdong;
-    private String stationid_namdaemoon2;
+    private String stationId_namdaemoon2;
     private String stationId_seohyun2;
     private String staOrder_jungja;
     private String staOrder_seohyun1;
@@ -278,7 +278,7 @@ public class showActivity extends AppCompatActivity
     public void namdaemoon2(View view)
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
-        stationid_namdaemoon2 = "101000001";
+        stationId_namdaemoon2 = "101000001";
         staOrder_namdaemoon2 = "25";
         buffer = null;
         buffer = new StringBuffer();
@@ -290,7 +290,7 @@ public class showActivity extends AppCompatActivity
             public void run()
             {
                 //오퍼레이션 1
-                getBusArrivalItem(stationid_namdaemoon2, staOrder_namdaemoon2);
+                getBusArrivalItem(stationId_namdaemoon2, staOrder_namdaemoon2);
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override

@@ -124,7 +124,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_mikoom = "206000087";
-        staOrder_mikoom = "6";
+        staOrder_mikoom = "7";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -175,7 +175,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_jungja1 = "206000725";
-        staOrder_jungja1 = "7";
+        staOrder_jungja1 = "9";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -226,7 +226,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_namdaemoon = "101000001";
-        staOrder_namdaemoon = "29";
+        staOrder_namdaemoon = "31";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -277,7 +277,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_sooncheon = "102000070";
-        staOrder_sooncheon = "32";
+        staOrder_sooncheon = "34";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -328,7 +328,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_jungja2 = "206000189";
-        staOrder_jungja2 = "42";
+        staOrder_jungja2 = "44";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -471,4 +471,5 @@ public class subActivity extends AppCompatActivity {
         //view 의 id 를 R 클래스에서 받아옴
         xmlShowInfo = findViewById(R.id.showInfo);
     }
+
 }
