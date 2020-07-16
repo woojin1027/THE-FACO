@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_btn1"
+        android:title="뒤로가기"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_btn2"
+        android:title="새로고침"
+        app:showAsAction="always" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toolbar Title"
+        android:layout_gravity="center"
+        android:id="@+id/toolbar_title"
+        android:textSize="20sp"
+        />
+</menu>
