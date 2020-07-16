@@ -471,5 +471,4 @@ public class subActivity extends AppCompatActivity {
         //view 의 id 를 R 클래스에서 받아옴
         xmlShowInfo = findViewById(R.id.showInfo);
     }
-
 }
