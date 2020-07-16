@@ -3,10 +3,14 @@ package com.example.practice;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -66,28 +70,52 @@ public class MainActivity extends AppCompatActivity {
 
         Button busbutton1 = (Button)findViewById(R.id.busNum4); //버튼1에 대한 참조획득
         Button busbutton2 = (Button)findViewById(R.id.busNum5); //버튼2에 대한 참조획득
-        //버튼1 클릭에 대한 이벤트 처리
+        //버튼1(8100) 클릭에 대한 이벤트 처리
         busbutton1.setOnClickListener(new View.OnClickListener()
         {
             @Override
             //버튼1
             public void onClick(View view)
             {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getApplicationContext());
+                text.setText("8100번 버스를 조회합니다");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
+
                 Intent intent = new Intent(MainActivity.this, subActivity.class);
 
                 //Intent intent = new Intent(MainActivity.this, PathSetting.class);
-                Toast.makeText(MainActivity.this, "8100번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "8100번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
 
-        //버튼2 클릭에 대한 이벤트 처리
+        //버튼2(M4102) 클릭에 대한 이벤트 처리
         busbutton2.setOnClickListener(new View.OnClickListener()
         {
             @Override
             //버튼2
             public void onClick(View view)
             {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getApplicationContext());
+                text.setText("M4102번 버스를 조회합니다");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
+
                 Intent intent = new Intent(MainActivity.this, showActivity.class);
                 Toast.makeText(MainActivity.this, "M4102번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
