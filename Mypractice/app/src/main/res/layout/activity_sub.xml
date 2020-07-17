@@ -13,8 +13,8 @@
 
         <TextView
             android:id="@+id/showInfo"
-            android:layout_width="103dp"
-            android:layout_height="47dp"
+            android:layout_width="134dp"
+            android:layout_height="247dp"
             android:layout_marginBottom="705dp"
             android:background="@android:drawable/ic_notification_overlay"
             android:elevation="100dp"

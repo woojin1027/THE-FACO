@@ -21,6 +21,7 @@ public class subActivity extends AppCompatActivity {
     private final String TAG = "myTag";
     private final String key1 = "AGosnxF7ORMEFRnphkCbkve01B6SaEZpj5R2kD03%2B43HobZwgWC2BqRthRvHeMOEWK1M%2BAPASvsbGc3K7Z9V8A%3D%3D"; //버스도착정보목록조회 인증키
     private final String endPoint1 = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice"; //버스도착정보목록조회 앞 주소
+    private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; // 버스위치정보목록조회 앞 주소
     private final String route = "234000878";
 
     //xml 변수
@@ -36,6 +37,7 @@ public class subActivity extends AppCompatActivity {
 
     //xml 값 입력 변수
     private StringBuffer buffer;
+    private StringBuffer buffer2;
 
     private String stationId_ori;
     private String stationId_mikoom;
@@ -65,6 +67,7 @@ public class subActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub);
         getXmlId();
         buffer = new StringBuffer();
+        buffer2 = new StringBuffer();
 
     }
 
@@ -449,6 +452,41 @@ public class subActivity extends AppCompatActivity {
         }catch (Exception e){e.printStackTrace();}
     }
 
+    //오퍼레이션1 버스위치정보조회서비스
+    private void getBusLocationList()
+    {
+        String stationUrl = endPoint2 + "?serviceKey=" + key1 + "&routeId=" + route;
+        Log.d(TAG, "정류장명 -> 정류장Id : " + stationUrl);
+
+        try
+        {
+            setUrlNParser(stationUrl);
+            while (eventType != XmlPullParser.END_DOCUMENT)
+            {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
+                        break;
+                    case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
+                        tag = xpp.getName();    //태그이름 얻어오기
+                        if(tag.equals("busLocationList"));  //첫번째 검색 결과
+                        else if(tag.equals("stationId"))
+                        {
+                            xpp.next();
+                            buffer2.append(xpp.getText());
+                        }
+                        break;
+                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
+                        break;
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if(tag.equals("busLocationList")); //첫번째 검색결과 종료
+                        break;
+                }
+                eventType = xpp.next();
+            }
+        }catch (Exception e){e.printStackTrace();}
+    }
     private void setUrlNParser(String quary)
     {
         try
@@ -470,5 +508,13 @@ public class subActivity extends AppCompatActivity {
     {
         //view 의 id 를 R 클래스에서 받아옴
         xmlShowInfo = findViewById(R.id.showInfo);
+    }
+
+    private void getbusdata()
+    {
+        for (int i = 1; i < 49; i++)
+        {
+            getBusLocationList();
+        }
     }
 }
