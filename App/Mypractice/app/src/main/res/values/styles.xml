@@ -5,7 +5,15 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#EBA9B2</item>
         <item name="colorPrimaryDark">#AE4957</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#0F4C81</item>
+
+        <!-- To change the popup menu and app text color  -->
+        <item name="android:textColor">#ffffffff</item>
+
+        <!-- To change the background of options menu-->
+        <item name="android:itemBackground">#ccAE4957</item>
+
     </style>
+
 
 </resources>

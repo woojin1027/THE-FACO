@@ -96,13 +96,13 @@ public class subActivity extends AppCompatActivity {
                             buffer.append("도착 정보 없음");
                         }
                         else
-                            {
-                                buffer.append("오리역 (서울역버스환승센터 방면)\n");
-                                buffer.append("첫번째 차량 도착 정보\n");
-                                buffer.append("남은 시간 : " + min1 + " 분 \n");
-                                buffer.append("남은 구간 : " + station1 + "정거장\n");
-                                buffer.append("빈 좌석수 : " + seat1 + "\n");
-                            }
+                        {
+                            buffer.append("오리역 (서울역버스환승센터 방면)\n");
+                            buffer.append("첫번째 차량 도착 정보\n");
+                            buffer.append("남은 시간 : " + min1 + " 분 \n");
+                            buffer.append("남은 구간 : " + station1 + "정거장\n");
+                            buffer.append("빈 좌석수 : " + seat1 + "\n");
+                        }
                         // 두번째 도착 차량은 null이 아닐 경우에만 출력
                         if(car2 != null)
                         {
@@ -124,7 +124,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_mikoom = "206000087";
-        staOrder_mikoom = "6";
+        staOrder_mikoom = "7";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -148,13 +148,13 @@ public class subActivity extends AppCompatActivity {
                             buffer.append("도착 정보 없음");
                         }
                         else
-                            {
-                                buffer.append("미금역.청솔마을.2001아울렛 (서울역버스환승센터 방면)\n");
-                                buffer.append("첫번째 차량 도착 정보\n");
-                                buffer.append("남은 시간 : " + min1 + " 분 \n");
-                                buffer.append("남은 구간 : " + station1 + "정거장\n");
-                                buffer.append("빈 좌석수 : " + seat1 + "\n");
-                            }
+                        {
+                            buffer.append("미금역.청솔마을.2001아울렛 (서울역버스환승센터 방면)\n");
+                            buffer.append("첫번째 차량 도착 정보\n");
+                            buffer.append("남은 시간 : " + min1 + " 분 \n");
+                            buffer.append("남은 구간 : " + station1 + "정거장\n");
+                            buffer.append("빈 좌석수 : " + seat1 + "\n");
+                        }
                         // 두번째 도착 차량은 null이 아닐 경우에만 출력
                         if(car2 != null)
                         {
@@ -175,7 +175,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_jungja1 = "206000725";
-        staOrder_jungja1 = "7";
+        staOrder_jungja1 = "9";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -199,13 +199,13 @@ public class subActivity extends AppCompatActivity {
                             buffer.append("도착 정보 없음");
                         }
                         else
-                            {
-                                buffer.append("정자역 (서울역버스환승센터 방면)\n");
-                                buffer.append("첫번째 차량 도착 정보\n");
-                                buffer.append("남은 시간 : " + min1 + " 분 \n");
-                                buffer.append("남은 구간 : " + station1 + "정거장\n");
-                                buffer.append("빈 좌석수 : " + seat1 + "\n");
-                            }
+                        {
+                            buffer.append("정자역 (서울역버스환승센터 방면)\n");
+                            buffer.append("첫번째 차량 도착 정보\n");
+                            buffer.append("남은 시간 : " + min1 + " 분 \n");
+                            buffer.append("남은 구간 : " + station1 + "정거장\n");
+                            buffer.append("빈 좌석수 : " + seat1 + "\n");
+                        }
                         // 두번째 도착 차량은 null이 아닐 경우에만 출력
                         if(car2 != null)
                         {
@@ -226,7 +226,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_namdaemoon = "101000001";
-        staOrder_namdaemoon = "29";
+        staOrder_namdaemoon = "31";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -250,13 +250,13 @@ public class subActivity extends AppCompatActivity {
                             buffer.append("도착 정보 없음");
                         }
                         else
-                            {
-                                buffer.append("남대문세무서.서울백병원(중) (단국대.치과병원 방면)\n");
-                                buffer.append("첫번째 차량 도착 정보\n");
-                                buffer.append("남은 시간 : " + min1 + " 분 \n");
-                                buffer.append("남은 구간 : " + station1 + "정거장\n");
-                                buffer.append("빈 좌석수 : " + seat1 + "\n");
-                            }
+                        {
+                            buffer.append("남대문세무서.서울백병원(중) (단국대.치과병원 방면)\n");
+                            buffer.append("첫번째 차량 도착 정보\n");
+                            buffer.append("남은 시간 : " + min1 + " 분 \n");
+                            buffer.append("남은 구간 : " + station1 + "정거장\n");
+                            buffer.append("빈 좌석수 : " + seat1 + "\n");
+                        }
                         // 두번째 도착 차량은 null이 아닐 경우에만 출력
                         if(car2 != null)
                         {
@@ -277,7 +277,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_sooncheon = "102000070";
-        staOrder_sooncheon = "32";
+        staOrder_sooncheon = "34";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -301,13 +301,13 @@ public class subActivity extends AppCompatActivity {
                             buffer.append("도착 정보 없음");
                         }
                         else
-                            {
-                                buffer.append("순천향대학병원 (단국대.치과병원 방면)\n");
-                                buffer.append("첫번째 차량 도착 정보\n");
-                                buffer.append("남은 시간 : " + min1 + " 분 \n");
-                                buffer.append("남은 구간 : " + station1 + "정거장\n");
-                                buffer.append("빈 좌석수 : " + seat1 + "\n");
-                            }
+                        {
+                            buffer.append("순천향대학병원 (단국대.치과병원 방면)\n");
+                            buffer.append("첫번째 차량 도착 정보\n");
+                            buffer.append("남은 시간 : " + min1 + " 분 \n");
+                            buffer.append("남은 구간 : " + station1 + "정거장\n");
+                            buffer.append("빈 좌석수 : " + seat1 + "\n");
+                        }
                         // 두번째 도착 차량은 null이 아닐 경우에만 출력
                         if(car2 != null)
                         {
@@ -328,7 +328,7 @@ public class subActivity extends AppCompatActivity {
     {
         car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
         stationId_jungja2 = "206000189";
-        staOrder_jungja2 = "42";
+        staOrder_jungja2 = "44";
         buffer = null;
         buffer = new StringBuffer();
         xmlShowInfo.setText("");
@@ -352,13 +352,13 @@ public class subActivity extends AppCompatActivity {
                             buffer.append("도착 정보 없음");
                         }
                         else
-                            {
-                                buffer.append("정자역 (단국대.치과병원 방면)\n");
-                                buffer.append("첫번째 차량 도착 정보\n");
-                                buffer.append("남은 시간 : " + min1 + " 분 \n");
-                                buffer.append("남은 구간 : " + station1 + "정거장\n");
-                                buffer.append("빈 좌석수 : " + seat1 + "\n");
-                            }
+                        {
+                            buffer.append("정자역 (단국대.치과병원 방면)\n");
+                            buffer.append("첫번째 차량 도착 정보\n");
+                            buffer.append("남은 시간 : " + min1 + " 분 \n");
+                            buffer.append("남은 구간 : " + station1 + "정거장\n");
+                            buffer.append("빈 좌석수 : " + seat1 + "\n");
+                        }
                         // 두번째 도착 차량은 null이 아닐 경우에만 출력
                         if(car2 != null)
                         {
