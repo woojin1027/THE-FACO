@@ -42,12 +42,36 @@ def draw_detections(img, rects, thickness = 1):
                         
                     
 def haar(frame):
+    readc = []
+    readc2 = []
     face_cascade = cv.CascadeClassifier('haarcascade\\haarcascade_frontalface_default.xml')
     body_cascade = cv.CascadeClassifier('haarcascade\\haarcascade_fullbody.xml')
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     body = body_cascade.detectMultiScale(gray, 1.3, 5)
     for (x,y,w,h) in body:
         cv.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+        w2 = int(w/2)
+        h2 = int(h/2)
+        cv.circle(frame,(x+w2,y+h2),5,(255,255,255),3)
+        readc.append((str(x+w2),str(y+h2)))
+        #print(readc[0][0])
+        #print(len(readc))
+        #print(readc)
+        for i in range(len(readc)):
+            for j in range(len(readc)):
+                a = abs(int(readc[i][0]) - int(readc[j][0]))
+                b = abs(int(readc[i][1]) - int(readc[j][1]))
+                if i != j:
+                    if a < 300:
+                        if b < 200:
+                            readc2.append(( int(readc[i][0]),int(readc[i][1]) ))
+                            readc2.append(( int(readc[j][0]),int(readc[j][1]) ))
+                            readc2 = list(set(readc2))
+                            cv.line(frame,(int(readc[i][0]),int(readc[i][1])),(int(readc[j][0]),int(readc[j][1])),(0,50,55),5)
+                            if len(readc2) == 15:
+                                print("줄을 서고있는 인원이 15명 이상입니다.")
+                                break
+        print("줄을 서고 있는 인원은:",len(readc2))
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = frame[y:y+h, x:x+w]
         faces = face_cascade.detectMultiScale(roi_gray)
@@ -64,16 +88,16 @@ def main():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture('123.mp4')
+    cap = cv.VideoCapture(0)
     while cap.isOpened():
         ret,img = cap.read()
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
-        if cap.get(1)%50 == 0:
+        if cap.get(1)%30 == 0:
             found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
             found_filtered = []
             for ri, r in enumerate(found):
@@ -105,7 +129,7 @@ def main2():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture('123.mp4')
+    cap = cv.VideoCapture('126.mp4')
     while cap.isOpened():
         ret,img = cap.read()
         frame = img
