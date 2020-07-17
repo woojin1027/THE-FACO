@@ -3,7 +3,7 @@ import numpy as np
 
 face_cascade = cv2.CascadeClassifier('haarcascade\\haarcascade_frontalface_default.xml')
 body_cascade = cv2.CascadeClassifier('haarcascade\\haarcascade_fullbody.xml')
-cap = cv2.VideoCapture('122.avi') 
+cap = cv2.VideoCapture('123.mp4') 
 
 while(cap.isOpened()):
     #ret,frame = cap.read()
@@ -11,7 +11,7 @@ while(cap.isOpened()):
     ret, image = cap.read()
     frame = image
     rows, cols = frame.shape[:2]
-    rotation_matrix = cv2.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
+    rotation_matrix = cv2.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
     image_rotation = cv2.warpAffine(frame, rotation_matrix, (cols, rows))
     image = image_rotation
     frame = np.array(image)

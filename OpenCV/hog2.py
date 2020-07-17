@@ -28,24 +28,24 @@ def main():
     
     while cap.isOpened():
         ret,img = cap.read()
-        
         frame = img
         rows, cols = frame.shape[:2]
         rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
-
-        found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
-        found_filtered = []
-        for ri, r in enumerate(found):
-            for qi, q in enumerate(found):
-                if ri != qi and inside(r, q):
-                    break
-            else:
-                found_filtered.append(r)
-        draw_detections(img, found)
-        draw_detections(img, found_filtered, 3)
-        print('%d (%d)' % (len(found_filtered), len(found)),"명")
+        if cap.get(1)%20 == 0:
+        
+            found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
+            found_filtered = []
+            for ri, r in enumerate(found):
+                for qi, q in enumerate(found):
+                    if ri != qi and inside(r, q):
+                        break
+                else:
+                    found_filtered.append(r)
+            draw_detections(img, found)
+            draw_detections(img, found_filtered, 3)
+            print('%d (%d)' % (len(found_filtered), len(found)),"명")
         img = cv.resize(img,(900,500))
         cv.imshow('frame', img)
         
@@ -55,7 +55,6 @@ def main():
             break
         
             
-    
 if __name__ == '__main__':
     main()
     cv.destroyAllWindows()
