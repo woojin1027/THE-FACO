@@ -18,10 +18,26 @@ import android.widget.Toast;
 
 /*
 액션바(인지 툴바인지) 버튼 왼쪽에 보내기, 버스이름 띄우는 텍스트 가운데 정렬
+
 */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
+    //implements View.OnClickListener
+
     private BackPressCloseHandler backPressCloseHandler;
+
+//    @Override
+//    public void onClick(View v) {
+//        if(v.getId() == R.id.textView4){
+//            setContentView(R.layout.activity_main_2);
+//            textView5.setOnClickListener(this);
+//        }
+//        else if(v.getId() == R.id.textView5){
+//            setContentView(R.layout.activity_main_1);
+//            textView4.setOnClickListener(this);
+//        }
+//    }
 
     @Override
     public void onBackPressed() { //'뒤로' 두번누르면 종료
@@ -29,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -38,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
+
         setContentView(R.layout.activity_main_1);
+
+        //textView4.setOnClickListener((View.OnClickListener) this);
+
         TextView textView3 = (TextView) findViewById(R.id.textView3);
         TextView textView4 = (TextView) findViewById(R.id.textView4);
         TextView textView5 = (TextView) findViewById(R.id.textView5);
@@ -56,16 +75,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /*//텍스트뷰5 클릭에 대한 이벤트 처리
-        //근데 안먹힘ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-        textView5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            //텍스트뷰5 = 대기인원파악
-            public void onClick(View view) {
-                setContentView(R.layout.activity_main_1);
-            }
-        });*/
 
+//        //텍스트뷰5 클릭에 대한 이벤트 처리
+//        //근데 안먹힘ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+//        textView5.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            //텍스트뷰5 = 대기인원조회
+//            public void onClick(View view) {
+//                setContentView(R.layout.activity_main_1);
+//                textView4.setOnClickListener(this);
+//            }
+//        });
 
 
         Button busbutton1 = (Button)findViewById(R.id.busNum4); //버튼1에 대한 참조획득
@@ -77,22 +97,20 @@ public class MainActivity extends AppCompatActivity {
             //버튼1
             public void onClick(View view)
             {
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
-                TextView text = layout.findViewById(R.id.text);
-                Toast toast = new Toast(getApplicationContext());
-                text.setText("8100번 버스를 조회합니다");
-                text.setTextSize(15);
-                text.setTextColor(Color.WHITE);
-                toast.setGravity(Gravity.BOTTOM,0,0);
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
+//                LayoutInflater inflater = getLayoutInflater();
+//                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
+//                TextView text = layout.findViewById(R.id.text);
+//                Toast toast = new Toast(getApplicationContext());
+//                text.setText("8100번 버스를 조회합니다");
+//                text.setTextSize(15);
+//                text.setTextColor(Color.WHITE);
+//                toast.setGravity(Gravity.BOTTOM,0,0);
+//                toast.setDuration(Toast.LENGTH_SHORT);
+//                toast.setView(layout);
+//                toast.show();
 
                 Intent intent = new Intent(MainActivity.this, subActivity.class);
-
                 //Intent intent = new Intent(MainActivity.this, PathSetting.class);
-                //Toast.makeText(MainActivity.this, "8100번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -104,20 +122,19 @@ public class MainActivity extends AppCompatActivity {
             //버튼2
             public void onClick(View view)
             {
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
-                TextView text = layout.findViewById(R.id.text);
-                Toast toast = new Toast(getApplicationContext());
-                text.setText("M4102번 버스를 조회합니다");
-                text.setTextSize(15);
-                text.setTextColor(Color.WHITE);
-                toast.setGravity(Gravity.BOTTOM,0,0);
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
+//                LayoutInflater inflater = getLayoutInflater();
+//                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
+//                TextView text = layout.findViewById(R.id.text);
+//                Toast toast = new Toast(getApplicationContext());
+//                text.setText("M4102번 버스를 조회합니다");
+//                text.setTextSize(15);
+//                text.setTextColor(Color.WHITE);
+//                toast.setGravity(Gravity.BOTTOM,0,0);
+//                toast.setDuration(Toast.LENGTH_SHORT);
+//                toast.setView(layout);
+//                toast.show();
 
                 Intent intent = new Intent(MainActivity.this, showActivity.class);
-                Toast.makeText(MainActivity.this, "M4102번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -126,29 +143,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) { //우측상단 메뉴가 보이도록 설정
+    public boolean onCreateOptionsMenu(Menu menu) { //우측상단 overflow 메뉴가 보이도록 설정
         getMenuInflater().inflate(R.menu.menu_right, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { // ''' 메뉴 설정
+    public boolean onOptionsItemSelected(MenuItem item) { // overflow 메뉴 설정
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.navigation_menu1:
+            case R.id.navigation_menu1: //즐겨찾기
                 return true;
+
             case R.id.navigation_menu2: //TheFaCo란?
                 Intent descript_Intent = new Intent(this, app_Description.class);
                 startActivity(descript_Intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
-            case R.id.navigation_menu3:
+//                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
-
