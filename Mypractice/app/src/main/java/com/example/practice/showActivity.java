@@ -4,9 +4,13 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -60,6 +64,7 @@ public class showActivity extends AppCompatActivity
     private String station2;
     private String seat2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -68,6 +73,54 @@ public class showActivity extends AppCompatActivity
         setContentView(R.layout.activity_show);
         getXmlId();
         buffer = new StringBuffer();
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        BusitemAdapter adapter = new BusitemAdapter();
+
+        adapter.addItem(new Bus_items("미금역.청솔마을.2001아울렛", ""));
+        adapter.addItem(new Bus_items("불정교사거리(미정차)", ""));
+        adapter.addItem(new Bus_items("정자역", ""));
+        adapter.addItem(new Bus_items("백궁삼거리(미정차)", ""));
+        adapter.addItem(new Bus_items("서현역.AK플라자", ""));
+        adapter.addItem(new Bus_items("이매촌한신.서현역.AK프라자", ""));
+        adapter.addItem(new Bus_items("판교TG(미정차)", ""));
+        adapter.addItem(new Bus_items("금토JC(미정차)", ""));
+        adapter.addItem(new Bus_items("서울진입(미정차)", ""));
+        adapter.addItem(new Bus_items("청계산입구역(미정차)", ""));
+        adapter.addItem(new Bus_items("양재IC(미정차)", ""));
+        adapter.addItem(new Bus_items("서초IC(미정차)", ""));
+        adapter.addItem(new Bus_items("반포IC(미정차)", ""));
+        adapter.addItem(new Bus_items("한남IC(미정차)", ""));
+        adapter.addItem(new Bus_items("한남1고가차도(미정차)", ""));
+        adapter.addItem(new Bus_items("남산1호터널TG(미정차)", ""));
+        adapter.addItem(new Bus_items("남대문세무서.국가인권위원회", ""));
+        adapter.addItem(new Bus_items("종로2가사거리(중)", ""));
+        adapter.addItem(new Bus_items("을지로입구역.광교", ""));
+        adapter.addItem(new Bus_items("북창동.남대문시장", ""));
+        adapter.addItem(new Bus_items("서울역교차로(미정차)", ""));
+        adapter.addItem(new Bus_items("숭례문", ""));
+        adapter.addItem(new Bus_items("남대문시장앞.이회영활동터", ""));
+        adapter.addItem(new Bus_items("명동국민은행앞", ""));
+        adapter.addItem(new Bus_items("남대문세무서.서울백병원(중)", ""));
+        adapter.addItem(new Bus_items("남산1호터널TG(미정차)", ""));
+        adapter.addItem(new Bus_items("한남1고가차도(미정차)", ""));
+        adapter.addItem(new Bus_items("한남IC(미정차)", ""));
+        adapter.addItem(new Bus_items("반포IC(미정차)", ""));
+        adapter.addItem(new Bus_items("서초IC(미정차)", ""));
+        adapter.addItem(new Bus_items("양재IC(미정차)", ""));
+        adapter.addItem(new Bus_items("청계산입구역(미정차)", ""));
+        adapter.addItem(new Bus_items("성남진입(미정차)", ""));
+        adapter.addItem(new Bus_items("금토JC(미정차)", ""));
+        adapter.addItem(new Bus_items("판교TG(미정차)", ""));
+        adapter.addItem(new Bus_items("이매촌한신.서현역.AK프라자", ""));
+        adapter.addItem(new Bus_items("서현역.AK플라자", ""));
+        adapter.addItem(new Bus_items("정자역", ""));
+        adapter.addItem(new Bus_items("미금역.청솔마을.2001아울렛", ""));
+
+
+        recyclerView.setAdapter(adapter);
     }
 
     public void jungja(View view)
@@ -471,4 +524,5 @@ public class showActivity extends AppCompatActivity
         //view 의 id 를 R 클래스에서 받아옴
         xmlShowInfo = findViewById(R.id.showInfo);
     }
+
 }

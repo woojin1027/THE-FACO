@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
 
-
         Button busbutton1 = (Button)findViewById(R.id.busNum4); //버튼1에 대한 참조획득
         Button busbutton2 = (Button)findViewById(R.id.busNum5); //버튼2에 대한 참조획득
         //버튼1 클릭에 대한 이벤트 처리
@@ -80,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         //버튼2 클릭에 대한 이벤트 처리
         busbutton2.setOnClickListener(new View.OnClickListener()
@@ -123,4 +123,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-

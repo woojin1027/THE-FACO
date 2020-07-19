@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/button1"
@@ -75,8 +75,8 @@
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="미금사거리(미정차)" />
 
                 <Button
@@ -91,8 +91,8 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="불정교사거리(미정차)" />
 
                 <Button
@@ -114,64 +114,64 @@
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="판교TG(미정차)" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="금토JC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="서울진입(미정차)" />
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="청계산입구역(미정차)" />
 
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="양재IC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="서초IC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView17"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="반포IC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="한남IC(미정차)" />
 
                 <Button
@@ -185,16 +185,16 @@
                     android:id="@+id/textView20"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="한남1고가차도(미정차)" />
 
                 <TextView
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="남산1호터널TG(미정차)" />
 
                 <Button
@@ -236,8 +236,8 @@
                     android:id="@+id/textView27"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="서울역교차로(미정차)" />
 
                 <Button
@@ -251,8 +251,8 @@
                     android:id="@+id/textView29"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="남대문로3가(미정차)" />
 
                 <Button
@@ -274,16 +274,16 @@
                     android:id="@+id/textView32"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="남산1호터널TG(미정차)" />
 
                 <TextView
                     android:id="@+id/textView33"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="한남1고가차도(미정차)" />
 
                 <Button
@@ -298,64 +298,64 @@
                     android:id="@+id/textView35"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="한남IC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView36"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="반포IC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView37"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="서초IC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView38"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="양재IC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView39"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="청계산입구역(미정차)" />
 
                 <TextView
                     android:id="@+id/textView40"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="성남진입(미정차)" />
 
                 <TextView
                     android:id="@+id/textView41"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="금토JC(미정차)" />
 
                 <TextView
                     android:id="@+id/textView42"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:gravity="center"
                     android:background="@drawable/edge"
+                    android:gravity="center"
                     android:text="판교TG(미정차)" />
 
                 <Button
