@@ -4,13 +4,8 @@
     <item
         android:id="@+id/navigation_menu1"
         android:icon="@android:drawable/stat_sys_warning"
-        android:title="ㅎㅇ?"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/navigation_menu3"
-        android:icon="@android:drawable/btn_star_big_on"
         android:title="즐겨찾기"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/navigation_menu2"
         android:icon="@drawable/icon_pink"

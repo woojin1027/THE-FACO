@@ -3,18 +3,19 @@ package com.example.practice;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*
-액션바(인지 툴바인지) 버튼 왼쪽에 보내기, 버스이름 띄우는 텍스트 가운데 정렬
-*/
 
 public class MainActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
@@ -72,10 +73,19 @@ public class MainActivity extends AppCompatActivity {
             //버튼1
             public void onClick(View view)
             {
-                Intent intent = new Intent(MainActivity.this, subActivity.class);
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getApplicationContext());
+                text.setText("8100번 버스를 조회합니다");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
 
-                //Intent intent = new Intent(MainActivity.this, PathSetting.class);
-                Toast.makeText(MainActivity.this, "8100번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, subActivity.class);
                 startActivity(intent);
             }
         });
@@ -88,8 +98,19 @@ public class MainActivity extends AppCompatActivity {
             //버튼2
             public void onClick(View view)
             {
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getApplicationContext());
+                text.setText("M4102번 버스를 조회합니다");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
+
                 Intent intent = new Intent(MainActivity.this, showActivity.class);
-                Toast.makeText(MainActivity.this, "M4102번 버스를 조회합니다", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
@@ -107,15 +128,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { // ''' 메뉴 설정
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.navigation_menu1:
+            case R.id.navigation_menu1://즐겨찾기
                 return true;
             case R.id.navigation_menu2: //TheFaCo란?
                 Intent descript_Intent = new Intent(this, app_Description.class);
                 startActivity(descript_Intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
-                return true;
-            case R.id.navigation_menu3:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
