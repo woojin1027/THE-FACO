@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#9991a8d2">
+
+    <Button
+        android:id="@+id/busNum8"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#91a8d2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="8100"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp" />
+
+    <Button
+        android:id="@+id/busNum9"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#6d7e9e"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="M4102"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp" />
+</LinearLayout>

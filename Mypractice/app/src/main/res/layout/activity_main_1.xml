@@ -37,8 +37,7 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView3"
-            android:background="#cc6d7e9e" />
+            app:layout_constraintStart_toEndOf="@+id/textView3"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
