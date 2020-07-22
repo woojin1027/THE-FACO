@@ -88,12 +88,12 @@ def main():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture('123.mp4')
     while cap.isOpened():
         ret,img = cap.read()
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
