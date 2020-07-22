@@ -1,6 +1,9 @@
 package com.example.practice;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,9 +19,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+//BottomNavigationView 하단 고정시키기
 
 public class MainActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
+
+    private BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    private Frag1 frag1;
+    private Frag2 frag2;
+    private Frag3 frag3;
 
     @Override
     public void onBackPressed() { //'뒤로' 두번누르면 종료
@@ -30,6 +43,70 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
+
+        setContentView(R.layout.main);
+
+        bottomNavigationView = findViewById(R.id.bottomNavi);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+            {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.action_waiting:
+                        setFrag(0);
+                        break;
+                    case R.id.action_map:
+                        setFrag(1);
+                        break;
+                    case R.id.action_recommend:
+                        setFrag(2);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        frag1=new Frag1();
+        frag2=new Frag2();
+        frag3=new Frag3();
+        setFrag(0); // 첫 프래그먼트 화면 지정
+    }
+
+    // 프레그먼트 교체
+    private void setFrag(int n)
+    {
+        fm = getSupportFragmentManager();
+        ft= fm.beginTransaction();
+        switch (n)
+        {
+            case 0:
+                ft.replace(R.id.Main_Frame,frag1);
+                ft.commit();
+                break;
+
+            case 1:
+                ft.replace(R.id.Main_Frame,frag2);
+                ft.commit();
+                break;
+
+            case 2:
+                ft.replace(R.id.Main_Frame,frag3);
+                ft.commit();
+                break;
+        }
+
+
+
+
+        /* 원래있던거
+
         //상태바 없애기
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -53,17 +130,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /*//텍스트뷰5 클릭에 대한 이벤트 처리
-        //근데 안먹힘ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-        textView5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            //텍스트뷰5 = 대기인원파악
-            public void onClick(View view) {
-                setContentView(R.layout.activity_main_1);
-            }
-        });*/
-
-
         Button busbutton1 = (Button)findViewById(R.id.busNum4); //버튼1에 대한 참조획득
         Button busbutton2 = (Button)findViewById(R.id.busNum5); //버튼2에 대한 참조획득
         //버튼1 클릭에 대한 이벤트 처리
@@ -71,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             //버튼1
-            public void onClick(View view)
             {
+            public void onClick(View view)
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
                 TextView text = layout.findViewById(R.id.text);
@@ -115,7 +181,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
+        */
+        }
 
 
     @Override
