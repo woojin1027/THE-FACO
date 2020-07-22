@@ -15,8 +15,15 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
 {
     ArrayList<Bus_items> items = new ArrayList<Bus_items>();
 
+//    //생성자에서 데이터 리스트 객체를 전달받는다.
+//    BusitemAdapter(ArrayList<Bus_items> list)
+//    {
+//        items = list;
+//    }
+
     public void addItem(Bus_items item)
     {
+        //외부에서 item 을 추가시킬 함수
         items.add(item);
     }
 
@@ -48,6 +55,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
+        //item 을 하나하나 보여주는 함수
         Bus_items item = items.get(position);
         holder.setItem(item);
     }
@@ -55,6 +63,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
     @Override
     public int getItemCount()
     {
+        //RecyclerView 의 총 개수
         return items.size();
     }
 

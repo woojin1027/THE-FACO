@@ -59,6 +59,7 @@ public class subActivity extends AppCompatActivity {
     private String min2;
     private String station2;
     private String seat2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

@@ -28,6 +28,11 @@ public class Bus_items
         this.BusInfo = businfo;
     }
 
+    public Bus_items(String businfo)
+    {
+        this.BusInfo = businfo;
+    }
+
 
 
     String BusInfo;

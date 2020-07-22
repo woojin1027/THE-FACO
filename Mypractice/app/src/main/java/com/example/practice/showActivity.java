@@ -1,9 +1,13 @@
 package com.example.practice;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -18,6 +22,9 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 //M4102 번 버스의 자바 파일
 public class showActivity extends AppCompatActivity
@@ -27,10 +34,11 @@ public class showActivity extends AppCompatActivity
     private final String TAG = "myTag";
     private final String key1 = "AGosnxF7ORMEFRnphkCbkve01B6SaEZpj5R2kD03%2B43HobZwgWC2BqRthRvHeMOEWK1M%2BAPASvsbGc3K7Z9V8A%3D%3D"; //버스도착정보목록조회 인증키
     private final String endPoint1 = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice"; //버스도착정보목록조회 앞 주소
+    private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; //버스위치정보조회서비스 앞 주소
     private final String route = "234001159";
 
     //xml 변수
-    private TextView xmlShowInfo;
+    private TextView textView2;
 
     //파싱을 위한 필드 선언
     private URL url;
@@ -43,18 +51,6 @@ public class showActivity extends AppCompatActivity
     //xml 값 입력 변수
     private StringBuffer buffer;
 
-    private String stationId_jungja;
-    private String stationId_seohyun1;
-    private String stationId_namdaemoon1;
-    private String stationId_myeongdong;
-    private String stationid_namdaemoon2;
-    private String stationId_seohyun2;
-    private String staOrder_jungja;
-    private String staOrder_seohyun1;
-    private String staOrder_namdaemoon1;
-    private String staOrder_myeongdong;
-    private String staOrder_namdaemoon2;
-    private String staOrder_seohyun2;
     private String car1;
     private String min1;
     private String station1;
@@ -64,6 +60,16 @@ public class showActivity extends AppCompatActivity
     private String station2;
     private String seat2;
 
+    private ArrayList listBus;
+    private ArrayList listmin1;
+    private ArrayList listmin2;
+    private ArrayList liststation1;
+    private ArrayList liststation2;
+    private ArrayList listBusseq;
+    private ArrayList liststationId;
+    private ArrayList listseatCnt;
+
+    BusitemAdapter adapter = new BusitemAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,363 +77,174 @@ public class showActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setTitle("M4102");
         setContentView(R.layout.activity_show);
-        getXmlId();
         buffer = new StringBuffer();
+        listmin1 = new ArrayList();
+        listmin2 = new ArrayList();
+        liststation1 = new ArrayList();
+        liststation2 = new ArrayList();
+        listBusseq = new ArrayList();
+        liststationId = new ArrayList();
+        listseatCnt = new ArrayList();
+        listBus = new ArrayList();
+
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        BusitemAdapter adapter = new BusitemAdapter();
-
-        adapter.addItem(new Bus_items("미금역.청솔마을.2001아울렛", ""));
-        adapter.addItem(new Bus_items("불정교사거리(미정차)", ""));
-        adapter.addItem(new Bus_items("정자역", ""));
-        adapter.addItem(new Bus_items("백궁삼거리(미정차)", ""));
-        adapter.addItem(new Bus_items("서현역.AK플라자", ""));
-        adapter.addItem(new Bus_items("이매촌한신.서현역.AK프라자", ""));
-        adapter.addItem(new Bus_items("판교TG(미정차)", ""));
-        adapter.addItem(new Bus_items("금토JC(미정차)", ""));
-        adapter.addItem(new Bus_items("서울진입(미정차)", ""));
-        adapter.addItem(new Bus_items("청계산입구역(미정차)", ""));
-        adapter.addItem(new Bus_items("양재IC(미정차)", ""));
-        adapter.addItem(new Bus_items("서초IC(미정차)", ""));
-        adapter.addItem(new Bus_items("반포IC(미정차)", ""));
-        adapter.addItem(new Bus_items("한남IC(미정차)", ""));
-        adapter.addItem(new Bus_items("한남1고가차도(미정차)", ""));
-        adapter.addItem(new Bus_items("남산1호터널TG(미정차)", ""));
-        adapter.addItem(new Bus_items("남대문세무서.국가인권위원회", ""));
-        adapter.addItem(new Bus_items("종로2가사거리(중)", ""));
-        adapter.addItem(new Bus_items("을지로입구역.광교", ""));
-        adapter.addItem(new Bus_items("북창동.남대문시장", ""));
-        adapter.addItem(new Bus_items("서울역교차로(미정차)", ""));
-        adapter.addItem(new Bus_items("숭례문", ""));
-        adapter.addItem(new Bus_items("남대문시장앞.이회영활동터", ""));
-        adapter.addItem(new Bus_items("명동국민은행앞", ""));
-        adapter.addItem(new Bus_items("남대문세무서.서울백병원(중)", ""));
-        adapter.addItem(new Bus_items("남산1호터널TG(미정차)", ""));
-        adapter.addItem(new Bus_items("한남1고가차도(미정차)", ""));
-        adapter.addItem(new Bus_items("한남IC(미정차)", ""));
-        adapter.addItem(new Bus_items("반포IC(미정차)", ""));
-        adapter.addItem(new Bus_items("서초IC(미정차)", ""));
-        adapter.addItem(new Bus_items("양재IC(미정차)", ""));
-        adapter.addItem(new Bus_items("청계산입구역(미정차)", ""));
-        adapter.addItem(new Bus_items("성남진입(미정차)", ""));
-        adapter.addItem(new Bus_items("금토JC(미정차)", ""));
-        adapter.addItem(new Bus_items("판교TG(미정차)", ""));
-        adapter.addItem(new Bus_items("이매촌한신.서현역.AK프라자", ""));
-        adapter.addItem(new Bus_items("서현역.AK플라자", ""));
-        adapter.addItem(new Bus_items("정자역", ""));
-        adapter.addItem(new Bus_items("미금역.청솔마을.2001아울렛", ""));
-
-
         recyclerView.setAdapter(adapter);
+
+        listBus.add("미금역.청솔마을.2001아울렛");
+        listBus.add("불정교사거리(미정차)");
+        listBus.add("정자역");
+        listBus.add("백궁삼거리(미정차)");
+        listBus.add("서현역.AK플라자");
+        listBus.add("이매촌한신.서현역.AK프라자");
+        listBus.add("판교TG(미정차)");
+        listBus.add("금토JC(미정차)");
+        listBus.add("서울진입(미정차)");
+        listBus.add("청계산입구역(미정차)");
+        listBus.add("양재IC(미정차)");
+        listBus.add("서초IC(미정차)");
+        listBus.add("반포IC(미정차)");
+        listBus.add("한남IC(미정차)");
+        listBus.add("한남1고가차도(미정차)");
+        listBus.add("남산1호터널TG(미정차)");
+        listBus.add("남대문세무서.국가인권위원회");
+        listBus.add("종로2가사거리(중)");
+        listBus.add("을지로입구역.광교");
+        listBus.add("북창동.남대문시장");
+        listBus.add("서울역교차로(미정차)");
+        listBus.add("숭례문");
+        listBus.add("남대문시장앞.이회영활동터");
+        listBus.add("명동국민은행앞");
+        listBus.add("남대문세무서.서울백병원(중)");
+        listBus.add("남산1호터널TG(미정차)");
+        listBus.add("한남1고가차도(미정차)");
+        listBus.add("한남IC(미정차)");
+        listBus.add("반포IC(미정차)");
+        listBus.add("서초IC(미정차)");
+        listBus.add("양재IC(미정차)");
+        listBus.add("청계산입구역(미정차)");
+        listBus.add("성남진입(미정차)");
+        listBus.add("금토JC(미정차)");
+        listBus.add("판교TG(미정차)");
+        listBus.add("이매촌한신.서현역.AK프라자");
+        listBus.add("서현역.AK플라자");
+        listBus.add("정자역");
+        listBus.add("미금역.청솔마을.2001아울렛");
+
+        for(int i = 0; i < listBus.size(); i++)
+        {
+            adapter.addItem(new Bus_items("" + listBus.get(i).toString(),""));
+        }
+        
     }
 
-    public void jungja(View view)
+
+    //새로고침 누를때 동작
+    public void refresh(View view)
     {
-        car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
-        stationId_jungja = "206000725";
-        staOrder_jungja = "3";
-        buffer = null;
-        buffer = new StringBuffer();
-        xmlShowInfo.setText("");
-        //준비상태의 스레드: 코딩 상에서 start() 메소드를 호출하면 run() 메소드에 설정된 스레드가 Runnable 상태로 진입
+        listmin1.clear();
+        listmin2.clear();
+        liststation1.clear();
+        liststation2.clear();
+        listBusseq.clear();
+        liststationId.clear();
+        listseatCnt.clear();
+
+        //준비상태
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-                //오퍼레이션 1
-                getBusArrivalItem(stationId_jungja, staOrder_jungja);
+                //오퍼레이션 1  버스위치정보조회
+                getBusLocationList();
+
+                for(int i = 0; i < listBusseq.size(); i++)
+                {
+                    for(int j = 1; j <= 39; j++)
+                    {
+                        if(listBusseq.contains(j) == true)
+                        {
+                            //오퍼레이션 2
+                            getBusArrivalItem(liststationId.get(i).toString(), listBusseq.get(i).toString());
+                        }
+                    }
+                }
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, car1 + " " + min1 + " " + station1);
-                        Log.d(TAG, car2 + " " + min2 + " " + station2);
-                        if(car1 == null)
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
+                        for(int i = 0; i < listBusseq.size(); i++)
                         {
-                            buffer.append("도착 정보 없음");
+                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"버스가 이 정류장을 지나고 있습니다.\n 빈 좌석 : " + listseatCnt.get(i)));
+                            for(int j= 0; j < listBus.size(); j++)
+                            {
+                                if(Integer.parseInt(listBusseq.get(i).toString()) != j)
+                                {
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
+                                }
+                            }
                         }
-                        else
-                        {
-                            buffer.append("정자역(숭례문 방면)\n");
-                            buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min1 + " 분 \n");
-                            buffer.append("남은 구간 : " + station1 + "정거장\n");
-                            buffer.append("빈 좌석수 : " + seat1 + "\n");
-                        }
-                        // 두번째 도착 차량은 null이 아닐 경우에만 출력
-                        if(car2 != null)
-                        {
-                            buffer.append("-------------------------\n");
-                            buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min2 + "분 \n");
-                            buffer.append("남은 구간 : " + station2 + "정거장 \n");
-                            buffer.append("빈 좌석수 : " + seat2 + "\n");
-                        }
-                        xmlShowInfo.setText(buffer.toString());
+
+
                     }
+
                 });
             }
         }).start();
+        adapter.notifyDataSetChanged();
+
     }
 
-
-    public void seohyun1(View view)
+    //오퍼레이션 1 (버스위치정보목록조회)
+    private void getBusLocationList()
     {
-        car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
-        stationId_seohyun1 = "206000299";
-        staOrder_seohyun1 = "5";
-        buffer = null;
-        buffer = new StringBuffer();
-        xmlShowInfo.setText("");
-        //준비상태의 스레드: 코딩 상에서 start() 메소드를 호출하면 run() 메소드에 설정된 스레드가 Runnable 상태로 진입
-        new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                //오퍼레이션 1
-                getBusArrivalItem(stationId_seohyun1, staOrder_seohyun1);
-                //UI setText 하는 곳
-                runOnUiThread(new Runnable(){
-                    @Override
-                    public void run()
-                    {
-                        Log.d(TAG, car1 + " " + min1 + " " + station1);
-                        Log.d(TAG, car2 + " " + min2 + " " + station2);
-                        if(car1 == null)
-                        {
-                            buffer.append("도착 정보 없음");
-                        }
-                        else
-                        {
-                            buffer.append("서현역.AK플라자(숭례문 방면)\n");
-                            buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min1 + " 분 \n");
-                            buffer.append("남은 구간 : " + station1 + "정거장\n");
-                            buffer.append("빈 좌석수 : " + seat1 + "\n");
-                        }
-                        // 두번째 도착 차량은 null이 아닐 경우에만 출력
-                        if(car2 != null)
-                        {
-                            buffer.append("-------------------------\n");
-                            buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min2 + "분 \n");
-                            buffer.append("남은 구간 : " + station2 + "정거장 \n");
-                            buffer.append("빈 좌석수 : " + seat2 + "\n");
-                        }
-                        xmlShowInfo.setText(buffer.toString());
-                    }
-                });
-            }
-        }).start();
-    }
+        String stationUrl = endPoint2 + "?serviceKey=" + key1 + "&routeId=" + route;
+        Log.d(TAG, "버스위치정보 조회 : " + stationUrl);
 
-    public void namdaemoon1(View view)
-    {
-        car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
-        stationId_namdaemoon1 = "101000292";
-        staOrder_namdaemoon1 = "17";
-        buffer = null;
-        buffer = new StringBuffer();
-        xmlShowInfo.setText("");
-        //준비상태의 스레드: 코딩 상에서 start() 메소드를 호출하면 run() 메소드에 설정된 스레드가 Runnable 상태로 진입
-        new Thread(new Runnable()
+        try
         {
-            @Override
-            public void run()
+            setUrlNParser(stationUrl);
+            while (eventType != XmlPullParser.END_DOCUMENT)
             {
-                //오퍼레이션 1
-                getBusArrivalItem(stationId_namdaemoon1, staOrder_namdaemoon1);
-                //UI setText 하는 곳
-                runOnUiThread(new Runnable(){
-                    @Override
-                    public void run()
-                    {
-                        Log.d(TAG, car1 + " " + min1 + " " + station1);
-                        Log.d(TAG, car2 + " " + min2 + " " + station2);
-                        if(car1 == null)
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
+                        break;
+                    case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
+                        tag = xpp.getName();    //태그이름 얻어오기
+                        if(tag.equals("busLocationList"));  //첫번째 검색 결과
+                        else if(tag.equals("stationSeq"))
                         {
-                            buffer.append("도착 정보 없음");
+                            xpp.next();
+                            listBusseq.add(xpp.getText());
                         }
-                        else
+                        else if(tag.equals("stationId"))
                         {
-                            buffer.append("남대문세무서.국가인권위원회 (숭례문 방면)\n");
-                            buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min1 + " 분 \n");
-                            buffer.append("남은 구간 : " + station1 + "정거장\n");
-                            buffer.append("빈 좌석수 : " + seat1 + "\n");
+                            xpp.next();
+                            liststationId.add(xpp.getText());
                         }
-                        // 두번째 도착 차량은 null이 아닐 경우에만 출력
-                        if(car2 != null)
+                        else if(tag.equals("remainSeatCnt"))
                         {
-                            buffer.append("-------------------------\n");
-                            buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min2 + "분 \n");
-                            buffer.append("남은 구간 : " + station2 + "정거장 \n");
-                            buffer.append("빈 좌석수 : " + seat2 + "\n");
+                            xpp.next();
+                            listseatCnt.add(xpp.getText());
                         }
-                        xmlShowInfo.setText(buffer.toString());
-                    }
-                });
+                        break;
+                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
+                        break;
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if(tag.equals("busLocationList")); //첫번째 검색결과 종료
+                        break;
+                }
+                eventType = xpp.next();
             }
-        }).start();
-    }
-
-    public void myeongdong(View view)
-    {
-        car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
-        stationId_myeongdong = "101000148";
-        staOrder_myeongdong = "24";
-        buffer = null;
-        buffer = new StringBuffer();
-        xmlShowInfo.setText("");
-        //준비상태의 스레드: 코딩 상에서 start() 메소드를 호출하면 run() 메소드에 설정된 스레드가 Runnable 상태로 진입
-        new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                //오퍼레이션 1
-                getBusArrivalItem(stationId_myeongdong, staOrder_myeongdong);
-                //UI setText 하는 곳
-                runOnUiThread(new Runnable(){
-                    @Override
-                    public void run()
-                    {
-                        Log.d(TAG, car1 + " " + min1 + " " + station1);
-                        Log.d(TAG, car2 + " " + min2 + " " + station2);
-                        if(car1 == null)
-                        {
-                            buffer.append("도착 정보 없음");
-                        }
-                        else
-                        {
-                            buffer.append("명동국민은행앞 (미금역.청솔마을.2001아울렛 방면)\n");
-                            buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min1 + " 분 \n");
-                            buffer.append("남은 구간 : " + station1 + "정거장\n");
-                            buffer.append("빈 좌석수 : " + seat1 + "\n");
-                        }
-                        // 두번째 도착 차량은 null이 아닐 경우에만 출력
-                        if(car2 != null)
-                        {
-                            buffer.append("-------------------------\n");
-                            buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min2 + "분 \n");
-                            buffer.append("남은 구간 : " + station2 + "정거장 \n");
-                            buffer.append("빈 좌석수 : " + seat2 + "\n");
-                        }
-                        xmlShowInfo.setText(buffer.toString());
-                    }
-                });
-            }
-        }).start();
-    }
-
-    public void namdaemoon2(View view)
-    {
-        car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
-        stationid_namdaemoon2 = "101000001";
-        staOrder_namdaemoon2 = "25";
-        buffer = null;
-        buffer = new StringBuffer();
-        xmlShowInfo.setText("");
-        //준비상태의 스레드: 코딩 상에서 start() 메소드를 호출하면 run() 메소드에 설정된 스레드가 Runnable 상태로 진입
-        new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                //오퍼레이션 1
-                getBusArrivalItem(stationid_namdaemoon2, staOrder_namdaemoon2);
-                //UI setText 하는 곳
-                runOnUiThread(new Runnable(){
-                    @Override
-                    public void run()
-                    {
-                        Log.d(TAG, car1 + " " + min1 + " " + station1);
-                        Log.d(TAG, car2 + " " + min2 + " " + station2);
-                        if(car1 == null)
-                        {
-                            buffer.append("도착 정보 없음");
-                        }
-                        else
-                        {
-                            buffer.append("남대문세무서.서울백병원(중) (미금역.청솔마을.2001아울렛 방면)\n");
-                            buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min1 + " 분 \n");
-                            buffer.append("남은 구간 : " + station1 + "정거장\n");
-                            buffer.append("빈 좌석수 : " + seat1 + "\n");
-                        }
-                        // 두번째 도착 차량은 null이 아닐 경우에만 출력
-                        if(car2 != null)
-                        {
-                            buffer.append("-------------------------\n");
-                            buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min2 + "분 \n");
-                            buffer.append("남은 구간 : " + station2 + "정거장 \n");
-                            buffer.append("빈 좌석수 : " + seat2 + "\n");
-                        }
-                        xmlShowInfo.setText(buffer.toString());
-                    }
-                });
-            }
-        }).start();
-    }
-
-    public void seohyun2(View view)
-    {
-        car1 = min1 = station1 = seat1 = car2 = min2 = station2 = seat2 = null;
-        stationId_seohyun2 = "206000026";
-        staOrder_seohyun2 = "37";
-        buffer = null;
-        buffer = new StringBuffer();
-        xmlShowInfo.setText("");
-        //준비상태의 스레드: 코딩 상에서 start() 메소드를 호출하면 run() 메소드에 설정된 스레드가 Runnable 상태로 진입
-        new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                //오퍼레이션 1
-                getBusArrivalItem(stationId_seohyun2, staOrder_seohyun2);
-                //UI setText 하는 곳
-                runOnUiThread(new Runnable(){
-                    @Override
-                    public void run()
-                    {
-                        Log.d(TAG, car1 + " " + min1 + " " + station1);
-                        Log.d(TAG, car2 + " " + min2 + " " + station2);
-                        if(car1 == null)
-                        {
-                            buffer.append("도착 정보 없음");
-                        }
-                        else
-                        {
-                            buffer.append("서현역.AK플라자 (미금역.청솔마을.2001아울렛 방면)\n");
-                            buffer.append("첫번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min1 + " 분 \n");
-                            buffer.append("남은 구간 : " + station1 + "정거장\n");
-                            buffer.append("빈 좌석수 : " + seat1 + "\n");
-                        }
-                        // 두번째 도착 차량은 null이 아닐 경우에만 출력
-                        if(car2 != null)
-                        {
-                            buffer.append("-------------------------\n");
-                            buffer.append("두번째 차량 도착 정보\n");
-                            buffer.append("남은 시간 : " + min2 + "분 \n");
-                            buffer.append("남은 구간 : " + station2 + "정거장 \n");
-                            buffer.append("빈 좌석수 : " + seat2 + "\n");
-                        }
-                        xmlShowInfo.setText(buffer.toString());
-                    }
-                });
-            }
-        }).start();
+        }catch (Exception e){e.printStackTrace();}
     }
 
 
@@ -435,7 +252,7 @@ public class showActivity extends AppCompatActivity
     private void getBusArrivalItem(String station, String staorder)
     {
         String stationUrl = endPoint1 + "?serviceKey=" + key1 + "&stationId=" + station + "&routeId=" + route + "&staOrder=" + staorder;
-        Log.d(TAG, "정류장명 -> 정류장Id : " + stationUrl);
+        Log.d(TAG, "버스도착정보조회 : " + stationUrl);
 
         try
         {
@@ -449,46 +266,46 @@ public class showActivity extends AppCompatActivity
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busArrivalList"));  //첫번째 검색 결과
-                        else if(tag.equals("plateNo1"))
-                        {
-                            xpp.next();
-                            car1 = xpp.getText();
-                        }
+//                        else if(tag.equals("plateNo1"))
+//                        {
+//                            xpp.next();
+//                            car1 = xpp.getText();
+//                        }
                         else if(tag.equals("locationNo1"))
                         {
                             xpp.next();
-                            station1 = xpp.getText();
+                            liststation1.add(xpp.getText());
                         }
                         else if(tag.equals("predictTime1"))
                         {
                             xpp.next();
-                            min1 = xpp.getText();
+                            listmin1.add(xpp.getText());
                         }
-                        else if(tag.equals("remainSeatCnt1"))
-                        {
-                            xpp.next();
-                            seat1 = xpp.getText();
-                        }
-                        else if(tag.equals("plateNo2"))
-                        {
-                            xpp.next();
-                            car2 = xpp.getText();
-                        }
+//                        else if(tag.equals("remainSeatCnt1"))
+//                        {
+//                            xpp.next();
+//                            seat1 = xpp.getText();
+//                        }
+//                        else if(tag.equals("plateNo2"))
+//                        {
+//                            xpp.next();
+//                            car2 = xpp.getText();
+//                        }
                         else if(tag.equals("locationNo2"))
                         {
                             xpp.next();
-                            station2 = xpp.getText();
+                            liststation2.add(xpp.getText());
                         }
                         else if(tag.equals("predictTime2"))
                         {
                             xpp.next();
-                            min2 = xpp.getText();
+                            listmin2.add(xpp.getText());
                         }
-                        else if(tag.equals("remainSeatCnt2"))
-                        {
-                            xpp.next();
-                            seat2 = xpp.getText();
-                        }
+//                        else if(tag.equals("remainSeatCnt2"))
+//                        {
+//                            xpp.next();
+//                            seat2 = xpp.getText();
+//                        }
                         break;
                     case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
                         break;
@@ -518,11 +335,6 @@ public class showActivity extends AppCompatActivity
         }catch(Exception e){}
     }
 
-    //activitymain.xml 레이아웃 에서 설정된 뷰들을 가져온다
-    private void getXmlId()
-    {
-        //view 의 id 를 R 클래스에서 받아옴
-        xmlShowInfo = findViewById(R.id.showInfo);
-    }
+
 
 }
