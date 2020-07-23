@@ -1,5 +1,7 @@
 package com.example.practice;
 
+//M4102 의 버스 아이템 셋팅
+
 public class Bus_items
 {
     public String getBusstopname()
@@ -32,8 +34,6 @@ public class Bus_items
     {
         this.BusInfo = businfo;
     }
-
-
 
     String BusInfo;
     String Busstopname;

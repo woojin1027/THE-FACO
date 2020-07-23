@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 //M4102 번 버스의 자바 파일
@@ -137,7 +138,7 @@ public class showActivity extends AppCompatActivity
         {
             adapter.addItem(new Bus_items("" + listBus.get(i).toString(),""));
         }
-        
+
     }
 
 
@@ -161,17 +162,17 @@ public class showActivity extends AppCompatActivity
                 //오퍼레이션 1  버스위치정보조회
                 getBusLocationList();
 
-                for(int i = 0; i < listBusseq.size(); i++)
-                {
-                    for(int j = 1; j <= 39; j++)
-                    {
-                        if(listBusseq.contains(j) == true)
-                        {
-                            //오퍼레이션 2
-                            getBusArrivalItem(liststationId.get(i).toString(), listBusseq.get(i).toString());
-                        }
-                    }
-                }
+//                for(int i = 0; i < listBusseq.size(); i++)
+//                {
+//                    for(int j = 1; j <= 39; j++)
+//                    {
+//                        if(listBusseq.contains(j) == true)
+//                        {
+//                            //오퍼레이션 2
+//                            getBusArrivalItem(liststationId.get(i).toString(), listBusseq.get(i).toString());
+//                        }
+//                    }
+//                }
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
@@ -266,11 +267,6 @@ public class showActivity extends AppCompatActivity
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busArrivalList"));  //첫번째 검색 결과
-//                        else if(tag.equals("plateNo1"))
-//                        {
-//                            xpp.next();
-//                            car1 = xpp.getText();
-//                        }
                         else if(tag.equals("locationNo1"))
                         {
                             xpp.next();
@@ -281,16 +277,6 @@ public class showActivity extends AppCompatActivity
                             xpp.next();
                             listmin1.add(xpp.getText());
                         }
-//                        else if(tag.equals("remainSeatCnt1"))
-//                        {
-//                            xpp.next();
-//                            seat1 = xpp.getText();
-//                        }
-//                        else if(tag.equals("plateNo2"))
-//                        {
-//                            xpp.next();
-//                            car2 = xpp.getText();
-//                        }
                         else if(tag.equals("locationNo2"))
                         {
                             xpp.next();
@@ -301,11 +287,6 @@ public class showActivity extends AppCompatActivity
                             xpp.next();
                             listmin2.add(xpp.getText());
                         }
-//                        else if(tag.equals("remainSeatCnt2"))
-//                        {
-//                            xpp.next();
-//                            seat2 = xpp.getText();
-//                        }
                         break;
                     case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
                         break;

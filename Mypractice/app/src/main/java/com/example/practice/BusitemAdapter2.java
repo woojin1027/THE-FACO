@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-//M4102 의 버스정류장 어댑터
-public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHolder>
+//8100 의 버스정류장 어댑터
+public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHolder>
 {
     ArrayList<Bus_items> items = new ArrayList<Bus_items>();
 
@@ -45,6 +45,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         View itemView = inflater.inflate(R.layout.bus_item, parent, false);
         return new ViewHolder(itemView);    //뷰홀더 객체 반환
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
