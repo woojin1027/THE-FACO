@@ -6,11 +6,12 @@
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/redbus"
+        android:icon="@mipmap/ic_smallt"
         android:label="TheFaCo"
-        android:roundIcon="@mipmap/redbus_round"
+        android:roundIcon="@mipmap/ic_smallt_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".PathSetting" />
         <activity android:name=".app_Description" />
         <activity android:name=".subActivity" />
