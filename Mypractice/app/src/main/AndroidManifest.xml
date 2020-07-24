@@ -3,6 +3,8 @@
     package="com.example.practice">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
@@ -11,6 +13,10 @@
         android:roundIcon="@mipmap/ic_smallt_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
 
         <activity android:name=".PathSetting" />
         <activity android:name=".app_Description" />
