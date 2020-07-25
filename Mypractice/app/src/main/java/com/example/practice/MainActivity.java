@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.action_waiting:
-                        setFrag(0);
+                        setFrag(0); // 프레그먼트 교체
                         break;
                     case R.id.action_map:
                         setFrag(1);
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { // ''' 메뉴 설정
+    public boolean onOptionsItemSelected(MenuItem item) { // 우측상단 메뉴 설정
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.navigation_menu1://즐겨찾기

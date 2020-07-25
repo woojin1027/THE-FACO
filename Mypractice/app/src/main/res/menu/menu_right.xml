@@ -10,6 +10,6 @@
         android:id="@+id/navigation_menu2"
         android:icon="@drawable/icon_pink"
         android:title="TheFaCo란?"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>
