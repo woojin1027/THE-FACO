@@ -163,7 +163,7 @@ public class showActivity extends AppCompatActivity
                     {
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
-                        //버스위치 리셋
+                        //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
                             adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
@@ -181,7 +181,6 @@ public class showActivity extends AppCompatActivity
             }
         }).start();
         adapter.notifyDataSetChanged();
-
     }
 
 
@@ -212,7 +211,7 @@ public class showActivity extends AppCompatActivity
                     {
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
-                        //버스위치 리셋
+                        //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
                             adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));

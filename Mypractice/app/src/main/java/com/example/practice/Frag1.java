@@ -33,8 +33,8 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
             @Override
             public void onClick(View v) {
                 toastshow8100(container);
-                Intent intent = new Intent(getActivity(),subActivity.class);
 
+                Intent intent = new Intent(getActivity(),subActivity.class);
                 startActivity(intent);
         }});
 
@@ -44,7 +44,6 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
             public void onClick(View v) {
                 toastshowM4102(container);
                 Intent intent = new Intent(getActivity(),showActivity.class);
-
                 startActivity(intent);
             }});
 
