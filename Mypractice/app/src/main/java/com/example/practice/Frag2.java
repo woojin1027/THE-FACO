@@ -16,9 +16,11 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,6 +60,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import static android.speech.tts.TextToSpeech.ERROR;
+        /*수정중*/
 
 public class Frag2 extends Fragment implements OnMapReadyCallback {
 
@@ -71,7 +74,7 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.frag2, null);
 
@@ -83,9 +86,6 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
 
                         // 한국어 설정
                         int result = TTS.setLanguage(Locale.KOREAN);
-
-                        // tts.setPitch(5); // set pitch level
-                        // tts.setSpeechRate(2); // set speech speed rate
 
                         // 한국어가 안된다면,
                         if (result == TextToSpeech.LANG_MISSING_DATA
@@ -120,7 +120,17 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
 
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
-                        Toast.makeText(getContext(), "위치권한이 필요합니다", Toast.LENGTH_SHORT).show();
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.toast_layout,container,false);
+                        TextView text = layout.findViewById(R.id.text);
+                        Toast toast = new Toast(getActivity());
+                        text.setText("위치권한이 필요합니다.");
+                        text.setTextSize(15);
+                        text.setTextColor(Color.WHITE);
+                        toast.setGravity(Gravity.BOTTOM,0,0);
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
                     }
 
                     @Override
@@ -187,11 +197,6 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
     public void onStop() {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback);
         super.onStop();
-        if (TTS != null) {
-            TTS.stop();
-            TTS.shutdown();
-            TTS = null;
-        }
     }
 
     @Override
