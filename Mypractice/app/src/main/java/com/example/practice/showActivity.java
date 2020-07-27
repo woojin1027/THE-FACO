@@ -180,16 +180,15 @@ public class showActivity extends AppCompatActivity
                     {
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
+                        //버스위치 리셋
+                        for(int j = 0; j < listBus.size(); j++)
+                        {
+                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
+                        }
+                        //버스위치 셋팅
                         for(int i = 0; i < listBusseq.size(); i++)
                         {
                             adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"버스가 이 정류장을 지나고 있습니다.\n 빈 좌석 : " + listseatCnt.get(i)));
-                            for(int j= 0; j < listBus.size(); j++)
-                            {
-                                if(Integer.parseInt(listBusseq.get(i).toString()) != j)
-                                {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
-                                }
-                            }
                         }
 
 

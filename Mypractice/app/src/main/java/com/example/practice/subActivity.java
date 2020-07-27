@@ -129,6 +129,60 @@ public class subActivity extends AppCompatActivity {
             adapter.addItem(new Bus_items("" + listBus.get(i).toString(),""));
         }
 
+//        listmin1.clear();
+//        listmin2.clear();
+//        liststation1.clear();
+//        liststation2.clear();
+//        listBusseq.clear();
+//        liststationId.clear();
+//        listseatCnt.clear();
+//
+//        //준비상태
+//        new Thread(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                //오퍼레이션 1  버스위치정보조회
+//                getBusLocationList();
+//
+//                for(int i = 0; i < listBusseq.size(); i++)
+//                {
+//                    for(int j = 1; j <= 39; j++)
+//                    {
+//                        if(listBusseq.contains(j) == true)
+//                        {
+//                            //오퍼레이션 2
+//                            getBusArrivalItem(liststationId.get(i).toString(), listBusseq.get(i).toString());
+//                        }
+//                    }
+//                }
+//                //UI setText 하는 곳
+//                runOnUiThread(new Runnable(){
+//                    @Override
+//                    public void run()
+//                    {
+//                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
+//                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
+//                        for(int i = 0; i < listBusseq.size(); i++)
+//                        {
+//                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"버스가 이 정류장을 지나고 있습니다.\n 빈 좌석 : " + listseatCnt.get(i)));
+//                            for(int j= 0; j < listBus.size(); j++)
+//                            {
+//                                if(Integer.parseInt(listBusseq.get(i).toString()) != j)
+//                                {
+//                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
+//                                }
+//                            }
+//                        }
+//
+//
+//                    }
+//
+//                });
+//            }
+//        }).start();
+//        adapter.notifyDataSetChanged();
     }
 
     //새로고침 누를때 동작
@@ -169,16 +223,15 @@ public class subActivity extends AppCompatActivity {
                     {
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
+                        //버스 리셋
+                        for(int j = 0; j < listBus.size(); j++)
+                        {
+                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
+                        }
+                        //버스위치 셋팅
                         for(int i = 0; i < listBusseq.size(); i++)
                         {
                             adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"버스가 이 정류장을 지나고 있습니다.\n 빈 좌석 : " + listseatCnt.get(i)));
-                            for(int j= 0; j < listBus.size(); j++)
-                            {
-                                if(Integer.parseInt(listBusseq.get(i).toString()) != j)
-                                {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
-                                }
-                            }
                         }
 
 
