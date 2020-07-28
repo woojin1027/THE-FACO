@@ -8,31 +8,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="41dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/refresh"
-                    android:layout_width="47dp"
-                    android:layout_height="37dp"
-                    android:layout_gravity="right"
-                    android:adjustViewBounds="false"
-                    android:background="#0000"
-                    android:cropToPadding="false"
-                    android:onClick="refresh"
-                    android:padding="0dp"
-                    android:src="@drawable/reload" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="691dp"
-            android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/refresh_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </LinearLayout>
 </LinearLayout>
