@@ -34,6 +34,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
     public void setItem(int position, Bus_items item)
     {
         items.set(position, item);
+        //8100 버튼을 눌렀을때 바뀐 리스트를 그대로 보여주기위한 메서드
         notifyItemChanged(position);
     }
 
