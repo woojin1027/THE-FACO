@@ -37,9 +37,6 @@ public class showActivity extends AppCompatActivity
     private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; //버스위치정보조회서비스 앞 주소
     private final String route = "234001159";
 
-    //xml 변수
-    private TextView textView2;
-
     //파싱을 위한 필드 선언
     private URL url;
     private InputStream is;
@@ -47,18 +44,6 @@ public class showActivity extends AppCompatActivity
     private XmlPullParser xpp;
     private String tag;
     private int eventType;
-
-    //xml 값 입력 변수
-    private StringBuffer buffer;
-
-    private String car1;
-    private String min1;
-    private String station1;
-    private String seat1;
-    private String car2;
-    private String min2;
-    private String station2;
-    private String seat2;
 
     private ArrayList listBus;
     private ArrayList listmin1;
@@ -77,7 +62,7 @@ public class showActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setTitle("M4102");
         setContentView(R.layout.activity_show);
-        buffer = new StringBuffer();
+
         listmin1 = new ArrayList();
         listmin2 = new ArrayList();
         liststation1 = new ArrayList();
@@ -191,6 +176,14 @@ public class showActivity extends AppCompatActivity
                     @Override
                     public void run()
                     {
+                        listmin1.clear();
+                        listmin2.clear();
+                        liststation1.clear();
+                        liststation2.clear();
+                        listBusseq.clear();
+                        liststationId.clear();
+                        listseatCnt.clear();
+
                         //오퍼레이션 1  버스위치정보조회
                         getBusLocationList();
 

@@ -28,9 +28,6 @@ public class subActivity extends AppCompatActivity {
     private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; // 버스위치정보목록조회 앞 주소
     private final String route = "234000878";
 
-    //xml 변수
-    //private TextView xmlShowInfo;
-
     //파싱을 위한 필드 선언
     private URL url;
     private InputStream is;
@@ -38,9 +35,6 @@ public class subActivity extends AppCompatActivity {
     private XmlPullParser xpp;
     private String tag;
     private int eventType;
-
-    //xml 값 입력 변수
-    //private StringBuffer buffer;
 
     private ArrayList listBus;
     private ArrayList listmin1;
@@ -125,11 +119,6 @@ public class subActivity extends AppCompatActivity {
         listBus.add("단국대.치과병원");
 
 
-        for(int i = 0; i < listBus.size(); i++)
-        {
-            adapter.addItem(new Bus_items("" + listBus.get(i).toString(),""));
-        }
-
         listmin1.clear();
         listmin2.clear();
         liststation1.clear();
@@ -137,6 +126,11 @@ public class subActivity extends AppCompatActivity {
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
+
+        for(int i = 0; i < listBus.size(); i++)
+        {
+            adapter.addItem(new Bus_items("" + listBus.get(i).toString(),""));
+        }
 
         //준비상태
         new Thread(new Runnable()
@@ -184,6 +178,14 @@ public class subActivity extends AppCompatActivity {
                     @Override
                     public void run()
                     {
+                        listmin1.clear();
+                        listmin2.clear();
+                        liststation1.clear();
+                        liststation2.clear();
+                        listBusseq.clear();
+                        liststationId.clear();
+                        listseatCnt.clear();
+
                         //오퍼레이션 1  버스위치정보조회
                         getBusLocationList();
 
@@ -210,7 +212,6 @@ public class subActivity extends AppCompatActivity {
                         });
                     }
                 }).start();
-
 
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
