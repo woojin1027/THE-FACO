@@ -34,6 +34,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
     public void setItem(int position, Bus_items item)
     {
         items.set(position, item);
+        notifyItemChanged(position);
     }
 
     @NonNull

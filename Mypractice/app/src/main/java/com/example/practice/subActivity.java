@@ -53,7 +53,7 @@ public class subActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("8100");
         setContentView(R.layout.activity_sub);
-        //buffer = new StringBuffer();
+
         listmin1 = new ArrayList();
         listmin2 = new ArrayList();
         liststation1 = new ArrayList();
@@ -147,7 +147,6 @@ public class subActivity extends AppCompatActivity {
                     public void run()
                     {
                         Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
@@ -213,12 +212,14 @@ public class subActivity extends AppCompatActivity {
                     }
                 }).start();
 
+                //2~3번 눌러야 바뀔 확률이 높기 때문에 notifyDataSetchanged() 를 세번 호출
+                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
-
 
     //오퍼레이션 2 (버스도착정보항목조회)
     private void getBusArrivalItem(String station, String staorder)

@@ -34,6 +34,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
     public void setItem(int position, Bus_items item)
     {
         items.set(position, item);
+        notifyItemChanged(position);
     }
 
     @NonNull
