@@ -7,26 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 
 //BottomNavigationView 하단 고정시키기
 
@@ -217,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_menu1://즐겨찾기
                 return true;
             case R.id.navigation_menu2: //TheFaCo란?
-                Intent descript_Intent = new Intent(this, app_Description.class);
+                Intent descript_Intent = new Intent(this, appDescription.class);
                 startActivity(descript_Intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();

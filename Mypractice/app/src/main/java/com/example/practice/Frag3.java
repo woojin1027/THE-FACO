@@ -30,14 +30,14 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
         button_setting1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),PathSetting.class);
+                Intent intent = new Intent(getActivity(), pathSetting2.class);
                 startActivity(intent);
             }});
 
         button_setting2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),PathSetting.class);
+                Intent intent = new Intent(getActivity(), pathSetting2.class);
                 startActivity(intent);
             }});
 
