@@ -88,16 +88,16 @@ def main():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture('123.mp4')
+    cap = cv.VideoCapture(0)
     while cap.isOpened():
         ret,img = cap.read()
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
-        if cap.get(1)%30 == 0:
+        if cap.get(1)%1 == 0:
             found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
             found_filtered = []
             for ri, r in enumerate(found):

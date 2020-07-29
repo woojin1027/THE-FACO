@@ -1,6 +1,7 @@
 from __future__ import print_function
 import numpy as np
 import cv2 as cv
+import datetime
 
 def inside(r, q):
     rx, ry, rw, rh = r
@@ -35,13 +36,13 @@ def draw_detections(img, rects, thickness = 1):
                         readc2.append(( int(readc[j][0]),int(readc[j][1]) ))
                         readc2 = list(set(readc2))
                         cv.line(img,(int(readc[i][0]),int(readc[i][1])),(int(readc[j][0]),int(readc[j][1])),(0,50,55),5)
-                        if len(readc2) == 15:
+                        if len(readc2) >= 15:
                             print("줄을 서고있는 인원이 15명 이상입니다.")
-                            break                 
+                            return(readc2)                
     return(readc2)
                         
 
-def main():
+def main(cap):
     import sys
     from glob import glob
     import itertools as it
@@ -49,16 +50,17 @@ def main():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture('127.mp4')
     while cap.isOpened():
         ret,img = cap.read()
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
+
         if cap.get(1)%30 == 0:
+            #30프레임에 한번씩 사람인 객체를 검사한다.
             found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
             found_filtered = []
             for ri, r in enumerate(found):
@@ -71,9 +73,13 @@ def main():
             draw_detections(img, found_filtered, 3)
             if line == None:
                 line = []
-            #print(line)
+            
             print("줄을 서고있는 인원:",len(line))
             print("파악된 인원:",'%d (%d)' % (len(found_filtered), len(found)),"명")
+
+            nowtime = datetime.datetime.now()
+            print(nowtime)
+            #현재 시간 출력
         img = cv.resize(img,(900,500))
         cv.imshow('frame', img)
         
@@ -83,7 +89,7 @@ def main():
             break
 
 
-            
 if __name__ == '__main__':
-    main()
+    cap = cv.VideoCapture('123.mp4')
+    main(cap)
     cv.destroyAllWindows()
