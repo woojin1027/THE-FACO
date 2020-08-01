@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class SplashActivity extends Activity {
+public class splashActivity extends Activity {
     AnimationDrawable animDrawable;
     ImageView imageView;
 
@@ -35,7 +35,7 @@ public class SplashActivity extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(splashActivity.this, MainActivity.class));
                 finish();
             }
         }, 2100);

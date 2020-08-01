@@ -8,24 +8,21 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.nio.file.Path;
-
 //출발지와 도착지 설정을 위한 클래스
 //https://loveiskey.tistory.com/171
-public class PathSetting extends AppCompatActivity {
+public class pathSetting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final int[] selectedItem = {0};
         final String[] items = new String[]{"미금역", "정자역", "명동성당"};
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(PathSetting.this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(pathSetting.this);
 
         dialog.setTitle("출발지를 고르세요.")
                 .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
