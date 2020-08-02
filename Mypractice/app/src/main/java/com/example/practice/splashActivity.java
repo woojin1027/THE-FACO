@@ -19,7 +19,7 @@ public class splashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         LinearLayout view = (LinearLayout) findViewById(R.id.viewcontainer);
         ImageView imageView = findViewById(R.id.mainIcon);
-        imageView.setImageResource(R.drawable.logo_transparent);
+        imageView.setImageResource(R.drawable.busicon);
         //전체화면만들기
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
