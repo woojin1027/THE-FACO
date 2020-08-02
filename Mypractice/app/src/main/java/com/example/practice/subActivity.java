@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -26,6 +27,7 @@ public class subActivity extends AppCompatActivity {
     private final String key1 = "AGosnxF7ORMEFRnphkCbkve01B6SaEZpj5R2kD03%2B43HobZwgWC2BqRthRvHeMOEWK1M%2BAPASvsbGc3K7Z9V8A%3D%3D"; //버스도착정보목록조회 인증키
     private final String endPoint1 = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice"; //버스도착정보목록조회 앞 주소
     private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; // 버스위치정보목록조회 앞 주소
+    private final String endPoint3 = "http://ws.bus.go.kr/api/rest/buspop/getBusPosByRtid"; //버스위치정보조회 앞 주소
     private final String route = "234000878";
 
     //파싱을 위한 필드 선언
@@ -44,8 +46,11 @@ public class subActivity extends AppCompatActivity {
     private ArrayList listBusseq;
     private ArrayList liststationId;
     private ArrayList listseatCnt;
-
+    private ArrayList listStopflag;
+    private ArrayList listnextstation;
     BusitemAdapter2 adapter = new BusitemAdapter2();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +67,7 @@ public class subActivity extends AppCompatActivity {
         liststationId = new ArrayList();
         listseatCnt = new ArrayList();
         listBus = new ArrayList();
+
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -129,8 +135,9 @@ public class subActivity extends AppCompatActivity {
 
         for(int i = 0; i < listBus.size(); i++)
         {
-            adapter.addItem(new Bus_items("" + listBus.get(i).toString(),""));
+            adapter.addItem(new Bus_items("" + listBus.get(i).toString(),"",0));
         }
+
 
         //준비상태
         new Thread(new Runnable()
@@ -150,12 +157,12 @@ public class subActivity extends AppCompatActivity {
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
-                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
+                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),"",0));
                         }
                         //버스위치 셋팅
                         for(int i = 0; i < listBusseq.size(); i++)
                         {
-                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"버스가 이 정류장을 지나고 있습니다.\n 빈 좌석 : " + listseatCnt.get(i)));
+                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon));
                         }
 
                     }
@@ -198,12 +205,12 @@ public class subActivity extends AppCompatActivity {
                                 //버스 리셋
                                 for(int j = 0; j < listBus.size(); j++)
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),"",0));
                                 }
                                 //버스위치 셋팅
                                 for(int i = 0; i < listBusseq.size(); i++)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"버스가 이 정류장을 지나고 있습니다.\n 빈 좌석 : " + listseatCnt.get(i)));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon));
                                 }
 
                             }
@@ -219,8 +226,11 @@ public class subActivity extends AppCompatActivity {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
     }
 
+    //새로고침 버튼 메서드
     public void refresh(View view)
     {
         listmin1.clear();
@@ -249,12 +259,12 @@ public class subActivity extends AppCompatActivity {
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
-                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),""));
+                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),"",0));
                         }
                         //버스위치 셋팅
                         for(int i = 0; i < listBusseq.size(); i++)
                         {
-                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"버스가 이 정류장을 지나고 있습니다.\n 빈 좌석 : " + listseatCnt.get(i)));
+                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon));
                         }
 
                     }
@@ -271,7 +281,7 @@ public class subActivity extends AppCompatActivity {
     private void getBusArrivalItem(String station, String staorder)
     {
         String stationUrl = endPoint1 + "?serviceKey=" + key1 + "&stationId=" + station + "&routeId=" + route + "&staOrder=" + staorder;
-        Log.d(TAG, "버스도착정보조회 : " + stationUrl);
+        Log.d(TAG, "버스도착정보항목조회 : " + stationUrl);
 
         try
         {
@@ -322,7 +332,7 @@ public class subActivity extends AppCompatActivity {
     private void getBusLocationList()
     {
         String stationUrl = endPoint2 + "?serviceKey=" + key1 + "&routeId=" + route;
-        Log.d(TAG, "버스위치정보 조회 : " + stationUrl);
+        Log.d(TAG, "버스위치정보목록 조회 : " + stationUrl);
 
         try
         {
@@ -357,6 +367,47 @@ public class subActivity extends AppCompatActivity {
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
                         if(tag.equals("busLocationList")); //첫번째 검색결과 종료
+                        break;
+                }
+                eventType = xpp.next();
+            }
+        }catch (Exception e){e.printStackTrace();}
+    }
+
+    //오퍼레이션 3 (버스위치정보조회)
+    private void getBusPosByRtidList()
+    {
+        String stationUrl = endPoint3 + "?serviceKey=" + key1 + "&BusRouteId=" + route;
+        Log.d(TAG, "버스위치정보 조회 : " + stationUrl);
+
+        try
+        {
+            setUrlNParser(stationUrl);
+            while (eventType != XmlPullParser.END_DOCUMENT)
+            {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
+                        break;
+                    case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
+                        tag = xpp.getName();    //태그이름 얻어오기
+                        if(tag.equals("itemList"));  //첫번째 검색 결과
+                        else if(tag.equals("stopFlag")) //정류소도착여부
+                        {
+                            xpp.next();
+                            listStopflag.add(xpp.getText());
+                        }
+                        else if(tag.equals("nextStId")) //다음정류소아이디
+                        {
+                            xpp.next();
+                            listnextstation.add(xpp.getText());
+                        }
+                        break;
+                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
+                        break;
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if(tag.equals("itemList")); //첫번째 검색결과 종료
                         break;
                 }
                 eventType = xpp.next();

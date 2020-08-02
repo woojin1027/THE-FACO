@@ -3,6 +3,7 @@ package com.example.practice;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -68,6 +69,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
     {
         TextView textView;  //버스정류장 이름
         TextView textView2; //버스도착정보
+        ImageView imageView; //버스이미지
 
         public ViewHolder(View itemView)
         {
@@ -75,12 +77,14 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
 
             textView = itemView.findViewById(R.id.textView);
             textView2 = itemView.findViewById(R.id.textView2);
+            imageView = itemView.findViewById(R.id.busicon);
         }
 
         public void setItem(Bus_items item)
         {
             textView.setText(item.getBusstopname());
             textView2.setText(item.getBusInfo());
+            imageView.setImageResource(item.getImage());
         }
     }
 
