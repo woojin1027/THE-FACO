@@ -25,21 +25,40 @@
 
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="290dp"
+                    android:layout_width="270dp"
                     android:layout_height="70dp"
                     android:gravity="center"
                     android:text="정류장"
                     android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/textView2"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:text="좌석수"
-                    android:textColor="#0317F4"
-                    android:textSize="14sp" />
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="5dp"
+                        app:srcCompat="@drawable/bearnote" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/note"
+                        android:layout_alignTop="@id/note"
+                        android:layout_alignRight="@id/note"
+                        android:layout_alignBottom="@id/note"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="좌석수"
+                        android:textColor="#AAAA00"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:typeface="sans" />
+                </RelativeLayout>
 
             </LinearLayout>
 

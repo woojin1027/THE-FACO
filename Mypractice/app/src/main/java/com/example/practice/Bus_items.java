@@ -20,6 +20,10 @@ public class Bus_items
     {
         return Image;
     }
+    public int getImage2()
+    {
+        return Image2;
+    }
 
     public void setBusstopname(String busstopname)
     {
@@ -36,11 +40,17 @@ public class Bus_items
         this.Image = image;
     }
 
-    public Bus_items(String busstopname, String businfo, int image)
+    public void setImage2(int image2)
+    {
+        this.Image2 = image2;
+    }
+
+    public Bus_items(String busstopname, String businfo, int image, int image2)
     {
         this.Busstopname = busstopname;
         this.BusInfo = businfo;
         this.Image = image;
+        this.Image2 = image2;
     }
 
     public Bus_items(String businfo)
@@ -48,6 +58,7 @@ public class Bus_items
         this.BusInfo = businfo;
     }
 
+    int Image2;
     int Image;
     String BusInfo;
     String Busstopname;
