@@ -24,7 +24,7 @@ def main():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture('123.mp4')
+    cap = cv.VideoCapture('131.mp4')
     
     while cap.isOpened():
         ret,img = cap.read()

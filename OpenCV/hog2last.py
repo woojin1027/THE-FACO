@@ -30,8 +30,8 @@ def draw_detections(img, rects, thickness = 1):
             a = abs(int(readc[i][0]) - int(readc[j][0]))
             b = abs(int(readc[i][1]) - int(readc[j][1]))
             if i != j:
-                if a < 300:
-                    if b < 200:
+                if a < 200:
+                    if b < 100:
                         readc2.append(( int(readc[i][0]),int(readc[i][1]) ))
                         readc2.append(( int(readc[j][0]),int(readc[j][1]) ))
                         readc2 = list(set(readc2))
@@ -52,15 +52,20 @@ def main(cap):
 
     while cap.isOpened():
         ret,img = cap.read()
+        if not ret:
+            print("영상이 끝났습니다. 종료 중 ...")
+            break
         frame = img
         rows, cols = frame.shape[:2]
         rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
-
+        fps = cap.get(cv.CAP_PROP_FPS) # 또는 cap.get(5)
+        
         if cap.get(1)%30 == 0:
             #30프레임에 한번씩 사람인 객체를 검사한다.
+            print("초당 프레임 수: %d" %(fps))
             found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
             found_filtered = []
             for ri, r in enumerate(found):
@@ -90,6 +95,6 @@ def main(cap):
 
 
 if __name__ == '__main__':
-    cap = cv.VideoCapture('123.mp4')
+    cap = cv.VideoCapture('132.mp4')
     main(cap)
     cv.destroyAllWindows()

@@ -97,7 +97,7 @@ def main():
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
-        if cap.get(1)%1 == 0:
+        if cap.get(1)%30 == 0:
             found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
             found_filtered = []
             for ri, r in enumerate(found):
@@ -129,7 +129,7 @@ def main2():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture('126.mp4')
+    cap = cv.VideoCapture('131.mp4')
     while cap.isOpened():
         ret,img = cap.read()
         frame = img
@@ -145,6 +145,6 @@ def main2():
             break    
             
 if __name__ == '__main__':
-    main()
-    #main2()
+    #main()
+    main2()
     cv.destroyAllWindows()
