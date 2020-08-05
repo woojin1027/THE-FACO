@@ -3,13 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#EBA9B2</item>
-        <item name="colorPrimaryDark">#AE4957</item>
+        <item name="colorPrimary">#5797CF</item>
+        <item name="colorPrimaryDark">#092F4F</item>
         <item name="colorAccent">#0F4C81</item>
 
 
         <!-- To change the background of options menu-->
-        <item name="android:itemBackground">#ccAE4957</item>
+        <item name="android:itemBackground">#cc91A8D2</item>
 
     </style>
 
