@@ -154,7 +154,7 @@ public class showActivity extends AppCompatActivity
                         //버스위치 셋팅
                         for(int i = 0; i < listBusseq.size(); i++)
                         {
-                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.bearnote));
+                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote));
                         }
 
                     }
@@ -201,7 +201,7 @@ public class showActivity extends AppCompatActivity
                                 //버스위치 셋팅
                                 for(int i = 0; i < listBusseq.size(); i++)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.bearnote));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote));
                                 }
 
                             }
@@ -254,7 +254,7 @@ public class showActivity extends AppCompatActivity
                         //버스위치 셋팅
                         for(int i = 0; i < listBusseq.size(); i++)
                         {
-                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.bearnote));
+                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote));
                         }
 
                     }
