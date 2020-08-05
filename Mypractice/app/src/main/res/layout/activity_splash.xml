@@ -15,7 +15,7 @@
         android:layout_marginTop="180dp"
         android:gravity="center"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/busicon" />
+        app:srcCompat="@drawable/icon_pink" />
 
     <TextView
         android:id="@+id/textView"

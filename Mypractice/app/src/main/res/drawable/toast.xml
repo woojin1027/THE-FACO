@@ -4,10 +4,10 @@
 
     <stroke
         android:width="2dp"
-        android:color="#bbcfd2"/>
+        android:color="#EBA9B2"/>
 
     <solid
-        android:color="#bbcfd2"/>
+        android:color="#EBA9B2"/>
 
     <padding
         android:left="10dp"
