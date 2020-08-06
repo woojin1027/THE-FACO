@@ -56,11 +56,20 @@
                     app:srcCompat="@drawable/rail1" />
 
                 <ImageView
+                    android:id="@+id/railstop"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="false"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/railstop1" />
+
+                <ImageView
                     android:id="@+id/busicon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     app:srcCompat="@drawable/busicon" />
+
             </RelativeLayout>
 
             <RelativeLayout

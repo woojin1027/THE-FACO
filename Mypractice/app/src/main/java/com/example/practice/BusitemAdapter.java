@@ -72,7 +72,8 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         ImageView imageView2; //좌석수 이미지
         ImageView imageView3; //상행선 레일 이미지
         ImageView imageView4; //하행선 레일 이미지
-        ImageView imageView5; //회차 레일 이미지
+        ImageView imageView5; //회차 레일 이미지2
+        ImageView imageView6;  //정차하는 정거장 이미지
 
         public ViewHolder(View itemView)
         {
@@ -85,6 +86,8 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView3 = itemView.findViewById(R.id.rail1);
             imageView4 = itemView.findViewById(R.id.rail2);
             imageView5 = itemView.findViewById(R.id.returnrail);
+            imageView6 = itemView.findViewById(R.id.railstop);
+
         }
 
         public void setItem(Bus_items item)
@@ -96,6 +99,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView3.setImageResource(item.getRail1());
             imageView4.setImageResource(item.getRail2());
             imageView5.setImageResource(item.getReturnrail());
+            imageView6.setImageResource(item.getRailstop());
         }
     }
 

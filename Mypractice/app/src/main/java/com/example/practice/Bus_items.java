@@ -41,6 +41,10 @@ public class Bus_items
         return Returnrail;
     }
 
+    public int getRailstop()
+    {
+        return Railstop;
+    }
 
     public void setBusstopname(String busstopname)
     {
@@ -77,7 +81,12 @@ public class Bus_items
         this.Returnrail = returnrail;
     }
 
-    public Bus_items(String busstopname, String businfo, int image, int image2, int rail1, int rail2, int returnrail)
+    public void setRailstop(int railstop)
+    {
+        this.Railstop = railstop;
+    }
+
+    public Bus_items(String busstopname, String businfo, int image, int image2, int rail1, int rail2, int returnrail, int railstop)
     {
         this.Busstopname = busstopname;
         this.BusInfo = businfo;
@@ -86,6 +95,7 @@ public class Bus_items
         this.Rail1 = rail1;
         this.Rail2 = rail2;
         this.Returnrail = returnrail;
+        this.Railstop = railstop;
     }
 
     public Bus_items(String businfo)
@@ -98,6 +108,7 @@ public class Bus_items
     int Rail1; //상행선 레일 이미지
     int Rail2; //하행선 레일 이미지
     int Returnrail; //회차 레일 이미지
+    int Railstop;   //정차하는 정거장 이미지
     String BusInfo;
     String Busstopname;
 }
