@@ -1,11 +1,15 @@
 package com.example.practice;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,26 +23,51 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.frag3,container,false);
 
-        Button button_setting1 = view.findViewById(R.id.button_setting1);
+        TextView button_setting1 = view.findViewById(R.id.button_setting11); //버튼이 아니라 텍스트뷰로 바꿔봄 -> 경로 설정시 데이터 바꿔야되서
         Button button_setting2 = view.findViewById(R.id.button_setting2);
 
-        //버튼 클릭시 PathSetting으로 이동
+        //버튼or텍스트뷰 클릭 시 PathSetting으로 이동
         button_setting1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), pathSetting2.class);
+                Intent intent = new Intent(getActivity(), pathSetting.class);
                 startActivity(intent);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,container,false);
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getActivity());
+                text.setText("출발지를 설정해주세요");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
+
             }});
 
         button_setting2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), pathSetting2.class);
+                Intent intent = new Intent(getActivity(), pathSetting.class);
                 startActivity(intent);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,container,false);
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getActivity());
+                text.setText("도착지를 설정해주세요");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
             }});
 
         return view;

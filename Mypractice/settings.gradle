@@ -1,2 +1,3 @@
+include ':jxl'
 rootProject.name='Mypractice'
 include ':app'

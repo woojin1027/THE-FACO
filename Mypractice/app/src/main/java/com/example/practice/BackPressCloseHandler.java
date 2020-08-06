@@ -1,16 +1,9 @@
 package com.example.practice;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class BackPressCloseHandler {
+public class BackPressCloseHandler extends Activity{
     private long backKeyPressedTime = 0;
     private Toast toast;
     private Activity activity;

@@ -2,25 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.practice.pathSetting2" >
+    tools:context="com.example.practice.pathSetting" >
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/searchbox"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:ems="10"
+        android:ems="15"
+        android:gravity="center"
         android:hint="Search Here"
-        android:gravity="center" >
+        android:imeOptions="actionSearch">
 
     </EditText>
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/list_excel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/searchbox"
         android:layout_centerHorizontal="true" >
     </ListView>
 

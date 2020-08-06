@@ -4,7 +4,7 @@
         android:duration="700"/>
 
     <item
-        android:drawable="@drawable/splash4"
+        android:drawable="@drawable/splash2"
         android:duration="700"/>
 
     <item

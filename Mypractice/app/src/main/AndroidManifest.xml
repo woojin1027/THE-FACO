@@ -19,8 +19,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
 
-        <activity android:name=".pathSetting" />
-        <activity android:name=".pathSetting2"/>
+        <activity android:name=".pathSetting"/>
         <activity android:name=".appDescription" />
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
