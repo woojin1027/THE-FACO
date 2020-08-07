@@ -1,10 +1,13 @@
 package com.example.practice;
 
+import android.provider.ContactsContract;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHolder>
 {
     ArrayList<Bus_items> items = new ArrayList<Bus_items>();
+
 
     public void addItem(Bus_items item)
     {
@@ -75,6 +79,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         ImageView imageView5; //회차 레일 이미지2
         ImageView imageView6;  //정차하는 정거장 이미지
 
+
         public ViewHolder(View itemView)
         {
             super(itemView);
@@ -100,7 +105,9 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView4.setImageResource(item.getRail2());
             imageView5.setImageResource(item.getReturnrail());
             imageView6.setImageResource(item.getRailstop());
+
         }
+
     }
 
 

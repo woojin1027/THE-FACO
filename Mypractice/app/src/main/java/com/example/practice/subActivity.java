@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +54,7 @@ public class subActivity extends AppCompatActivity {
     BusitemAdapter2 adapter = new BusitemAdapter2();
 
     int []BusstopArr = new int[]{1,2,3,4,6,8,9,18,21,22,23,24,27,29,30,33,42,43,44,45,46,47};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -237,15 +239,39 @@ public class subActivity extends AppCompatActivity {
                         {
                             if(Integer.parseInt(listBusseq.get(i).toString()) < 25)
                             {
-                                adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
+
+                                }
+                                else
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                }
                             }
                             else if(Integer.parseInt(listBusseq.get(i).toString()) == 25)
                             {
-                                adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
+
+                                }
+                                else
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                }
                             }
                             else
                             {
-                                adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
+
+                                }
+                                else
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                }
                             }
                         }
 
@@ -328,15 +354,39 @@ public class subActivity extends AppCompatActivity {
                                 {
                                     if(Integer.parseInt(listBusseq.get(i).toString()) < 25)
                                     {
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                        if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                        {
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
+
+                                        }
+                                        else
+                                        {
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                        }
                                     }
                                     else if(Integer.parseInt(listBusseq.get(i).toString()) == 25)
                                     {
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                        if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                        {
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
+
+                                        }
+                                        else
+                                        {
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                        }
                                     }
                                     else
                                     {
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                        if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                        {
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
+
+                                        }
+                                        else
+                                        {
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                        }
                                     }
                                 }
                             }
@@ -425,15 +475,39 @@ public class subActivity extends AppCompatActivity {
                         {
                             if(Integer.parseInt(listBusseq.get(i).toString()) < 25)
                             {
-                                adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
+
+                                }
+                                else
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                }
                             }
                             else if(Integer.parseInt(listBusseq.get(i).toString()) == 25)
                             {
-                                adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
+
+                                }
+                                else
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                }
                             }
                             else
                             {
-                                adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
+
+                                }
+                                else
+                                {
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                }
                             }
                         }
 
