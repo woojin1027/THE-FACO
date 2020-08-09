@@ -64,6 +64,10 @@ public class showActivity extends AppCompatActivity
 
     int []BusstopArr = new int[]{2,4,5,16,17,18,19,22,23,24,35,36,37};
 
+//    LinearLayout page = findViewById(R.id.page);
+//    Animation translateBottomAnim;
+//    Animation translatetopAnim;
+//    boolean isPageOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -402,8 +406,59 @@ public class showActivity extends AppCompatActivity
             }
         });
 
+//        translateBottomAnim = AnimationUtils.loadAnimation(this, R.anim.translate_bottom);
+//        translatetopAnim = AnimationUtils.loadAnimation(this,R.anim.translate_top);
+//
+//        SlidingPageAnimationListener animListener = new SlidingPageAnimationListener();
+//        translateBottomAnim.setAnimationListener(animListener);
+//        translatetopAnim.setAnimationListener(animListener);
+//
+//        adapter.setOnItemClickListener(new OnBusItemClickListener() {
+//            @Override
+//            public void onItemClick(BusitemAdapter.ViewHolder holder, View view, int position)
+//            {
+//                Bus_items item = adapter.getItem(position);
+//                if(isPageOpen)
+//                {
+//                    page.startAnimation(translatetopAnim);
+//                }
+//                else
+//                {
+//                    page.setVisibility(View.VISIBLE);
+//                    page.startAnimation(translateBottomAnim);
+//                }
+//
+//            }
+//        });
+//    }
+//
+//    private class SlidingPageAnimationListener implements Animation.AnimationListener
+//    {
+//
+//        @Override
+//        public void onAnimationStart(Animation animation) {
+//
+//        }
+//
+//        @Override
+//        public void onAnimationEnd(Animation animation)
+//        {
+//            if(isPageOpen)
+//            {
+//                page.setVisibility(View.INVISIBLE);
+//                isPageOpen = false;
+//            }
+//            else
+//            {
+//                isPageOpen = true;
+//            }
+//        }
+//
+//        @Override
+//        public void onAnimationRepeat(Animation animation) {
+//
+//        }
     }
-
 
 
     //새로고침버튼 메서드

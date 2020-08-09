@@ -18,10 +18,10 @@ import java.net.CookieHandler;
 import java.util.ArrayList;
 
 //M4102 의 버스정류장 어댑터
-public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHolder>
+public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHolder> implements OnBusItemClickListener
 {
     ArrayList<Bus_items> items = new ArrayList<Bus_items>();
-
+    OnBusItemClickListener listener;
 
     public void addItem(Bus_items item)
     {
@@ -53,7 +53,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         //인플레이션을 통해 뷰 객체 만들기
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.bus_item, parent, false);
-        return new ViewHolder(itemView);    //뷰홀더 객체 반환
+        return new ViewHolder(itemView, this);    //뷰홀더 객체 반환
     }
 
     @Override
@@ -71,8 +71,21 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         return items.size();
     }
 
+    public void setOnItemClickListener(OnBusItemClickListener listener)
+    {
+        this.listener = listener;
+    }
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position)
+    {
+        if(listener != null)
+        {
+            listener.onItemClick(holder, view, position);
+        }
+    }
 
-    class ViewHolder extends RecyclerView.ViewHolder
+
+    static class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView textView;  //버스정류장 이름
         TextView textView2; //버스도착정보
@@ -84,7 +97,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         ImageView imageView6;  //정차하는 정거장 이미지
 
 
-        public ViewHolder(View itemView)
+        public ViewHolder(View itemView, final OnBusItemClickListener listener)
         {
             super(itemView);
 
@@ -96,6 +109,19 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView4 = itemView.findViewById(R.id.rail2);
             imageView5 = itemView.findViewById(R.id.returnrail);
             imageView6 = itemView.findViewById(R.id.railstop);
+
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View view)
+                {
+                    int position = getAdapterPosition();
+                    if(listener != null)
+                    {
+                        listener.onItemClick(ViewHolder.this, view, position);
+                    }
+                }
+            });
 
         }
 
@@ -111,6 +137,8 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView6.setImageResource(item.getRailstop());
 
         }
+
+
 
     }
 
