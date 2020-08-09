@@ -8,8 +8,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -399,6 +403,8 @@ public class showActivity extends AppCompatActivity
         });
 
     }
+
+
 
     //새로고침버튼 메서드
     public void refresh(View view)

@@ -1,5 +1,7 @@
 package com.example.practice;
 
+import android.animation.ValueAnimator;
+import android.content.Context;
 import android.provider.ContactsContract;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.net.CookieHandler;
 import java.util.ArrayList;
 
 //M4102 의 버스정류장 어댑터
@@ -68,7 +71,8 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         return items.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder
+
+    class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView textView;  //버스정류장 이름
         TextView textView2; //버스도착정보
