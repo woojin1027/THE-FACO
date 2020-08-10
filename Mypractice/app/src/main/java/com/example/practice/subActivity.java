@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -39,6 +38,7 @@ public class subActivity extends AppCompatActivity {
     private String tag;
     private int eventType;
 
+    private ArrayList listflag;
     private ArrayList listBus;
     private ArrayList listmin1;
     private ArrayList listmin2;
@@ -48,8 +48,6 @@ public class subActivity extends AppCompatActivity {
     private ArrayList liststationId;
     private ArrayList listseatCnt;
     private ArrayList listBusstop;
-    private ArrayList listStopflag;
-    private ArrayList listnextstation;
 
     BusitemAdapter2 adapter = new BusitemAdapter2();
 
@@ -67,6 +65,7 @@ public class subActivity extends AppCompatActivity {
         listmin2 = new ArrayList();
         liststation1 = new ArrayList();
         liststation2 = new ArrayList();
+        listflag = new ArrayList();
         listBusseq = new ArrayList();
         liststationId = new ArrayList();
         listseatCnt = new ArrayList();
@@ -138,6 +137,7 @@ public class subActivity extends AppCompatActivity {
         listmin2.clear();
         liststation1.clear();
         liststation2.clear();
+        listflag.clear();
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
@@ -242,7 +242,6 @@ public class subActivity extends AppCompatActivity {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
                                     adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
-
                                 }
                                 else
                                 {
@@ -298,6 +297,7 @@ public class subActivity extends AppCompatActivity {
                         listmin2.clear();
                         liststation1.clear();
                         liststation2.clear();
+                        listflag.clear();
                         listBusseq.clear();
                         liststationId.clear();
                         listseatCnt.clear();
@@ -413,6 +413,7 @@ public class subActivity extends AppCompatActivity {
         listmin2.clear();
         liststation1.clear();
         liststation2.clear();
+        listflag.clear();
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
@@ -618,46 +619,6 @@ public class subActivity extends AppCompatActivity {
         }catch (Exception e){e.printStackTrace();}
     }
 
-    //오퍼레이션 3 (버스위치정보조회)
-    private void getBusPosByRtidList()
-    {
-        String stationUrl = endPoint3 + "?serviceKey=" + key1 + "&BusRouteId=" + route;
-        Log.d(TAG, "버스위치정보 조회 : " + stationUrl);
-
-        try
-        {
-            setUrlNParser(stationUrl);
-            while (eventType != XmlPullParser.END_DOCUMENT)
-            {
-                switch (eventType)
-                {
-                    case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
-                        break;
-                    case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
-                        tag = xpp.getName();    //태그이름 얻어오기
-                        if(tag.equals("itemList"));  //첫번째 검색 결과
-                        else if(tag.equals("stopFlag")) //정류소도착여부
-                        {
-                            xpp.next();
-                            listStopflag.add(xpp.getText());
-                        }
-                        else if(tag.equals("nextStId")) //다음정류소아이디
-                        {
-                            xpp.next();
-                            listnextstation.add(xpp.getText());
-                        }
-                        break;
-                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
-                        break;
-                    case XmlPullParser.END_TAG:
-                        tag = xpp.getName(); //태그 이름 얻어오기
-                        if(tag.equals("itemList")); //첫번째 검색결과 종료
-                        break;
-                }
-                eventType = xpp.next();
-            }
-        }catch (Exception e){e.printStackTrace();}
-    }
 
     private void setUrlNParser(String quary)
     {

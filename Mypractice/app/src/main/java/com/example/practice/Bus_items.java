@@ -16,6 +16,11 @@ public class Bus_items
         return BusInfo;
     }
 
+    public String getBusInfo2()
+    {
+        return BusInfo2;
+    }
+
     public int getImage()
     {
         return Image;
@@ -54,6 +59,11 @@ public class Bus_items
     public void setBusInfo(String businfo)
     {
         this.BusInfo = businfo;
+    }
+
+    public void setBusInfo2(String businfo2)
+    {
+        this.BusInfo2 = businfo2;
     }
 
     public void setImage(int image)
@@ -98,17 +108,13 @@ public class Bus_items
         this.Railstop = railstop;
     }
 
-    public Bus_items(String businfo)
-    {
-        this.BusInfo = businfo;
-    }
-
     int Image; //버스아이콘 이미지
     int Image2; //좌석수 배경 이미지
     int Rail1; //상행선 레일 이미지
     int Rail2; //하행선 레일 이미지
     int Returnrail; //회차 레일 이미지
     int Railstop;   //정차하는 정거장 이미지
-    String BusInfo;
-    String Busstopname;
+    String BusInfo; //버스좌석정보
+    String BusInfo2;    //버스도착정보
+    String Busstopname; //버스정류장이름
 }

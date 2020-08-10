@@ -1,9 +1,12 @@
 package com.example.practice;
 
+import android.animation.ValueAnimator;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,11 @@ import java.util.ArrayList;
 public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHolder>
 {
     ArrayList<Bus_items> items = new ArrayList<Bus_items>();
+
+    //Item의 클릭 상태를 저장할 array 객체
+    private SparseBooleanArray selectedItems = new SparseBooleanArray();
+    //직전에 클릭됐던 Item의 position
+    private int prePosition = -1;
 
     public void addItem(Bus_items item)
     {
@@ -51,11 +59,35 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull ViewHolder holder,final int position)
     {
         //item 을 하나하나 보여주는 함수
         Bus_items item = items.get(position);
         holder.setItem(item);
+
+        ViewHolder viewHolder = (ViewHolder)holder;
+        viewHolder.onBind(items.get(position),position,selectedItems);
+        viewHolder.setOnBusItemClickListener2(new OnBusItemClickListener2(){
+
+            @Override
+            public void onItemClick2() {
+                if (selectedItems.get(position)) {
+                    // 펼쳐진 Item을 클릭 시
+                    selectedItems.delete(position);
+                } else {
+                    // 직전의 클릭됐던 Item의 클릭상태를 지움
+                    selectedItems.delete(prePosition);
+                    // 클릭한 Item의 position을 저장
+                    selectedItems.put(position, true);
+                }
+                // 해당 포지션의 변화를 알림
+                if (prePosition != -1) notifyItemChanged(prePosition);
+                notifyItemChanged(position);
+                // 클릭된 position 저장
+                prePosition = position;
+            }
+        });
+
     }
 
     @Override
@@ -68,13 +100,17 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
     static class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView textView;  //버스정류장 이름
-        TextView textView2; //버스도착정보
+        TextView textView2; //버스좌석정보
+        TextView textView3; //버스도착정보
         ImageView imageView; //버스이미지
         ImageView imageView2; //좌석수 이미지
         ImageView imageView3; //상행선 레일 이미지
         ImageView imageView4; //하행선 레일 이미지
         ImageView imageView5; //회차 레일 이미지
         ImageView imageView6;  //정차하는 정거장 이미지
+        LinearLayout linearlayout; //카드뷰 전체의 레이아웃
+
+        OnBusItemClickListener2 onBusItemClickListener2;
 
         public ViewHolder(View itemView)
         {
@@ -82,18 +118,67 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
 
             textView = itemView.findViewById(R.id.textView);
             textView2 = itemView.findViewById(R.id.textView2);
+            textView3 = itemView.findViewById(R.id.textView3);
             imageView = itemView.findViewById(R.id.busicon);
             imageView2 = itemView.findViewById(R.id.note);
             imageView3 = itemView.findViewById(R.id.rail1);
             imageView4 = itemView.findViewById(R.id.rail2);
             imageView5 = itemView.findViewById(R.id.returnrail);
             imageView6 = itemView.findViewById(R.id.railstop);
+            linearlayout = itemView.findViewById(R.id.linearlayout);
+
+            linearlayout.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    onBusItemClickListener2.onItemClick2();
+                }
+            });
         }
 
+        public void onBind(Bus_items item, int position, SparseBooleanArray selectedItems)
+        {
+            textView.setText(item.getBusstopname());
+            textView2.setText(item.getBusInfo());
+            textView3.setText(item.getBusInfo2());
+            imageView.setImageResource(item.getImage());
+            imageView2.setImageResource(item.getImage2());
+            imageView3.setImageResource(item.getRail1());
+            imageView4.setImageResource(item.getRail2());
+            imageView5.setImageResource(item.getReturnrail());
+            imageView6.setImageResource(item.getRailstop());
+            changeVisibility(selectedItems.get(position));
+        }
+
+        private void changeVisibility(final boolean isExpanded)
+        {
+            // ValueAnimator.ofInt(int... values)는 View가 변할 값을 지정, 인자는 int 배열
+            ValueAnimator va = isExpanded ? ValueAnimator.ofInt(0, 600) : ValueAnimator.ofInt(600, 0);
+            // Animation이 실행되는 시간, n/1000초
+            va.setDuration(500);
+            va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    // imageView의 높이 변경
+                    textView3.getLayoutParams().height = (int) animation.getAnimatedValue();
+                    textView3.requestLayout();
+                    // imageView가 실제로 사라지게하는 부분
+                    textView3.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+                }
+            });
+            // Animation start
+            va.start();
+        }
+
+        public void setOnBusItemClickListener2(OnBusItemClickListener2 onBusItemClickListener2)
+        {
+            this.onBusItemClickListener2 = onBusItemClickListener2;
+        }
         public void setItem(Bus_items item)
         {
             textView.setText(item.getBusstopname());
             textView2.setText(item.getBusInfo());
+            textView3.setText(item.getBusInfo2());
             imageView.setImageResource(item.getImage());
             imageView2.setImageResource(item.getImage2());
             imageView3.setImageResource(item.getRail1());

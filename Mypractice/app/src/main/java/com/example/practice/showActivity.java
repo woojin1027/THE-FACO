@@ -1,19 +1,8 @@
 package com.example.practice;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,9 +16,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 //M4102 번 버스의 자바 파일
 public class showActivity extends AppCompatActivity
@@ -50,6 +36,7 @@ public class showActivity extends AppCompatActivity
     private String tag;
     private int eventType;
 
+    private ArrayList listflag;
     private ArrayList listBus;
     private ArrayList listmin1;
     private ArrayList listmin2;
@@ -64,10 +51,6 @@ public class showActivity extends AppCompatActivity
 
     int []BusstopArr = new int[]{2,4,5,16,17,18,19,22,23,24,35,36,37};
 
-//    LinearLayout page = findViewById(R.id.page);
-//    Animation translateBottomAnim;
-//    Animation translatetopAnim;
-//    boolean isPageOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -80,6 +63,7 @@ public class showActivity extends AppCompatActivity
         listmin2 = new ArrayList();
         liststation1 = new ArrayList();
         liststation2 = new ArrayList();
+        listflag = new ArrayList();
         listBusseq = new ArrayList();
         liststationId = new ArrayList();
         listseatCnt = new ArrayList();
@@ -178,6 +162,7 @@ public class showActivity extends AppCompatActivity
         listmin2.clear();
         liststation1.clear();
         liststation2.clear();
+        listflag.clear();
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
@@ -190,6 +175,8 @@ public class showActivity extends AppCompatActivity
             {
                 //오퍼레이션 1  버스위치정보조회
                 getBusLocationList();
+
+                //오퍼레이션 2 버스도착정보항목조회
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
@@ -204,6 +191,7 @@ public class showActivity extends AppCompatActivity
                             if(j == 0)
                             {
                                 adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
+//                                adapter.setItem(j,new Bus_items("첫번째 버스 도착정보\n"+ liststation1.get(j).toString() + "전 " + listmin1.get(j).toString() + "분" ));
                             }
                             else if(j < 21)
                             {
@@ -300,12 +288,16 @@ public class showActivity extends AppCompatActivity
                         listmin2.clear();
                         liststation1.clear();
                         liststation2.clear();
+                        listflag.clear();
                         listBusseq.clear();
                         liststationId.clear();
                         listseatCnt.clear();
 
                         //오퍼레이션 1  버스위치정보조회
                         getBusLocationList();
+
+                        //오퍼레이션 2 버스도착정보항목조회
+
 
                         //UI setText 하는 곳
                         runOnUiThread(new Runnable(){
@@ -406,58 +398,6 @@ public class showActivity extends AppCompatActivity
             }
         });
 
-//        translateBottomAnim = AnimationUtils.loadAnimation(this, R.anim.translate_bottom);
-//        translatetopAnim = AnimationUtils.loadAnimation(this,R.anim.translate_top);
-//
-//        SlidingPageAnimationListener animListener = new SlidingPageAnimationListener();
-//        translateBottomAnim.setAnimationListener(animListener);
-//        translatetopAnim.setAnimationListener(animListener);
-//
-//        adapter.setOnItemClickListener(new OnBusItemClickListener() {
-//            @Override
-//            public void onItemClick(BusitemAdapter.ViewHolder holder, View view, int position)
-//            {
-//                Bus_items item = adapter.getItem(position);
-//                if(isPageOpen)
-//                {
-//                    page.startAnimation(translatetopAnim);
-//                }
-//                else
-//                {
-//                    page.setVisibility(View.VISIBLE);
-//                    page.startAnimation(translateBottomAnim);
-//                }
-//
-//            }
-//        });
-//    }
-//
-//    private class SlidingPageAnimationListener implements Animation.AnimationListener
-//    {
-//
-//        @Override
-//        public void onAnimationStart(Animation animation) {
-//
-//        }
-//
-//        @Override
-//        public void onAnimationEnd(Animation animation)
-//        {
-//            if(isPageOpen)
-//            {
-//                page.setVisibility(View.INVISIBLE);
-//                isPageOpen = false;
-//            }
-//            else
-//            {
-//                isPageOpen = true;
-//            }
-//        }
-//
-//        @Override
-//        public void onAnimationRepeat(Animation animation) {
-//
-//        }
     }
 
 
@@ -468,6 +408,7 @@ public class showActivity extends AppCompatActivity
         listmin2.clear();
         liststation1.clear();
         liststation2.clear();
+        listflag.clear();
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
@@ -480,6 +421,9 @@ public class showActivity extends AppCompatActivity
             {
                 //오퍼레이션 1  버스위치정보조회
                 getBusLocationList();
+
+                //오퍼레이션 2 버스도착정보항목조회
+
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
@@ -627,7 +571,7 @@ public class showActivity extends AppCompatActivity
     private void getBusArrivalItem(String station, String staorder)
     {
         String stationUrl = endPoint1 + "?serviceKey=" + key1 + "&stationId=" + station + "&routeId=" + route + "&staOrder=" + staorder;
-        Log.d(TAG, "버스도착정보조회 : " + stationUrl);
+        Log.d(TAG, "버스도착정보항목조회 : " + stationUrl);
 
         try
         {
@@ -661,6 +605,11 @@ public class showActivity extends AppCompatActivity
                             xpp.next();
                             listmin2.add(xpp.getText());
                         }
+                        else if(tag.equals("flag"))
+                        {
+                            xpp.next();
+                            listflag.add(xpp.getText());
+                        }
                         break;
                     case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
                         break;
@@ -689,7 +638,6 @@ public class showActivity extends AppCompatActivity
             eventType = xpp.getEventType();
         }catch(Exception e){}
     }
-
 
 
 }
