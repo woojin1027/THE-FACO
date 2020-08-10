@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,14 +26,15 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
     {
         view = inflater.inflate(R.layout.frag3,container,false);
 
-        TextView button_setting1 = view.findViewById(R.id.button_setting11); //버튼이 아니라 텍스트뷰로 바꿔봄 -> 경로 설정시 데이터 바꿔야되서
-        Button button_setting2 = view.findViewById(R.id.button_setting2);
+        TextView setting1 = view.findViewById(R.id.textview_setting1); //버튼이 아니라 텍스트뷰로 바꿔봄 -> 경로 설정시 데이터 바꿔야되서
+        TextView setting2 = view.findViewById(R.id.textview_setting2);
 
         //버튼or텍스트뷰 클릭 시 PathSetting으로 이동
-        button_setting1.setOnClickListener(new View.OnClickListener() {
+
+        setting1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), pathSetting.class);
+                Intent intent = new Intent(getActivity(), pathSetting_8100.class);
                 startActivity(intent);
 
                 LayoutInflater inflater = getLayoutInflater();
@@ -51,10 +51,10 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
 
             }});
 
-        button_setting2.setOnClickListener(new View.OnClickListener() {
+        setting2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), pathSetting.class);
+                Intent intent = new Intent(getActivity(), pathSetting_m4102.class);
                 startActivity(intent);
 
                 LayoutInflater inflater = getLayoutInflater();
