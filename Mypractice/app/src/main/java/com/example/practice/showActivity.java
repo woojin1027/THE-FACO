@@ -1,8 +1,10 @@
 package com.example.practice;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,7 +52,6 @@ public class showActivity extends AppCompatActivity
     BusitemAdapter adapter = new BusitemAdapter();
 
     int []BusstopArr = new int[]{2,4,5,16,17,18,19,22,23,24,35,36,37};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -231,8 +232,8 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                 }
                                 else
                                 {
@@ -243,8 +244,8 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                 }
                                 else
                                 {
@@ -255,8 +256,8 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                 }
                                 else
                                 {
@@ -350,8 +351,8 @@ public class showActivity extends AppCompatActivity
                                     {
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
 
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                         }
                                         else
                                         {
@@ -362,8 +363,8 @@ public class showActivity extends AppCompatActivity
                                     {
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
 
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                         }
                                         else
                                         {
@@ -374,8 +375,8 @@ public class showActivity extends AppCompatActivity
                                     {
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
 
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                         }
                                         else
                                         {
@@ -476,8 +477,8 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                 }
                                 else
                                 {
@@ -488,8 +489,8 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                 }
                                 else
                                 {
@@ -500,8 +501,8 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                 }
                                 else
                                 {

@@ -27,7 +27,7 @@ public class subActivity extends AppCompatActivity {
     private final String key1 = "AGosnxF7ORMEFRnphkCbkve01B6SaEZpj5R2kD03%2B43HobZwgWC2BqRthRvHeMOEWK1M%2BAPASvsbGc3K7Z9V8A%3D%3D"; //버스도착정보목록조회 인증키
     private final String endPoint1 = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice"; //버스도착정보목록조회 앞 주소
     private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; // 버스위치정보목록조회 앞 주소
-    private final String endPoint3 = "http://ws.bus.go.kr/api/rest/buspop/getBusPosByRtid"; //버스위치정보조회 앞 주소
+    private final String endPoint3 = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll"; //버스도착정보조회 앞 주소
     private final String route = "234000878";
 
     //파싱을 위한 필드 선언
@@ -142,6 +142,7 @@ public class subActivity extends AppCompatActivity {
         liststationId.clear();
         listseatCnt.clear();
 
+
         for(int i = 0; i < listBus.size(); i++)
         {
             if(i == 0)
@@ -190,6 +191,7 @@ public class subActivity extends AppCompatActivity {
                 //오퍼레이션 1  버스위치정보조회
                 getBusLocationList();
 
+                //getArrInfoByRouteAllList();
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
@@ -241,6 +243,7 @@ public class subActivity extends AppCompatActivity {
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
+
                                     adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                 }
                                 else
@@ -252,8 +255,8 @@ public class subActivity extends AppCompatActivity {
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                 }
                                 else
                                 {
@@ -264,8 +267,8 @@ public class subActivity extends AppCompatActivity {
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                 }
                                 else
                                 {
@@ -356,8 +359,8 @@ public class subActivity extends AppCompatActivity {
                                     {
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
 
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                         }
                                         else
                                         {
@@ -368,8 +371,8 @@ public class subActivity extends AppCompatActivity {
                                     {
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
 
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                         }
                                         else
                                         {
@@ -380,8 +383,8 @@ public class subActivity extends AppCompatActivity {
                                     {
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
 
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                         }
                                         else
                                         {
@@ -478,8 +481,8 @@ public class subActivity extends AppCompatActivity {
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                 }
                                 else
                                 {
@@ -490,8 +493,8 @@ public class subActivity extends AppCompatActivity {
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                 }
                                 else
                                 {
@@ -502,8 +505,8 @@ public class subActivity extends AppCompatActivity {
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
 
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                 }
                                 else
                                 {
@@ -520,6 +523,43 @@ public class subActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
+    }
+
+    //오퍼레이션 3 (버스도착정보항목조회)
+    private void getArrInfoByRouteAllList()
+    {
+        String stationUrl = endPoint3 + "?ServiceKey=" + key1 + "&busRouteId=" + route;
+        Log.d(TAG, "버스도착정보조회 : " + stationUrl);
+
+        try
+        {
+            setUrlNParser(stationUrl);
+            while (eventType != XmlPullParser.END_DOCUMENT)
+            {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
+                        break;
+                    case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
+                        tag = xpp.getName();    //태그이름 얻어오기
+                        if(tag.equals("itemList"));  //첫번째 검색 결과
+                        else if(tag.equals("staOrd"))
+                        {
+                            xpp.next();
+                            liststation1.add(xpp.getText());
+                        }
+
+                        break;
+                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
+                        break;
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if(tag.equals("itemList")); //첫번째 검색결과 종료
+                        break;
+                }
+                eventType = xpp.next();
+            }
+        }catch (Exception e){e.printStackTrace();}
     }
 
     //오퍼레이션 2 (버스도착정보항목조회)
