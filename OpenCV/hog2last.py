@@ -57,7 +57,7 @@ def main(cap):
             break
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
@@ -95,6 +95,6 @@ def main(cap):
 
 
 if __name__ == '__main__':
-    cap = cv.VideoCapture('132.mp4')
+    cap = cv.VideoCapture(1)
     main(cap)
     cv.destroyAllWindows()
