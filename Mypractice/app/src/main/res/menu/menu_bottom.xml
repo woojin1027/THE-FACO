@@ -5,7 +5,7 @@
         android:id="@+id/action_waiting"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_pin_24"
-        android:title="대기인원조회"/>
+        android:title="대기인원 조회"/>
 
     <item
         android:id="@+id/action_map"
@@ -16,7 +16,7 @@
     <item
         android:id="@+id/action_recommend"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_feedback_24"
-        android:title="추천 경로"/>
+        android:icon="@drawable/ic_baseline_access_time_24"
+        android:title="예상 소요시간"/>
 
 </menu>

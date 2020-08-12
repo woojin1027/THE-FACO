@@ -4,15 +4,24 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -28,22 +37,33 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
     ListView list_excel;
     ArrayAdapter<String> arrayAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pathsetting);
 
-
-
         searchBox = (EditText)findViewById(R.id.searchbox);  //검색창
         list_excel = (ListView)findViewById(R.id.list_excel);  //정류장데이터
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1); //텍스트뷰 하나로 구성된 내장 레이아웃
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1); //텍스트뷰 한개로 구성된 내장 레이아웃
         Excel(); //데이터 읽기
 
         list_excel.setAdapter(arrayAdapter);
         list_excel.setTextFilterEnabled(true);
         searchBox.addTextChangedListener(this);
+
+
+        //정류장 클릭시 이벤트
+        list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selected_item = (String)parent.getItemAtPosition(position);
+                Toast myToast = Toast.makeText(getApplicationContext(), selected_item, Toast.LENGTH_SHORT);
+                myToast.show();
+            }
+        });
     }
+
 
     public void Excel() {
         Workbook workbook = null;
@@ -65,23 +85,16 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
             for(int row = RowStart; row <= RowEnd; row++) {
                 String excelload = sheet.getCell(ColumnStart, row).getContents();
                 arrayAdapter.add(excelload);
+//                String excelload_2 = sheet.getCell(ColumnStart, row+6).getContents();
+//                arrayAdapter.add(excelload_2);
+
             }
 //            for(int row = RowStart_2; row <= RowEnd; row++) {
 //                String excelload_2 = sheet.getCell(ColumnStart, row).getContents();
 //                arrayAdapter.add(excelload_2);
 //            }
 
-//
-//            //이거 씀
-//            final TextView sss = findViewById(R.id.textview_setting1);
-//            //여기부터 씀
-//            list_excel.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    sss.setText((CharSequence) list_excel);
-//
-//                }
-//            });
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,5 +122,11 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         if (searchBox.getText().length() == 0) {
             list_excel.clearTextFilter();
         }
+    }
+
+
+    //주변 정류장 검색
+    public void mynear(View view) {
+
     }
 }
