@@ -96,10 +96,11 @@ public class Bus_items
         this.Railstop = railstop;
     }
 
-    public Bus_items(String busstopname, String businfo, int image, int image2, int rail1, int rail2, int returnrail, int railstop)
+    public Bus_items(String busstopname, String businfo, String businfo2, int image, int image2, int rail1, int rail2, int returnrail, int railstop)
     {
         this.Busstopname = busstopname;
         this.BusInfo = businfo;
+        this.BusInfo2 = businfo2;
         this.Image = image;
         this.Image2 = image2;
         this.Rail1 = rail1;

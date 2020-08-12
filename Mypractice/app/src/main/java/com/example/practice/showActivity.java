@@ -28,6 +28,7 @@ public class showActivity extends AppCompatActivity
     private final String key1 = "AGosnxF7ORMEFRnphkCbkve01B6SaEZpj5R2kD03%2B43HobZwgWC2BqRthRvHeMOEWK1M%2BAPASvsbGc3K7Z9V8A%3D%3D"; //버스도착정보목록조회 인증키
     private final String endPoint1 = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice"; //버스도착정보목록조회 앞 주소
     private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; //버스위치정보조회서비스 앞 주소
+    private final String endPoint3 = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll"; //버스도착정보조회 앞 주소
     private final String route = "234001159";
 
     //파싱을 위한 필드 선언
@@ -40,8 +41,6 @@ public class showActivity extends AppCompatActivity
 
     private ArrayList listflag;
     private ArrayList listBus;
-    private ArrayList listmin1;
-    private ArrayList listmin2;
     private ArrayList liststation1;
     private ArrayList liststation2;
     private ArrayList listBusseq;
@@ -60,8 +59,6 @@ public class showActivity extends AppCompatActivity
         setTitle("M4102");
         setContentView(R.layout.activity_show);
 
-        listmin1 = new ArrayList();
-        listmin2 = new ArrayList();
         liststation1 = new ArrayList();
         liststation2 = new ArrayList();
         listflag = new ArrayList();
@@ -125,42 +122,40 @@ public class showActivity extends AppCompatActivity
         {
             if(i == 0)
             {
-                adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
+                adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
             }
             else if(i < 21)
             {
                 if(listBusstop.contains(i))
                 {
-                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
+                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
                 }
                 else
                 {
-                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,0,0,R.drawable.rail1,0,0,0));
+                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,R.drawable.rail1,0,0,0));
                 }
             }
             else if(i == 21)
             {
-                adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
+                adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
             }
             else if(i < 38)
             {
                 if (listBusstop.contains(i))
                 {
-                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
+                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
                 }
                 else
                 {
-                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,0,0,0,R.drawable.rail2,0,0));
+                    adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,0,R.drawable.rail2,0,0));
                 }
             }
             else
             {
-                adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
+                adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
             }
         }
 
-        listmin1.clear();
-        listmin2.clear();
         liststation1.clear();
         liststation2.clear();
         listflag.clear();
@@ -177,52 +172,52 @@ public class showActivity extends AppCompatActivity
                 //오퍼레이션 1  버스위치정보조회
                 getBusLocationList();
 
-                //오퍼레이션 2 버스도착정보항목조회
+                //오퍼레이션 3 버스도착정보조회
+                getArrInfoByRouteAllList();
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin2 + " " + liststation2);
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2);
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
                             if(j == 0)
                             {
-                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
+                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
 //                                adapter.setItem(j,new Bus_items("첫번째 버스 도착정보\n"+ liststation1.get(j).toString() + "전 " + listmin1.get(j).toString() + "분" ));
                             }
                             else if(j < 21)
                             {
                                 if(listBusstop.contains(j))
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
                                 }
                                 else
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,0));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,0));
                                 }
                             }
                             else if(j == 21)
                             {
-                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
+                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
                             }
                             else if(j < 38)
                             {
                                 if(listBusstop.contains(j))
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
                                 }
                                 else
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,0));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,0));
                                 }
                             }
                             else
                             {
-                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
+                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
                             }
                         }
                         //버스위치 셋팅
@@ -233,11 +228,11 @@ public class showActivity extends AppCompatActivity
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
 
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                 }
                                 else
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
                                 }
                             }
                             else if(Integer.parseInt(listBusseq.get(i).toString()) == 21)
@@ -245,11 +240,11 @@ public class showActivity extends AppCompatActivity
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
 
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                 }
                                 else
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
                                 }
                             }
                             else
@@ -257,11 +252,11 @@ public class showActivity extends AppCompatActivity
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
 
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                 }
                                 else
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
                                 }
                             }
                         }
@@ -285,8 +280,7 @@ public class showActivity extends AppCompatActivity
                     @Override
                     public void run()
                     {
-                        listmin1.clear();
-                        listmin2.clear();
+
                         liststation1.clear();
                         liststation2.clear();
                         listflag.clear();
@@ -297,7 +291,8 @@ public class showActivity extends AppCompatActivity
                         //오퍼레이션 1  버스위치정보조회
                         getBusLocationList();
 
-                        //오퍼레이션 2 버스도착정보항목조회
+                        //오퍼레이션 3 버스도착정보조회
+                        getArrInfoByRouteAllList();
 
 
                         //UI setText 하는 곳
@@ -305,43 +300,43 @@ public class showActivity extends AppCompatActivity
                             @Override
                             public void run()
                             {
-                                Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
+                                Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2);
                                 //버스 리셋
                                 for(int j = 0; j < listBus.size(); j++)
                                 {
                                     if(j == 0)
                                     {
-                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
+                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
                                     }
                                     else if(j < 21)
                                     {
                                         if(listBusstop.contains(j))
                                         {
-                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
+                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
                                         }
                                         else
                                         {
-                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,0));
+                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,0));
                                         }
                                     }
                                     else if(j == 21)
                                     {
-                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
+                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
                                     }
                                     else if(j < 38)
                                     {
                                         if(listBusstop.contains(j))
                                         {
-                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
+                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
                                         }
                                         else
                                         {
-                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,0));
+                                            adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,0));
                                         }
                                     }
                                     else
                                     {
-                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
+                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
                                     }
                                 }
                                 //버스위치 셋팅
@@ -352,11 +347,11 @@ public class showActivity extends AppCompatActivity
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
 
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                         }
                                         else
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
                                         }
                                     }
                                     else if(Integer.parseInt(listBusseq.get(i).toString()) == 21)
@@ -364,11 +359,11 @@ public class showActivity extends AppCompatActivity
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
 
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                         }
                                         else
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
                                         }
                                     }
                                     else
@@ -376,11 +371,11 @@ public class showActivity extends AppCompatActivity
                                         if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                         {
 
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                         }
                                         else
                                         {
-                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                            adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
                                         }
                                     }
                                 }
@@ -405,8 +400,6 @@ public class showActivity extends AppCompatActivity
     //새로고침버튼 메서드
     public void refresh(View view)
     {
-        listmin1.clear();
-        listmin2.clear();
         liststation1.clear();
         liststation2.clear();
         listflag.clear();
@@ -423,51 +416,51 @@ public class showActivity extends AppCompatActivity
                 //오퍼레이션 1  버스위치정보조회
                 getBusLocationList();
 
-                //오퍼레이션 2 버스도착정보항목조회
-
+                //오퍼레이션 3 버스도착정보조회
+                getArrInfoByRouteAllList();
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + listmin1 + " " + liststation1);
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2);
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
                             if(j == 0)
                             {
-                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
+                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
                             }
                             else if(j < 21)
                             {
                                 if(listBusstop.contains(j))
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop1));
                                 }
                                 else
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,R.drawable.rail1,0,0,0));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,0));
                                 }
                             }
                             else if(j == 21)
                             {
-                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
+                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,0,R.drawable.returnrail,R.drawable.returnicon));
                             }
                             else if(j < 38)
                             {
                                 if(listBusstop.contains(j))
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop2));
                                 }
                                 else
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,0));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,0));
                                 }
                             }
                             else
                             {
-                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
+                                adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop3));
                             }
                         }
                         //버스위치 셋팅
@@ -478,11 +471,11 @@ public class showActivity extends AppCompatActivity
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
 
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                 }
                                 else
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0));
                                 }
                             }
                             else if(Integer.parseInt(listBusseq.get(i).toString()) == 21)
@@ -490,11 +483,11 @@ public class showActivity extends AppCompatActivity
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
 
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0));
                                 }
                                 else
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0));
                                 }
                             }
                             else
@@ -502,11 +495,11 @@ public class showActivity extends AppCompatActivity
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
 
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0));
                                 }
                                 else
                                 {
-                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석",R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
+                                    adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0));
                                 }
                             }
                         }
@@ -591,20 +584,10 @@ public class showActivity extends AppCompatActivity
                             xpp.next();
                             liststation1.add(xpp.getText());
                         }
-                        else if(tag.equals("predictTime1"))
-                        {
-                            xpp.next();
-                            listmin1.add(xpp.getText());
-                        }
                         else if(tag.equals("locationNo2"))
                         {
                             xpp.next();
                             liststation2.add(xpp.getText());
-                        }
-                        else if(tag.equals("predictTime2"))
-                        {
-                            xpp.next();
-                            listmin2.add(xpp.getText());
                         }
                         else if(tag.equals("flag"))
                         {
@@ -617,6 +600,52 @@ public class showActivity extends AppCompatActivity
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
                         if(tag.equals("busArrivalList")); //첫번째 검색결과 종료
+                        break;
+                }
+                eventType = xpp.next();
+            }
+        }catch (Exception e){e.printStackTrace();}
+    }
+
+    //오퍼레이션 3 (버스도착정보항목조회)
+    private void getArrInfoByRouteAllList()
+    {
+        String stationUrl = endPoint3 + "?ServiceKey=" + key1 + "&busRouteId=" + route;
+        Log.d(TAG, "버스도착정보조회 : " + stationUrl);
+
+        try
+        {
+            setUrlNParser(stationUrl);
+            while (eventType != XmlPullParser.END_DOCUMENT)
+            {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
+                        break;
+                    case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
+                        tag = xpp.getName();    //태그이름 얻어오기
+                        if(tag.equals("itemList"));  //첫번째 검색 결과
+//                        else if(tag.equals("staOrd"))
+//                        {
+//                            xpp.next();
+//                            liststation1.add(xpp.getText());
+//                        }
+                        else if(tag.equals("arrmsg1")) //첫번째 버스의 도착정보 메세지
+                        {
+                            xpp.next();
+                            liststation1.add(xpp.getText());
+                        }
+                        else if(tag.equals("arrmsg2")) //두번째 버스의 도착정보 메세지
+                        {
+                            xpp.next();
+                            liststation2.add(xpp.getText());
+                        }
+                        break;
+                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
+                        break;
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if(tag.equals("itemList")); //첫번째 검색결과 종료
                         break;
                 }
                 eventType = xpp.next();
