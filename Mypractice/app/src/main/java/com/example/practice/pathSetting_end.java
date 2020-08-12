@@ -23,7 +23,7 @@ import jxl.read.biff.BiffException;
 
 // 참고  https://loveiskey.tistory.com/171
 
-public class pathSetting_m4102 extends AppCompatActivity implements TextWatcher {
+public class pathSetting_end extends AppCompatActivity implements TextWatcher {
     EditText searchBox;
     ListView list_excel;
     ArrayAdapter<String> arrayAdapter;

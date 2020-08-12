@@ -34,7 +34,7 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
         setting1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), pathSetting_8100.class);
+                Intent intent = new Intent(getActivity(), pathSetting_start.class);
                 startActivity(intent);
 
                 LayoutInflater inflater = getLayoutInflater();
@@ -54,7 +54,7 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
         setting2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), pathSetting_m4102.class);
+                Intent intent = new Intent(getActivity(), pathSetting_end.class);
                 startActivity(intent);
 
                 LayoutInflater inflater = getLayoutInflater();
