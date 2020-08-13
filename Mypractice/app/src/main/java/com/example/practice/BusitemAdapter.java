@@ -2,6 +2,7 @@ package com.example.practice;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.provider.ContactsContract;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -111,7 +112,10 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         ImageView imageView4; //하행선 레일 이미지
         ImageView imageView5; //회차 레일 이미지2
         ImageView imageView6;  //정차하는 정거장 이미지
+        ImageView imageView7;   //버스도착정보 레일
+        ImageView imageView8;   //버스도착정보 텍스트상자
         LinearLayout linearlayout; //카드뷰 전체의 레이아웃
+        LinearLayout linearlayout2; //접기펼치기 레이아웃
 
         OnBusItemClickListener onBusItemClickListener;
 
@@ -128,7 +132,10 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView4 = itemView.findViewById(R.id.rail2);
             imageView5 = itemView.findViewById(R.id.returnrail);
             imageView6 = itemView.findViewById(R.id.railstop);
+            imageView7 = itemView.findViewById(R.id.infoimage1);
+            imageView8 = itemView.findViewById(R.id.infoimage2);
             linearlayout = itemView.findViewById(R.id.linearlayout);
+            linearlayout2 = itemView.findViewById(R.id.linearlayout2);
 
             linearlayout.setOnClickListener(new View.OnClickListener(){
 
@@ -151,6 +158,8 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView4.setImageResource(item.getRail2());
             imageView5.setImageResource(item.getReturnrail());
             imageView6.setImageResource(item.getRailstop());
+            imageView7.setImageResource(item.getTextrail());
+            imageView8.setImageResource(item.getTextInfobox());
             changeVisibility(selectedItems.get(position));
         }
 
@@ -164,10 +173,10 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     // imageView의 높이 변경
-                    textView3.getLayoutParams().height = (int) animation.getAnimatedValue();
-                    textView3.requestLayout();
+                    linearlayout2.getLayoutParams().height = (int) animation.getAnimatedValue();
+                    linearlayout2.requestLayout();
                     // imageView가 실제로 사라지게하는 부분
-                    textView3.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+                    linearlayout2.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
                 }
             });
             // Animation start
@@ -190,12 +199,11 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView4.setImageResource(item.getRail2());
             imageView5.setImageResource(item.getReturnrail());
             imageView6.setImageResource(item.getRailstop());
+            imageView7.setImageResource(item.getTextrail());
+            imageView8.setImageResource(item.getTextInfobox());
 
         }
 
-
-
     }
-
 
 }
