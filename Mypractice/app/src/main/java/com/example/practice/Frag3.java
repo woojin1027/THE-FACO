@@ -36,7 +36,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.Locale;
 
 import static android.speech.tts.TextToSpeech.ERROR;
-        /*수정중*/
+//다 빼야함~~~~~~~
+//마이페이지
 
 public class Frag3 extends Fragment implements OnMapReadyCallback {
 

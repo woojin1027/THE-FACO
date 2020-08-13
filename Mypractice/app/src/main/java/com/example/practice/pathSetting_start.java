@@ -1,5 +1,6 @@
 package com.example.practice;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -38,6 +40,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
     ListView list_excel;
     ArrayAdapter<String> arrayAdapter;
     TextView textView;
+    Button nearby_stop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +51,23 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         list_excel = (ListView)findViewById(R.id.list_excel);  //정류장데이터
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         //텍스트뷰 한개로 구성된 내장 레이아웃
+        nearby_stop = (Button) findViewById(R.id.nearby_stop);
+
 
         Excel(); //데이터 읽기
 
         list_excel.setAdapter(arrayAdapter);
         list_excel.setTextFilterEnabled(true);
         searchBox.addTextChangedListener(this);
+
+
+        nearby_stop.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(pathSetting_start.this, mapActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         //정류장 클릭시 이벤트
@@ -117,11 +131,6 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         }
     }
 
-
-    //주변 정류장 검색
-    public void mynear(View view) {
-
-    }
 
     public void toastshow(View view, String string) {
         LayoutInflater inflater = getLayoutInflater();

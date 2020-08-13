@@ -29,7 +29,7 @@ public class Frag2 extends Fragment // Fragment 클래스를 상속받아야한�
         TextView setting1 = view.findViewById(R.id.textview_setting1); //버튼이 아니라 텍스트뷰로 바꿔봄 -> 경로 설정시 데이터 바꿔야되서
         TextView setting2 = view.findViewById(R.id.textview_setting2);
 
-        //버튼or텍스트뷰 클릭 시 PathSetting으로 이동
+        //텍스트뷰 클릭 시 PathSetting으로 이동
 
         setting1.setOnClickListener(new View.OnClickListener() {
             @Override

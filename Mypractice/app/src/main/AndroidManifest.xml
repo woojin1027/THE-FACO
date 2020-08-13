@@ -15,6 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
@@ -25,7 +27,7 @@
         <activity android:name=".appDescription" />
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
-
+        <activity android:name=".mapActivity" />
         <activity android:name=".MainActivity" />
 
         <activity android:name=".splashActivity"
