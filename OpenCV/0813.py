@@ -53,18 +53,7 @@ def main(cap):
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    #a = cap.get(cv.CAP_PROP_FRAME_WIDTH)
-    #b = cap.get(cv.CAP_PROP_FRAME_HEIGHT)
-    #print(a,b)
-
-    #재생할 파일의 프레임 얻기
-    fps = cap.get(cv.CAP_PROP_FPS) # 또는 cap.get(5)
-    #저장할 비디오 코덱
-    fourcc = cv.VideoWriter_fourcc(*'DIVX')
-    #저장할 파일 이름
-    filename = input("저장할 파일명을 입력하세요: ") + '.avi'
-    #파일 stream 생성
-    out = cv.VideoWriter(filename, fourcc, fps, (w,h))
+   
     
     while cap.isOpened():
 
@@ -99,7 +88,7 @@ def main(cap):
             draw_detections(img, found_filtered, 3)
             if line == None:
                 line = []
-            
+            fps = cap.get(cv.CAP_PROP_FPS) # 또는 cap.get(5)
             print("초당 프레임 수: %d" %(fps))
             print("줄을 서고있는 인원:",len(line))
             print("파악된 인원:",'%d (%d)' % (len(found_filtered), len(found)),"명")
@@ -108,7 +97,6 @@ def main(cap):
 
         img = cv.resize(img,(w,h))
         cv.imshow('frame', img)
-        out.write(img)
 
         ch = cv.waitKey(30)& 0xff
         if ch == 27:
@@ -117,6 +105,6 @@ def main(cap):
     
 
 if __name__ == '__main__':
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture(0,cv.CAP_DSHOW)
     main(cap)
     cv.destroyAllWindows()
