@@ -187,7 +187,6 @@ public class showActivity extends AppCompatActivity
                             if(j == 0)
                             {
                                 adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop3));
-//                                adapter.setItem(j,new Bus_items("첫번째 버스 도착정보\n"+ liststation1.get(j).toString() + "전 " + listmin1.get(j).toString() + "분" ));
                             }
                             else if(j < 21)
                             {

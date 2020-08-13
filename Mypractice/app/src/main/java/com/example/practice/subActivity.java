@@ -239,7 +239,6 @@ public class subActivity extends AppCompatActivity {
                             {
                                 if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                 {
-
                                     adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()),new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString())),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0));
                                 }
                                 else
