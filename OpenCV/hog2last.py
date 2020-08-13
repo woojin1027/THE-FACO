@@ -47,10 +47,25 @@ def main(cap):
     from glob import glob
     import itertools as it
 
+    checkT = 0
+    w = 900
+    h = 500
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
+    #재생할 파일의 프레임 얻기
+    fps = cap.get(cv.CAP_PROP_FPS) # 또는 cap.get(5)
+    #저장할 비디오 코덱
+    fourcc = cv.VideoWriter_fourcc(*'DIVX')
+    #저장할 파일 이름
+    filename = 'detect.avi'
+    #파일 stream 생성
+    out = cv.VideoWriter(filename, fourcc, fps, (w,h))
+    
     while cap.isOpened():
+        
+
+        nowtime = datetime.datetime.now()
         ret,img = cap.read()
         if not ret:
             print("영상이 끝났습니다. 종료 중 ...")
@@ -60,12 +75,15 @@ def main(cap):
         rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
-        img1 = img.copy()
-        fps = cap.get(cv.CAP_PROP_FPS) # 또는 cap.get(5)
-        
-        if cap.get(1)%30 == 0:
-            #30프레임에 한번씩 사람인 객체를 검사한다.
-            print("초당 프레임 수: %d" %(fps))
+
+        # 현재시간에서 과거에 측정한 시간을 뺐을때, 3초 이상이면, 새로 측정을 진행
+        nowT =  int(nowtime.strftime('%S'))
+        #print("현재 초 : ",nowT)
+        resultT = abs(nowT - checkT)
+
+        if resultT > 1:
+            checkT = nowT
+            
             found, _w = hog.detectMultiScale(img, winStride=(8,8), padding=(32,32), scale=1.05)
             found_filtered = []
             for ri, r in enumerate(found):
@@ -79,22 +97,23 @@ def main(cap):
             if line == None:
                 line = []
             
+            print("초당 프레임 수: %d" %(fps))
             print("줄을 서고있는 인원:",len(line))
             print("파악된 인원:",'%d (%d)' % (len(found_filtered), len(found)),"명")
-
-            nowtime = datetime.datetime.now()
             print(nowtime)
             #현재 시간 출력
-        img = cv.resize(img,(900,500))
+
+        img = cv.resize(img,(w,h))
         cv.imshow('frame', img)
-        
+        out.write(img)
+
         ch = cv.waitKey(30)& 0xff
         if ch == 27:
             print('Done')
             break
-
+    
 
 if __name__ == '__main__':
-    cap = cv.VideoCapture(1)
+    cap = cv.VideoCapture(0,cv.CAP_DSHOW)
     main(cap)
     cv.destroyAllWindows()
