@@ -2,6 +2,7 @@ package com.example.practice;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -53,7 +55,6 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         //텍스트뷰 한개로 구성된 내장 레이아웃
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
 
-
         Excel(); //데이터 읽기
 
         list_excel.setAdapter(arrayAdapter);
@@ -64,8 +65,11 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         nearby_stop.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(pathSetting_start.this, mapActivity.class);
-                startActivity(intent);
+                selectPhoneNumber();
+//                Intent intent = new Intent(pathSetting_start.this, mapActivity2.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                startActivity(intent);
             }
         });
 
@@ -82,6 +86,11 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
                 pathSetting_start.super.onBackPressed();
             }
         });
+    }
+    private void selectPhoneNumber() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, URI.);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     private void Excel() {
@@ -143,6 +152,6 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         toast.setGravity(Gravity.BOTTOM,0,0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
-        toast.show(); }
-
+        toast.show();
+    }
 }

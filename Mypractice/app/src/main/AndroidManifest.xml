@@ -27,8 +27,8 @@
         <activity android:name=".appDescription" />
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
-        <activity android:name=".mapActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".mapActivity"/>
 
         <activity android:name=".splashActivity"
             android:screenOrientation="portrait">
