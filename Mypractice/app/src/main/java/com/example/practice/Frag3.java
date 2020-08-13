@@ -46,6 +46,7 @@ public class Frag3 extends Fragment implements OnMapReadyCallback {
     private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
+    private TextToSpeech TTS;
     MapView mapView;
 
 
@@ -54,6 +55,27 @@ public class Frag3 extends Fragment implements OnMapReadyCallback {
                              final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.frag3, null);
 
+        TTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != ERROR) {
+                    if (status == TextToSpeech.SUCCESS) {
+
+                        // 한국어 설정
+                        int result = TTS.setLanguage(Locale.KOREAN);
+
+                        // 한국어가 안된다면,
+                        if (result == TextToSpeech.LANG_MISSING_DATA
+                                || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                            Log.e("TTS", "Language is not supported");
+                        } else {
+                        }
+                    } else {
+                        Log.e("TTS", "Initilization Failed");
+                    }
+                }
+            }
+        });
 
         Dexter.withActivity(getActivity())
                 .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)

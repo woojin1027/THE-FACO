@@ -1,21 +1,13 @@
 package com.example.practice;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,13 +18,15 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
+//해야할것 : 정류장 클릭 시 버튼(이나 텍스트뷰)에 띄우게 바꾸기
+//미금역 검색하면 나오는 검은 창 없애기-ㅁ-;;;;
+
+// 참고  https://loveiskey.tistory.com/171
 
 public class pathSetting_end extends AppCompatActivity implements TextWatcher {
     EditText searchBox;
     ListView list_excel;
     ArrayAdapter<String> arrayAdapter;
-    TextView textView;
-    Button nearby_stop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,43 +34,18 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher {
         setContentView(R.layout.activity_pathsetting);
 
 
-        searchBox = (EditText) findViewById(R.id.searchbox);  //검색창
-        list_excel = (ListView) findViewById(R.id.list_excel);  //정류장데이터
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        //텍스트뷰 하나로 구성된 내장 레이아웃
-        nearby_stop = (Button) findViewById(R.id.nearby_stop);
 
+        searchBox = (EditText)findViewById(R.id.searchbox);  //검색창
+        list_excel = (ListView)findViewById(R.id.list_excel);  //정류장데이터
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1); //텍스트뷰 하나로 구성된 내장 레이아웃
         Excel(); //데이터 읽기
 
         list_excel.setAdapter(arrayAdapter);
         list_excel.setTextFilterEnabled(true);
         searchBox.addTextChangedListener(this);
-
-
-        //주변 정류장 클릭시 이벤트
-        nearby_stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(pathSetting_end.this, mapActivity2.class);
-                startActivity(intent);
-            }
-        });
-
-        //정류장 클릭시 이벤트
-        list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selected_item = (String)parent.getItemAtPosition(position);
-                textView = findViewById(R.id.textview_setting2);
-                //textView.setText(selected_item); 도착지 텍스트가 안바뀐다.......ㅠ
-                toastshow(view, selected_item);
-                pathSetting_end.super.onBackPressed();
-            }
-        });
     }
 
-    private void Excel() {
+    public void Excel() {
         Workbook workbook = null;
         Sheet sheet = null;
         try {
@@ -97,6 +66,23 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher {
                 String excelload = sheet.getCell(ColumnStart, row).getContents();
                 arrayAdapter.add(excelload);
             }
+//            for(int row = RowStart_2; row <= RowEnd; row++) {
+//                String excelload_2 = sheet.getCell(ColumnStart, row).getContents();
+//                arrayAdapter.add(excelload_2);
+//            }
+
+//
+//            //이거 씀
+//            final TextView sss = findViewById(R.id.textview_setting2);
+//            //여기부터 씀
+//            list_excel.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    sss.setText((CharSequence) list_excel);
+//
+//                }
+//            });
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (BiffException e) {
@@ -105,7 +91,9 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher {
             list_excel.setAdapter(arrayAdapter);
             workbook.close();
         }
+
     }
+
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -121,19 +109,5 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher {
         if (searchBox.getText().length() == 0) {
             list_excel.clearTextFilter();
         }
-    }
-
-    public void toastshow(View view, String string) {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate( R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
-        TextView text = layout.findViewById(R.id.text);
-        Toast toast = new Toast(this);
-        text.setText(string + "을(를) 선택");
-        text.setTextSize(15);
-        text.setTextColor(Color.WHITE);
-        toast.setGravity(Gravity.BOTTOM,0,0);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
     }
 }
