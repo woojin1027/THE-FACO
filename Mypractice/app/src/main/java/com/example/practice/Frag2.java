@@ -1,21 +1,8 @@
 package com.example.practice;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.location.Location;
 import android.os.Bundle;
-import android.os.Looper;
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,315 +12,64 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
+public class Frag2 extends Fragment // Fragment 클래스를 상속받아야한다
+{
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
-import static android.speech.tts.TextToSpeech.ERROR;
-        /*수정중*/
-
-public class Frag2 extends Fragment implements OnMapReadyCallback {
-
-    private GoogleMap mMap;
-    private LocationRequest locationRequest;
-    private LocationCallback locationCallback;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-
-    private TextToSpeech TTS;
-    MapView mapView;
+    private View view;
 
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.frag2, null);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
+        view = inflater.inflate(R.layout.frag2,container,false);
 
-        TTS = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+        TextView setting1 = view.findViewById(R.id.textview_setting1); //버튼이 아니라 텍스트뷰로 바꿔봄 -> 경로 설정시 데이터 바꿔야되서
+        TextView setting2 = view.findViewById(R.id.textview_setting2);
+
+        //버튼or텍스트뷰 클릭 시 PathSetting으로 이동
+
+        setting1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onInit(int status) {
-                if (status != ERROR) {
-                    if (status == TextToSpeech.SUCCESS) {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), pathSetting_start.class);
+                startActivity(intent);
 
-                        // 한국어 설정
-                        int result = TTS.setLanguage(Locale.KOREAN);
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,container,false);
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getActivity());
+                text.setText("출발지를 설정해주세요");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
 
-                        // 한국어가 안된다면,
-                        if (result == TextToSpeech.LANG_MISSING_DATA
-                                || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                            Log.e("TTS", "Language is not supported");
-                        } else {
-                        }
-                    } else {
-                        Log.e("TTS", "Initilization Failed");
-                    }
-                }
-            }
-        });
+            }});
 
-        Dexter.withActivity(getActivity())
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
+        setting2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), pathSetting_end.class);
+                startActivity(intent);
 
-                        buildLocationRequest();
-                        buildLocationCallback();
-                        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.toast_layout,container,false);
+                TextView text = layout.findViewById(R.id.text);
+                Toast toast = new Toast(getActivity());
+                text.setText("도착지를 설정해주세요");
+                text.setTextSize(15);
+                text.setTextColor(Color.WHITE);
+                toast.setGravity(Gravity.BOTTOM,0,0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
+            }});
 
-                        mapView = (MapView) view.findViewById(R.id.map);
-                        mapView.onCreate(savedInstanceState);
-                        mapView.onResume();
-                        mapView.getMapAsync(Frag2.this);
-
-                        initArea();
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        LayoutInflater inflater = getLayoutInflater();
-                        View layout = inflater.inflate(R.layout.toast_layout,container,false);
-                        TextView text = layout.findViewById(R.id.text);
-                        Toast toast = new Toast(getActivity());
-                        text.setText("위치권한이 필요합니다.");
-                        text.setTextSize(15);
-                        text.setTextColor(Color.WHITE);
-                        toast.setGravity(Gravity.BOTTOM,0,0);
-                        toast.setDuration(Toast.LENGTH_SHORT);
-                        toast.setView(layout);
-                        toast.show();
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-
-                    }
-
-                }).check();
         return view;
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    private void buildLocationRequest() {
-        locationRequest = new LocationRequest();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(500);
-        locationRequest.setSmallestDisplacement(10f);
-    }
-
-    private void buildLocationCallback() {
-        locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(final LocationResult locationResult) {
-
-            }
-        };
-    }
-
-    private void initArea() {
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        if (fusedLocationProviderClient != null) {
-
-            if ((ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-                return;
-            }
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
-        }
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        fusedLocationProviderClient.removeLocationUpdates(locationCallback);
-        super.onStop();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-        if ((ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-
-            return;
-        }
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-        if (mMap != null) mMap.setMyLocationEnabled(true);
-    }
-
 }
-
-
-
-
-
-
-
-
-//package com.example.practice;
-//
-//import android.os.Bundle;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//
-//import androidx.annotation.Nullable;
-//import androidx.fragment.app.Fragment;
-//
-//import com.google.android.gms.maps.CameraUpdateFactory;
-//import com.google.android.gms.maps.GoogleMap;
-//import com.google.android.gms.maps.MapView;
-//import com.google.android.gms.maps.OnMapReadyCallback;
-//import com.google.android.gms.maps.model.LatLng;
-//import com.google.android.gms.maps.model.MarkerOptions;
-////https://webnautes.tistory.com/647
-//
-//public class Frag2 extends Fragment implements OnMapReadyCallback{
-//    private MapView mapView = null;
-//
-//    public Frag2()
-//    {
-//        // required
-//    }
-//
-//
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
-//
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.frag2, container, false);
-//
-//        mapView = (MapView)view.findViewById(R.id.map);
-//        mapView.getMapAsync(this);
-//
-//        return view;
-//    }
-//
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        mapView.onStart();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        mapView.onStop();
-//    }
-//
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        mapView.onSaveInstanceState(outState);
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        mapView.onResume();
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        mapView.onPause();
-//    }
-//
-//    @Override
-//    public void onLowMemory() {
-//        super.onLowMemory();
-//        mapView.onLowMemory();
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        mapView.onLowMemory();
-//    }
-//
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//        //액티비티가 처음 생성될 때 실행되는 함수
-//
-//        if(mapView != null)
-//        {
-//            mapView.onCreate(savedInstanceState);
-//        }
-//    }
-//
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        LatLng SEOUL = new LatLng(37.56, 126.97);
-//
-//        MarkerOptions markerOptions = new MarkerOptions();
-//
-//        markerOptions.position(SEOUL);
-//
-//        markerOptions.title("서울");
-//
-//        markerOptions.snippet("수도");
-//
-//        googleMap.addMarker(markerOptions);
-//
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-//
-//        googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
-//    }
-//
-//}

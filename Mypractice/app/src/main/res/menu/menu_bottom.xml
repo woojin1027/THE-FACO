@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_waiting"
+        android:id="@+id/action_first"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_person_pin_24"
-        android:title="대기인원 조회"/>
+        android:icon="@drawable/ic_baseline_directions_bus_24"
+        android:title="버스"/>
 
     <item
-        android:id="@+id/action_map"
+        android:id="@+id/action_second"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_my_location_24"
-        android:title="지도"/>
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="정류장"/>
 
     <item
-        android:id="@+id/action_recommend"
+        android:id="@+id/action_third"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_access_time_24"
-        android:title="예상 소요시간"/>
+        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:title="마이페이지"/>
 
 </menu>

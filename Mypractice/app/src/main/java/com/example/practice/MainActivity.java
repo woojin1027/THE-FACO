@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
             {
                 switch (menuItem.getItemId())
                 {
-                    case R.id.action_waiting:
+                    case R.id.action_first:
                         setFrag(0); // 프레그먼트 교체
                         break;
-                    case R.id.action_map:
+                    case R.id.action_second:
                         setFrag(1);
                         break;
-                    case R.id.action_recommend:
+                    case R.id.action_third:
                         setFrag(2);
                         break;
                 }
