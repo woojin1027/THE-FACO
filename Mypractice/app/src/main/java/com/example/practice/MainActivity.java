@@ -204,11 +204,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_menu1://즐겨찾기
                 return true;
             case R.id.navigation_menu2: //TheFaCo란?
-                Intent descript_Intent = new Intent(this, appDescription.class);
-                startActivity(descript_Intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
+                //데이터 담아서 팝업(액티비티) 호출
+                Intent intent = new Intent(this, popupActivity.class);
+                intent.putExtra("data", "Test Popup");
+                //value에 설명할 내용을 적으면 됨
+
+                startActivityForResult(intent, 1);
+
+
+//                Intent descript_Intent = new Intent(this, appDescription.class);
+//                startActivity(descript_Intent);
+//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                finish();
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

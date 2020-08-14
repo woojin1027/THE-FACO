@@ -20,7 +20,8 @@
             android:hint="정류장 검색"
             android:imeOptions="actionSearch"
             android:textColor="#000000"
-            android:textSize="24sp">
+            android:textSize="24sp"
+            android:fontFamily="@font/ibm_medium">
 
         </EditText>
 
@@ -52,13 +53,14 @@
             android:shadowRadius="5"
             android:text="주변 정류장"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:fontFamily="@font/tt_together"/>
 
         <ListView
             android:id="@+id/list_excel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:fontFamily="@font/ibm_medium" />
     </FrameLayout>
 
 </LinearLayout>
