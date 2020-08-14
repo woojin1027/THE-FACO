@@ -1,0 +1,4 @@
+include ':ODsayAndroidSDK'
+include ':jxl'
+rootProject.name='Mypractice'
+include ':app'

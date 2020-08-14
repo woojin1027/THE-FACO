@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_first"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_directions_bus_24"
+        android:title="버스"/>
+
+    <item
+        android:id="@+id/action_second"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="정류장"/>
+
+    <item
+        android:id="@+id/action_third"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:title="마이페이지"/>
+
+</menu>
