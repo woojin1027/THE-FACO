@@ -29,7 +29,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="정류장"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
