@@ -37,7 +37,7 @@ import java.util.Locale;
 
 import static android.speech.tts.TextToSpeech.ERROR;
 
-//참고용//
+//map 참고용//
 
 public class oldFrag3 extends Fragment implements OnMapReadyCallback {
 

@@ -33,7 +33,8 @@
             android:padding="15dp"
             android:text="출발지"
             android:textColor="#ccFFFFFF"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:fontFamily="@font/tt_together"/>
     </LinearLayout>
 
     <LinearLayout
@@ -73,7 +74,8 @@
             android:padding="15dp"
             android:text="도착지"
             android:textColor="#ccFFFFFF"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:fontFamily="@font/tt_together"/>
 
     </LinearLayout>
 
@@ -96,7 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:text="즐겨찾기"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/tt_together"/>
 
         <ImageView
             android:id="@+id/imageView5"
@@ -111,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:text="조회"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:fontFamily="@font/tt_together"/>
     </LinearLayout>
 </LinearLayout>

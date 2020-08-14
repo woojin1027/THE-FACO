@@ -32,7 +32,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-//해야할것 : 정류장 클릭 시 버튼(이나 텍스트뷰)에 띄우게 바꾸기
+//해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 
 public class pathSetting_start extends AppCompatActivity implements TextWatcher {
