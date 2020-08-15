@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 public class splashActivity extends Activity {
     AnimationDrawable animDrawable;
-    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
