@@ -68,7 +68,9 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
                 startActivity(intent);
             }
         });
-
+//
+//        adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,0,0,
+//                R.drawable.returnrail,R.drawable.returnicon,R.drawable.textrail2,R.drawable.textinfobox2));
 
         //정류장 클릭시 이벤트
         list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {

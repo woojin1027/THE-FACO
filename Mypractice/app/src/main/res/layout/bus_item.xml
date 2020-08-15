@@ -30,7 +30,8 @@
                     android:gravity="center"
                     android:text="정류장"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/ibm_medium"/>
 
 
             </LinearLayout>
