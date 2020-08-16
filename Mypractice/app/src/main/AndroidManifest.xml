@@ -22,7 +22,6 @@
 
         <activity android:name=".pathSetting_start"/>
         <activity android:name=".pathSetting_end"/>
-        <activity android:name=".pathsetting_practice"/>
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
         <activity android:name=".mapActivity" />

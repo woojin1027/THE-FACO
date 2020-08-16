@@ -29,10 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
             android:background="#cc6d7e9e"
             android:padding="15dp"
             android:text="출발지"
-            android:textColor="#ccFFFFFF"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/tt_together"/>
     </LinearLayout>
@@ -71,10 +72,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
             android:background="#cc6d7e9e"
             android:padding="15dp"
             android:text="도착지"
-            android:textColor="#ccFFFFFF"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:fontFamily="@font/tt_together"/>
 
@@ -84,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        tools:layout_marginTop="25dp">
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:id="@+id/imageView4"

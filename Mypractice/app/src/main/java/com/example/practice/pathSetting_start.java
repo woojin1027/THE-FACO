@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -56,10 +58,25 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
 
         Excel(); //데이터 읽기
 
+        list_excel.setVisibility(View.INVISIBLE);
         list_excel.setAdapter(arrayAdapter);
         list_excel.setTextFilterEnabled(true);
         searchBox.addTextChangedListener(this);
 
+
+        //엔터키막기
+        final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        searchBox.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == event.KEYCODE_ENTER)
+                {
+                    imm.hideSoftInputFromWindow(searchBox.getWindowToken(),0);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         nearby_stop.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -68,7 +85,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
                 startActivity(intent);
             }
         });
-//
+
 //        adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,0,0,
 //                R.drawable.returnrail,R.drawable.returnicon,R.drawable.textrail2,R.drawable.textinfobox2));
 
@@ -78,6 +95,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selected_item = (String)parent.getItemAtPosition(position);
+
                 textView = findViewById(R.id.textview_setting1);
                 //textView.setText(selected_item); 출발지 텍스트가 안바뀐다.......ㅠ
                 toastshow(view, selected_item);
@@ -117,18 +135,23 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
     }
 
 
+
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        list_excel.setVisibility(View.VISIBLE);
         list_excel.setFilterText(searchBox.getText().toString());
     }
 
     @Override
     public void afterTextChanged(Editable s) {
         if (searchBox.getText().length() == 0) {
+            list_excel.setVisibility(View.VISIBLE);
             list_excel.clearTextFilter();
         }
     }

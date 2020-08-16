@@ -16,12 +16,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="6"
+            android:fontFamily="@font/ibm_medium"
             android:gravity="left"
-            android:hint="정류장 검색"
+            android:hint=" 정류장 검색"
             android:imeOptions="actionSearch"
             android:textColor="#000000"
-            android:textSize="24sp"
-            android:fontFamily="@font/ibm_medium">
+            android:textSize="24sp">
 
         </EditText>
 
@@ -47,20 +47,31 @@
             android:alpha=".80"
             android:background="@drawable/buttonshape"
             android:clickable="true"
+            android:fontFamily="@font/tt_together"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5"
             android:text="주변 정류장"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:fontFamily="@font/tt_together"/>
+            android:textSize="18sp" />
 
         <ListView
             android:id="@+id/list_excel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/ibm_medium" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="502dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            tools:visibility="invisible" />
     </FrameLayout>
 
 </LinearLayout>
