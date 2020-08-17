@@ -1,4 +1,4 @@
- package com.example.intentexample;
+package com.example.intentexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
- public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Button btn_move;
 
@@ -20,8 +20,8 @@ import android.widget.Button;
         btn_move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , Subactivity.class);
-                startActivity(intent);//activity 이동
+                Intent.intent = new Intent(MainActivity.this , subactivity.class);
+                startActivity(intent);//액티비티 이동
             }
         });
     }
