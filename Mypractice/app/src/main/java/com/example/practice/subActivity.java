@@ -173,6 +173,7 @@ public class subActivity extends AppCompatActivity {
         }
 
 
+
         //준비상태
         new Thread(new Runnable()
         {

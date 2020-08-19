@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+
 //8100 의 버스정류장 어댑터
 public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHolder>
 {

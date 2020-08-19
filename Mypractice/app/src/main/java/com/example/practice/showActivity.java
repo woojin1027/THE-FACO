@@ -59,6 +59,7 @@ public class showActivity extends AppCompatActivity
         setTitle("M4102");
         setContentView(R.layout.activity_show);
 
+
         liststation1 = new ArrayList();
         liststation2 = new ArrayList();
         listflag = new ArrayList();

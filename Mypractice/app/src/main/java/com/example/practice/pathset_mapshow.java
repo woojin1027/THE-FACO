@@ -98,6 +98,7 @@ public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallb
                     case XmlPullParser.END_TAG:
                         if(parser.getName().equals("msgbody")) {
                             Toast.makeText(this, "\n 위도:" + float_x + "\n 경도:" + float_y + "\n", Toast.LENGTH_LONG).show();
+
 //      수정중                      status1.setText(status1.getText()+"\n 위도 : " + float_x + "\n 경도 : " + float_y +"\n");
 //                            int i = 0, j = 0;
 //                            for (i = 0, i <= 10, i++){
@@ -129,6 +130,7 @@ public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallb
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+
 //     수정중   if (float_x != 0){
 //            do {
 //                LatLng marker[] = new LatLng[float_x, float_y];
@@ -136,7 +138,6 @@ public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallb
 //
 //            }while();
 //        }
-
 
     }
 }

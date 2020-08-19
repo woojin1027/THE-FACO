@@ -101,6 +101,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
 
 
 
+
     static class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView textView;  //버스정류장 이름

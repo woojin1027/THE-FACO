@@ -3,6 +3,7 @@ package com.example.practice;
 public class Bus_items2
 {
 
+
     public String getBusInfo() {
         return BusInfo;
     }
