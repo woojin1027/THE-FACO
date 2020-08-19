@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.MapView;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
@@ -38,11 +40,14 @@ import jxl.read.biff.BiffException;
 
 
 public class pathSetting_start extends AppCompatActivity implements TextWatcher {
+    public String selected_item;
     EditText searchBox;
     ListView list_excel;
     ArrayAdapter<String> arrayAdapter;
     TextView textView;
     Button nearby_stop;
+    MapView mapView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         //텍스트뷰 한개로 구성된 내장 레이아웃
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
+        mapView = findViewById(R.id.mapView);
 
 
         Excel(); //데이터 읽기
@@ -78,6 +84,8 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
             }
         });
 
+
+        //주변 정류장 클릭시 이벤트
         nearby_stop.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -86,23 +94,34 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
             }
         });
 
-//        adapter.addItem(new Bus_items("" + listBus.get(i).toString(),null,null,0,0,0,0,
-//                R.drawable.returnrail,R.drawable.returnicon,R.drawable.textrail2,R.drawable.textinfobox2));
 
         //정류장 클릭시 이벤트
         list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selected_item = (String)parent.getItemAtPosition(position);
+                selected_item = (String)parent.getItemAtPosition(position);
+
+
+                //이름이 같은 정류장은 어케 구분하지
+                
+
+                int selected_item_MOBILE_NO = (int) parent.getItemIdAtPosition(position);
 
                 textView = findViewById(R.id.textview_setting1);
                 //textView.setText(selected_item); 출발지 텍스트가 안바뀐다.......ㅠ
                 toastshow(view, selected_item);
-                pathSetting_start.super.onBackPressed();
+
+                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow.class);
+                intent.putExtra("selected_item", selected_item);
+                startActivity(intent);
+
+                //pathSetting_start.super.onBackPressed();
             }
         });
     }
+
+
 
     private void Excel() {
         Workbook workbook = null;
@@ -113,9 +132,9 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
             sheet = workbook.getSheet(0);
 
             int MaxColumn = 2;
-            int RowStart = 1; //B열
+            int RowStart = 1; //2행부터 아래로
             int RowEnd = sheet.getColumn(MaxColumn - 1).length -1;
-            int ColumnStart = 1; //2행부터
+            int ColumnStart = 1; //B열만
             int ColumnEnd = sheet.getRow(2).length - 1;
 
 
