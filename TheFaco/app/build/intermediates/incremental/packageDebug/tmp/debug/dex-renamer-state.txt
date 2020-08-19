@@ -1,0 +1,4 @@
+#Fri Jul 03 14:46:45 KST 2020
+base.0=C\:\\Users\\82105\\AndroidStudioProjects\\TheFaco\\app\\build\\intermediates\\dex\\debug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
