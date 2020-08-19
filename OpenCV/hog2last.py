@@ -117,6 +117,6 @@ def main(cap):
     
 
 if __name__ == '__main__':
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture(1)
     main(cap)
     cv.destroyAllWindows()
