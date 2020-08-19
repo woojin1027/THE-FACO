@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -26,12 +27,15 @@ import com.google.android.gms.maps.MapView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import jxl.Image;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -47,6 +51,8 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
     TextView textView;
     Button nearby_stop;
     MapView mapView;
+    ImageView icon_search;
+    String selected_item2="";
 
 
     @Override
@@ -56,6 +62,8 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
 
         searchBox = (EditText)findViewById(R.id.searchbox);  //검색창
         list_excel = (ListView)findViewById(R.id.list_excel);  //정류장데이터
+        icon_search = (ImageView)findViewById(R.id.icon_search);  //돋보기 아이콘
+
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         //텍스트뷰 한개로 구성된 내장 레이아웃
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
@@ -96,29 +104,48 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
 
 
         //정류장 클릭시 이벤트
-        list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        //을 돋보기 클릭시로 바꿈
+        icon_search.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selected_item = (String)parent.getItemAtPosition(position);
-
-
-                //이름이 같은 정류장은 어케 구분하지
-                
-
-                int selected_item_MOBILE_NO = (int) parent.getItemIdAtPosition(position);
-
-                textView = findViewById(R.id.textview_setting1);
-                //textView.setText(selected_item); 출발지 텍스트가 안바뀐다.......ㅠ
-                toastshow(view, selected_item);
+            public void onClick(View v) {
+                selected_item = String.valueOf(searchBox.getText());
 
                 Intent intent = new Intent(pathSetting_start.this, pathset_mapshow.class);
-                intent.putExtra("selected_item", selected_item);
+                try {
+                    selected_item2 = URLEncoder.encode(selected_item, "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+//                intent.putExtra("selected_item", selected_item2);
                 startActivity(intent);
-
-                //pathSetting_start.super.onBackPressed();
             }
         });
+//
+//        list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                selected_item = (String)parent.getItemAtPosition(position);
+//
+//
+//                //이름이 같은 정류장은 어케 구분하지
+//
+//
+//                int selected_item_MOBILE_NO = (int) parent.getItemIdAtPosition(position);
+//
+//                textView = findViewById(R.id.textview_setting1);
+//                //textView.setText(selected_item); 출발지 텍스트가 안바뀐다.......ㅠ
+//                toastshow(view, selected_item);
+//
+//                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow.class);
+//                intent.putExtra("selected_item", selected_item);
+//                startActivity(intent);
+//
+//                //pathSetting_start.super.onBackPressed();
+//            }
+//        });
     }
 
 
@@ -163,14 +190,14 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        list_excel.setVisibility(View.VISIBLE);
+        //list_excel.setVisibility(View.VISIBLE);
         list_excel.setFilterText(searchBox.getText().toString());
     }
 
     @Override
     public void afterTextChanged(Editable s) {
         if (searchBox.getText().length() == 0) {
-            list_excel.setVisibility(View.VISIBLE);
+            //list_excel.setVisibility(View.VISIBLE);
             list_excel.clearTextFilter();
         }
     }
