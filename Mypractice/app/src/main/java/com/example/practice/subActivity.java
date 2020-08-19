@@ -14,8 +14,10 @@ import android.widget.TextView;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class subActivity extends AppCompatActivity {
     private final String endPoint1 = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice"; //버스도착정보목록조회 앞 주소
     private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; // 버스위치정보목록조회 앞 주소
     private final String endPoint3 = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll"; //버스도착정보조회 앞 주소
+    private final String AWSendPoint = " https://w5yp3bwer4.execute-api.ap-northeast-2.amazonaws.com/project/projectFunction"; //AWS api gateway 의 엔드포인트
     private final String route = "234000878";
 
     //파싱을 위한 필드 선언
@@ -37,6 +40,7 @@ public class subActivity extends AppCompatActivity {
     private XmlPullParser xpp;
     private String tag;
     private int eventType;
+    private String result; //rest api 호출한 값 담는 변수
 
     private ArrayList listsample;
     private ArrayList listBus;
@@ -186,12 +190,14 @@ public class subActivity extends AppCompatActivity {
                 //오퍼레이션 3 버스도착정보조회
                 getArrInfoByRouteAllList();
 
+                getLineData();
+
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2 + " " + listsample);
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2 + " " + result);
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
@@ -517,6 +523,37 @@ public class subActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
+    }
+
+    //rest api 호출
+    private void getLineData()
+    {
+        result = null;
+        try
+        {
+            Log.d(TAG, "AWS rest api 호출: " + AWSendPoint);
+            //rest api 에 연결
+            URL url = new URL(AWSendPoint);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            InputStream is = conn.getInputStream();
+
+            StringBuilder builder = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+            String line;
+            while((line = reader.readLine()) != null)
+            {
+                builder.append(line);
+            }
+
+            //결과 출력
+            result = builder.toString();
+
+        }catch(Exception e){
+            Log.e("REST_API", "GET method failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     //오퍼레이션 3 (버스도착정보항목조회)
