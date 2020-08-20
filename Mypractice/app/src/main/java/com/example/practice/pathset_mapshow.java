@@ -19,11 +19,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.net.URL;
 
+//리스트 클릭 시 그 특정 정류장을 보여주는 클래스
 /*https://coding-factory.tistory.com/39*/
 
 public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap googleMap;
-    private pathSetting_start pathSetting_start;
+    private pathSetting_end pathSetting_end;
     float float_x, float_y;
     float Array[][];
 
@@ -48,7 +49,7 @@ public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallb
             URL url = new URL("http://openapi.gbis.go.kr/ws/rest/busstationservice?serviceKey=" //정류소명/번호목록조회
                     + "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D"
                     + "&keyword="
-                    + "미금"
+                    + pathSetting_end.selected_item
             );
 
 
@@ -71,10 +72,7 @@ public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallb
                                 bool_y = true;
                             }
                             if(parser.getName().equals("message")){ //message 태그를 만나면 에러 출력
-                                Toast.makeText(this,          // 현재 화면의 제어권자
-                                        "error", // 보여줄 메시지
-                                        Toast.LENGTH_LONG)    // 보여줄 기간 (길게, 짧게)
-                                        .show();
+                                Toast.makeText(this,"error",Toast.LENGTH_LONG).show();
 
 //                                status1.setText(status1.getText()+"에러");
                                 //여기에 에러코드에 따라 다른 메세지를 출력하도록 할 수 있다.

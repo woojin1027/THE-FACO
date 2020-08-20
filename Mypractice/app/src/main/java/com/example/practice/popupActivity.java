@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 //TheFaCo란? 에 쓰이는 팝업창
+//https://mixup.tistory.com/36
 
 public class popupActivity extends Activity {
     TextView txtText;

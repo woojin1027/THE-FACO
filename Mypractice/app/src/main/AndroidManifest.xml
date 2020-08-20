@@ -23,6 +23,7 @@
         <activity android:name=".pathSetting_start"/>
         <activity android:name=".pathSetting_end"/>
         <activity android:name=".pathset_mapshow"/>
+        <activity android:name=".pathset_mapshow2"/>
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
         <activity android:name=".mapActivity" />

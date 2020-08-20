@@ -23,18 +23,16 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static android.media.CamcorderProfile.get;
 
 //해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 public class pathSetting_end extends AppCompatActivity implements TextWatcher{
 
     public String selected_item;
+    public String mytest;
+    int int_mytest;
     ListView list_new;
     ArrayList<HashMap<String, String>> data;
     HashMap<String, String> data_hashmap;
@@ -56,56 +54,139 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
 
 
 
-
         /*데이터 넣기 노가다 작업 시작지점*/
         //https://m.blog.naver.com/PostView.nhn?blogId=gi_balja&logNo=221162720020&proxyReferer=https:%2F%2Fwww.google.com%2F
 
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "단국대.치과병원");
-        data_hashmap.put("MOBILE_NO", "47682");
+        data_hashmap.put("정류장명", "단국대.치과병원");
+        data_hashmap.put("정류소번호", "47682");
         data.add(data_hashmap);
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "단국대정문");
-        data_hashmap.put("MOBILE_NO", "47717");
+        data_hashmap.put("정류장명", "단국대정문");
+        data_hashmap.put("정류소번호", "47717");
         data.add(data_hashmap);
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "꽃메마을.새에덴교회");
-        data_hashmap.put("MOBILE_NO", "29277");
+        data_hashmap.put("정류장명", "꽃메마을.새에덴교회");
+        data_hashmap.put("정류소번호", "29277");
         data.add(data_hashmap);
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "보정동주민센터");
-        data_hashmap.put("MOBILE_NO", "29249");
+        data_hashmap.put("정류장명", "보정동주민센터");
+        data_hashmap.put("정류소번호", "29249");
         data.add(data_hashmap);
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "오리역");
-        data_hashmap.put("MOBILE_NO", "07058");
+        data_hashmap.put("정류장명", "오리역");
+        data_hashmap.put("정류소번호", "07058");
         data.add(data_hashmap);
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "미금역.청솔마을.2001아울렛");
-        data_hashmap.put("MOBILE_NO", "07333");
+        data_hashmap.put("정류장명", "미금역.청솔마을.2001아울렛");
+        data_hashmap.put("정류소번호", "07333");
         data.add(data_hashmap);
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "정자역");
-        data_hashmap.put("MOBILE_NO", "07624");
+        data_hashmap.put("정류장명", "정자역");
+        data_hashmap.put("정류소번호", "07624");
         data.add(data_hashmap);
 
         data_hashmap = new HashMap<String, String>();
-        data_hashmap.put("STATION_NM", "분당구청입구.수내교");
-        data_hashmap.put("MOBILE_NO", "07115");
+        data_hashmap.put("정류장명", "분당구청입구.수내교");
+        data_hashmap.put("정류소번호", "07115");
         data.add(data_hashmap);
 
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "순천향대학병원");
+        data_hashmap.put("정류소번호", "03163");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "남대문세무서.국가인권위원회");
+        data_hashmap.put("정류소번호", "02287");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "종로2가사거리");
+        data_hashmap.put("정류소번호", "01001");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "을지로입구역.광교");
+        data_hashmap.put("정류소번호", "02246");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "북창동.남대문시장");
+        data_hashmap.put("정류소번호", "02283");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서울역버스환승센터6");
+        data_hashmap.put("정류소번호", "02006");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "숭례문");
+        data_hashmap.put("정류소번호", "02121");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "명동국민은행앞");
+        data_hashmap.put("정류소번호", "02253");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "남대문세무서.서울백병원");
+        data_hashmap.put("정류소번호", "02001");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "순천향대학병원");
+        data_hashmap.put("정류소번호", "03164");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "분당구청입구.수내교");
+        data_hashmap.put("정류소번호", "07114");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "정자역");
+        data_hashmap.put("정류소번호", "07049");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "미금역.청솔마을.2001아울렛");
+        data_hashmap.put("정류소번호", "07331");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "오리역");
+        data_hashmap.put("정류소번호", "07057");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "보정동주민센터");
+        data_hashmap.put("정류소번호", "29873");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "꽃메마을2단지");
+        data_hashmap.put("정류소번호", "29282");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "단국대.치과병원");
+        data_hashmap.put("정류소번호", "47683");
+        data.add(data_hashmap);
 
         SimpleAdapter adapter = new SimpleAdapter(
                 getApplicationContext(), data,
                 android.R.layout.simple_list_item_2,
-                new String[]{"STATION_NM", "MOBILE_NO"},
+                new String[]{"정류장명", "정류소번호"},
                 new int[]{android.R.id.text1, android.R.id.text2}
         );
         list_new.setAdapter(adapter);
@@ -134,7 +215,6 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
         nearby_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(pathSetting_end.this, mapActivity.class);
                 startActivity(intent);
             }
@@ -142,44 +222,26 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
 
 
         //돋보기 클릭 시 -> 리스트 띄우고 -> 리스트 누르면 지도 띄우기
-
         icon_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 list_new.setVisibility(View.VISIBLE);
                 toastshow(v, "검색 결과");
-//                selected_item = (String)parent.getItemAtPosition(position);
-//                toastshow(v, selected_item);
             }
         });
+
 
         list_new.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = String.valueOf(android.R.id.text1);
-                toastshow(view, item + "을(를) 선택하시겠습니까?");
-                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow.class);
+                HashMap<String,String> map =(HashMap<String,String>)list_new.getItemAtPosition(position);
+                mytest = data_hashmap.get("정류장번호");
+                toastshow(view, map + "을(를) 선택하시겠습니까?");
+
+                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow2.class);
                 startActivity(intent);
             }
         });
-
-
-//        list_new.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                ListView list_new = (ListView)parent;
-//
-//                String item = String.valueOf(list_new.getContext());
-//                toastshow(view, item + "를 선택하시겠습니까?");
-//                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow.class);
-//                startActivity(intent);
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
     }
 
 
