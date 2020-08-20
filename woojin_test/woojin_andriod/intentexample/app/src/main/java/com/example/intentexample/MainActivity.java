@@ -8,13 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btn_move;
     private EditText et_test;
     private String str;
-
+    ImageView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        test = (ImageView)findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"우진 테스트",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 
