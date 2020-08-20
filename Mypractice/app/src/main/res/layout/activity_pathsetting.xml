@@ -37,17 +37,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
+        <ListView
+            android:id="@+id/list_new"
             android:layout_width="match_parent"
-            android:layout_height="431dp"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:clickable="false"
-            tools:visibility="invisible" />
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ibm_medium"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/nearby_stop"
@@ -68,17 +63,12 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
-        <ListView
-            android:id="@+id/list_excel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/ibm_medium" />
-
         <TextView
             android:id="@+id/result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="18sp" />
 
     </FrameLayout>
 

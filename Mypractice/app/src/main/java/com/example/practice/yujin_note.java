@@ -33,7 +33,7 @@ public class yujin_note extends AppCompatActivity implements TextWatcher {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pathsetting);
 
-        listView = findViewById(R.id.list_excel);
+        //listView = findViewById(R.id.list_excel);
         data = new ArrayList<HashMap<String, String>>();
 
 

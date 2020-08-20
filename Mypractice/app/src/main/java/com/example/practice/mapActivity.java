@@ -11,6 +11,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+//주변 정류장 띄우는 클래스
+
 public class mapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

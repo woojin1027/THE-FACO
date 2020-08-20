@@ -21,6 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.MapView;
@@ -44,37 +45,87 @@ import jxl.read.biff.BiffException;
 
 
 public class pathSetting_start extends AppCompatActivity implements TextWatcher {
-    public String selected_item;
-    EditText searchBox;
-    ListView list_excel;
-    ArrayAdapter<String> arrayAdapter;
-    TextView textView;
-    Button nearby_stop;
-    MapView mapView;
-    ImageView icon_search;
-    String selected_item2="";
 
+    public String selected_item;
+    ListView list_new;
+    ArrayList<HashMap<String, String>> data;
+    HashMap<String, String> data_hashmap;
+    EditText searchBox;
+    ImageView icon_search;
+    Button nearby_stop;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pathsetting);
 
-        searchBox = (EditText)findViewById(R.id.searchbox);  //검색창
-        list_excel = (ListView)findViewById(R.id.list_excel);  //정류장데이터
-        icon_search = (ImageView)findViewById(R.id.icon_search);  //돋보기 아이콘
-
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        //텍스트뷰 한개로 구성된 내장 레이아웃
+        searchBox = (EditText) findViewById(R.id.searchbox);  //검색창
+        list_new = findViewById(R.id.list_new);  //정류장데이터
+        icon_search = (ImageView) findViewById(R.id.icon_search);  //돋보기 아이콘
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
-        mapView = findViewById(R.id.mapView);
+
+        data = new ArrayList<HashMap<String, String>>();
 
 
-        Excel(); //데이터 읽기
 
-        list_excel.setVisibility(View.INVISIBLE);
-        list_excel.setAdapter(arrayAdapter);
-        list_excel.setTextFilterEnabled(true);
+
+        /*데이터 넣기 노가다 작업 시작지점*/
+        //https://m.blog.naver.com/PostView.nhn?blogId=gi_balja&logNo=221162720020&proxyReferer=https:%2F%2Fwww.google.com%2F
+
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "단국대.치과병원");
+        data_hashmap.put("MOBILE_NO", "1");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "단국대정문");
+        data_hashmap.put("MOBILE_NO", "2");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "꽃메마을.새에덴교회");
+        data_hashmap.put("MOBILE_NO", "3");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "보정동주민센터");
+        data_hashmap.put("MOBILE_NO", "4");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "오리역");
+        data_hashmap.put("MOBILE_NO", "5");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "미금역.청솔마을.2001아울렛");
+        data_hashmap.put("MOBILE_NO", "6");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "정자역");
+        data_hashmap.put("MOBILE_NO", "7");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("STATION_NM", "분당구청입구.수내교");
+        data_hashmap.put("MOBILE_NO", "8");
+        data.add(data_hashmap);
+
+
+        SimpleAdapter adapter = new SimpleAdapter(
+                getApplicationContext(), data,
+                android.R.layout.simple_list_item_2,
+                new String[]{"STATION_NM", "MOBILE_NO"},
+                new int[]{android.R.id.text1, android.R.id.text2}
+        );
+        list_new.setAdapter(adapter);
+
+        /*노가다 끝지점*/
+
+
+        list_new.setTextFilterEnabled(true);
         searchBox.addTextChangedListener(this);
 
 
@@ -83,123 +134,49 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         searchBox.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode == event.KEYCODE_ENTER)
-                {
-                    imm.hideSoftInputFromWindow(searchBox.getWindowToken(),0);
+                if (keyCode == event.KEYCODE_ENTER) {
+                    imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
                     return true;
                 }
                 return false;
             }
         });
 
-
         //주변 정류장 클릭시 이벤트
-        nearby_stop.setOnClickListener(new View.OnClickListener(){
+        nearby_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(pathSetting_start.this, mapActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        //정류장 클릭시 이벤트
+        //돋보기 클릭 시 -> 리스트 띄우고 -> 리스트 누르면 지도 띄우기
 
-        //을 돋보기 클릭시로 바꿈
-        icon_search.setOnClickListener(new View.OnClickListener(){
-
+        icon_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selected_item = String.valueOf(searchBox.getText());
-
-                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow.class);
-                try {
-                    selected_item2 = URLEncoder.encode(selected_item, "utf-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-//                intent.putExtra("selected_item", selected_item2);
-                startActivity(intent);
+                list_new.setVisibility(View.VISIBLE);
+                toastshow(v, "검색 결과");
+//                selected_item = (String)parent.getItemAtPosition(position);
+//                toastshow(v, selected_item);
             }
         });
-//
-//        list_excel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                selected_item = (String)parent.getItemAtPosition(position);
-//
-//
-//                //이름이 같은 정류장은 어케 구분하지
-//
-//
-//                int selected_item_MOBILE_NO = (int) parent.getItemIdAtPosition(position);
-//
-//                textView = findViewById(R.id.textview_setting1);
-//                //textView.setText(selected_item); 출발지 텍스트가 안바뀐다.......ㅠ
-//                toastshow(view, selected_item);
-//
-//                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow.class);
-//                intent.putExtra("selected_item", selected_item);
-//                startActivity(intent);
-//
-//                //pathSetting_start.super.onBackPressed();
-//            }
-//        });
-    }
 
-
-
-    private void Excel() {
-        Workbook workbook = null;
-        Sheet sheet = null;
-        try {
-            InputStream inputStream = getBaseContext().getResources().getAssets().open("StationInfo.xls");
-            workbook = Workbook.getWorkbook(inputStream);
-            sheet = workbook.getSheet(0);
-
-            int MaxColumn = 2;
-            int RowStart = 1; //2행부터 아래로
-            int RowEnd = sheet.getColumn(MaxColumn - 1).length -1;
-            int ColumnStart = 1; //B열만
-            int ColumnEnd = sheet.getRow(2).length - 1;
-
-
-            //excel file의 B2셀부터 B열의 모든 정보를 띄움 ( = 2019년 기준 경기도에 있는 모든 버스정류장 이름)
-            for(int row = RowStart; row <= RowEnd; row++) {
-                String excelload = sheet.getCell(ColumnStart, row).getContents();
-                arrayAdapter.add(excelload);
+        list_new.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ListView list_new = (ListView)parent;
+                String item = (String) list_new.getItemAtPosition(position);
+                toastshow(view, item + "를 선택하시겠습니까?");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
-            e.printStackTrace();
-        } finally {
-            list_excel.setAdapter(arrayAdapter);
-            workbook.close();
-        }
-    }
 
-
-
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        //list_excel.setVisibility(View.VISIBLE);
-        list_excel.setFilterText(searchBox.getText().toString());
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        if (searchBox.getText().length() == 0) {
-            //list_excel.setVisibility(View.VISIBLE);
-            list_excel.clearTextFilter();
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
 
@@ -208,7 +185,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         View layout = inflater.inflate( R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
         TextView text = layout.findViewById(R.id.text);
         Toast toast = new Toast(this);
-        text.setText(string + "을(를) 선택");
+        text.setText(string);
         text.setTextSize(15);
         text.setTextColor(Color.WHITE);
         toast.setGravity(Gravity.BOTTOM,0,0);
@@ -216,4 +193,21 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher 
         toast.setView(layout);
         toast.show(); }
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        list_new.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        list_new.setVisibility(View.INVISIBLE);
+        list_new.setFilterText(searchBox.getText().toString());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (searchBox.getText().length() == 0) {
+            list_new.clearTextFilter();
+        }
+    }
 }
