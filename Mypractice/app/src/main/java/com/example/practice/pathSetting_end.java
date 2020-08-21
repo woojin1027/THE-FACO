@@ -25,11 +25,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 //해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 public class pathSetting_end extends AppCompatActivity implements TextWatcher{
-
+    TextView tv;
+    String test_value;
+    String map_detail;
     public String selected_item;
     public String mytest;
     int int_mytest;
@@ -234,11 +237,18 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
         list_new.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HashMap<String,String> map =(HashMap<String,String>)list_new.getItemAtPosition(position);
-                mytest = data_hashmap.get("정류장번호");
+                HashMap<String, String> map = (HashMap<String,String>)list_new.getItemAtPosition(position);
+                Map.Entry<String,String> entry = map.entrySet().iterator().next();
+                mytest = map.get("정류소번호");
+                toastshow(view, mytest);
+
+                map_detail = entry.getValue();
+
+
+
                 toastshow(view, map + "을(를) 선택하시겠습니까?");
 
-                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow2.class);
+                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow4.class);
                 startActivity(intent);
             }
         });

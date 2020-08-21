@@ -33,9 +33,10 @@ import jxl.read.biff.BiffException;
 public class pathset_mapshow2 extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap googleMap;
     private pathSetting_end pathSetting_end;
-    int a=0, b=0;
+    int a, b;
     int colTotal;
-
+    String str_a;
+    String str_b;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +45,13 @@ public class pathset_mapshow2 extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_search);
         mapFragment.getMapAsync(this);
-
+        Excel();
 
     }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-        Excel();
 
         LatLng POINT = new LatLng(a, b);
         MarkerOptions markerOptions = new MarkerOptions();
@@ -62,39 +61,45 @@ public class pathset_mapshow2 extends FragmentActivity implements OnMapReadyCall
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(POINT));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+
+        Toast.makeText(this,          // 현재 화면의 제어권자
+                a+"와"+b, // 보여줄 메시지
+                Toast.LENGTH_LONG)    // 보여줄 기간 (길게, 짧게)
+                .show();
+
     }
 
+
     private void Excel() {
-        Workbook workbook;
-        Sheet sheet;
+        Workbook workbook=null;
+        Sheet sheet=null;
         try {
-            InputStream inputStream = getBaseContext().getResources().getAssets().open("station_test.xlsx");
+            InputStream inputStream = getBaseContext().getResources().getAssets().open("station_2020_August.xlsx");
             workbook = Workbook.getWorkbook(inputStream);
             sheet = workbook.getSheet(0);
             colTotal = sheet.getColumns();   //전체 열(세로) 수
 
-            for(int colstart=1; colstart<colTotal; colstart++){
+            for(int colstart=0; colstart<colTotal+2; colstart++){
 
-                String excelload = sheet.getCell(colstart,0).getContents();
+                String excelload = sheet.getCell(colstart, 0).getContents();
                 int excelload_2 =  Integer.parseInt(excelload);
-                int int_mytest = Integer.parseInt(pathSetting_end.mytest);
-                if(excelload_2 == int_mytest){
+                int int_mytest = Integer.parseInt(String.valueOf(pathSetting_end.tv));
+                if(excelload == String.valueOf(pathSetting_end.tv)){
                     int save_col = colstart;
-                    String str_a = sheet.getCell(save_col-3, 1).getContents();
-                    String str_b = sheet.getCell(save_col-2, 1).getContents();
+                    str_a = sheet.getCell(save_col-3,0).getContents();
+                    str_b = sheet.getCell(save_col-2,0).getContents();
                     a =  Integer.parseInt(str_a);
                     b =  Integer.parseInt(str_b);
                 }break;
             }
-            Toast.makeText(this,          // 현재 화면의 제어권자
-                    a+"와"+b, // 보여줄 메시지
-                    Toast.LENGTH_LONG)    // 보여줄 기간 (길게, 짧게)
-                    .show();
+
         }
         catch (IOException e) {e.printStackTrace();}
         catch (BiffException e) {e.printStackTrace();}
-//        finally {
-//            workbook.close();
-//        }
+        finally {
+            if(workbook != null) {
+                workbook.close();
+            }
+        }
     }
 }
