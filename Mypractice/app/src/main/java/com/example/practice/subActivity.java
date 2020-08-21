@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -50,6 +53,8 @@ public class subActivity extends AppCompatActivity {
     private ArrayList liststationId;
     private ArrayList listseatCnt;
     private ArrayList listBusstop;
+    private ArrayList DBStationId;
+    private ArrayList DBLineCnt;
 
     BusitemAdapter2 adapter = new BusitemAdapter2();
 
@@ -191,6 +196,8 @@ public class subActivity extends AppCompatActivity {
                 getArrInfoByRouteAllList();
 
                 getLineData();
+
+                JSONParser();
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
@@ -554,6 +561,27 @@ public class subActivity extends AppCompatActivity {
             Log.e("REST_API", "GET method failed: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    //DB 에서 받은 JSON 데이터를 ArrayList 에 파싱하여 저장
+    private void JSONParser()
+    {
+
+        DBStationId = new ArrayList();
+        DBLineCnt = new ArrayList();
+        try
+        {
+            JSONObject jObject = new JSONObject(result);
+            JSONArray jarray = jObject.getJSONArray("Items");
+            for(int i = 0; i < jarray.length(); i++)
+            {
+                JSONObject obj = jarray.getJSONObject(i);
+                DBStationId.add(obj.getString("StationId"));
+                //DBLineCnt.add(obj.getString("LineCnt"));
+            }
+
+            Log.d(TAG, "JSON Parsing: " + DBStationId);
+        }catch(JSONException e){e.printStackTrace();}
     }
 
     //오퍼레이션 3 (버스도착정보항목조회)
