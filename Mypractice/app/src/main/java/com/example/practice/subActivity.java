@@ -314,6 +314,10 @@ public class subActivity extends AppCompatActivity {
                         //오퍼레이션 3 버스도착정보조회
                         getArrInfoByRouteAllList();
 
+                        getLineData();
+
+                        JSONParser();
+
                         //UI setText 하는 곳
                         runOnUiThread(new Runnable(){
                             @Override
@@ -436,6 +440,10 @@ public class subActivity extends AppCompatActivity {
 
                 //오퍼레이션 3 버스도착정보조회
                 getArrInfoByRouteAllList();
+
+                getLineData();
+
+                JSONParser();
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
@@ -577,10 +585,10 @@ public class subActivity extends AppCompatActivity {
             {
                 JSONObject obj = jarray.getJSONObject(i);
                 DBStationId.add(obj.getString("StationId"));
-                //DBLineCnt.add(obj.getString("LineCnt"));
+                DBLineCnt.add(obj.getString("Detect_Number(People)"));
             }
 
-            Log.d(TAG, "JSON Parsing: " + DBStationId);
+            Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBLineCnt);
         }catch(JSONException e){e.printStackTrace();}
     }
 
@@ -692,17 +700,17 @@ public class subActivity extends AppCompatActivity {
                         else if(tag.equals("stationSeq"))
                         {
                             xpp.next();
-                            listBusseq.add(xpp.getText());
+                            listBusseq.add(xpp.getText()); //정류소 순번
                         }
                         else if(tag.equals("stationId"))
                         {
                             xpp.next();
-                            liststationId.add(xpp.getText());
+                            liststationId.add(xpp.getText()); //정류소 ID
                         }
                         else if(tag.equals("remainSeatCnt"))
                         {
                             xpp.next();
-                            listseatCnt.add(xpp.getText());
+                            listseatCnt.add(xpp.getText()); //남은 좌석수
                         }
                         break;
                     case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시

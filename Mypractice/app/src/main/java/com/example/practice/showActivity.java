@@ -307,6 +307,9 @@ public class showActivity extends AppCompatActivity
                         //오퍼레이션 3 버스도착정보조회
                         getArrInfoByRouteAllList();
 
+                        getLineData();
+
+                        JSONParser();
 
                         //UI setText 하는 곳
                         runOnUiThread(new Runnable(){
@@ -431,6 +434,10 @@ public class showActivity extends AppCompatActivity
 
                 //오퍼레이션 3 버스도착정보조회
                 getArrInfoByRouteAllList();
+
+                getLineData();
+
+                JSONParser();
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
@@ -572,10 +579,10 @@ public class showActivity extends AppCompatActivity
             {
                 JSONObject obj = jarray.getJSONObject(i);
                 DBStationId.add(obj.getString("StationId"));
-                //DBLineCnt.add(obj.getString("LineCnt"));
+                DBLineCnt.add(obj.getString("Detect_Number(People)"));
             }
 
-            Log.d(TAG, "JSON Parsing: " + DBStationId);
+            Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBLineCnt);
         }catch(JSONException e){e.printStackTrace();}
     }
 
@@ -597,17 +604,17 @@ public class showActivity extends AppCompatActivity
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busLocationList"));  //첫번째 검색 결과
-                        else if(tag.equals("stationSeq"))
+                        else if(tag.equals("stationSeq")) //정류소 순번
                         {
                             xpp.next();
                             listBusseq.add(xpp.getText());
                         }
-                        else if(tag.equals("stationId"))
+                        else if(tag.equals("stationId")) //정류소 ID
                         {
                             xpp.next();
                             liststationId.add(xpp.getText());
                         }
-                        else if(tag.equals("remainSeatCnt"))
+                        else if(tag.equals("remainSeatCnt")) //남은 좌석수
                         {
                             xpp.next();
                             listseatCnt.add(xpp.getText());
