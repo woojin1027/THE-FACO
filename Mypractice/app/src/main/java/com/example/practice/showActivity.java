@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -51,6 +54,9 @@ public class showActivity extends AppCompatActivity
     private ArrayList liststationId;
     private ArrayList listseatCnt;
     private ArrayList listBusstop;
+    private ArrayList AllStationId;
+    private ArrayList DBStationId;
+    private ArrayList DBLineCnt;
 
     BusitemAdapter adapter = new BusitemAdapter();
 
@@ -72,6 +78,7 @@ public class showActivity extends AppCompatActivity
         listseatCnt = new ArrayList();
         listBus = new ArrayList();
         listBusstop = new ArrayList();
+        AllStationId = new ArrayList();
 
         for(int i = 0; i < BusstopArr.length; i++)
         {
@@ -167,6 +174,7 @@ public class showActivity extends AppCompatActivity
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
+        AllStationId.clear();
 
         //준비상태
         new Thread(new Runnable()
@@ -182,12 +190,14 @@ public class showActivity extends AppCompatActivity
 
                 getLineData();
 
+                JSONParser();
+
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2);
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2 + " " + result);
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
@@ -293,6 +303,7 @@ public class showActivity extends AppCompatActivity
                         listBusseq.clear();
                         liststationId.clear();
                         listseatCnt.clear();
+                        AllStationId.clear();
 
                         //오퍼레이션 1  버스위치정보조회
                         getBusLocationList();
@@ -300,6 +311,9 @@ public class showActivity extends AppCompatActivity
                         //오퍼레이션 3 버스도착정보조회
                         getArrInfoByRouteAllList();
 
+                        getLineData();
+
+                        JSONParser();
 
                         //UI setText 하는 곳
                         runOnUiThread(new Runnable(){
@@ -412,6 +426,7 @@ public class showActivity extends AppCompatActivity
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
+        AllStationId.clear();
 
         //준비상태
         new Thread(new Runnable()
@@ -424,6 +439,10 @@ public class showActivity extends AppCompatActivity
 
                 //오퍼레이션 3 버스도착정보조회
                 getArrInfoByRouteAllList();
+
+                getLineData();
+
+                JSONParser();
 
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
@@ -530,7 +549,7 @@ public class showActivity extends AppCompatActivity
             //rest api 에 연결
             URL url = new URL(AWSendPoint);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod("GET"); //GET 방식으로 호출
             InputStream is = conn.getInputStream();
 
             StringBuilder builder = new StringBuilder();
@@ -551,6 +570,27 @@ public class showActivity extends AppCompatActivity
         }
     }
 
+    //DB 에서 받은 JSON 데이터를 ArrayList 에 파싱하여 저장
+    private void JSONParser()
+    {
+
+        DBStationId = new ArrayList();
+        DBLineCnt = new ArrayList();
+        try
+        {
+            JSONObject jObject = new JSONObject(result);
+            JSONArray jarray = jObject.getJSONArray("Items");
+            for(int i = 0; i < jarray.length(); i++)
+            {
+                JSONObject obj = jarray.getJSONObject(i);
+                DBStationId.add(obj.getString("StationId"));
+                DBLineCnt.add(obj.getString("Detect_Number(People)"));
+            }
+
+            Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBLineCnt);
+        }catch(JSONException e){e.printStackTrace();}
+    }
+
     //오퍼레이션 1 (버스위치정보목록조회)
     private void getBusLocationList()
     {
@@ -569,17 +609,17 @@ public class showActivity extends AppCompatActivity
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busLocationList"));  //첫번째 검색 결과
-                        else if(tag.equals("stationSeq"))
+                        else if(tag.equals("stationSeq")) //정류소 순번
                         {
                             xpp.next();
                             listBusseq.add(xpp.getText());
                         }
-                        else if(tag.equals("stationId"))
+                        else if(tag.equals("stationId")) //정류소 ID
                         {
                             xpp.next();
                             liststationId.add(xpp.getText());
                         }
-                        else if(tag.equals("remainSeatCnt"))
+                        else if(tag.equals("remainSeatCnt")) //남은 좌석수
                         {
                             xpp.next();
                             listseatCnt.add(xpp.getText());
@@ -662,11 +702,11 @@ public class showActivity extends AppCompatActivity
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("itemList"));  //첫번째 검색 결과
-//                        else if(tag.equals("staOrd"))
-//                        {
-//                            xpp.next();
-//                            liststation1.add(xpp.getText());
-//                        }
+                        else if(tag.equals("stId"))
+                        {
+                            xpp.next();
+                            AllStationId.add(xpp.getText());
+                        }
                         else if(tag.equals("arrmsg1")) //첫번째 버스의 도착정보 메세지
                         {
                             xpp.next();
