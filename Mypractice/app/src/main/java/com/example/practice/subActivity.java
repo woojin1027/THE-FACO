@@ -53,6 +53,7 @@ public class subActivity extends AppCompatActivity {
     private ArrayList liststationId;
     private ArrayList listseatCnt;
     private ArrayList listBusstop;
+    private ArrayList AllStationId;
     private ArrayList DBStationId;
     private ArrayList DBLineCnt;
 
@@ -75,6 +76,7 @@ public class subActivity extends AppCompatActivity {
         listseatCnt = new ArrayList();
         listBus = new ArrayList();
         listBusstop = new ArrayList();
+        AllStationId = new ArrayList();
 
         for(int i = 0; i < BusstopArr.length; i++)
         {
@@ -142,6 +144,7 @@ public class subActivity extends AppCompatActivity {
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
+        AllStationId.clear();
 
         for(int i = 0; i < listBus.size(); i++)
         {
@@ -307,6 +310,7 @@ public class subActivity extends AppCompatActivity {
                         listBusseq.clear();
                         liststationId.clear();
                         listseatCnt.clear();
+                        AllStationId.clear();
 
                         //오퍼레이션 1  버스위치정보조회
                         getBusLocationList();
@@ -428,6 +432,7 @@ public class subActivity extends AppCompatActivity {
         listBusseq.clear();
         liststationId.clear();
         listseatCnt.clear();
+        AllStationId.clear();
 
         //준비상태
         new Thread(new Runnable()
@@ -610,11 +615,11 @@ public class subActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("itemList"));  //첫번째 검색 결과
-//                        else if(tag.equals("stNm"))
-//                        {
-//                            xpp.next();
-//                            listsample.add(xpp.getText());
-//                        }
+                        else if(tag.equals("stId"))
+                        {
+                            xpp.next();
+                            AllStationId.add(xpp.getText());
+                        }
                         else if(tag.equals("arrmsg1")) //첫번째 버스의 도착정보 메세지
                         {
                             xpp.next();
