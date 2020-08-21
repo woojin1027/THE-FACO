@@ -68,7 +68,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         Bus_items item = items.get(position);
         holder.setItem(item);
 
-        ViewHolder viewHolder = (ViewHolder)holder;
+        final ViewHolder viewHolder = (ViewHolder)holder;
         viewHolder.onBind(items.get(position),position,selectedItems);
         viewHolder.setOnBusItemClickListener(new OnBusItemClickListener() {
             @Override
@@ -102,7 +102,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
 
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder
+    public class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView textView;  //버스정류장 이름
         TextView textView2; //버스좌석정보

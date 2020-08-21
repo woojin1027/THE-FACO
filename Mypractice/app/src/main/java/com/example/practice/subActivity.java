@@ -56,6 +56,9 @@ public class subActivity extends AppCompatActivity {
     private ArrayList AllStationId;
     private ArrayList DBStationId;
     private ArrayList DBLineCnt;
+    private ArrayList DBStaOrder;
+    private ArrayList DBSeatcnt1;
+    private ArrayList DBSeatcnt2;
 
     BusitemAdapter2 adapter = new BusitemAdapter2();
 
@@ -77,6 +80,8 @@ public class subActivity extends AppCompatActivity {
         listBus = new ArrayList();
         listBusstop = new ArrayList();
         AllStationId = new ArrayList();
+        DBSeatcnt1 = new ArrayList();
+        DBSeatcnt2 = new ArrayList();
 
         for(int i = 0; i < BusstopArr.length; i++)
         {
@@ -145,6 +150,8 @@ public class subActivity extends AppCompatActivity {
         liststationId.clear();
         listseatCnt.clear();
         AllStationId.clear();
+        DBSeatcnt1.clear();
+        DBSeatcnt2.clear();
 
         for(int i = 0; i < listBus.size(); i++)
         {
@@ -311,6 +318,8 @@ public class subActivity extends AppCompatActivity {
                         liststationId.clear();
                         listseatCnt.clear();
                         AllStationId.clear();
+                        DBSeatcnt1.clear();
+                        DBSeatcnt2.clear();
 
                         //오퍼레이션 1  버스위치정보조회
                         getBusLocationList();
@@ -433,6 +442,8 @@ public class subActivity extends AppCompatActivity {
         liststationId.clear();
         listseatCnt.clear();
         AllStationId.clear();
+        DBSeatcnt1.clear();
+        DBSeatcnt2.clear();
 
         //준비상태
         new Thread(new Runnable()
@@ -582,6 +593,7 @@ public class subActivity extends AppCompatActivity {
 
         DBStationId = new ArrayList();
         DBLineCnt = new ArrayList();
+        DBStaOrder = new ArrayList();
         try
         {
             JSONObject jObject = new JSONObject(result);
@@ -591,10 +603,33 @@ public class subActivity extends AppCompatActivity {
                 JSONObject obj = jarray.getJSONObject(i);
                 DBStationId.add(obj.getString("StationId"));
                 DBLineCnt.add(obj.getString("Detect_Number(People)"));
+                DBStaOrder.add(obj.getString("staorder"));
             }
 
-            Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBLineCnt);
+            Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBStaOrder + " " + DBLineCnt);
         }catch(JSONException e){e.printStackTrace();}
+    }
+
+    private void DataCalculate()
+    {
+        for(int i = 0; i < DBStationId.size(); i++)
+            {
+                getBusArrivalItem(DBStationId.get(i).toString(), DBStaOrder.get(i).toString());
+                if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) > 0)
+                {
+
+                }
+                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) == 0)
+                {
+
+                }
+                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0)
+                {
+
+                }
+        }
+
+
     }
 
     //오퍼레이션 3 (버스도착정보항목조회)
@@ -661,15 +696,15 @@ public class subActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busArrivalList"));  //첫번째 검색 결과
-                        else if(tag.equals("locationNo1"))
+                        else if(tag.equals("remainSeatCnt1"))
                         {
                             xpp.next();
-                            liststation1.add(xpp.getText());
+                            DBSeatcnt1.add(xpp.getText());
                         }
-                        else if(tag.equals("locationNo2"))
+                        else if(tag.equals("remainSeatCnt2"))
                         {
                             xpp.next();
-                            liststation2.add(xpp.getText());
+                            DBSeatcnt2.add(xpp.getText());
                         }
                         break;
                     case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
