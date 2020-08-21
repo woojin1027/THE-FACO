@@ -1,5 +1,6 @@
 package com.example.practice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -35,6 +36,10 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
     String map_detail;
     public String selected_item;
     public String mytest;
+    public String mytest_name;
+
+    public static Context context;
+
     int int_mytest;
     ListView list_new;
     ArrayList<HashMap<String, String>> data;
@@ -239,19 +244,17 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HashMap<String, String> map = (HashMap<String,String>)list_new.getItemAtPosition(position);
                 Map.Entry<String,String> entry = map.entrySet().iterator().next();
-                mytest = map.get("정류소번호");
-                toastshow(view, mytest);
+                mytest = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
+                mytest_name = map.get("정류장명");
 
                 map_detail = entry.getValue();
-
-
-
                 toastshow(view, map + "을(를) 선택하시겠습니까?");
 
                 Intent intent = new Intent(pathSetting_end.this, pathset_mapshow4.class);
                 startActivity(intent);
             }
         });
+        context = this;
     }
 
 

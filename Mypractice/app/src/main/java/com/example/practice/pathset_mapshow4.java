@@ -2,7 +2,6 @@ package com.example.practice;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -33,48 +32,46 @@ public class pathset_mapshow4 extends FragmentActivity implements OnMapReadyCall
 
     private final String TAG = "myTag";
     private final String endPoint = "http://openapi.gbis.go.kr/ws/rest/busstationservice"; //정류소 조회 서비스
-    private final String key1 = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
+    private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
 
-    pathSetting_end pathSetting_end;
+    pathSetting_end pathSetting_end = new pathSetting_end();
 
-    private String str_x;
-    private String str_y;
-    float float_x;
-    float float_y;
+
+    private Double db_x;
+    private Double db_y;
+    Double float_x;
+    Double float_y;
+
+
+    String bbbb = ((pathSetting_end)pathSetting_end.context).mytest;
+    int mytest_int = Integer.parseInt(bbbb);
+    String aaaa = ((pathSetting_end)pathSetting_end.context).mytest_name;
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        float_x = Float.parseFloat(str_x);
-        float_y = Float.parseFloat(str_y);
+//        float_x = Double.parseDouble(db_x);
+//        float_y = Double.parseDouble(db_y);
 
-        LatLng POINT = new LatLng(float_x, float_y);
+        LatLng POINT = new LatLng(db_x, db_y);
+        Log.d(tag ,"\n위도 : " + db_x + "\n경도 : " + db_y + "\n");
+
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(POINT);
-        markerOptions.title("서울");
-        markerOptions.snippet("한국의 수도");
+        markerOptions.title(aaaa);
+        markerOptions.snippet(bbbb);
         googleMap.addMarker(markerOptions);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(POINT));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(10));
 
-        Toast.makeText(this,          // 현재 화면의 제어권자
-                float_x +"와"+ float_y, // 보여줄 메시지
-                Toast.LENGTH_LONG)    // 보여줄 기간 (길게, 짧게)
-                .show();
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_search);
-//준비상태
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //오퍼레이션 1  버스위치정보조회
-                getStationLocationList();
-            }
-        });
+
+        getStationLocationList();
     }
 
 
@@ -87,7 +84,8 @@ public class pathset_mapshow4 extends FragmentActivity implements OnMapReadyCall
     //정류소명/번호목록조회 오퍼레이션
     private void getStationLocationList()
     {
-        String stationUrl = endPoint + "?serviceKey=" + key1 + "&keyword=" + pathSetting_end.mytest;
+
+        String stationUrl = endPoint + "?serviceKey=" + key + "&keyword=" + mytest_int;
         Log.d(TAG, "정류소 조회 : " + stationUrl);
 
         try
@@ -98,36 +96,45 @@ public class pathset_mapshow4 extends FragmentActivity implements OnMapReadyCall
                 switch (eventType)
                 {
                     case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
-                        break;
+                        Log.d(TAG, "파싱 시작합니다.");
+
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
-                        if(tag.equals("busStationList"));  //첫번째 검색 결과
-                        else if(tag.equals("x"))
+                        if(tag.equals("busStationList"))
                         {
-                            str_x = xpp.getText();
-                            xpp.next();
-                            //float_x.add(xpp.getText());
-                        }
-                        else if(tag.equals("y"))
-                        {
-                            str_y = xpp.getText();
-                            xpp.next();
-                            //float_y.add(xpp.getText());
-                        }
-                        break;
-                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
-                        break;
+                            if(tag.equals("x"))
+                            {
+                                db_x = Double.valueOf(xpp.getText());
+                                //xpp.next();
+                                //float_x.add(xpp.getText());
+                            }
+                            if(tag.equals("y"))
+                            {
+                                db_y = Double.valueOf(xpp.getText());
+                                //xpp.next();
+                                //float_y.add(xpp.getText());
+                            }
+                            Log.d(TAG, "데이터 얻었습니다.");
+                        }  //첫번째 검색 결과
+
+
+                    case XmlPullParser.TEXT://xml 문서의 텍스트 만날시
+                        Log.d(TAG, "Break-"); break;
+
+
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
                         if(tag.equals("busStationList")); //첫번째 검색결과 종료
+                        Log.d(TAG, "파싱을 종료합니다.");
+
                         break;
                 }
-                eventType = xpp.next();
+//                eventType = xpp.next();
             }
         }catch (Exception e){e.printStackTrace();}
     }
 
-    private void setUrlNParser(String quary)
+    private void setUrlNParser(String quary) //URL 세팅
     {
         try
         {
@@ -142,4 +149,5 @@ public class pathset_mapshow4 extends FragmentActivity implements OnMapReadyCall
             eventType = xpp.getEventType();
         }catch(Exception e){}
     }
+
 }
