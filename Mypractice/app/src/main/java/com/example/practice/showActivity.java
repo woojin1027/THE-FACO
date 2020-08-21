@@ -45,8 +45,13 @@ public class showActivity extends AppCompatActivity
     private ArrayList liststation2;
     private ArrayList listBusseq;
     private ArrayList liststationId;
-    private ArrayList listseatCnt;
+    private ArrayList listseatCnt; // 잔여좌석
     private ArrayList listBusstop;
+<<<<<<< Updated upstream
+=======
+    private ArrayList DBStationId; // 정류장 이름
+    private ArrayList DBLineCnt; // 정류장 대기 인원
+>>>>>>> Stashed changes
 
     BusitemAdapter adapter = new BusitemAdapter();
 

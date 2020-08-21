@@ -19,7 +19,7 @@
         android:text="8100"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
-        android:fontFamily="@font/tt_together"/>
+        android:fontFamily="@font/heroitem"/>
 
     <Button
         android:id="@+id/busNum9"
@@ -35,5 +35,5 @@
         android:text="M4102"
         android:textColor="#FFFFFF"
         android:textSize="28sp"
-        android:fontFamily="@font/tt_together"/>
+        android:fontFamily="@font/heroitem"/>
 </LinearLayout>
