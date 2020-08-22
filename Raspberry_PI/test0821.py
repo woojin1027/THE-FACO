@@ -46,9 +46,6 @@ def getEthName():
   except:
     interface="None"
   return interface
- 
-                
-
 
 def inside(r, q):
     rx, ry, rw, rh = r
@@ -139,11 +136,13 @@ def main(cap):
             print("초당 프레임 수: %d" %(fps))
             print("줄을 서고있는 인원:",len(line))
             print("파악된 인원:",'%d (%d)' % (len(found_filtered), len(found)),"명")
-            print(nowtime)
+            print(nowtime) 
+            #현재 시간 출력
+
+
             #def on_log(client, userdata, level, buf):
             #    print(msg.topic+" "+str(msg.payload))
-
-            mqttc = paho.Client()                                       # mqttc object
+            #mqttc = paho.Client()                                       # mqttc object
             mqttc.on_connect = on_connect                               # assign on_connect func
             mqttc.on_message = on_message                               # assign on_message func
             #mqttc.on_log = on_log
@@ -166,8 +165,8 @@ def main(cap):
             while 1==1:
                 sleep(5)
                 if connflag == True:
-                    ethName=getEthName()
-                    ethMAC=getMAC(ethName)
+                    ethName = getEthName()
+                    ethMAC = getMAC(ethName)
                     macIdStr = ethMAC
                     Detect_Number = randint(1,25)
                     Station_Name= get_Station_Name(8)
@@ -185,7 +184,7 @@ def main(cap):
                     print(paylodmsg_json)
                 else:
                     print("waiting for connection...")   
-            #현재 시간 출력
+           
 
         img = cv.resize(img,(w,h))
         cv.imshow('frame', img)
