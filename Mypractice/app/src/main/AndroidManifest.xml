@@ -26,6 +26,7 @@
         <activity android:name=".pathset_mapshow2"/>
         <activity android:name=".pathset_mapshow3"/>
         <activity android:name=".pathset_mapshow4"/>
+        <activity android:name=".pathset_mapshow5"/>
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
         <activity android:name=".mapActivity" />

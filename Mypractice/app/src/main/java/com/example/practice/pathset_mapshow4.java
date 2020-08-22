@@ -48,6 +48,7 @@ public class pathset_mapshow4 extends FragmentActivity implements OnMapReadyCall
     String aaaa = ((pathSetting_end)pathSetting_end.context).mytest_name;
 
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
 //        float_x = Double.parseDouble(db_x);
@@ -85,7 +86,7 @@ public class pathset_mapshow4 extends FragmentActivity implements OnMapReadyCall
     private void getStationLocationList()
     {
 
-        String stationUrl = endPoint + "?serviceKey=" + key + "&keyword=" + mytest_int;
+        String stationUrl = endPoint + "?serviceKey=" + key + "&keyword=" + aaaa;
         Log.d(TAG, "정류소 조회 : " + stationUrl);
 
         try
@@ -100,36 +101,45 @@ public class pathset_mapshow4 extends FragmentActivity implements OnMapReadyCall
 
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
-                        if(tag.equals("busStationList"))
-                        {
+                        if(tag.equals("busStationList")){
+                            Log.d(TAG, "버스스테이션은 인식함");
+                            tag = xpp.getName();
                             if(tag.equals("x"))
                             {
-                                db_x = Double.valueOf(xpp.getText());
-                                //xpp.next();
-                                //float_x.add(xpp.getText());
+                                xpp.next();
+                                db_x = Double.parseDouble(xpp.getText());
                             }
                             if(tag.equals("y"))
                             {
-                                db_y = Double.valueOf(xpp.getText());
-                                //xpp.next();
-                                //float_y.add(xpp.getText());
+                                xpp.next();
+                                db_y = Double.parseDouble(xpp.getText());
                             }
-                            Log.d(TAG, "데이터 얻었습니다.");
-                        }  //첫번째 검색 결과
+                        }
+
+
+//                        else if (tag.equals("centerYn")) ;
+//                        else if (tag.equals("districtCd")) ;
+//                        else if (tag.equals("mobileNo")) ;
+//                        else if (tag.equals("regionName")) ;
+//                        else if (tag.equals("stationId")) ;
+//                        else if (tag.equals("stationName")) ;
+
+
+                        Log.d(TAG, "데이터 얻었습니다.");
+                        break;
+                        //첫번째 검색 결과
 
 
                     case XmlPullParser.TEXT://xml 문서의 텍스트 만날시
-                        Log.d(TAG, "Break-"); break;
-
+                        break;
 
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
                         if(tag.equals("busStationList")); //첫번째 검색결과 종료
                         Log.d(TAG, "파싱을 종료합니다.");
-
                         break;
                 }
-//                eventType = xpp.next();
+                //eventType = xpp.next();
             }
         }catch (Exception e){e.printStackTrace();}
     }
