@@ -44,7 +44,7 @@ def draw_detections(img, rects, thickness = 1):
     return(readc2)
                         
 
-def main(cap):
+def main(cap,Name):
     import sys
     from glob import glob
     import itertools as it
@@ -71,7 +71,7 @@ def main(cap):
             break
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
 
@@ -96,28 +96,26 @@ def main(cap):
             if line == None:
                 line = []
             
-            #print("초당 프레임 수: %d" %(fps))
+            """print("초당 프레임 수: %d" %(fps))
             print("줄을 서고있는 인원:",len(line))
             print("파악된 인원:",'%d (%d)' % (len(found_filtered), len(found)),"명")
-            print(nowtime)
+            print(nowtime)"""
             #현재 시간 출력
             
-            while 1==1:
-                sleep(5)
-                if len(line) >= 1:
-                    
-                    Detect_Number = randint(1,25)
-                    
-                    paylodmsg0="{"
-                    paylodmsg1 = "\"StationId\": \""
-                    paylodmsg2 = "\", \"Detect_Number(People)\":"
-                    paylodmsg3 = ", \"station_Name\": \""
-                    paylodmsg4 = ", \"Experiment_Time\": \""
-                    paylodmsg5 ="\"}"
-                    paylodmsg = "{} {} {} {} {} {} {} {}".format(paylodmsg0, paylodmsg1, 'suwon', paylodmsg2, Detect_Number, paylodmsg4, nowtime, paylodmsg5)
-                    print(paylodmsg)
-                else:
-                    print("waiting for connection...")   
+            if len(line) >= 1:
+                
+                Detect_Number = randint(1,25)
+                
+                paylodmsg0="{"
+                paylodmsg1 = "\"StationId\": \""
+                paylodmsg2 = "\", \"Detect_Number(People)\":"
+                paylodmsg3 = ", \"station_Name\": \""
+                paylodmsg4 = ", \"Experiment_Time\": \""
+                paylodmsg5 ="\"}"
+                paylodmsg = "{} {} {} {} {} {} {} {}".format(paylodmsg0, paylodmsg1, Name, paylodmsg2, Detect_Number, paylodmsg4, nowtime, paylodmsg5)
+                print(paylodmsg)
+            else:
+                print("waiting for connection...")   
 
         img = cv.resize(img,(w,h))
         cv.imshow('frame', img)
@@ -130,6 +128,8 @@ def main(cap):
     
 
 if __name__ == '__main__':
-    cap = cv.VideoCapture('133_TEST.avi')
-    main(cap)
+    cap = cv.VideoCapture('133.mp4')
+    Name = 'Sindorim'
+    sleep(5)
+    main(cap,Name)
     cv.destroyAllWindows()
