@@ -614,6 +614,8 @@ public class subActivity extends AppCompatActivity {
     {
         for(int i = 0; i < DBStationId.size(); i++)
             {
+                DBSeatcnt1.clear();
+                DBSeatcnt2.clear();
                 getBusArrivalItem(DBStationId.get(i).toString(), DBStaOrder.get(i).toString());
                 if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) > 0)
                 {
