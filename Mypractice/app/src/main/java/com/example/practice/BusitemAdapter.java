@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.net.CookieHandler;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 //M4102 의 버스정류장 어댑터
 public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHolder>
@@ -27,6 +29,11 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
     private SparseBooleanArray selectedItems = new SparseBooleanArray();
     //직전에 클릭됐던 Item의 position
     private int prePosition = -1;
+
+    private int itemposition;
+    int []BusstopArr = new int[]{0,2,4,5,16,17,18,19,22,23,24,35,36,37,38};
+    private ArrayList listBusstop;
+
 
     public void addItem(Bus_items item)
     {
@@ -70,6 +77,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
 
         final ViewHolder viewHolder = (ViewHolder)holder;
         viewHolder.onBind(items.get(position),position,selectedItems);
+
         viewHolder.setOnBusItemClickListener(new OnBusItemClickListener() {
             @Override
             public void onItemClick() {
@@ -98,7 +106,6 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
         //RecyclerView 의 총 개수
         return items.size();
     }
-
 
 
 
@@ -161,7 +168,9 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             imageView6.setImageResource(item.getRailstop());
             imageView7.setImageResource(item.getTextrail());
             imageView8.setImageResource(item.getTextInfobox());
+
             changeVisibility(selectedItems.get(position));
+
         }
 
         private void changeVisibility(final boolean isExpanded)
@@ -173,10 +182,10 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    // imageView의 높이 변경
+                    // 높이 변경
                     linearlayout2.getLayoutParams().height = (int) animation.getAnimatedValue();
                     linearlayout2.requestLayout();
-                    // imageView가 실제로 사라지게하는 부분
+                    // View가 실제로 사라지게하는 부분
                     linearlayout2.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
                 }
             });
