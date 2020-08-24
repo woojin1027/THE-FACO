@@ -104,6 +104,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
         TextView textView;  //버스정류장 이름
         TextView textView2; //버스좌석정보
         TextView textView3; //버스도착정보
+        TextView textView7; //정류장 대기인원 수
         ImageView imageView; //버스이미지
         ImageView imageView2; //좌석수 이미지
         ImageView imageView3; //상행선 레일 이미지
@@ -112,6 +113,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
         ImageView imageView6;  //정차하는 정거장 이미지
         ImageView imageView7;   //버스도착정보 레일
         ImageView imageView8;   //버스도착정보 텍스트상자
+        ImageView imageView9;   //버스대기인원 텍스트상자
         LinearLayout linearlayout; //카드뷰 전체의 레이아웃
         LinearLayout linearlayout2; //접기펼치기 레이아웃
 
@@ -124,6 +126,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             textView = itemView.findViewById(R.id.textView);
             textView2 = itemView.findViewById(R.id.textView2);
             textView3 = itemView.findViewById(R.id.textView3);
+            textView7 = itemView.findViewById(R.id.textView7);
             imageView = itemView.findViewById(R.id.busicon);
             imageView2 = itemView.findViewById(R.id.note);
             imageView3 = itemView.findViewById(R.id.rail1);
@@ -132,6 +135,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             imageView6 = itemView.findViewById(R.id.railstop);
             imageView7 = itemView.findViewById(R.id.infoimage1);
             imageView8 = itemView.findViewById(R.id.infoimage2);
+            imageView9 = itemView.findViewById(R.id.lineinfo);
             linearlayout = itemView.findViewById(R.id.linearlayout);
             linearlayout2 = itemView.findViewById(R.id.linearlayout2);
 
@@ -149,6 +153,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             textView.setText(item.getBusstopname());
             textView2.setText(item.getBusInfo());
             textView3.setText(item.getBusInfo2());
+            textView7.setText(item.getLineInfo());
             imageView.setImageResource(item.getImage());
             imageView2.setImageResource(item.getImage2());
             imageView3.setImageResource(item.getRail1());
@@ -157,6 +162,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             imageView6.setImageResource(item.getRailstop());
             imageView7.setImageResource(item.getTextrail());
             imageView8.setImageResource(item.getTextInfobox());
+            imageView9.setImageResource(item.getLineInfobox());
             changeVisibility(selectedItems.get(position));
         }
 
@@ -189,6 +195,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             textView.setText(item.getBusstopname());
             textView2.setText(item.getBusInfo());
             textView3.setText(item.getBusInfo2());
+            textView7.setText(item.getLineInfo());
             imageView.setImageResource(item.getImage());
             imageView2.setImageResource(item.getImage2());
             imageView3.setImageResource(item.getRail1());
@@ -197,6 +204,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             imageView6.setImageResource(item.getRailstop());
             imageView7.setImageResource(item.getTextrail());
             imageView8.setImageResource(item.getTextInfobox());
+            imageView9.setImageResource(item.getLineInfobox());
         }
     }
 
