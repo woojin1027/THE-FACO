@@ -8,9 +8,9 @@
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_smallt"
+        android:icon="@mipmap/ic_launcher"
         android:label="TheFaCo"
-        android:roundIcon="@mipmap/ic_smallt_round"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -40,8 +40,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
 
     </application>
 
