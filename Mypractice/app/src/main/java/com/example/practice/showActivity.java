@@ -517,7 +517,6 @@ public class showActivity extends AppCompatActivity
         }catch (Exception e){e.printStackTrace();}
     }
 
-
     //오퍼레이션 2 (버스도착정보항목조회)
     private void getBusArrivalItem(String station, String staorder)
     {

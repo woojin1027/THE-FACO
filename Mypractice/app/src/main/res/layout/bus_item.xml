@@ -187,6 +187,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="대기인원수"
                 android:textStyle="bold"
                 android:translationX="290dp"
