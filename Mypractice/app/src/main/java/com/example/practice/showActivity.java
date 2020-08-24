@@ -458,15 +458,14 @@ public class showActivity extends AppCompatActivity
             for(int i = 0; i < jarray.length(); i++)
             {
                 JSONObject obj = jarray.getJSONObject(i);
-                if(Integer.parseInt(obj.getString("ts")) ==4102 || Integer.parseInt(obj.getString("ts")) == 81004102)
+                if(Integer.parseInt(obj.getString("ts")) == 4102)
                 {
                     DBStationId.add(obj.getString("StationId"));
                     DBLineCnt.add(obj.getString("Detect_Number(People)"));
                     DBStaOrder.add(obj.getString("staorder"));
                 }
             }
-            DBStaOrder.set(1,3);
-            DBStaOrder.set(2,1);
+
             Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBLineCnt + " " + DBStaOrder);
         }catch(JSONException e){e.printStackTrace();}
     }

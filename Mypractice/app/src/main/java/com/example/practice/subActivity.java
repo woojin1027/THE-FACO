@@ -474,7 +474,7 @@ public class subActivity extends AppCompatActivity {
             for(int i = 0; i < jarray.length(); i++)
             {
                 JSONObject obj = jarray.getJSONObject(i);
-                if(Integer.parseInt(obj.getString("ts")) == 8100 || Integer.parseInt(obj.getString("ts")) == 81004102)
+                if(Integer.parseInt(obj.getString("ts")) == 8100)
                 {
                     DBStationId.add(obj.getString("StationId"));
                     DBLineCnt.add(obj.getString("Detect_Number(People)"));
