@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,6 +36,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
@@ -59,6 +61,7 @@ import java.util.List;
 import java.util.Locale;
 
 //https://movie13.tistory.com/1
+
 public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -76,11 +79,11 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
     TextView text;
     String data;
 
-    private Double db_x;
-    private Double db_y;
+    Double db_x;
+    Double db_y;
 
 
-/*여기부터 부가내용*/
+    /*여기부터 부가내용*/
 
     private AppCompatActivity mActivity;
 
@@ -104,9 +107,6 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             .setInterval(UPDATE_INTERVAL_MS)
             .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
-
-
-
 
 
     @Override
@@ -151,7 +151,8 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_search);
         mapFragment.getMapAsync(this);
-        getStationLocationList();
+        //getStationLocationList();
+        setDefaultLocation();
     }
 
 //    public void mOnClick(View v) {
@@ -181,14 +182,14 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
 //        }
 //    }
 
-
+/*
     String getStationLocationList() {
         StringBuffer buffer = new StringBuffer();
 
 
         String queryUrl = "http://openapi.gbis.go.kr/ws/rest/busstationservice"//요청 URL
                 + "?serviceKey=" + key
-                + "&keyword=" + aaaa;
+                + "&keyword=" + mytest_int;
 
         try {
             URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
@@ -258,17 +259,18 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
         //buffer.append("파싱 끝\n");
         return buffer.toString();
     }
+*/
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
 
-
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
-        setDefaultLocation();
+        //getStationLocationList();
+        //setDefaultLocation();
 
-        //mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
+        mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
@@ -276,7 +278,7 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
             @Override
             public boolean onMyLocationButtonClick() {
 
-                Log.d( tag, "onMyLocationButtonClick : 위치에 따른 카메라 이동 활성화");
+                Log.d(tag, "onMyLocationButtonClick : 위치에 따른 카메라 이동 활성화");
                 mMoveMapByAPI = true;
                 return true;
             }
@@ -312,26 +314,96 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
             @Override
             public void onCameraMove() {}
         });
-//        LatLng POINT = new LatLng(db_x, db_y);
-//        Log.d(tag ,"\n위도 : " + db_x + "\n경도 : " + db_y + "\n");
-//
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.position(POINT);
-//        markerOptions.title(aaaa);
-//        markerOptions.snippet(bbbb);
-//        googleMap.addMarker(markerOptions);
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(POINT));
-//        googleMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-    }
+    }//close onMapReady
+
 
     private void setDefaultLocation() {
         mMoveMapByUser = false;
 
+        StringBuffer buffer = new StringBuffer();
 
-        //디폴트 위치, Seoul
-        LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
-        String markerTitle = "위치정보 가져올 수 없음";
-        String markerSnippet = "위치 퍼미션과 GPS 활성 여부 확인하세요";
+        String queryUrl = "http://openapi.gbis.go.kr/ws/rest/busstationservice"//요청 URL
+                + "?serviceKey=" + key
+                + "&keyword=" + mytest_int;
+
+        //try를 시작도 못함
+        //개빡췬다
+        try {
+            URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
+            InputStream is = url.openStream(); //url위치로 입력스트림 연결
+
+            Log.d(tag, queryUrl);
+
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(is, "UTF-8")); //inputstream 으로부터 xml 입력받기
+            xpp.next();
+
+            int eventType = xpp.getEventType();
+            String tag = null;
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+                        Log.d(tag, "파싱 시작\n");
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        tag = xpp.getName();//태그 이름 얻어오기
+                        if (tag.equals("busStationList")) ;// 첫번째 검색결과
+//                        else if(tag.equals("mobileNo")) {
+//                            int a = xpp.next();
+//                            if (a != mytest_int) //mobileNo랑 다르면
+//                            {
+//                                //append하지 않음
+//
+//                                //근데 append의 반대가 뭘까.......
+//                                break;
+//                            }
+//
+//                        }
+                        else if (tag.equals("x")) {
+                            Log.d(tag, "위도 체크\n");
+
+                            buffer.append("위도 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            db_x = Double.parseDouble(xpp.getText());
+
+                            buffer.append("\n");
+
+                        } else if (tag.equals("y")) {
+                            Log.d(tag, "경도 체크\n");
+
+                            buffer.append("경도 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            db_y = Double.parseDouble(xpp.getText());
+                            buffer.append("\n");
+                        }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if (tag.equals("busStationList")) buffer.append("\n");// 첫번째 검색결과종료..줄바꿈
+                        break;
+                }
+
+                eventType = xpp.next();
+            }
+
+        } catch (Exception e) {
+            Log.d(tag, "에러발생");
+        }
+
+        //buffer.append("파싱 끝\n");
+
+        //디폴트 위치
+        LatLng DEFAULT_LOCATION = new LatLng(db_x, db_y);
+        String markerTitle = aaaa;
+        String markerSnippet = bbbb;
 
 
         if (currentMarker != null) currentMarker.remove();
@@ -511,8 +583,9 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
                 return;
             }
 
-//이거 수정해야함
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
+            //FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+            //이거 수정해야함
+            //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
             mRequestingLocationUpdates = true;
 
             mGoogleMap.setMyLocationEnabled(true);
@@ -596,8 +669,11 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
         Log.d(tag, "onLocationChanged : ");
 
         String markerTitle = getCurrentAddress(currentPosition);
-        String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
-                + " 경도:" + String.valueOf(location.getLongitude());
+        String markerSnippet = "위도:" + location.getLatitude()
+                + " 경도:" + location.getLongitude();
+
+        //String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
+        //                + " 경도:" + String.valueOf(location.getLongitude());
 
         //현재 위치에 마커 생성하고 이동
         setCurrentLocation(location, markerTitle, markerSnippet);
@@ -672,14 +748,10 @@ public class pathset_mapshow5 extends AppCompatActivity implements OnMapReadyCal
     }
 
     @Override
-    public void onProviderEnabled(String provider) {
-
-    }
+    public void onProviderEnabled(String provider) {    }
 
     @Override
-    public void onProviderDisabled(String provider) {
-
-    }
+    public void onProviderDisabled(String provider) {    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {

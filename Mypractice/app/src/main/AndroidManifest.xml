@@ -4,6 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:usesCleartextTraffic="true"
@@ -22,7 +24,6 @@
 
         <activity android:name=".pathSetting_start"/>
         <activity android:name=".pathSetting_end"/>
-        <activity android:name=".pathset_mapshow"/>
         <activity android:name=".pathset_mapshow2"/>
         <activity android:name=".pathset_mapshow3"/>
         <activity android:name=".pathset_mapshow4"/>
