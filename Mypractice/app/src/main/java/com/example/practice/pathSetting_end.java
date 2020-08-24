@@ -191,6 +191,31 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
         data_hashmap.put("정류소번호", "47683");
         data.add(data_hashmap);
 
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서현역");
+        data_hashmap.put("정류소번호", "07302");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서현역.AK플라자");
+        data_hashmap.put("정류소번호", "07169");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "이매촌한신.서현역.AK프라자");
+        data_hashmap.put("정류소번호", "07561");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "이매촌한신.서현역.AK프라자");
+        data_hashmap.put("정류소번호", "07168");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "남대문시장앞.이회영활동터");
+        data_hashmap.put("정류소번호", "02219");
+        data.add(data_hashmap);
+
         SimpleAdapter adapter = new SimpleAdapter(
                 getApplicationContext(), data,
                 android.R.layout.simple_list_item_2,
@@ -218,6 +243,7 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
                 return false;
             }
         });
+
 
         //주변 정류장 클릭시 이벤트
         nearby_stop.setOnClickListener(new View.OnClickListener() {
