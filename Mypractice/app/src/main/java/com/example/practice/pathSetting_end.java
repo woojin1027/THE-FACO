@@ -276,7 +276,7 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
                 map_detail = entry.getValue();
                 toastshow(view, map + "을(를) 선택하시겠습니까?");
 
-                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow5.class);
+                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow.class);
                 startActivity(intent);
             }
         });

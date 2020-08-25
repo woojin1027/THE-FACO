@@ -236,7 +236,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HashMap<String,String> item =(HashMap<String,String>)list_new.getItemAtPosition(position);
                 toastshow(view, item + "을(를) 선택하시겠습니까?");
-                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow2.class);
+                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow.class);
                 //정류장 위도경도 따서 지도에 띄우기
                 startActivity(intent);
             }

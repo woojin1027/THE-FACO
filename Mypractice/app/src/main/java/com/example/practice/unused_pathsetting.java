@@ -110,7 +110,7 @@ public class unused_pathsetting extends AppCompatActivity implements TextWatcher
             public void onClick(View v) {
                 selected_item = String.valueOf(searchBox.getText());
 
-                Intent intent = new Intent(unused_pathsetting.this, pathset_mapshow3.class);
+                Intent intent = new Intent(unused_pathsetting.this, pathset_mapshow.class);
                 try {
                     selected_item2 = URLEncoder.encode(selected_item, "utf-8");
                 } catch (UnsupportedEncodingException e) {
