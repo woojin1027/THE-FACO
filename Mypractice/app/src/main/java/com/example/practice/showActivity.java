@@ -227,15 +227,15 @@ public class showActivity extends AppCompatActivity
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + liststation2 + " " + result);
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + result);
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
                             if(j == 0)
                             {
-                                if(DBStaOrder.contains(j+1))
+                                if(DBStationId.contains(AllStationId.get(j)))
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop3,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(j+1)),R.drawable.woodicon));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop3,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStationId.indexOf(AllStationId.get(j))),R.drawable.woodicon));
                                 }
                                 else
                                 {
@@ -246,9 +246,9 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(listBusstop.contains(j))
                                 {
-                                    if(DBStaOrder.contains(j+1))
+                                    if(DBStationId.contains(AllStationId.get(j)))
                                     {
-                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop1,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(j+1)),R.drawable.woodicon));
+                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,R.drawable.rail1,0,0,R.drawable.railstop1,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStationId.indexOf(AllStationId.get(j))),R.drawable.woodicon));
                                     }
                                     else
                                     {
@@ -262,9 +262,9 @@ public class showActivity extends AppCompatActivity
                             }
                             else if(j == 21)
                             {
-                                if(DBStaOrder.contains(j+1))
+                                if(DBStationId.contains(AllStationId.get(j)))
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,0,R.drawable.returnrail,R.drawable.returnicon,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(j+1)),R.drawable.woodicon));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,0,R.drawable.returnrail,R.drawable.returnicon,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStationId.indexOf(AllStationId.get(j))),R.drawable.woodicon));
                                 }
                                 else
                                 {
@@ -275,9 +275,9 @@ public class showActivity extends AppCompatActivity
                             {
                                 if(listBusstop.contains(j))
                                 {
-                                    if(DBStaOrder.contains(j+1))
+                                    if(DBStationId.contains(AllStationId.get(j)))
                                     {
-                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop2,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(j+1)),R.drawable.woodicon));
+                                        adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop2,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStationId.indexOf(AllStationId.get(j))),R.drawable.woodicon));
                                     }
                                     else
                                     {
@@ -291,10 +291,10 @@ public class showActivity extends AppCompatActivity
                             }
                             else
                             {
-                                if(DBStaOrder.contains(j+1))
+                                if(DBStationId.contains(AllStationId.get(j)))
 
                                 {
-                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop3,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(j+1)),R.drawable.woodicon));
+                                    adapter.setItem(j,new Bus_items("" + listBus.get(j).toString(),null,"1번째 버스\n" + liststation1.get(j).toString() + "\n2번째 버스\n" + liststation2.get(j).toString(),0,0,0,R.drawable.rail2,0,R.drawable.railstop3,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStationId.indexOf(AllStationId.get(j))),R.drawable.woodicon));
                                 }
                                 else
                                 {
@@ -307,15 +307,15 @@ public class showActivity extends AppCompatActivity
                         {
                             if(Integer.parseInt(listBusseq.get(i).toString()) - 1 < 21)
                             {
-                                if(DBStaOrder.contains(Integer.parseInt(listBusseq.get(i).toString())))
+                                if(DBStaOrder.contains(listBusseq.get(i)))
                                 {
                                     if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                     {
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(Integer.parseInt(listBusseq.get(i).toString()))),R.drawable.woodicon));
+                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,R.drawable.rail1,0,0,0,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(listBusseq.get(i))),R.drawable.woodicon));
                                     }
                                     else
                                     {
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(Integer.parseInt(listBusseq.get(i).toString()))),R.drawable.woodicon));
+                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,R.drawable.rail1,0,0,0,R.drawable.textrail,R.drawable.textinfobox,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(listBusseq.get(i))),R.drawable.woodicon));
                                     }
                                 }
                                 else
@@ -333,16 +333,16 @@ public class showActivity extends AppCompatActivity
                             }
                             else if(Integer.parseInt(listBusseq.get(i).toString()) - 1 == 21)
                             {
-                                if(DBStaOrder.contains(Integer.parseInt(listBusseq.get(i).toString())))
+                                if(DBStaOrder.contains(listBusseq.get(i)))
                                 {
                                     if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                     {
 
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(Integer.parseInt(listBusseq.get(i).toString()))),R.drawable.woodicon));
+                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,0,R.drawable.returnrail,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(listBusseq.get(i))),R.drawable.woodicon));
                                     }
                                     else
                                     {
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(Integer.parseInt(listBusseq.get(i).toString()))),R.drawable.woodicon));
+                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,0,R.drawable.returnrail,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(listBusseq.get(i))),R.drawable.woodicon));
                                     }
                                 }
                                 else
@@ -361,16 +361,16 @@ public class showActivity extends AppCompatActivity
                             }
                             else
                             {
-                                if(DBStaOrder.contains(Integer.parseInt(listBusseq.get(i).toString())))
+                                if(DBStaOrder.contains(listBusseq.get(i)))
                                 {
                                     if(Integer.parseInt(listseatCnt.get(i).toString()) < 10)
                                     {
 
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(Integer.parseInt(listBusseq.get(i).toString()))),R.drawable.woodicon));
+                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote2,0,R.drawable.rail2,0,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(listBusseq.get(i))),R.drawable.woodicon));
                                     }
                                     else
                                     {
-                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(Integer.parseInt(listBusseq.get(i).toString()))),R.drawable.woodicon));
+                                        adapter.setItem(Integer.parseInt(listBusseq.get(i).toString()) - 1,new Bus_items("" + listBus.get(Integer.parseInt(listBusseq.get(i).toString()) - 1),"" + listseatCnt.get(i) + "석","1번째 버스\n" + liststation1.get(Integer.parseInt(listBusseq.get(i).toString())).toString() + "\n2번째 버스\n" + liststation2.get(Integer.parseInt(listBusseq.get(i).toString())).toString(),R.drawable.busicon,R.drawable.seatnote,0,R.drawable.rail2,0,0,R.drawable.textrail2,R.drawable.textinfobox2,"대기인원 수\n" + DBLineCnt.get(DBStaOrder.indexOf(listBusseq.get(i))),R.drawable.woodicon));
                                     }
                                 }
                                 else
@@ -458,13 +458,15 @@ public class showActivity extends AppCompatActivity
             for(int i = 0; i < jarray.length(); i++)
             {
                 JSONObject obj = jarray.getJSONObject(i);
-                if(Integer.parseInt(obj.getString("ts")) == 4102)
+                if(Integer.parseInt(obj.getString("ts")) == 4102 || Integer.parseInt(obj.getString("ts")) == 81004102)
                 {
                     DBStationId.add(obj.getString("StationId"));
                     DBLineCnt.add(obj.getString("Detect_Number(People)"));
                     DBStaOrder.add(obj.getString("staorder"));
                 }
             }
+            DBStaOrder.set(1,3);
+            DBStaOrder.set(2,1);
 
             Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBLineCnt + " " + DBStaOrder);
         }catch(JSONException e){e.printStackTrace();}
