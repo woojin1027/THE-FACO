@@ -4,13 +4,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_smallt"
+        android:icon="@mipmap/ic_launcher"
         android:label="TheFaCo"
-        android:roundIcon="@mipmap/ic_smallt_round"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -23,10 +25,6 @@
         <activity android:name=".pathSetting_start"/>
         <activity android:name=".pathSetting_end"/>
         <activity android:name=".pathset_mapshow"/>
-        <activity android:name=".pathset_mapshow2"/>
-        <activity android:name=".pathset_mapshow3"/>
-        <activity android:name=".pathset_mapshow4"/>
-        <activity android:name=".pathset_mapshow5"/>
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
         <activity android:name=".mapActivity" />
@@ -40,8 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
 
     </application>
 
