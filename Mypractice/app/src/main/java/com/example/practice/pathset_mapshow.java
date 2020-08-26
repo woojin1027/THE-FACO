@@ -243,12 +243,11 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setMyLocation(float_x,float_y,mGoogleMap);
+                        setMyLocation(float_x,float_y);
                     }
                 });
             }
         }).start();
-
 
         mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -302,13 +301,12 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
         mGoogleMap.addMarker(markerOptions);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Default_Location_test, 15);
         mGoogleMap.moveCamera(cameraUpdate);
-
-
     }
 
-    private void setMyLocation(Float x, Float y, GoogleMap googleMap) //내가 선택한 정류장 마커로 찍기
+    private void setMyLocation(Float x, Float y) //내가 선택한 정류장 마커로 찍기
     {
-        googleMap = mGoogleMap;
+        //, GoogleMap googleMap
+        //googleMap = mGoogleMap;
         mMoveMapByUser = false;
         x = float_x;
         y = float_y;
@@ -320,9 +318,9 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
                 .snippet(bbbb);
 
         //마커생성이 안됨 왤까 ㅇㅅㅇ..
-        currentMarker = googleMap.addMarker(markerOptions);
+        currentMarker = mGoogleMap.addMarker(markerOptions);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(myLocation, 15);
-        googleMap.moveCamera(cameraUpdate);
+        mGoogleMap.moveCamera(cameraUpdate);
         Log.d(tag, "근데 왜 마커를 못만들어 썅");
         //currentMarker = mGoogleMap.addMarker(markerOptions);
 
