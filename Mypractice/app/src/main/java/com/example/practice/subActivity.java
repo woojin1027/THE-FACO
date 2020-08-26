@@ -488,22 +488,22 @@ public class subActivity extends AppCompatActivity {
 
     private void DataCalculate()
     {
+        int first, second;
+        ArrayList sample = new ArrayList();
+        sample.clear();
         for(int i = 0; i < DBStationId.size(); i++)
             {
                 DBSeatcnt1.clear();
                 DBSeatcnt2.clear();
                 getBusArrivalItem(DBStationId.get(i).toString(), DBStaOrder.get(i).toString());
-                if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) > 0)
+                if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) >= 0)
                 {
-
-                }
-                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) == 0)
-                {
-
+                    sample.add("첫번째 버스 모두 탑승가능");
                 }
                 else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0)
                 {
-
+                    first = - Integer.parseInt(DBSeatcnt1.get(i).toString()) + Integer.parseInt(DBLineCnt.get(i).toString());   //첫번째 버스 탑승가능인원 수
+                    sample.add("첫번째 버스" + first + "명 탑승가능");
                 }
         }
 
