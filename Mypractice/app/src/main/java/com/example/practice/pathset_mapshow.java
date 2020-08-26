@@ -34,7 +34,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -58,7 +57,6 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
         LocationListener {
 
     pathSetting_end pathSetting_end = new pathSetting_end();
-    private Marker mPerth;
     private String tag;
     Float float_x;
     Float float_y;
@@ -66,10 +64,10 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
 
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
 
+
+    String aaaa = ((pathSetting_end) pathSetting_end.context).mytest_name;
     String bbbb = ((pathSetting_end) pathSetting_end.context).mytest;
     int mytest_int = Integer.parseInt(bbbb);
-    String aaaa = ((pathSetting_end) pathSetting_end.context).mytest_name;
-
 
     String data;
 
@@ -78,7 +76,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
     private AppCompatActivity mActivity;
 
     private GoogleApiClient mGoogleApiClient = null;
-    private GoogleMap mGoogleMap;
+    public GoogleMap mGoogleMap;
     private Marker currentMarker = null;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -120,21 +118,6 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map_search);
         mapFragment.getMapAsync(this);
 
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                //data = getStationLocationList();//아래 메소드를 호출하여 XML data를 파싱해서 String 객체로 얻어오기
-                getStationLocationList();
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                    }
-                });
-            }
-        }).start();
-
     }
 
 //    public void mOnClick(View v) {
@@ -165,9 +148,9 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
 //    }
 
 
-    public String getStationLocationList() {
+    public String getStationLocationList() //정류장 위도 경도 파싱
+    {
         StringBuffer buffer = new StringBuffer();
-
         String queryUrl = "http://openapi.gbis.go.kr/ws/rest/busstationservice"//요청 URL
                 + "?serviceKey=" + key
                 + "&keyword=" + mytest_int;
@@ -234,7 +217,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
         } catch (Exception e) {Log.d(tag, "에러발생"); }
         Log.d(tag, "위도 : " + float_x + "\n경도 : " + float_y);
         Log.d(tag, "파싱종료");
-
+//        setMyLocation(float_x,float_y,mGoogleMap);
         return buffer.toString();
     }
 
@@ -249,9 +232,25 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
         mGoogleMap = googleMap;
 
         //지도의 초기위치를 정류장으로 이동(해야되는데...)
-        setDefaultLocation(float_x, float_y);
+        //setDefaultLocation_test();
 
-        mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(tag,"쓰레드 테스트");
+                getStationLocationList();
+                //정류장 위도경도 조회
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setMyLocation(float_x,float_y,mGoogleMap);
+                    }
+                });
+            }
+        }).start();
+
+
+        mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
@@ -292,38 +291,41 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
         });
     }//close onMapReady
 
+    private void setDefaultLocation_test() //초기위치 : 서울 마커로 찍기
+    {
+        Log.d(tag,"디폴트 로케이션 테스트");
+        LatLng Default_Location_test = new LatLng(127,36);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(Default_Location_test);
+        markerOptions.title("테스트");
+        markerOptions.snippet("테스트입니다.");
+        mGoogleMap.addMarker(markerOptions);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Default_Location_test, 15);
+        mGoogleMap.moveCamera(cameraUpdate);
 
-    private void setDefaultLocation(Float x, Float y) {
 
+    }
+
+    private void setMyLocation(Float x, Float y, GoogleMap googleMap) //내가 선택한 정류장 마커로 찍기
+    {
+        googleMap = mGoogleMap;
         mMoveMapByUser = false;
         x = float_x;
         y = float_y;
-        Log.d(tag, "아니 여기까지 오긴하냐고 시발");
-        //디폴트 위치
-        LatLng Default_Location = new LatLng(x, y);
-        /*mPerth = mGoogleMap.addMarker(new MarkerOptions()
-                .position(Default_Location)
-                .title(aaaa)
-                .snippet(bbbb));
-*/
+        Log.d(tag, "받아온 위도 : "+ x + "   받아온 경도 : " + y);
+        LatLng myLocation = new LatLng(x, y);
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(Default_Location);
-        markerOptions.title(aaaa);
-        markerOptions.snippet(bbbb);
-        mGoogleMap.addMarker(markerOptions);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Default_Location, 15);
-        mGoogleMap.moveCamera(cameraUpdate);
-        Log.d(tag, "근데 왜 마커를 못만들어 썅");
+        markerOptions.position(myLocation)
+                .title(aaaa)
+                .snippet(bbbb);
+
         //마커생성이 안됨 왤까 ㅇㅅㅇ..
-
-
+        currentMarker = googleMap.addMarker(markerOptions);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(myLocation, 15);
+        googleMap.moveCamera(cameraUpdate);
+        Log.d(tag, "근데 왜 마커를 못만들어 썅");
         //currentMarker = mGoogleMap.addMarker(markerOptions);
 
-        /*mPerth = mGoogleMap.addMarker(new MarkerOptions()
-                .position(Default_Location)
-                .title(aaaa)
-                .snippet(bbbb));
-*/
         //mGoogleMap.addMarker(markerOptions);
         //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(Default_Location));
     }
@@ -376,7 +378,10 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
-
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
 
     @TargetApi(Build.VERSION_CODES.M)
     private void checkPermissions() {
