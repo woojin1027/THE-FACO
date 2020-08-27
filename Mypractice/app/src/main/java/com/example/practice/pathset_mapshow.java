@@ -21,9 +21,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -52,14 +52,14 @@ import static java.lang.String.format;
 //https://olsh1108o.tistory.com/entry/Android-Open-API-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%B6%80%EC%82%B0-%EB%B2%84%EC%8A%A4-%EC%96%B4%ED%94%8C-%EB%A7%8C%EB%93%A4%EA%B8%B0
 //https://movie13.tistory.com/1
 
-public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
+public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
     pathSetting_end pathSetting_end = new pathSetting_end();
     private String tag;
-    Float float_x;
-    Float float_y;
+    Double double_x;
+    Double double_y;
     String str_x, str_y;
 
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
@@ -69,15 +69,14 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
     String bbbb = ((pathSetting_end) pathSetting_end.context).mytest;
     int mytest_int = Integer.parseInt(bbbb);
 
-    String data;
 
     /*여기부터 부가내용*/
 
-    private AppCompatActivity mActivity;
+    private FragmentActivity mActivity;
 
-    private GoogleApiClient mGoogleApiClient = null;
-    public GoogleMap mGoogleMap;
-    private Marker currentMarker = null;
+    public GoogleApiClient mGoogleApiClient = null;
+    public GoogleMap gMap;
+    public Marker marker;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002;
@@ -86,7 +85,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
 
     boolean askPermissionOnceAgain = false;
     boolean mRequestingLocationUpdates = false;
-    Location mCurrentLocatiion;
+    Location mCurrentlocation;
     boolean mMoveMapByUser = true;
     boolean mMoveMapByAPI = true;
     LatLng currentPosition;
@@ -103,9 +102,9 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.map_search);
+        setContentView(R.layout.map_search2);
 
-        Log.d(tag, "onCreate");
+        Log.d(tag, "순서 1 : onCreate");
         mActivity = this;
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -115,45 +114,20 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_search);
+                .findFragmentById(R.id.map_search2);
         mapFragment.getMapAsync(this);
+        //getMapAsync()는 반드시 Main Thread에서 호출돼야한다
 
     }
-
-//    public void mOnClick(View v) {
-//
-//        switch (v.getId()) {
-//            case R.id.list_new:
-//
-//                new Thread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        data = getStationLocationList();//아래 메소드를 호출하여 XML data를 파싱해서 String 객체로 얻어오기
-//
-//
-//                        runOnUiThread(new Runnable() {
-//
-//                            @Override
-//                            public void run() {
-//                                text.setText(data); //TextView에 문자열  data 출력
-//                            }
-//                        });
-//
-//                    }
-//                }).start();
-//
-//                break;
-//        }
-//    }
 
 
     public String getStationLocationList() //정류장 위도 경도 파싱
     {
+        Log.d(tag,"순서 4 : 파싱");
         StringBuffer buffer = new StringBuffer();
         String queryUrl = "http://openapi.gbis.go.kr/ws/rest/busstationservice"//요청 URL
                 + "?serviceKey=" + key
-                + "&keyword=" + mytest_int;
+                + "&keyword=" + bbbb;
 
         try {
             URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
@@ -190,15 +164,14 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
                                 xpp.next();
                                 buffer.append(xpp.getText());
                                 str_x = xpp.getText();
-                                float_x = Float.parseFloat(str_x);
+                                double_x = Double.parseDouble(str_x);
                                 buffer.append("\n");
-
                         }
                         else if (tag.equals("y")) {
                                 xpp.next();
                                 buffer.append(xpp.getText());
                                 str_y = xpp.getText();
-                                float_y = Float.parseFloat(str_y);
+                                double_y = Double.parseDouble(str_y);
                                 buffer.append("\n");
                             }
                         break;
@@ -215,7 +188,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
             }
 
         } catch (Exception e) {Log.d(tag, "에러발생"); }
-        Log.d(tag, "위도 : " + float_x + "\n경도 : " + float_y);
+        Log.d(tag, "위도 : " + double_x + "\n경도 : " + double_y);
         Log.d(tag, "파싱종료");
 //        setMyLocation(float_x,float_y,mGoogleMap);
         return buffer.toString();
@@ -224,35 +197,43 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap)
-    //★ 중요 ★ 온맵이 먼저 실행 , 그다음이 온크리에이트
-    // 그래서 float_x,float_y가 null이 되는겨
-    // 긍까 setDefaultLocation은 그냥 서울 위도경도(숫자)로 하고
-    // 다른 void function 만들어서 마커 띄우게 해보기
     {
-        mGoogleMap = googleMap;
+        gMap = googleMap;
 
         //지도의 초기위치를 정류장으로 이동(해야되는데...)
-        //setDefaultLocation_test();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d(tag,"쓰레드 테스트");
-                getStationLocationList();
+                Log.d(tag,"순서 3 : 쓰레드 테스트");
+                getStationLocationList(); //순서 4 : 파싱
+                //setMyLocation(float_x,float_y);
+
                 //정류장 위도경도 조회
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setMyLocation(float_x,float_y);
+                        Log.d(tag, "run 내부");
+                        makemarker(gMap);
                     }
                 });
             }
         }).start();
 
-        mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
-        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
+
+        Log.d(tag, "순서 2 : 쓰레드 바깥");
+
+        gMap.getUiSettings().setZoomControlsEnabled(true);
+        gMap.getUiSettings().setMyLocationButtonEnabled(true);
+        gMap.animateCamera(CameraUpdateFactory.zoomTo(1));
+
+        LatLng myLocation = new LatLng(127.01, 38.02);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(myLocation);
+        marker = gMap.addMarker(markerOptions);
+
+
+        gMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
 
             @Override
             public boolean onMyLocationButtonClick() {
@@ -262,7 +243,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
                 return true;
             }
         });
-        mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
@@ -270,7 +251,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        mGoogleMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
+        gMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
 
             @Override
             public void onCameraMoveStarted(int i) {
@@ -283,49 +264,61 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+        gMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
 
             @Override
             public void onCameraMove() {}
         });
     }//close onMapReady
 
-    private void setDefaultLocation_test() //초기위치 : 서울 마커로 찍기
+    private void makemarker(GoogleMap googleMap) //마커찍기
     {
-        Log.d(tag,"디폴트 로케이션 테스트");
-        LatLng Default_Location_test = new LatLng(127,36);
+        gMap = googleMap;
+        Log.d(tag,"순서 5 : 정류장 마커찍기");
+        Log.d(tag, double_x +"와"+ double_y);
+
+        LatLng myLocation = new LatLng(7.946527,-1.023194);
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(Default_Location_test);
-        markerOptions.title("테스트");
-        markerOptions.snippet("테스트입니다.");
-        mGoogleMap.addMarker(markerOptions);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Default_Location_test, 15);
-        mGoogleMap.moveCamera(cameraUpdate);
+        markerOptions.position(myLocation);
+        gMap.addMarker(markerOptions);
+        marker = gMap.addMarker(markerOptions);
+
+
+        LatLng myLocation2 = new LatLng(double_x, double_y);
+        MarkerOptions markerOptions2 = new MarkerOptions();
+        markerOptions2.position(myLocation2);
+        gMap.addMarker(markerOptions2);
+        marker = gMap.addMarker(markerOptions2);
+
+        Log.d(tag,"순서 6 : 찍혀야되는데..");
     }
 
-    private void setMyLocation(Float x, Float y) //내가 선택한 정류장 마커로 찍기
+    private void setMyLocation(Double x, Double y) //내가 선택한 정류장 마커로 찍기
     {
-        //, GoogleMap googleMap
-        //googleMap = mGoogleMap;
         mMoveMapByUser = false;
-        x = float_x;
-        y = float_y;
+        x = double_x;
+        y = double_y;
         Log.d(tag, "받아온 위도 : "+ x + "   받아온 경도 : " + y);
+        //https://mailmail.tistory.com/19 마커 참고
+/*
         LatLng myLocation = new LatLng(x, y);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(myLocation)
                 .title(aaaa)
                 .snippet(bbbb);
-
+        //mGoogleMap.addMarker(markerOptions);
         //마커생성이 안됨 왤까 ㅇㅅㅇ..
-        currentMarker = mGoogleMap.addMarker(markerOptions);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(myLocation, 15);
-        mGoogleMap.moveCamera(cameraUpdate);
+
+        gMap.addMarker(markerOptions);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(myLocation, 1);
+
+        //currentMarker = mGoogleMap.addMarker(markerOptions);
+        gMap.moveCamera(cameraUpdate);
+        gMap.animateCamera(CameraUpdateFactory.zoomTo(1));
+        //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
         Log.d(tag, "근데 왜 마커를 못만들어 썅");
         //currentMarker = mGoogleMap.addMarker(markerOptions);
-
-        //mGoogleMap.addMarker(markerOptions);
-        //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(Default_Location));
+*/
     }
 
     @Override
@@ -501,7 +494,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
             //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
             mRequestingLocationUpdates = true;
 
-            mGoogleMap.setMyLocationEnabled(true);
+            gMap.setMyLocationEnabled(true);
 
         }
     }
@@ -516,28 +509,21 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
     private void stopLocationUpdates() {
 
         Log.d(tag,"stopLocationUpdates : LocationServices.FusedLocationApi.removeLocationUpdates");
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
+        //LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
         mRequestingLocationUpdates = false;
     }
 
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
 
         mMoveMapByUser = false;
-
-
-        if (currentMarker != null) currentMarker.remove();
-
+        //if (currentMarker != null) currentMarker.remove();
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(currentLatLng);
-        markerOptions.title(markerTitle);
-        markerOptions.snippet(markerSnippet);
-        markerOptions.draggable(true);
-
-
-        currentMarker = mGoogleMap.addMarker(markerOptions);
+        markerOptions.title("내위치");
+        marker = gMap.addMarker(markerOptions);
 
 
         if ( mMoveMapByAPI ) {
@@ -545,7 +531,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
             Log.d(tag, "setCurrentLocation :  mGoogleMap moveCamera "
                     + location.getLatitude() + " " + location.getLongitude() ) ;
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-            mGoogleMap.moveCamera(cameraUpdate);
+            gMap.moveCamera(cameraUpdate);
         }
     }
 
@@ -587,7 +573,7 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
         //현재 위치에 마커 생성하고 이동
         setCurrentLocation(location, markerTitle, markerSnippet);
 
-        mCurrentLocatiion = location;
+        mCurrentlocation = location;
     }
 
     private String getCurrentAddress(LatLng latlng) {
@@ -680,14 +666,14 @@ public class pathset_mapshow extends AppCompatActivity implements OnMapReadyCall
                     Log.d(tag, "onConnected : 퍼미션 가지고 있음");
                     Log.d(tag, "onConnected : call startLocationUpdates");
                     startLocationUpdates();
-                    mGoogleMap.setMyLocationEnabled(true);
+                    gMap.setMyLocationEnabled(true);
                 }
 
             }else{
 
                 Log.d(tag, "onConnected : call startLocationUpdates");
                 startLocationUpdates();
-                mGoogleMap.setMyLocationEnabled(true);
+                gMap.setMyLocationEnabled(true);
             }
         }
     }
