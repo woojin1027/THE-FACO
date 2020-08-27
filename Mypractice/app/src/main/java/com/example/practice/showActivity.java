@@ -225,10 +225,13 @@ public class showActivity extends AppCompatActivity
                 //오퍼레이션 3 버스도착정보조회
                 getArrInfoByRouteAllList();
 
+                //rest api 호출
                 getLineData();
 
+                //호출한 rest api JSON 값을 변환
                 JSONParser();
 
+                //대기인원 계산
                 DataCalculate();
 
                 //UI setText 하는 곳
@@ -479,6 +482,7 @@ public class showActivity extends AppCompatActivity
         }catch(JSONException e){e.printStackTrace();}
     }
 
+    //대기인원 수 계산
     private void DataCalculate()
     {
         Log.d(TAG, "버스도착정보항목조회 : " + DBStationId.size() + "번 호출");

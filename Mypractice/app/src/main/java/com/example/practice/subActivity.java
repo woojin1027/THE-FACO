@@ -496,6 +496,7 @@ public class subActivity extends AppCompatActivity {
         }catch(JSONException e){e.printStackTrace();}
     }
 
+    //대기인원 수 계산
     private void DataCalculate()
     {
         Log.d(TAG, "버스도착정보항목조회 : " + DBStationId.size() + "번 호출");
