@@ -606,7 +606,7 @@ public class subActivity extends AppCompatActivity {
         String stationUrl = endPoint1 + "?serviceKey=" + key1 + "&stationId=" + station + "&routeId=" + route + "&staOrder=" + staorder;
         //Log.d(TAG, "버스도착정보항목조회 : " + stationUrl);
 
-
+        String s = null;
         try
         {
             setUrlNParser(stationUrl);
@@ -624,6 +624,16 @@ public class subActivity extends AppCompatActivity {
                             xpp.next();
                             DBSeatcnt1.set(count,xpp.getText());
                         }
+//                        else if (tag.equals("predictTime2"))
+//                        {
+//                            xpp.next();
+//                            s = xpp.getText();
+//                            if(s == null)
+//                            {
+//                                DBSeatcnt2.set(count, -1);
+//                                continue;
+//                            }
+//                        }
                         else if(tag.equals("remainSeatCnt2"))
                         {
                             xpp.next();
@@ -640,6 +650,8 @@ public class subActivity extends AppCompatActivity {
                 eventType = xpp.next();
             }
         }catch (Exception e){e.printStackTrace();}
+
+        Log.d(TAG, "" + s);
     }
 
     //오퍼레이션 1 (버스위치정보목록조회)
