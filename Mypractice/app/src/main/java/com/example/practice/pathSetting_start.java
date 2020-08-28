@@ -1,5 +1,6 @@
 package com.example.practice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,12 +26,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 //해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 public class pathSetting_start extends AppCompatActivity implements TextWatcher{
+    String map_detail;
 
-    public String selected_item;
+    public String mytest;
+    public String mytest_name;
+
+    public static Context context;
+
     ListView list_new;
     ArrayList<HashMap<String, String>> data;
     HashMap<String, String> data_hashmap;
@@ -49,8 +56,6 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
 
         data = new ArrayList<HashMap<String, String>>();
-
-
 
         /*데이터 넣기 노가다 작업 시작지점*/
         //https://m.blog.naver.com/PostView.nhn?blogId=gi_balja&logNo=221162720020&proxyReferer=https:%2F%2Fwww.google.com%2F
@@ -181,6 +186,31 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
         data_hashmap.put("정류소번호", "47683");
         data.add(data_hashmap);
 
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서현역");
+        data_hashmap.put("정류소번호", "07302");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서현역.AK플라자");
+        data_hashmap.put("정류소번호", "07169");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "이매촌한신.서현역.AK프라자");
+        data_hashmap.put("정류소번호", "07561");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "이매촌한신.서현역.AK프라자");
+        data_hashmap.put("정류소번호", "07168");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "남대문시장앞.이회영활동터");
+        data_hashmap.put("정류소번호", "02219");
+        data.add(data_hashmap);
+
         SimpleAdapter adapter = new SimpleAdapter(
                 getApplicationContext(), data,
                 android.R.layout.simple_list_item_2,
@@ -225,8 +255,6 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
             public void onClick(View v) {
                 list_new.setVisibility(View.VISIBLE);
                 toastshow(v, "검색 결과");
-//                selected_item = (String)parent.getItemAtPosition(position);
-////                toastshow(v, selected_item);
             }
         });
 
@@ -234,13 +262,18 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
         list_new.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HashMap<String,String> item =(HashMap<String,String>)list_new.getItemAtPosition(position);
-                toastshow(view, item + "을(를) 선택하시겠습니까?");
-                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow.class);
+                HashMap<String,String> map =(HashMap<String,String>)list_new.getItemAtPosition(position);
+                Map.Entry<String,String> entry = map.entrySet().iterator().next();
+                mytest = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
+                mytest_name = map.get("정류장명");
+
+                map_detail = entry.getValue();
+                Intent intent = new Intent(pathSetting_start.this, pathset_mapshow_start.class);
                 //정류장 위도경도 따서 지도에 띄우기
                 startActivity(intent);
             }
         });
+        context = this;
     }
 
 

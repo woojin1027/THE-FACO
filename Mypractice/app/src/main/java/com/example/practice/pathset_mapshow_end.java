@@ -55,7 +55,7 @@ import static java.lang.String.format;
 
 //도착지 설정 시 지도 띄우는 class
 
-public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
+public class pathset_mapshow_end extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
@@ -263,13 +263,39 @@ public class pathset_mapshow extends FragmentActivity implements OnMapReadyCallb
             @Override
             public void onCameraMove() {}
         });
+
+        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (marker.equals(marker)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(pathset_mapshow_end.this);
+                    builder.setTitle("출발지 설정");
+                    builder.setMessage(aaaa + "를 선택하시겠습니까?");
+                    builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //예 눌렀을때의 이벤트 처리
+                        }
+                    });
+                    builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //아니오 눌렀을때의 이벤트 처리
+                        }
+                    });
+                    builder.show();
+                }
+                return true;
+            }
+        });
+
     }//close onMapReady
 
     private void makemarker(GoogleMap googleMap) //마커찍기
     {
         gMap = googleMap;
         Log.d(tag,"순서 5 : 정류장 마커찍기");
-        Log.d(tag, "위도 : " + double_y + "\n경도 : " +double_x);
+        Log.d(tag,"위도 : " +double_x + "\n경도 : " + double_y);
 
         LatLng myLocation = new LatLng(double_x, double_y);
         MarkerOptions markerOptions = new MarkerOptions();
