@@ -33,13 +33,10 @@
         <TextView
             android:id="@+id/txtText"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
             android:alpha="0.87"
-            android:fontFamily="@font/font_tt_together"
             android:gravity="left"
-            android:text="@string/name_story"
             android:textColor="#000"
             android:textSize="15sp" />
     </LinearLayout>

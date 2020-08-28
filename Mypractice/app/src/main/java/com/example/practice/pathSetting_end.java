@@ -31,7 +31,6 @@ import java.util.Map;
 //해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 public class pathSetting_end extends AppCompatActivity implements TextWatcher{
-    String map_detail;
     public String selected_item;
     public String mytest;
     public String mytest_name;
@@ -267,8 +266,6 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
                 Map.Entry<String,String> entry = map.entrySet().iterator().next();
                 mytest = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
                 mytest_name = map.get("정류장명");
-
-                map_detail = entry.getValue();
                 Intent intent = new Intent(pathSetting_end.this, pathset_mapshow_end.class);
                 startActivity(intent);
             }
