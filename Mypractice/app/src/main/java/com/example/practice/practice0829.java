@@ -41,16 +41,16 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
+//주변 정류장 띄우기 연습
 public class practice0829 extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
 
-    private GoogleMap mMap;
+    private GoogleMap gMap;
     private Marker currentMarker = null;
 
-    private static final String TAG = "googlemap_example";
+    private static final String tag = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
@@ -65,7 +65,7 @@ public class practice0829 extends AppCompatActivity
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
-    Location mCurrentLocatiion;
+    Location mCurrentLocation;
     LatLng currentPosition;
 
 
@@ -110,9 +110,9 @@ public class practice0829 extends AppCompatActivity
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        Log.d(TAG, "onMapReady :");
+        Log.d(tag, "onMapReady :");
 
-        mMap = googleMap;
+        gMap = googleMap;
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
@@ -166,14 +166,14 @@ public class practice0829 extends AppCompatActivity
         }
 
 
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        gMap.getUiSettings().setMyLocationButtonEnabled(true);
+        gMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
 
-                Log.d(TAG, "onMapClick :");
+                Log.d(tag, "onMapClick :");
             }
         });
     }
@@ -197,13 +197,13 @@ public class practice0829 extends AppCompatActivity
                 String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
                         + " 경도:" + String.valueOf(location.getLongitude());
 
-                Log.d(TAG, "onLocationResult : " + markerSnippet);
+                Log.d(tag, "onLocationResult : " + markerSnippet);
 
 
                 //현재 위치에 마커 생성하고 이동
                 setCurrentLocation(location, markerTitle, markerSnippet);
 
-                mCurrentLocatiion = location;
+                mCurrentLocation = location;
             }
 
 
@@ -216,7 +216,7 @@ public class practice0829 extends AppCompatActivity
 
         if (!checkLocationServicesStatus()) {
 
-            Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
+            Log.d(tag, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
         } else {
 
@@ -229,17 +229,17 @@ public class practice0829 extends AppCompatActivity
             if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
                     hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) {
 
-                Log.d(TAG, "startLocationUpdates : 퍼미션 안가지고 있음");
+                Log.d(tag, "startLocationUpdates : 퍼미션 안가지고 있음");
                 return;
             }
 
 
-            Log.d(TAG, "startLocationUpdates : call mFusedLocationClient.requestLocationUpdates");
+            Log.d(tag, "startLocationUpdates : call mFusedLocationClient.requestLocationUpdates");
 
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
             if (checkPermission())
-                mMap.setMyLocationEnabled(true);
+                gMap.setMyLocationEnabled(true);
 
         }
 
@@ -250,15 +250,15 @@ public class practice0829 extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        Log.d(TAG, "onStart");
+        Log.d(tag, "onStart");
 
         if (checkPermission()) {
 
-            Log.d(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
+            Log.d(tag, "onStart : call mFusedLocationClient.requestLocationUpdates");
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
-            if (mMap != null)
-                mMap.setMyLocationEnabled(true);
+            if (gMap != null)
+                gMap.setMyLocationEnabled(true);
 
         }
 
@@ -273,7 +273,7 @@ public class practice0829 extends AppCompatActivity
 
         if (mFusedLocationClient != null) {
 
-            Log.d(TAG, "onStop : call stopLocationUpdates");
+            Log.d(tag, "onStop : call stopLocationUpdates");
             mFusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
@@ -338,10 +338,10 @@ public class practice0829 extends AppCompatActivity
         markerOptions.draggable(true);
 
 
-        currentMarker = mMap.addMarker(markerOptions);
+        currentMarker = gMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        mMap.moveCamera(cameraUpdate);
+        gMap.moveCamera(cameraUpdate);
 
     }
 
@@ -352,7 +352,7 @@ public class practice0829 extends AppCompatActivity
         //디폴트 위치, Seoul
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
         String markerTitle = "위치정보 가져올 수 없음";
-        String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
+        String markerSnippet = "위치 퍼미션과 GPS 활성 여부를 확인하세요";
 
 
         if (currentMarker != null) currentMarker.remove();
@@ -363,10 +363,10 @@ public class practice0829 extends AppCompatActivity
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        currentMarker = mMap.addMarker(markerOptions);
+        currentMarker = gMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
-        mMap.moveCamera(cameraUpdate);
+        gMap.moveCamera(cameraUpdate);
 
     }
 
@@ -495,7 +495,7 @@ public class practice0829 extends AppCompatActivity
                 if (checkLocationServicesStatus()) {
                     if (checkLocationServicesStatus()) {
 
-                        Log.d(TAG, "onActivityResult : GPS 활성화 되있음");
+                        Log.d(tag, "onActivityResult : GPS 활성화 되있음");
 
 
                         needRequest = true;
@@ -508,5 +508,3 @@ public class practice0829 extends AppCompatActivity
         }
     }
 }
-
-

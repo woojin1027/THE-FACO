@@ -41,7 +41,7 @@
             android:id="@+id/list_new"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/ibm_medium"
+            android:fontFamily="@font/font_goyang"
             android:visibility="visible" />
 
         <Button
