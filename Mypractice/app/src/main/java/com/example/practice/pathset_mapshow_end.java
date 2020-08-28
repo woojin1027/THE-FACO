@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,7 +17,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -269,7 +275,7 @@ public class pathset_mapshow_end extends FragmentActivity implements OnMapReadyC
             public boolean onMarkerClick(Marker marker) {
                 if (marker.equals(marker)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(pathset_mapshow_end.this);
-                    builder.setTitle("출발지 설정");
+                    builder.setTitle("도착지 설정");
                     builder.setMessage(aaaa + "를 선택하시겠습니까?");
                     builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
                         @Override
@@ -405,8 +411,6 @@ public class pathset_mapshow_end extends FragmentActivity implements OnMapReadyC
                     Log.d(tag, "onRequestPermissionsResult : mGoogleApiClient connect");
                     mGoogleApiClient.connect();
                 }
-
-
 
             } else {
 
@@ -681,4 +685,18 @@ public class pathset_mapshow_end extends FragmentActivity implements OnMapReadyC
         Log.d(tag, "onConnectionFailed");
         //setDefaultLocation();
     }
+
+    public void toastshow(String string) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate( R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+        TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(this);
+        text.setText(string);
+        text.setTextSize(15);
+        text.setTextColor(Color.WHITE);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show(); }
+
 }

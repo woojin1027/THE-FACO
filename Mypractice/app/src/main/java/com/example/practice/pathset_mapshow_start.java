@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,7 +17,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,7 +64,7 @@ import static java.lang.String.format;
 public class pathset_mapshow_start extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-
+    Frag2 Frag2 = new Frag2();
     pathSetting_start pathSetting_start = new pathSetting_start();
     private String tag;
     Double double_x; //경도
@@ -67,6 +73,8 @@ public class pathset_mapshow_start extends FragmentActivity implements OnMapRead
 
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
 
+    //TextView getTextView = Frag2.setting1;
+    TextView textView;
     String aaaa = ((pathSetting_start) pathSetting_start.context).mytest_name;
     String bbbb = ((pathSetting_start) pathSetting_start.context).mytest;
     int mytest_int = Integer.parseInt(bbbb);
@@ -275,6 +283,16 @@ public class pathset_mapshow_start extends FragmentActivity implements OnMapRead
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //예 눌렀을때의 이벤트 처리
+                            //getTextView.setText(aaaa);
+                            //textView = findViewById(R.id.textview_setting1);
+                            //textView.setText(aaaa);
+                            //텍스트 바꾸고..싶은데 어케 바꾸누ㅡㅡ
+
+                            toastshow("출발지를 설정하였습니다.\n도착지를 설정해주세요!");
+
+                            Intent intent = new Intent(pathset_mapshow_start.this, pathSetting_end.class);
+                            startActivity(intent);
+                            //돌아가기
                         }
                     });
                     builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
@@ -682,4 +700,17 @@ public class pathset_mapshow_start extends FragmentActivity implements OnMapRead
         Log.d(tag, "onConnectionFailed");
         //setDefaultLocation();
     }
+
+    public void toastshow(String string) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate( R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+        TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(this);
+        text.setText(string);
+        text.setTextSize(15);
+        text.setTextColor(Color.WHITE);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show(); }
 }
