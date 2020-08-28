@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 //8100번 버스의 자바 파일
 public class subActivity extends AppCompatActivity {
@@ -56,8 +57,10 @@ public class subActivity extends AppCompatActivity {
     private ArrayList DBStaOrder;
     private ArrayList DBSeatcnt1;
     private ArrayList DBSeatcnt2;
+    private ArrayList BusNum1;
+    private ArrayList BusNum2;
 
-    private ArrayList CalStaOrder;
+    private ArrayList<Integer> CalStaOrder;
     private ArrayList CalculData;
     private ArrayList CalculData2;
 
@@ -510,7 +513,7 @@ public class subActivity extends AppCompatActivity {
         int first = 0, second = 0;
         CalculData = new ArrayList();
         CalculData2 = new ArrayList();
-        CalStaOrder = new ArrayList();
+        CalStaOrder = new ArrayList<>();
         CalStaOrder.clear();
         CalculData.clear();
         CalculData2.clear();
@@ -526,13 +529,13 @@ public class subActivity extends AppCompatActivity {
             CalculData.add("");
             DBSeatcnt1.add(-1);
             DBSeatcnt2.add(-1);
+            CalStaOrder.add(Integer.parseInt(DBStaOrder.get(i).toString()));
         }
+        //Collections.sort(CalStaOrder);
 
         for(int i = 0; i < DBStationId.size(); i++)
         {
             getBusArrivalItem(DBStationId.get(i).toString(), DBStaOrder.get(i).toString(), i);
-            CalStaOrder.add(DBStaOrder.get(i));
-
             //파싱값이 존재하지않을 때 -1 로 채워넣는다
             if(examine.get(i) == null)
             {
@@ -579,10 +582,8 @@ public class subActivity extends AppCompatActivity {
                 }
             }
         }
-        Log.d(TAG,"대기인원 계산" + CalculData + " " + CalculData2 + DBSeatcnt1 + DBSeatcnt2);
+        Log.d(TAG,"대기인원 계산" + CalculData + " " + CalculData2 + DBSeatcnt1 + DBSeatcnt2 + CalStaOrder);
     }
-
-
 
     //오퍼레이션 3 (버스도착정보항목조회)
     private void getArrInfoByRouteAllList()
@@ -647,10 +648,16 @@ public class subActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busArrivalList"));  //첫번째 검색 결과
+                        else if(tag.equals("plateNo1"))
+                        {
+                            xpp.next();
+                            BusNum1.set(count,xpp.getText());
+                        }
                         else if(tag.equals("plateNo2"))
                         {
                             xpp.next();
                             examine.set(count,xpp.getText());
+                            BusNum2.set(count,xpp.getText());
                         }
                         else if(tag.equals("remainSeatCnt1"))
                         {
@@ -662,6 +669,7 @@ public class subActivity extends AppCompatActivity {
                             xpp.next();
                             DBSeatcnt2.set(count,xpp.getText());
                         }
+
                         break;
                     case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
                         break;
