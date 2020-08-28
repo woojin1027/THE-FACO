@@ -5,12 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,11 +18,9 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 
 //8100번 버스의 자바 파일
 public class subActivity extends AppCompatActivity {
@@ -586,6 +581,8 @@ public class subActivity extends AppCompatActivity {
         }
         Log.d(TAG,"대기인원 계산" + CalculData + " " + CalculData2 + DBSeatcnt1 + DBSeatcnt2);
     }
+
+
 
     //오퍼레이션 3 (버스도착정보항목조회)
     private void getArrInfoByRouteAllList()

@@ -1,10 +1,8 @@
 package com.example.practice;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -249,7 +247,7 @@ public class showActivity extends AppCompatActivity
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + result);
+                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1 + " " + result);
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
