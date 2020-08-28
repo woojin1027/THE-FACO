@@ -57,8 +57,8 @@ public class subActivity extends AppCompatActivity {
     private ArrayList DBStaOrder;
     private ArrayList DBSeatcnt1;
     private ArrayList DBSeatcnt2;
-    private ArrayList BusNum1;
-    private ArrayList BusNum2;
+    private ArrayList Buslocation1 = new ArrayList();
+    private ArrayList Buslocation2 = new ArrayList();
 
     private ArrayList<Integer> CalStaOrder;
     private ArrayList CalculData;
@@ -510,7 +510,6 @@ public class subActivity extends AppCompatActivity {
     {
         Log.d(TAG, "버스도착정보항목조회 : " + DBStationId.size() + "번 호출");
 
-        int first = 0, second = 0;
         CalculData = new ArrayList();
         CalculData2 = new ArrayList();
         CalStaOrder = new ArrayList<>();
@@ -519,6 +518,8 @@ public class subActivity extends AppCompatActivity {
         CalculData2.clear();
         DBSeatcnt1.clear();
         DBSeatcnt2.clear();
+        Buslocation1.clear();
+        Buslocation2.clear();
         examine.clear();
 
         //for 문을 돌리기 위해 강제로 각각 리스트 인덱스에 빈 값을 추가
@@ -529,9 +530,11 @@ public class subActivity extends AppCompatActivity {
             CalculData.add("");
             DBSeatcnt1.add(-1);
             DBSeatcnt2.add(-1);
+            Buslocation1.add(-1);
+            Buslocation2.add(-1);
             CalStaOrder.add(Integer.parseInt(DBStaOrder.get(i).toString()));
         }
-        //Collections.sort(CalStaOrder);
+        Collections.sort(CalStaOrder);
 
         for(int i = 0; i < DBStationId.size(); i++)
         {
@@ -542,43 +545,107 @@ public class subActivity extends AppCompatActivity {
                 DBSeatcnt2.set(i, -1);
             }
 
-            if(DBSeatcnt1.get(i).equals(-1) && DBSeatcnt2.get(i).equals(-1))
+            if(DBSeatcnt1.get(i).equals(-1) && DBSeatcnt2.get(i).equals(-1) && Buslocation1.get(i).equals(-1) && Buslocation2.get(i).equals(-1))
             {
                 CalculData.set(i,"");
                 CalculData2.set(i,"");
             }
-            else if(DBSeatcnt2.get(i).equals(-1))
+            else if(DBSeatcnt2.get(i).equals(-1) || Buslocation2.get(i).equals(-1))
             {
                 CalculData2.set(i,"");
-                if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) >= 0)
+                for(int j = 0; j <= i ; j++)
                 {
-                    CalculData.set(i,"(모든인원 탑승가능)");
+                    int first = 0;
+                    //대기인원이 있는 정류장들의 각각의 첫번째 오는 버스가 같은 버스일 때
+                    if(Buslocation1.get(i) == Buslocation1.get(j))
+                    {
+                        first = first - Integer.parseInt(DBLineCnt.get(j).toString());
+                        if(Integer.parseInt(DBSeatcnt1.get(i).toString()) + first >= 0)
+                        {
+                            if(j == i)
+                            {
+                                CalculData.set(i,"(모든인원 탑승가능)");
+                            }
+                        }
+                        else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < 0)
+                        {
+                            if(j == i)
+                            {
+                                first = Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                CalculData.set(i,"(" + first + "명 탑승가능)");
+                            }
+                        }
+                    }
                 }
-                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0)
-                {
-                    first = Integer.parseInt(DBSeatcnt1.get(i).toString());   //첫번째 버스 탑승가능인원 수
-                    CalculData.set(i,"(" + first + "명 탑승가능)");
-                }
+
             }
             else
             {
-                if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) >= 0)
+                for(int j = 0; j <= i ; j++)
                 {
-                    CalculData.set(i,"(모든인원 탑승가능)");
-                }
-                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) >= 0)
-                {
-                    first = Integer.parseInt(DBSeatcnt1.get(i).toString());   //첫번째 버스 탑승가능인원 수
-                    CalculData.set(i,"(" + first + "명 탑승가능)");
-                    CalculData2.set(i,"(나머지인원 탑승가능)");
-                }
-                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0)
-                {
-                    first = Integer.parseInt(DBSeatcnt1.get(i).toString());   //첫번째 버스 탑승가능인원 수
-                    second = Integer.parseInt(DBSeatcnt2.get(i).toString());    //두번째 버스 탑승가능인원 수
-                    CalculData.set(i,"(" + first + "명 탑승가능)");
-                    CalculData2.set(i,"(나머지" + second + "명 탑승가능)");
+                    int first = 0, second = 0;
 
+                    //대기인원이 있는 정류장들의 각각의 첫번째 오는 버스가 같은 버스일 때
+                    if (Buslocation1.get(i) == Buslocation1.get(j) || Buslocation2.get(i) == Buslocation2.get(j))
+                    {
+                        first = first - Integer.parseInt(DBLineCnt.get(j).toString()); //대기인원 수 세기
+                        if (Integer.parseInt(DBSeatcnt1.get(i).toString()) + first >= 0)
+                        {
+                            if(j == i)
+                            {
+                                CalculData.set(i, "(모든인원 탑승가능)");
+                            }
+                        }
+                        else if (Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + Integer.parseInt(DBSeatcnt1.get(i).toString()) + first >= 0)
+                        {
+                            if(j == i)
+                            {
+                                first = Integer.parseInt(DBSeatcnt1.get(i).toString()) + first - Integer.parseInt(DBLineCnt.get(j).toString());
+                                CalculData.set(i, "(" + first + "명 탑승가능)");
+                                CalculData2.set(i, "(나머지인원 탑승가능)");
+                            }
+                        }
+                        else if (Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < 0)
+                        {
+                            if(j == i)
+                            {
+                                first = Integer.parseInt(DBSeatcnt1.get(i).toString()) + first - Integer.parseInt(DBLineCnt.get(j).toString());
+                                second = Integer.parseInt(DBSeatcnt2.get(i).toString());    //두번째 버스 탑승가능인원 수
+                                CalculData.set(i, "(" + first + "명 탑승가능)");
+                                CalculData2.set(i, "(나머지" + second + "명 탑승가능)");
+                            }
+                        }
+                    }
+                    //대기인원이 있는 정류장들의 각각의 첫번째 오는 버스와 두번째 오늘 버스가 같은 버스일 때
+                    else if (Buslocation2.get(i) == Buslocation1.get(j))
+                    {
+                        second = second - Integer.parseInt(DBLineCnt.get(j).toString()); //대기인원 수 세기
+                        if (Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) >= 0)
+                        {
+                            if(j == i)
+                            {
+                                CalculData.set(i, "(모든인원 탑승가능)");
+                            }
+                        }
+                        else if (Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0 && Integer.parseInt(DBSeatcnt1.get(j).toString()) - Integer.parseInt(DBLineCnt.get(j).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) >= 0)
+                        {
+                            if(j == i)
+                            {
+                                CalculData.set(i, "(" + Integer.parseInt(DBSeatcnt1.get(i).toString()) + "명 탑승가능)");
+                                CalculData2.set(i, "(나머지인원 탑승가능)");
+                            }
+                        }
+                        else if (Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0 && Integer.parseInt(DBSeatcnt1.get(j).toString()) - Integer.parseInt(DBLineCnt.get(j).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0)
+                        {
+
+                            if(j == i)
+                            {
+                                second  = Integer.parseInt(DBSeatcnt2.get(i).toString()) + second + Integer.parseInt(DBLineCnt.get(i).toString());
+                                CalculData.set(i, "(" + Integer.parseInt(DBSeatcnt1.get(i).toString()) + "명 탑승가능)");
+                                CalculData2.set(i, "(나머지" + second + "명 탑승가능)");
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -648,16 +715,20 @@ public class subActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busArrivalList"));  //첫번째 검색 결과
-                        else if(tag.equals("plateNo1"))
+                        else if(tag.equals("locationNo1"))
                         {
                             xpp.next();
-                            BusNum1.set(count,xpp.getText());
+                            Buslocation1.set(count,xpp.getText());
+                        }
+                        else if(tag.equals("locationNo2"))
+                        {
+                            xpp.next();
+                            Buslocation2.set(count,xpp.getText());
                         }
                         else if(tag.equals("plateNo2"))
                         {
                             xpp.next();
                             examine.set(count,xpp.getText());
-                            BusNum2.set(count,xpp.getText());
                         }
                         else if(tag.equals("remainSeatCnt1"))
                         {
