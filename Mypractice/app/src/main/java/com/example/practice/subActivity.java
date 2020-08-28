@@ -66,6 +66,8 @@ public class subActivity extends AppCompatActivity {
     private ArrayList CalculData;
     private ArrayList CalculData2;
 
+    private ArrayList examine = new ArrayList();
+
     BusitemAdapter2 adapter = new BusitemAdapter2();
 
     int []BusstopArr = new int[]{1,2,3,4,6,8,9,18,21,22,23,24,27,29,30,33,42,43,44,45,46,47};
@@ -170,6 +172,15 @@ public class subActivity extends AppCompatActivity {
             @Override
             public void onRefresh()
             {
+                liststation1.clear();
+                liststation2.clear();
+                listBusseq.clear();
+                liststationId.clear();
+                listseatCnt.clear();
+                AllStationId.clear();
+                DBSeatcnt1.clear();
+                DBSeatcnt2.clear();
+
                 init();
 
                 //2~3번 눌러야 바뀔 확률이 높기 때문에 notifyDataSetchanged() 를 세번 호출
@@ -484,11 +495,11 @@ public class subActivity extends AppCompatActivity {
             for(int i = 0; i < jarray.length(); i++)
             {
                 JSONObject obj = jarray.getJSONObject(i);
-                if(Integer.parseInt(obj.getString("ts")) == 8100 || Integer.parseInt(obj.getString("ts")) == 81004102)
+                if(Integer.parseInt(obj.getString("BusNumber")) == 8100 || Integer.parseInt(obj.getString("BusNumber")) == 81004102)
                 {
                     DBStationId.add(obj.getString("StationId"));
                     DBLineCnt.add(obj.getString("Detect_Number(People)"));
-                    DBStaOrder.add(obj.getString("staorder"));
+                    DBStaOrder.add(obj.getString("Staorder"));
                 }
             }
 
@@ -510,10 +521,12 @@ public class subActivity extends AppCompatActivity {
         CalculData2.clear();
         DBSeatcnt1.clear();
         DBSeatcnt2.clear();
+        examine.clear();
 
         //for 문을 돌리기 위해 강제로 각각 리스트 인덱스에 빈 값을 추가
         for(int i = 0; i < DBStationId.size(); i++)
         {
+            examine.add("");
             CalculData2.add("");
             CalculData.add("");
             DBSeatcnt1.add(-1);
@@ -524,10 +537,30 @@ public class subActivity extends AppCompatActivity {
         {
             getBusArrivalItem(DBStationId.get(i).toString(), DBStaOrder.get(i).toString(), i);
             CalStaOrder.add(DBStaOrder.get(i));
-            if(Integer.parseInt(DBSeatcnt1.get(i).toString()) == -1  || Integer.parseInt(DBSeatcnt2.get(i).toString()) == -1)
+
+            //파싱값이 존재하지않을 때 -1 로 채워넣는다
+            if(examine.get(i) == null)
+            {
+                DBSeatcnt2.set(i, -1);
+            }
+
+            if(DBSeatcnt1.get(i).equals(-1) && DBSeatcnt2.get(i).equals(-1))
             {
                 CalculData.set(i,"");
                 CalculData2.set(i,"");
+            }
+            else if(DBSeatcnt2.get(i).equals(-1))
+            {
+                CalculData2.set(i,"");
+                if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) >= 0)
+                {
+                    CalculData.set(i,"(모든인원 탑승가능)");
+                }
+                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) - Integer.parseInt(DBLineCnt.get(i).toString()) < 0)
+                {
+                    first = Integer.parseInt(DBSeatcnt1.get(i).toString());   //첫번째 버스 탑승가능인원 수
+                    CalculData.set(i,"(" + first + "명 탑승가능)");
+                }
             }
             else
             {
@@ -547,10 +580,10 @@ public class subActivity extends AppCompatActivity {
                     second = Integer.parseInt(DBSeatcnt2.get(i).toString());    //두번째 버스 탑승가능인원 수
                     CalculData.set(i,"(" + first + "명 탑승가능)");
                     CalculData2.set(i,"(나머지" + second + "명 탑승가능)");
+
                 }
             }
         }
-
         Log.d(TAG,"대기인원 계산" + CalculData + " " + CalculData2 + DBSeatcnt1 + DBSeatcnt2);
     }
 
@@ -604,9 +637,7 @@ public class subActivity extends AppCompatActivity {
     private void getBusArrivalItem(String station, String staorder, int count)
     {
         String stationUrl = endPoint1 + "?serviceKey=" + key1 + "&stationId=" + station + "&routeId=" + route + "&staOrder=" + staorder;
-        //Log.d(TAG, "버스도착정보항목조회 : " + stationUrl);
 
-        String s = null;
         try
         {
             setUrlNParser(stationUrl);
@@ -619,21 +650,16 @@ public class subActivity extends AppCompatActivity {
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
                         if(tag.equals("busArrivalList"));  //첫번째 검색 결과
+                        else if(tag.equals("plateNo2"))
+                        {
+                            xpp.next();
+                            examine.set(count,xpp.getText());
+                        }
                         else if(tag.equals("remainSeatCnt1"))
                         {
                             xpp.next();
                             DBSeatcnt1.set(count,xpp.getText());
                         }
-//                        else if (tag.equals("predictTime2"))
-//                        {
-//                            xpp.next();
-//                            s = xpp.getText();
-//                            if(s == null)
-//                            {
-//                                DBSeatcnt2.set(count, -1);
-//                                continue;
-//                            }
-//                        }
                         else if(tag.equals("remainSeatCnt2"))
                         {
                             xpp.next();
@@ -650,8 +676,6 @@ public class subActivity extends AppCompatActivity {
                 eventType = xpp.next();
             }
         }catch (Exception e){e.printStackTrace();}
-
-        Log.d(TAG, "" + s);
     }
 
     //오퍼레이션 1 (버스위치정보목록조회)
