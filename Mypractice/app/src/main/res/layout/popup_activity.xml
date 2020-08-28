@@ -37,7 +37,7 @@
             android:layout_marginBottom="3dp"
             android:alpha="0.87"
             android:gravity="left"
-            android:textColor="#000"
+            android:textColor="#52373a"
             android:textSize="15sp" />
     </LinearLayout>
     <!-- Notice -->
@@ -53,18 +53,19 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
-            android:text="확인"
-            android:textSize="14sp"
-            android:textColor="#80363E"
-            android:padding="8dp"
-            android:alpha="0.87"
-            android:gravity="center"
-            android:background="#00000000"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="45dp"
+            android:alpha="0.87"
+            android:background="#00000000"
+            android:fontFamily="@font/tt_together"
+            android:gravity="center"
             android:onClick="mOnClose"
-            android:fontFamily="@font/tt_together"/>
+            android:padding="8dp"
+            android:text="확인"
+            android:textColor="#884049"
+            android:textSize="14sp" />
     </LinearLayout>
     <!--// 닫기 버튼 -->
 </LinearLayout>

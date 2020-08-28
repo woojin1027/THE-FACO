@@ -244,7 +244,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
         nearby_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(pathSetting_start.this, mapActivity.class);
+                Intent intent = new Intent(pathSetting_start.this, practice0829.class);
                 startActivity(intent);
             }
         });

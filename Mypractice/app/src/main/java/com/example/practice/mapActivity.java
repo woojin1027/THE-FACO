@@ -53,9 +53,8 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    Double my_x; //내위치 경도
-    Double my_y;
-    String str_x, str_y;
+    Double my_name,my_mobileNo,my_x,my_y;
+    String str_name,str_mobileNo,str_x,str_y;
 
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
 
@@ -105,14 +104,15 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public void run() {
                 Log.d(tag,"순서 3 : 쓰레드 내부");
-                //getStationLocationList();
+
+                getBusStationAroundList();
 
                 //정류장 위도경도 조회
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Log.d(tag, "runOnUi쓰레드 내부");
-                        //makemarker(gMap);
+                        makemarker(gMap);
                     }
                 });
             }
@@ -160,12 +160,12 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     public String getBusStationAroundList() //주변 정류소 조회
     {
-        Log.d(tag,"순서 4 : 파싱");
+        Log.d(tag,"파싱");
         StringBuffer buffer = new StringBuffer();
         String queryUrl = "http://openapi.gbis.go.kr/ws/rest/busstationservice/searcharound"//요청 URL
                 + "?serviceKey=" + key
                 + "x=" + my_x
-                + "y=" + my_y;
+                + "&y=" + my_y;
 
         try {
             URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
@@ -189,6 +189,20 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
                     case XmlPullParser.START_TAG:
                         tag = xpp.getName();//태그 이름 얻어오기
                         if (tag.equals("busStationAroundList")) ;// 첫번째 검색결과
+                        else if (tag.equals("stationName")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            str_name = xpp.getText();
+                            //my_name = Double.parseDouble(str_name);
+                            //buffer.append("\n");
+                        }
+                        else if (tag.equals("mobileNo")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            str_mobileNo = xpp.getText();
+                            my_mobileNo = Double.parseDouble(str_mobileNo);
+                            //buffer.append("\n");
+                        }
 
                         else if (tag.equals("x")) {
                             xpp.next();
@@ -219,6 +233,7 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         } catch (Exception e) {Log.d(tag, "에러발생"); }
         Log.d(tag, "위도 : " + my_y + "\n경도 : " + my_x);
+        Log.d(tag, str_name + "과 " + str_mobileNo);
         Log.d(tag, "파싱종료");
         return buffer.toString();
     }
@@ -296,7 +311,22 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
         return buffer.toString();
     }
      */
+    private void makemarker(GoogleMap googleMap) //마커찍기
+    {
+        gMap = googleMap;
+        Log.d(tag,"정류장 마커찍기");
+        Log.d(tag,"위도 : " +my_x + "\n경도 : " + my_y);
 
+        LatLng myLocation = new LatLng(my_x, my_y);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(myLocation)
+                .title(str_name)
+                .snippet(str_mobileNo);
+        gMap.addMarker(markerOptions);
+        marker = gMap.addMarker(markerOptions);
+        marker.showInfoWindow();
+
+    }
 
     @Override
     protected void onStart() {
@@ -395,9 +425,6 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
                     Log.d(tag, "onRequestPermissionsResult : mGoogleApiClient connect");
                     mGoogleApiClient.connect();
                 }
-
-
-
             } else {
 
                 checkPermissions();
@@ -492,6 +519,7 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
 
+        Log.d(tag, "setCurrentLocation안으로 들어옴");
         mMoveMapByUser = false;
         //if (currentMarker != null) currentMarker.remove();
 
@@ -501,6 +529,7 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
         markerOptions.position(currentLatLng);
         markerOptions.title("내위치");
         marker = gMap.addMarker(markerOptions);
+        marker.showInfoWindow();
 
         if ( mMoveMapByAPI ) {
 
@@ -515,7 +544,7 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("위치 서비스 비활성화");
         builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"
-                + "위치 설정을 수정하실래요?");
+                + "위치 설정을 수정하시겠습니까?");
         builder.setCancelable(true);
         builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
             @Override
@@ -548,6 +577,7 @@ public class mapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         //현재 위치에 마커 생성하고 이동
         setCurrentLocation(location, markerTitle, markerSnippet);
+        Log.d(tag, "setCurrentLocation : 내 위치 마커 생성하고 이동");
 
         mCurrentlocation = location;
     }
