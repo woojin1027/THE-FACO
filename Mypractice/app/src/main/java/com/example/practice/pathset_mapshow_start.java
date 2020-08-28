@@ -267,7 +267,6 @@ public class pathset_mapshow_start extends FragmentActivity implements OnMapRead
         });
 
         gMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-
             @Override
             public void onCameraMove() {}
         });
@@ -290,9 +289,16 @@ public class pathset_mapshow_start extends FragmentActivity implements OnMapRead
 
                             toastshow("출발지를 설정하였습니다.\n도착지를 설정해주세요!");
 
+                            finish();
+
+
+                            /*
                             Intent intent = new Intent(pathset_mapshow_start.this, pathSetting_end.class);
                             startActivity(intent);
                             //돌아가기
+
+
+                             */
                         }
                     });
                     builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
@@ -319,10 +325,10 @@ public class pathset_mapshow_start extends FragmentActivity implements OnMapRead
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(myLocation)
                 .title(aaaa)
-                .snippet(bbbb)
-                .isVisible();
+                .snippet(bbbb);
         gMap.addMarker(markerOptions);
         marker = gMap.addMarker(markerOptions);
+        marker.showInfoWindow();
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
 
     }
