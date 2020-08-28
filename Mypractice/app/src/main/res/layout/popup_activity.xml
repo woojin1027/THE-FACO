@@ -39,7 +39,7 @@
             android:alpha="0.87"
             android:fontFamily="@font/font_tt_together"
             android:gravity="left"
-            android:text=" 'THE FAstest COurse' 의 줄임말 입니다.\n 위 앱의 취지는 현재의 대중교통 서비스앱과 비교하여,가장빠른길을 알려주고, 위 앱의 사용자들또한, 각자의 이상에 가장 빠른길로 나아가는데 도움이 되었으면 하는 바램으로 선정하였습니다."
+            android:text="@string/name_story"
             android:textColor="#000"
             android:textSize="15sp" />
     </LinearLayout>
