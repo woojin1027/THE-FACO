@@ -1,5 +1,6 @@
 package com.example.practice;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -55,6 +56,7 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
 
         data = new ArrayList<HashMap<String, String>>();
+
 
         /*데이터 넣기 노가다 작업 시작지점*/
         //https://m.blog.naver.com/PostView.nhn?blogId=gi_balja&logNo=221162720020&proxyReferer=https:%2F%2Fwww.google.com%2F

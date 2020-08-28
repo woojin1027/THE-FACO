@@ -311,6 +311,7 @@ public class pathset_mapshow_end extends FragmentActivity implements OnMapReadyC
                 .isVisible();
         gMap.addMarker(markerOptions);
         marker = gMap.addMarker(markerOptions);
+        marker.showInfoWindow();
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
     }
 

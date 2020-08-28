@@ -10,9 +10,9 @@
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher08"
-        android:label="TheFaCo"
-        android:roundIcon="@mipmap/ic_launcher08_round"
+        android:icon="@mipmap/ic_blue_thefaco"
+        android:roundIcon="@mipmap/ic_blue_thefaco_round"
+        android:label="The FACO"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 

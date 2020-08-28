@@ -15,8 +15,6 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-//BottomNavigationView 하단 고정시키기
-
 public class MainActivity extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
 
@@ -206,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_menu2: //TheFaCo란?
                 //데이터 담아서 팝업(액티비티) 호출
                 Intent intent = new Intent(this, popupActivity.class);
-                intent.putExtra("data", "'THE FAstest COurse' 의 줄임말 입니다. \n이 앱의 취지는 현재의 대중교통 서비스앱과 비교하여, 가장 빠른 길을 알려주고, 위 앱의 사용자들또한, 각자의 이상에 가장 빠른길로 나아가는데 도움이 되었으면 하는 바램으로 선정하였습니다.");
+                intent.putExtra("data", "'THE FAstest COurse' 의 줄임말 입니다. \n\n이 앱의 취지는 현재의 대중교통 서비스앱과 비교하여, 가장 빠른 길을 알려주고, 위 앱의 사용자들또한, 각자의 이상에 가장 빠른길로 나아가는데 도움이 되었으면 하는 바램으로 선정하였습니다.");
                 //value에 설명할 내용을 적으면 됨
 
                 startActivityForResult(intent, 1);
