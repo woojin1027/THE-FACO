@@ -11,13 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,14 +26,8 @@ import com.google.android.gms.maps.MapView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
-import jxl.Image;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -110,7 +102,7 @@ public class unused_pathsetting extends AppCompatActivity implements TextWatcher
             public void onClick(View v) {
                 selected_item = String.valueOf(searchBox.getText());
 
-                Intent intent = new Intent(unused_pathsetting.this, pathset_mapshow.class);
+                Intent intent = new Intent(unused_pathsetting.this, pathset_mapshow_end.class);
                 try {
                     selected_item2 = URLEncoder.encode(selected_item, "utf-8");
                 } catch (UnsupportedEncodingException e) {

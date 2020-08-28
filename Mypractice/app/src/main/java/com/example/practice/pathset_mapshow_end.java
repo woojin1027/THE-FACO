@@ -21,9 +21,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -47,41 +47,38 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static java.lang.String.format;
 //https://olsh1108o.tistory.com/entry/Android-Open-API-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C-%EB%B6%80%EC%82%B0-%EB%B2%84%EC%8A%A4-%EC%96%B4%ED%94%8C-%EB%A7%8C%EB%93%A4%EA%B8%B0
 //https://movie13.tistory.com/1
 
-public class practice extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
+//도착지 설정 시 지도 띄우는 class
+
+public class pathset_mapshow_end extends FragmentActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    stationApi stationApi = new stationApi();
     pathSetting_end pathSetting_end = new pathSetting_end();
     private String tag;
-    Float float_x;
-    Float float_y;
+    Double double_x; //경도
+    Double double_y; //위도
     String str_x, str_y;
 
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
-
-    String str_xx = ((stationApi) stationApi.context).str_x;
-    String str_yy = ((stationApi) stationApi.context).str_y;
-
 
     String aaaa = ((pathSetting_end) pathSetting_end.context).mytest_name;
     String bbbb = ((pathSetting_end) pathSetting_end.context).mytest;
     int mytest_int = Integer.parseInt(bbbb);
 
-    String data;
 
     /*여기부터 부가내용*/
 
-    private AppCompatActivity mActivity;
+    private FragmentActivity mActivity;
 
-    private GoogleApiClient mGoogleApiClient = null;
-    public GoogleMap mGoogleMap;
-    private Marker currentMarker = null;
+    public GoogleApiClient mGoogleApiClient = null;
+    public GoogleMap gMap;
+    public Marker marker;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002;
@@ -90,7 +87,7 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
 
     boolean askPermissionOnceAgain = false;
     boolean mRequestingLocationUpdates = false;
-    Location mCurrentLocatiion;
+    Location mCurrentlocation;
     boolean mMoveMapByUser = true;
     boolean mMoveMapByAPI = true;
     LatLng currentPosition;
@@ -107,9 +104,9 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.map_search);
+        setContentView(R.layout.map_search2);
 
-        Log.d(tag, "onCreate");
+        Log.d(tag, "순서 1 : onCreate");
         mActivity = this;
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -119,58 +116,118 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_search);
+                .findFragmentById(R.id.map_search2);
         mapFragment.getMapAsync(this);
+        //getMapAsync()는 반드시 Main Thread에서 호출돼야한다
 
     }
 
-//    public void mOnClick(View v) {
-//
-//        switch (v.getId()) {
-//            case R.id.list_new:
-//
-//                new Thread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        data = getStationLocationList();//아래 메소드를 호출하여 XML data를 파싱해서 String 객체로 얻어오기
-//
-//
-//                        runOnUiThread(new Runnable() {
-//
-//                            @Override
-//                            public void run() {
-//                                text.setText(data); //TextView에 문자열  data 출력
-//                            }
-//                        });
-//
-//                    }
-//                }).start();
-//
-//                break;
-//        }
-//    }
 
+    public String getStationLocationList() //정류장 위도 경도 파싱
+    {
+        Log.d(tag,"순서 4 : 파싱");
+        StringBuffer buffer = new StringBuffer();
+        String queryUrl = "http://openapi.gbis.go.kr/ws/rest/busstationservice"//요청 URL
+                + "?serviceKey=" + key
+                + "&keyword=" + aaaa;
+
+        try {
+            URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
+            InputStream is = url.openStream(); //url위치로 입력스트림 연결
+            Log.d(tag, queryUrl);
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(is, "UTF-8")); //inputstream 으로부터 xml 입력받기
+
+            String tag= null;
+
+            xpp.next();
+            int eventType = xpp.getEventType();
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+                        Log.d(tag, "파싱시작");
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        tag = xpp.getName();//태그 이름 얻어오기
+                        if (tag.equals("busStationList")) ;// 첫번째 검색결과
+                        else if(tag.equals("mobileNo")) {
+                            int a = xpp.next();
+                            if (a != mytest_int) //mobileNo랑 다르면
+                            {
+                                //append하지 않음
+                                //근데 append의 반대가 뭘까.......
+                                break;
+                            }
+                        }
+                        else if (tag.equals("x")) {
+                                xpp.next();
+                                buffer.append(xpp.getText());
+                                str_x = xpp.getText();
+                                double_y = Double.parseDouble(str_x);
+                                //buffer.append("\n");
+                        }
+                        else if (tag.equals("y")) {
+                                xpp.next();
+                                buffer.append(xpp.getText());
+                                str_y = xpp.getText();
+                                double_x = Double.parseDouble(str_y);
+
+                            }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if (tag.equals("busStationList"));// 첫번째 검색결과종료..줄바꿈
+                        break;
+                }
+                eventType = xpp.next();
+            }
+
+        } catch (Exception e) {Log.d(tag, "에러발생"); }
+        Log.d(tag, "위도 : " + double_y + "\n경도 : " + double_x);
+        Log.d(tag, "파싱종료");
+        return buffer.toString();
+    }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap)
-    //★ 중요 ★ 온맵이 먼저 실행 , 그다음이 온크리에이트
-    // 그래서 float_x,float_y가 null이 되는겨
-    // 긍까 setDefaultLocation은 그냥 서울 위도경도(숫자)로 하고
-    // 다른 void function 만들어서 마커 띄우게 해보기
     {
-        mGoogleMap = googleMap;
+        gMap = googleMap;
 
         //지도의 초기위치를 정류장으로 이동(해야되는데...)
-        //setDefaultLocation_test();
 
-        setMyLocation(str_xx, str_yy);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(tag,"순서 3 : 쓰레드 내부");
+                getStationLocationList(); //순서 4 : 파싱
+                //setMyLocation(float_x,float_y);
 
-        mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
-        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
+                //정류장 위도경도 조회
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(tag, "runOnUi쓰레드 내부");
+                        makemarker(gMap);
+                    }
+                });
+            }
+        }).start();
+
+        Log.d(tag, "순서 2 : 쓰레드 바깥");
+
+        gMap.getUiSettings().setZoomControlsEnabled(true);
+        gMap.getUiSettings().setMyLocationButtonEnabled(true);
+        gMap.animateCamera(CameraUpdateFactory.zoomTo(1));
+
+        gMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
 
             @Override
             public boolean onMyLocationButtonClick() {
@@ -180,7 +237,7 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
                 return true;
             }
         });
-        mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
@@ -188,7 +245,7 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
             }
         });
 
-        mGoogleMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
+        gMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
 
             @Override
             public void onCameraMoveStarted(int i) {
@@ -201,37 +258,54 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
             }
         });
 
-        mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+        gMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
 
             @Override
             public void onCameraMove() {}
         });
+
+        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (marker.equals(marker)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(pathset_mapshow_end.this);
+                    builder.setTitle("출발지 설정");
+                    builder.setMessage(aaaa + "를 선택하시겠습니까?");
+                    builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //예 눌렀을때의 이벤트 처리
+                        }
+                    });
+                    builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //아니오 눌렀을때의 이벤트 처리
+                        }
+                    });
+                    builder.show();
+                }
+                return true;
+            }
+        });
+
     }//close onMapReady
 
-
-    private void setMyLocation(String x, String y) //내가 선택한 정류장 마커로 찍기
+    private void makemarker(GoogleMap googleMap) //마커찍기
     {
-        //, GoogleMap googleMap
-        //googleMap = mGoogleMap;
-        mMoveMapByUser = false;
-        Float x1 = Float.parseFloat(x);
-        Float y1 = Float.parseFloat(y);
-        Log.d(tag, "받아온 위도 : "+ x + "   받아온 경도 : " + y);
-        LatLng myLocation = new LatLng(x1, y1);
+        gMap = googleMap;
+        Log.d(tag,"순서 5 : 정류장 마커찍기");
+        Log.d(tag,"위도 : " +double_x + "\n경도 : " + double_y);
+
+        LatLng myLocation = new LatLng(double_x, double_y);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(myLocation)
                 .title(aaaa)
-                .snippet(bbbb);
-
-        //마커생성이 안됨 왤까 ㅇㅅㅇ..
-        currentMarker = mGoogleMap.addMarker(markerOptions);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(myLocation, 15);
-        mGoogleMap.moveCamera(cameraUpdate);
-        Log.d(tag, "근데 왜 마커를 못만들어 썅");
-        //currentMarker = mGoogleMap.addMarker(markerOptions);
-
-        //mGoogleMap.addMarker(markerOptions);
-        //mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(Default_Location));
+                .snippet(bbbb)
+                .isVisible();
+        gMap.addMarker(markerOptions);
+        marker = gMap.addMarker(markerOptions);
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
     }
 
     @Override
@@ -407,7 +481,7 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
             //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
             mRequestingLocationUpdates = true;
 
-            mGoogleMap.setMyLocationEnabled(true);
+            gMap.setMyLocationEnabled(true);
 
         }
     }
@@ -422,28 +496,21 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
     private void stopLocationUpdates() {
 
         Log.d(tag,"stopLocationUpdates : LocationServices.FusedLocationApi.removeLocationUpdates");
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
+        //LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
         mRequestingLocationUpdates = false;
     }
 
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
 
         mMoveMapByUser = false;
-
-
-        if (currentMarker != null) currentMarker.remove();
-
+        //if (currentMarker != null) currentMarker.remove();
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(currentLatLng);
-        markerOptions.title(markerTitle);
-        markerOptions.snippet(markerSnippet);
-        markerOptions.draggable(true);
-
-
-        currentMarker = mGoogleMap.addMarker(markerOptions);
+        markerOptions.title("내위치");
+        marker = gMap.addMarker(markerOptions);
 
 
         if ( mMoveMapByAPI ) {
@@ -451,7 +518,7 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
             Log.d(tag, "setCurrentLocation :  mGoogleMap moveCamera "
                     + location.getLatitude() + " " + location.getLongitude() ) ;
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-            mGoogleMap.moveCamera(cameraUpdate);
+            gMap.moveCamera(cameraUpdate);
         }
     }
 
@@ -493,7 +560,7 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
         //현재 위치에 마커 생성하고 이동
         setCurrentLocation(location, markerTitle, markerSnippet);
 
-        mCurrentLocatiion = location;
+        mCurrentlocation = location;
     }
 
     private String getCurrentAddress(LatLng latlng) {
@@ -586,14 +653,14 @@ public class practice extends AppCompatActivity implements OnMapReadyCallback,Go
                     Log.d(tag, "onConnected : 퍼미션 가지고 있음");
                     Log.d(tag, "onConnected : call startLocationUpdates");
                     startLocationUpdates();
-                    mGoogleMap.setMyLocationEnabled(true);
+                    gMap.setMyLocationEnabled(true);
                 }
 
             }else{
 
                 Log.d(tag, "onConnected : call startLocationUpdates");
                 startLocationUpdates();
-                mGoogleMap.setMyLocationEnabled(true);
+                gMap.setMyLocationEnabled(true);
             }
         }
     }
