@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_test2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity_loading"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +22,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAcPSc8WJIeb85x362mPWwP9tI4DMBb6Kc"/>
-
+            android:value="AIzaSyAcPSc8WJIeb85x362mPWwP9tI4DMBb6Kc" />
     </application>
 
 </manifest>

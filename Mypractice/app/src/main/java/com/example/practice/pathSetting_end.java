@@ -31,8 +31,6 @@ import java.util.Map;
 //해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 public class pathSetting_end extends AppCompatActivity implements TextWatcher{
-    TextView tv;
-    String test_value;
     String map_detail;
     public String selected_item;
     public String mytest;
@@ -40,7 +38,6 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
 
     public static Context context;
 
-    int int_mytest;
     ListView list_new;
     ArrayList<HashMap<String, String>> data;
     HashMap<String, String> data_hashmap;
@@ -59,8 +56,6 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
 
         data = new ArrayList<HashMap<String, String>>();
-
-
 
         /*데이터 넣기 노가다 작업 시작지점*/
         //https://m.blog.naver.com/PostView.nhn?blogId=gi_balja&logNo=221162720020&proxyReferer=https:%2F%2Fwww.google.com%2F
@@ -274,9 +269,7 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
                 mytest_name = map.get("정류장명");
 
                 map_detail = entry.getValue();
-                toastshow(view, map + "을(를) 선택하시겠습니까?");
-
-                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow.class);
+                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow_end.class);
                 startActivity(intent);
             }
         });
