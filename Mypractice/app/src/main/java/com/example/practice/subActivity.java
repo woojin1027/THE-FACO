@@ -536,21 +536,31 @@ public class subActivity extends AppCompatActivity {
         }
         Collections.sort(CalStaOrder);
 
+        for(int j = 0; j < DBStationId.size(); j++)
+        {
+            getBusArrivalItem(DBStationId.get(j).toString(), DBStaOrder.get(j).toString(), j);
+
+            //파싱값이 존재하지않을 때 -1 로 채워넣는다
+            if (examine.get(j) == null)
+            {
+                DBSeatcnt2.set(j, -1);
+                Buslocation2.set(j, -1);
+            }
+            else if (Buslocation2.get(j) != null)
+            {
+                Buslocation1.set(j, Integer.parseInt(DBStaOrder.get(j).toString()) - Integer.parseInt(Buslocation1.get(j).toString()));
+                Buslocation2.set(j, Integer.parseInt(DBStaOrder.get(j).toString()) - Integer.parseInt(Buslocation2.get(j).toString()));
+            }
+        }
+
         for(int i = 0; i < DBStationId.size(); i++)
         {
-            getBusArrivalItem(DBStationId.get(i).toString(), DBStaOrder.get(i).toString(), i);
-            //파싱값이 존재하지않을 때 -1 로 채워넣는다
-            if(examine.get(i) == null)
-            {
-                DBSeatcnt2.set(i, -1);
-            }
-
-            if(DBSeatcnt1.get(i).equals(-1) && DBSeatcnt2.get(i).equals(-1) && Buslocation1.get(i).equals(-1) && Buslocation2.get(i).equals(-1))
+            if(DBSeatcnt1.get(i).equals(-1) && DBSeatcnt2.get(i).equals(-1))
             {
                 CalculData.set(i,"");
                 CalculData2.set(i,"");
             }
-            else if(DBSeatcnt2.get(i).equals(-1) || Buslocation2.get(i).equals(-1))
+            else if(DBSeatcnt2.get(i).equals(-1))
             {
                 CalculData2.set(i,"");
                 for(int j = 0; j <= i ; j++)
@@ -571,7 +581,7 @@ public class subActivity extends AppCompatActivity {
                         {
                             if(j == i)
                             {
-                                first = Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                first = Integer.parseInt(DBSeatcnt1.get(i).toString()) + first + Integer.parseInt(DBLineCnt.get(i).toString());
                                 CalculData.set(i,"(" + first + "명 탑승가능)");
                             }
                         }
@@ -649,7 +659,7 @@ public class subActivity extends AppCompatActivity {
                 }
             }
         }
-        Log.d(TAG,"대기인원 계산" + CalculData + " " + CalculData2 + DBSeatcnt1 + DBSeatcnt2 + CalStaOrder);
+        Log.d(TAG,"대기인원 계산" + CalculData + " " + CalculData2 + DBSeatcnt1 + DBSeatcnt2 + Buslocation1 + Buslocation2);
     }
 
     //오퍼레이션 3 (버스도착정보항목조회)
