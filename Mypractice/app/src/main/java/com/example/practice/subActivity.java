@@ -560,7 +560,7 @@ public class subActivity extends AppCompatActivity {
                 Buslocation2.set(j, Integer.parseInt(DBStaOrder.get(j).toString()) - Integer.parseInt(Buslocation2.get(j).toString()));
             }
         }
-        Log.d(TAG, "확인" + Buslocation2);
+
         for(int i = 0; i < DBStationId.size(); i++)
         {
             if(DBSeatcnt1.get(i).equals(-1) && DBSeatcnt2.get(i).equals(-1))
@@ -571,8 +571,9 @@ public class subActivity extends AppCompatActivity {
             //수정 완료 -> 오류생기면 다시 수정
             else if(DBSeatcnt2.get(i).equals(-1))
             {
+                CalculData.set(i,"");
                 CalculData2.set(i,"");
-                int first = 0;
+                int first = 0, firstinfo = 0;
                 for(int j = 0; j < DBStationId.size() ; j++)
                 {
                     if(Integer.parseInt(DBStaOrder.get(i).toString()) >= Integer.parseInt(DBStaOrder.get(j).toString()))
@@ -589,8 +590,8 @@ public class subActivity extends AppCompatActivity {
                             if (Integer.parseInt(DBSeatcnt1.get(i).toString()) + first >= Integer.parseInt(DBLineCnt.get(i).toString())) {
                                 CalculData.set(i, "(모든인원 탑승가능)");
                             } else if (Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt1.get(i).toString()) + first > 0) {
-                                first = first + Integer.parseInt(DBSeatcnt1.get(i).toString());
-                                CalculData.set(i, "(" + first + "명 탑승가능)");
+                                firstinfo = first + Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                CalculData.set(i, "(" + firstinfo + "명 탑승가능)");
                             } else if (Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt1.get(i).toString()) + first <= 0) {
                                 CalculData.set(i, "(탑승불가)");
                             }
@@ -602,7 +603,7 @@ public class subActivity extends AppCompatActivity {
             //수정완료 -> 오류생기면 다시 수정
             else
             {
-                int first = 0, second = 0;
+                int first = 0, second = 0, firstinfo = 0, secondinfo = 0;
                 for(int j = 0; j < DBStationId.size(); j++)
                 {
                     if(Integer.parseInt(DBStaOrder.get(i).toString()) >= Integer.parseInt(DBStaOrder.get(j).toString()))
@@ -624,51 +625,51 @@ public class subActivity extends AppCompatActivity {
                                 }
                                 else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt1.get(i).toString()) + first > 0 && Integer.parseInt(DBLineCnt.get(i).toString()) - (first + Integer.parseInt(DBSeatcnt1.get(i).toString())) <= Integer.parseInt(DBSeatcnt2.get(i).toString()))
                                 {
-                                    first = first + Integer.parseInt(DBSeatcnt1.get(i).toString());
-                                    second = Integer.parseInt(DBLineCnt.get(i).toString()) - first;
-                                    CalculData.set(i,"(" + first + "명 탑승가능)");
+                                    firstinfo = first + Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                    secondinfo = Integer.parseInt(DBLineCnt.get(i).toString()) - first;
+                                    CalculData.set(i,"(" + firstinfo + "명 탑승가능)");
                                     CalculData2.set(i,"(나머지인원 탑승가능)");
                                 }
                                 else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) + first < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt1.get(i).toString()) + first <= 0 && Integer.parseInt(DBLineCnt.get(i).toString()) - (first + Integer.parseInt(DBSeatcnt1.get(i).toString())) > Integer.parseInt(DBSeatcnt2.get(i).toString()))
                                 {
-                                    second = Integer.parseInt(DBSeatcnt2.get(i).toString());
+                                    secondinfo = Integer.parseInt(DBSeatcnt2.get(i).toString());
                                     CalculData.set(i,"(탑승불가)");
-                                    CalculData2.set(i,"(" + second + "명 탑승가능)");
+                                    CalculData2.set(i,"(" + secondinfo + "명 탑승가능)");
                                 }
                             }
                         }
-//                        //수정중
-//                        //대기인원이 있는 정류장들의 각각의 첫번째 오는 버스와 두번째 오늘 버스가 같은 버스일 때
-//                        else if (Buslocation2.get(i) == Buslocation1.get(j))
-//                        {
-//                            //대기인원 수와 좌석수 뺄셈 계산
-//                            if(Integer.parseInt(DBStaOrder.get(i).toString()) > Integer.parseInt(DBStaOrder.get(j).toString()))
-//                            {
-//                                second = second - Integer.parseInt(DBLineCnt.get(j).toString());
-//                            }
-//                            //조건문 돌리기
-//                            if(j <= DBStationId.size() - 1)
-//                            {
-//                                if(Integer.parseInt(DBSeatcnt1.get(i).toString())  >= Integer.parseInt(DBLineCnt.get(i).toString()))
-//                                {
-//                                    CalculData.set(i,"(모든인원 탑승가능)");
-//                                }
-//                                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second - (Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString())) >= 0)
-//                                {
-//                                    first = Integer.parseInt(DBSeatcnt1.get(i).toString());
-//                                    CalculData.set(i,"(" + first + "명 탑승가능)");
-//                                    CalculData2.set(i,"(나머지인원 탑승가능)");
-//                                }
-//                                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second - (Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString())) < 0)
-//                                {
-//                                    first = Integer.parseInt(DBSeatcnt1.get(i).toString());
-//                                    second = Integer.parseInt(DBLineCnt.get(i).toString()) - first;
-//                                    CalculData.set(i,"(탑승불가)");
-//                                    CalculData2.set(i,"(" + second + "명 탑승가능)");
-//                                }
-//                            }
-//
-//                        }
+                        //수정중
+                        //대기인원이 있는 정류장들의 각각의 첫번째 오는 버스와 두번째 오늘 버스가 같은 버스일 때
+                        else if (Buslocation2.get(i) == Buslocation1.get(j))
+                        {
+                            //대기인원 수와 좌석수 뺄셈 계산
+                            if(Integer.parseInt(DBStaOrder.get(i).toString()) > Integer.parseInt(DBStaOrder.get(j).toString()))
+                            {
+                                second = second - Integer.parseInt(DBLineCnt.get(j).toString());
+                            }
+                            //조건문 돌리기
+                            if(j <= DBStationId.size() - 1)
+                            {
+                                if(Integer.parseInt(DBSeatcnt1.get(i).toString())  >= Integer.parseInt(DBLineCnt.get(i).toString()))
+                                {
+                                    CalculData.set(i,"(모든인원 탑승가능)");
+                                }
+                                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second - (Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString())) >= 0)
+                                {
+                                    firstinfo = Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                    CalculData.set(i,"(" + firstinfo + "명 탑승가능)");
+                                    CalculData2.set(i,"(나머지인원 탑승가능)");
+                                }
+                                else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second - (Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString())) < 0)
+                                {
+                                    firstinfo = Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                    secondinfo = Integer.parseInt(DBLineCnt.get(i).toString()) - firstinfo;
+                                    CalculData.set(i,"(탑승불가)");
+                                    CalculData2.set(i,"(" + secondinfo + "명 탑승가능)");
+                                }
+                            }
+
+                        }
                     }
 
                 }
