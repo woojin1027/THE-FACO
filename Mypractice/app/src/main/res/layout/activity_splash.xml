@@ -15,9 +15,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="180dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/logo_b_5" />
-
-
+        app:srcCompat="@drawable/logo_b_8" />
 
     <!--<TextView
         android:id="@+id/textView8"
@@ -31,5 +29,6 @@
         android:textSize="48sp"
         android:textStyle="bold"
         tools:visibility="visible" />-->
+
 
 </LinearLayout>

@@ -4,8 +4,7 @@
     android:id="@+id/linearlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:visibility="visible">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -32,7 +31,7 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font@font/font_dream"
+                        android:fontFamily="@font/font_dream"
                         android:gravity="center"
                         android:text="정류장"
                         android:textSize="16sp"
@@ -107,9 +106,9 @@
                     android:layout_alignBottom="@id/note"
                     android:layout_marginLeft="3dp"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/font_dream"
                     android:gravity="center"
                     android:text="좌석수"
+                    android:fontFamily="@font/font_dream"
                     android:textColor="#056EED"
                     android:textSize="12sp"
                     android:typeface="sans" />
@@ -183,8 +182,8 @@
                 android:layout_width="150dp"
                 android:layout_height="200dp"
                 android:translationX="250dp"
-                android:translationY="30dp"
-                app:srcCompat="@drawable/ticket_1" />
+                android:translationY="-10dp"
+                app:srcCompat="@drawable/woodicon" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -195,7 +194,7 @@
                 android:text="대기인원수"
                 android:textStyle="bold"
                 android:translationX="290dp"
-                android:translationY="90dp" />
+                android:translationY="70dp" />
 
         </RelativeLayout>
 
