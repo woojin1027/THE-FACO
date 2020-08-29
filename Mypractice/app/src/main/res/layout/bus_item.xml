@@ -31,7 +31,7 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/ibm_medium"
+                        android:fontFamily="@font/font_seoulhangang"
                         android:gravity="center"
                         android:text="정류장"
                         android:textSize="16sp"
@@ -108,8 +108,9 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="좌석수"
+                    android:fontFamily="@font/font_seoulhangang"
                     android:textColor="#056EED"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:typeface="sans" />
 
             </RelativeLayout>
@@ -170,6 +171,7 @@
                 android:layout_centerHorizontal="false"
                 android:gravity="center"
                 android:text="버스도착정보"
+                android:fontFamily="@font/font_seoulhangang"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:translationX="-40dp"
@@ -189,6 +191,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="대기인원수"
+                android:fontFamily="@font/font_seoulhangang"
                 android:textStyle="bold"
                 android:translationX="290dp"
                 android:translationY="70dp" />
