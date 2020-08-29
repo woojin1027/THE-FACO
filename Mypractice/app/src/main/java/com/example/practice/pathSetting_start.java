@@ -54,12 +54,8 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
         icon_search = (ImageView) findViewById(R.id.icon_search);  //돋보기 아이콘
         nearby_stop = (Button) findViewById(R.id.nearby_stop);
 
+
         data = new ArrayList<HashMap<String, String>>();
-
-
-        /*데이터 넣기 노가다 작업 시작지점*/
-        //https://m.blog.naver.com/PostView.nhn?blogId=gi_balja&logNo=221162720020&proxyReferer=https:%2F%2Fwww.google.com%2F
-
 
         data_hashmap = new HashMap<String, String>();
         data_hashmap.put("정류장명", "단국대.치과병원");
@@ -218,8 +214,6 @@ public class pathSetting_start extends AppCompatActivity implements TextWatcher{
                 new int[]{android.R.id.text1, android.R.id.text2}
         );
         list_new.setAdapter(adapter);
-
-        /*노가다 끝지점*/
 
 
         list_new.setTextFilterEnabled(true);

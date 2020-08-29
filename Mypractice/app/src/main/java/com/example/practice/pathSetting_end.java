@@ -56,10 +56,6 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
 
         data = new ArrayList<HashMap<String, String>>();
 
-        /*데이터 넣기 노가다 작업 시작지점*/
-        //https://m.blog.naver.com/PostView.nhn?blogId=gi_balja&logNo=221162720020&proxyReferer=https:%2F%2Fwww.google.com%2F
-
-
         data_hashmap = new HashMap<String, String>();
         data_hashmap.put("정류장명", "단국대.치과병원");
         data_hashmap.put("정류소번호", "47682");
@@ -218,7 +214,6 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
         );
         list_new.setAdapter(adapter);
 
-        /*노가다 끝지점*/
 
 
         list_new.setTextFilterEnabled(true);

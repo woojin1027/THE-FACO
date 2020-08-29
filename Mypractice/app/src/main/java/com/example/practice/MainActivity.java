@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 1:
-                ft.replace(R.id.Main_Frame,frag2);
+                ft.replace(R.id.Main_Frame, frag2);
                 ft.commit();
                 break;
 
@@ -209,12 +209,6 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivityForResult(intent, 1);
 
-
-//                Intent descript_Intent = new Intent(this, appDescription.class);
-//                startActivity(descript_Intent);
-//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                finish();
-//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

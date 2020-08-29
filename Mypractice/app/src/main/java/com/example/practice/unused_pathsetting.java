@@ -32,8 +32,8 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-//해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
-
+//안씀
+//엑셀 데이터 읽던 클래스
 
 public class unused_pathsetting extends AppCompatActivity implements TextWatcher {
     public String selected_item;
