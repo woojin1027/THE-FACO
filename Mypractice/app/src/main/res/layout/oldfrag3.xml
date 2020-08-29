@@ -24,6 +24,7 @@
         android:layout_marginLeft="78dp"
         android:layout_marginTop="210dp"
         android:text="TextView"
+        android:fontFamily="@font/dream"
         android:textColor="#FFFFFF" />
 
     <com.google.android.gms.maps.MapView

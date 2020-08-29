@@ -21,7 +21,7 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/tt_together"
+            android:fontFamily="@font/font_dream"
             android:gravity="bottom|center_horizontal"
             android:text="마이페이지"
             android:textColor="#203152"

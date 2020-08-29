@@ -19,7 +19,7 @@
             android:background="#D18B93"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:fontFamily="@font/tt_together"/>
+            android:fontFamily="@font/dream"/>
     </LinearLayout>
     <!-- //end 타이틀바 -->
 
@@ -59,7 +59,7 @@
             android:layout_height="45dp"
             android:alpha="0.87"
             android:background="#00000000"
-            android:fontFamily="@font/tt_together"
+            android:fontFamily="@font/dream"
             android:gravity="center"
             android:onClick="mOnClose"
             android:padding="8dp"

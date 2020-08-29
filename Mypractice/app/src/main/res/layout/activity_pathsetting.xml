@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="6"
-            android:fontFamily="@font/ibm_medium"
+            android:fontFamily="@font/font_dream"
             android:gravity="left"
             android:hint=" 정류장 검색"
             android:imeOptions="actionSearch"
@@ -41,7 +41,7 @@
             android:id="@+id/list_new"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/font_goyang"
+            android:fontFamily="@font/font_dream"
             android:visibility="visible" />
 
         <Button
@@ -54,7 +54,7 @@
             android:alpha=".80"
             android:background="@drawable/buttonshape"
             android:clickable="true"
-            android:fontFamily="@font/dunggeunmo"
+            android:fontFamily="@font/font_dream"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
