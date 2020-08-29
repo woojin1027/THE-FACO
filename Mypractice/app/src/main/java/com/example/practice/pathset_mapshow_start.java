@@ -205,7 +205,6 @@ public class pathset_mapshow_start extends AppCompatActivity
 
         }
 
-
         gMap.getUiSettings().setMyLocationButtonEnabled(true);
         gMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -235,14 +234,11 @@ public class pathset_mapshow_start extends AppCompatActivity
 
                             toastshow("출발지를 설정하였습니다.\n도착지를 설정해주세요!");
 
-                            finish();
 
-
-                            /*
                             Intent intent = new Intent(pathset_mapshow_start.this, pathSetting_end.class);
                             startActivity(intent);
                             //돌아가기
-                             */
+
                         }
                     });
                     builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
@@ -287,8 +283,6 @@ public class pathset_mapshow_start extends AppCompatActivity
 
                 mCurrentLocation = location;
             }
-
-
         }
 
     };
@@ -309,7 +303,6 @@ public class pathset_mapshow_start extends AppCompatActivity
         marker = gMap.addMarker(markerOptions);
         marker.showInfoWindow();
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
-
     }
 
     public String getStationLocationList() //정류장 위도 경도 파싱
@@ -383,7 +376,6 @@ public class pathset_mapshow_start extends AppCompatActivity
         Log.d(tag, "파싱종료");
         return buffer.toString();
     }
-
 
     private void startLocationUpdates() {
 
@@ -501,21 +493,7 @@ public class pathset_mapshow_start extends AppCompatActivity
 
         if (currentMarker != null) currentMarker.remove();
 
-
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.position(currentLatLng);
-//        markerOptions.title(markerTitle);
-//        markerOptions.snippet(markerSnippet);
-//        markerOptions.draggable(true);
-//
-//
-//        currentMarker = gMap.addMarker(markerOptions);
-//
-//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-//        gMap.moveCamera(cameraUpdate);
-
     }
 
 
