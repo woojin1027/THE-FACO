@@ -615,7 +615,6 @@ public class subActivity extends AppCompatActivity {
                             if(Integer.parseInt(DBStaOrder.get(i).toString()) > Integer.parseInt(DBStaOrder.get(j).toString()))
                             {
                                 first = first - Integer.parseInt(DBLineCnt.get(j).toString());
-                                //second = second + first;
                             }
                             //조건문 돌리기
                             if(j <= DBStationId.size() - 1)
@@ -662,7 +661,7 @@ public class subActivity extends AppCompatActivity {
                                 }
                                 else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) <= 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second  < Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString()))
                                 {
-                                    secondinfo = Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                    secondinfo = Integer.parseInt(DBLineCnt.get(i).toString()) + second;
                                     CalculData.set(i,"(탑승불가)");
                                     CalculData2.set(i,"(" + secondinfo + "명 탑승가능");
                                 }
@@ -675,9 +674,9 @@ public class subActivity extends AppCompatActivity {
                                 else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) > 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second  < Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString()))
                                 {
                                     firstinfo = Integer.parseInt(DBSeatcnt1.get(i).toString());
-                                    secondinfo = Integer.parseInt(DBLineCnt.get(i).toString()) - Integer.parseInt(DBSeatcnt1.get(i).toString());
+                                    secondinfo = Integer.parseInt(DBLineCnt.get(i).toString()) + second;
                                     CalculData.set(i,"(" + firstinfo + "명 탑승가능)");
-                                    CalculData2.set(i,"(" + secondinfo + "명 탑승가능");
+                                    CalculData2.set(i,"(" + secondinfo + "명 탑승가능)");
                                 }
                                 else
                                 {
