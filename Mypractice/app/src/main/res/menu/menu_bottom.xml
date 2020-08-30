@@ -4,19 +4,19 @@
     <item
         android:id="@+id/action_first"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_directions_bus_24"
+        android:icon="@drawable/ic_baseline_directions_bus_white_24"
         android:title="버스"/>
 
     <item
         android:id="@+id/action_second"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_location_on_24"
+        android:icon="@drawable/ic_baseline_location_on_white_24"
         android:title="정류장"/>
 
     <item
         android:id="@+id/action_third"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_favorite_border_24"
-        android:title="마이페이지"/>
+        android:icon="@drawable/ic_baseline_info_white_24"
+        android:title="Info?뭐라할까요"/>
 
 </menu>

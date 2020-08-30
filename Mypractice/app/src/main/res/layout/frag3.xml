@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dream"
             android:gravity="bottom|center_horizontal"
-            android:text="마이페이지"
+            android:text="layout중 frag3을 바꾸면 됩니다!"
             android:textColor="#134563"
             android:textSize="24sp" />
     </LinearLayout>

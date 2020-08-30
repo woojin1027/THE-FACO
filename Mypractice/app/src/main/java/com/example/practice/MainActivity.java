@@ -107,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
         /* 원래있던거
 
         //상태바 없애기
@@ -189,13 +187,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    //우측 상단 메뉴는 지웁니다!
+        /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) { //우측상단 메뉴가 보이도록 설정
         getMenuInflater().inflate(R.menu.menu_right, menu);
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) { // 우측상단 메뉴 설정
         // Handle presses on the action bar items
         switch (item.getItemId()) {
@@ -213,5 +212,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
 }

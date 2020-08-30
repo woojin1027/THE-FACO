@@ -144,7 +144,6 @@ public class pathset_mapshow_start extends BaseActivity
             public void run() {
                 Log.d(tag, "순서 3 : 쓰레드 내부");
                 getStationLocationList(); //순서 4 : 파싱
-                //setMyLocation(float_x,float_y);
 
                 //정류장 위도경도 조회
                 runOnUiThread(new Runnable() {
