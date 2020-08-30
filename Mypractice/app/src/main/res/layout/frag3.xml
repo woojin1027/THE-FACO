@@ -15,7 +15,7 @@
             android:id="@+id/imageView6"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            card_view:srcCompat="@drawable/mypage1" />
+            card_view:srcCompat="@drawable/logo_b_9" />
 
         <TextView
             android:id="@+id/textView6"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dream"
             android:gravity="bottom|center_horizontal"
-            android:text="layout중 frag3을 바꾸면 됩니다!"
+            android:text="The FACO 소개"
             android:textColor="#134563"
             android:textSize="24sp" />
     </LinearLayout>
@@ -43,9 +43,9 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/font_dream"
-            android:text="즐겨찾기"
+            android:text="앱 개발동기"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -55,15 +55,28 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView1"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="160dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             card_view:cardCornerRadius="20dp"
-            card_view:cardUseCompatPadding="true">
+            card_view:cardUseCompatPadding="true"
+            android:layout_marginBottom="10dp">
 
+            <TextView
+                android:id="@+id/mypage_nearbystop"
+                android:translationX="5dp"
+                android:layout_width="310dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+
+                android:fontFamily="@font/font_dream"
+                android:text="@string/name_story"
+                android:textColor="#91A8D2"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -72,24 +85,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/font_dream"
-            android:text="주변 정류장"
+            android:text="사용방법"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            card_view:cardCornerRadius="20dp"
-            card_view:cardUseCompatPadding="true">
+            android:layout_height="wrap_content"
+            app:videoId="vRXZj0DzXIA"
+            app:autoPlay="true"
+            app:showYouTubeButton="false"
+            />
 
-        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
-
 </LinearLayout>
