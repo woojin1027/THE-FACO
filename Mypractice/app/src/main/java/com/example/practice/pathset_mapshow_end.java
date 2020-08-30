@@ -54,7 +54,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-public class pathset_mapshow_end extends AppCompatActivity
+public class pathset_mapshow_end extends BaseActivity2
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -67,6 +67,8 @@ public class pathset_mapshow_end extends AppCompatActivity
     String aaaa = ((pathSetting_end) pathSetting_end.context).mytest_name;
     String bbbb = ((pathSetting_end) pathSetting_end.context).mytest;
     int mytest_int = Integer.parseInt(bbbb);
+
+    TextView textView;
 
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
 
@@ -102,6 +104,7 @@ public class pathset_mapshow_end extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        textView = findViewById(R.id.textview_setting2);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -228,20 +231,12 @@ public class pathset_mapshow_end extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //예 눌렀을때의 이벤트 처리
-                            //getTextView.setText(aaaa);
-                            //textView = findViewById(R.id.textview_setting1);
-                            //textView.setText(aaaa);
-                            //텍스트 바꾸고..싶은데 어케 바꾸누ㅡㅡ
 
-                            toastshow("도착지를 설정하였습니다.");
-
-                            finish();
-
-                            /*
-                            Intent intent = new Intent(pathset_mapshow_start.this, pathSetting_end.class);
+                            toastshow("도착지를 설정하였습니다");
+                            Intent intent = new Intent(pathset_mapshow_end.this, path_base.class);
+                            intent.putExtra("도착지", aaaa) ;
                             startActivity(intent);
-                            //돌아가기
-                             */
+                            actFinish2();
                         }
                     });
                     builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {

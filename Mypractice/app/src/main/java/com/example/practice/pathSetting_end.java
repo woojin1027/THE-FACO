@@ -30,7 +30,7 @@ import java.util.Map;
 
 //해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
-public class pathSetting_end extends AppCompatActivity implements TextWatcher{
+public class pathSetting_end extends BaseActivity2 implements TextWatcher{
     public String selected_item;
     public String mytest;
     public String mytest_name;
@@ -47,6 +47,7 @@ public class pathSetting_end extends AppCompatActivity implements TextWatcher{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        actList.add(this);
         setContentView(R.layout.activity_pathsetting);
 
         searchBox = (EditText) findViewById(R.id.searchbox);  //검색창

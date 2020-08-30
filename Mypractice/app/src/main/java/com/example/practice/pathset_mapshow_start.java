@@ -54,7 +54,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-public class pathset_mapshow_start extends AppCompatActivity
+public class pathset_mapshow_start extends BaseActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -101,7 +101,7 @@ public class pathset_mapshow_start extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        actList.add(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -227,16 +227,13 @@ public class pathset_mapshow_start extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //예 눌렀을때의 이벤트 처리
-                            //getTextView.setText(aaaa);
-                            //textView = findViewById(R.id.textview_setting1);
-                            //textView.setText(aaaa);
-                            //텍스트 바꾸고..싶은데 어케 바꾸누ㅡㅡ
+                            toastshow("출발지를 설정하였습니다");
 
-                            toastshow("출발지를 설정하였습니다.\n도착지를 설정해주세요!");
+                            Intent intent = new Intent(pathset_mapshow_start.this, path_base.class);
+                            intent.putExtra("출발지", aaaa) ;
 
-
-                            Intent intent = new Intent(pathset_mapshow_start.this, pathSetting_end.class);
                             startActivity(intent);
+                            actFinish();
                             //돌아가기
 
                         }

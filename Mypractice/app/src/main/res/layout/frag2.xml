@@ -14,7 +14,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/rounded_corner2"
         android:fontFamily="@font/dream"
-        android:text="조회(?)"
+        android:text="조회"
         android:textColor="#ffffff"
         android:textSize="24sp"
         android:visibility="visible" />

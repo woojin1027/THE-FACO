@@ -22,9 +22,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
 
-        <activity android:name=".practice0829"/>
+        <activity android:name=".practice0829"/><activity android:name=".result"/>
 
-        <activity android:name=".BaseActivity"/>
+        <activity android:name=".BaseActivity"/> <activity android:name=".BaseActivity2"/>
 
         <activity android:name=".pathSetting_start"/> <activity android:name=".pathSetting_end"/>
         <activity android:name=".pathset_mapshow_start"/> <activity android:name=".pathset_mapshow_end"/>
