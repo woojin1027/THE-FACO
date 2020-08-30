@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -31,14 +32,17 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="30dp"
+        android:layout_width="10dp"
         android:layout_height="20dp"
-        android:translationX="170dp"
-        android:translationY="-120dp"
+        android:translationX="180dp"
+        android:translationY="-118dp"
         android:background="@drawable/back_1"
         android:id="@+id/egg_1"></Button>
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
@@ -65,10 +69,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView1"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             card_view:cardCornerRadius="20dp"
@@ -78,10 +82,10 @@
             <TextView
                 android:id="@+id/mypage_nearbystop"
                 android:translationX="5dp"
-                android:layout_width="310dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp"
-
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:fontFamily="@font/font_dream"
                 android:text="@string/name_story"
                 android:textColor="#91A8D2"
@@ -94,6 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
             android:fontFamily="@font/font_dream"
             android:text="사용방법"
             android:textColor="#ffffff"
@@ -104,10 +109,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:videoId="vRXZj0DzXIA"
-            app:autoPlay="true"
+            app:autoPlay="false"
             app:showYouTubeButton="false"
-            />
+            android:layout_marginBottom="30dp" />
 
-
-    </LinearLayout>
+        <TextView
+            android:id="@+id/mypage_nearbystop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/font_dream"
+            android:text="상세 설명"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ticket_1"
+            ></ImageView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

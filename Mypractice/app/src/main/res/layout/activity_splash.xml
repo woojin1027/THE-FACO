@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="180dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/logo_b_8" />
+        app:srcCompat="@drawable/logo_b_11" />
 
     <!--<TextView
         android:id="@+id/textView8"
