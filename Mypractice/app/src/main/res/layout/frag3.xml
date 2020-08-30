@@ -25,6 +25,7 @@
             android:fontFamily="@font/dream"
             android:gravity="bottom|center_horizontal"
             android:text="The FACO 소개"
+            android:layout_marginTop="-3dp"
             android:textColor="#134563"
             android:background="#91A8D2"
             android:textSize="24sp" />
