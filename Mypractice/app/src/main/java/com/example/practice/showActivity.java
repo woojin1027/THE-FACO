@@ -553,10 +553,9 @@ public class showActivity extends AppCompatActivity
         {
             if(DBSeatcnt1.get(i).equals(-1) && DBSeatcnt2.get(i).equals(-1))
             {
-                CalculData.set(i,"");
-                CalculData2.set(i,"");
+                CalculData.set(i, "");
+                CalculData2.set(i, "");
             }
-            //수정 완료 -> 오류생기면 다시 수정
             else if(DBSeatcnt2.get(i).equals(-1))
             {
                 CalculData.set(i,"");
@@ -588,7 +587,6 @@ public class showActivity extends AppCompatActivity
                     }
                 }
             }
-            //수정중
             else
             {
                 int first = 0, second = 0, firstinfo = 0, secondinfo = 0;
