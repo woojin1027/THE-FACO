@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.odsay.odsayandroidsdk.ODsayService;
 
@@ -29,6 +31,8 @@ import com.odsay.odsayandroidsdk.OnResultCallbackListener;
 
 public class result extends AppCompatActivity {
 
+    private final String TAG = "myTag";
+
     TextView textView;
     TextView setting1;
     TextView setting2;
@@ -45,6 +49,8 @@ public class result extends AppCompatActivity {
 
     //대중교통환승경로 조회 서비스 API key
     private final String key = "AGosnxF7ORMEFRnphkCbkve01B6SaEZpj5R2kD03%2B43HobZwgWC2BqRthRvHeMOEWK1M%2BAPASvsbGc3K7Z9V8A%3D%3D";
+    private final String endPoint = "http://ws.bus.go.kr/api/rest/pathinfo/getPathInfoByBusNSub"; //요청 URL
+    PathitemAdapter adapter = new PathitemAdapter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +60,10 @@ public class result extends AppCompatActivity {
         setting1 = findViewById(R.id.textview_setting1);
         setting2 = findViewById(R.id.textview_setting2);
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerview1);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
         intent = getIntent();
         String str_1 = intent.getStringExtra("출발지"); //정류장명
@@ -104,6 +114,65 @@ public class result extends AppCompatActivity {
 //        odsayService.requestBusStationInfo("107475", onResultCallbackListener());
 
     }
+
+    //오퍼레이션 1 (버스위치정보목록조회)
+    private void getBusLocationList(String sX, String sY, String eX, String eY)
+    {
+        String stationUrl = endPoint + "?ServiceKey=" + key + "&startX=" + sX + "&startY=" + sY + "&endX=" + eX + "&endY=" + eY;
+        Log.d(TAG, "대중교통환승경로 조회 서비스 : " + stationUrl);
+
+        try
+        {
+            setUrlNParser(stationUrl);
+            while (eventType != XmlPullParser.END_DOCUMENT)
+            {
+                switch (eventType)
+                {
+                    case XmlPullParser.START_DOCUMENT: //xml 문서가 시작할 때
+                        break;
+                    case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
+                        tag = xpp.getName();    //태그이름 얻어오기
+                        if(tag.equals("itemList"));  //첫번째 검색 결과
+                        if(tag.equals("pathList"));
+                        else if(tag.equals("fname"))    //탑승지이름
+                        {
+                            xpp.next();
+
+                        }
+                        else if(tag.equals("tname"))    //하차지이름
+                        {
+                            xpp.next();
+
+                        }
+                        break;
+                    case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
+                        break;
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if(tag.equals("itemList")); //첫번째 검색결과 종료
+                        break;
+                }
+                eventType = xpp.next();
+            }
+        }catch (Exception e){e.printStackTrace();}
+    }
+
+    private void setUrlNParser(String quary)
+    {
+        try
+        {
+            url = new URL(quary);   //문자열로 된 요청 url 을 URL객체로 생성
+            is = url.openStream();  //입력스트림 객체 is 를 연다
+
+            factory = XmlPullParserFactory.newInstance();
+            xpp = factory.newPullParser();  //XmlPullParserFactory를 이용해 XmlPullParser 객체 생성
+            xpp.setInput(new InputStreamReader(is, "UTF-8"));   //xml 입력받기
+
+            xpp.next(); //공백을 기준으로 입력을 받는다.
+            eventType = xpp.getEventType();
+        }catch(Exception e){}
+    }
+
 
     private void init(final String str_1, final String str_2, final Double db_sx, final Double db_sy, final Double db_ex, final Double db_ey) {
 
