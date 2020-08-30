@@ -237,12 +237,15 @@ public class pathset_mapshow_end extends BaseActivity2
                             intent = getIntent();
                             Double db_1 = intent.getDoubleExtra("출발지위도",0);
                             Double db_2 = intent.getDoubleExtra("출발지경도",0);
+                            String str_1 = intent.getStringExtra("출발지");
 
                             Intent intent2 = new Intent(pathset_mapshow_end.this, result.class);
                             intent2.putExtra("도착지위도", double_x);
                             intent2.putExtra("도착지경도", double_y);
                             intent2.putExtra("출발지위도", db_1);
                             intent2.putExtra("출발지경도", db_2);
+                            intent2.putExtra("출발지", str_1);
+                            intent2.putExtra("도착지", aaaa);
 
                             startActivity(intent2);
                             actFinish2();

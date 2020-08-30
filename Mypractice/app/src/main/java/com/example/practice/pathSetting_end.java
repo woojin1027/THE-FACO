@@ -262,11 +262,14 @@ public class pathSetting_end extends BaseActivity2 implements TextWatcher{
                 mytest2 = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
                 mytest_name2 = map.get("정류장명");
 
+                //출발지 정보 얻어옴
                 intent = getIntent();
                 Double db_1 = intent.getDoubleExtra("출발지위도",0);
                 Double db_2 = intent.getDoubleExtra("출발지경도",0);
+                String str_1 = intent.getStringExtra("출발지");
 
                 Intent intent1 = new Intent(pathSetting_end.this, pathset_mapshow_end.class);
+                intent1.putExtra("출발지", str_1);
                 intent1.putExtra("출발지위도", db_1);
                 intent1.putExtra("출발지경도", db_2);
                 startActivity(intent1);
