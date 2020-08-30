@@ -100,6 +100,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             }
         });
 
+
     }
 
     @Override
@@ -151,7 +152,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
             linearlayout = itemView.findViewById(R.id.linearlayout);
             linearlayout2 = itemView.findViewById(R.id.linearlayout2);
 
-            linearlayout.setOnClickListener(new View.OnClickListener(){
+            linearlayout.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {

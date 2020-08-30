@@ -869,7 +869,6 @@ public class subActivity extends AppCompatActivity {
         }catch (Exception e){e.printStackTrace();}
     }
 
-
     private void setUrlNParser(String quary)
     {
         try
