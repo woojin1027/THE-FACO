@@ -311,7 +311,8 @@ public class pathset_mapshow_end extends BaseActivity2
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(myLocation)
                 .title(aaaa)
-                .snippet(bbbb);
+                .snippet(bbbb)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow));
         gMap.addMarker(markerOptions);
         marker = gMap.addMarker(markerOptions);
         marker.showInfoWindow();

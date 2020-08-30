@@ -42,9 +42,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 //주변 정류장 띄우기 연습
-public class map_around_busstop extends AppCompatActivity
-        implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+public class map_around_busstop extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
 
     private GoogleMap gMap;
@@ -81,6 +79,7 @@ public class map_around_busstop extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //다소 배터리를 소모하지만 스크린이 켜진 상태로 유지시킨다
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -113,7 +112,7 @@ public class map_around_busstop extends AppCompatActivity
         Log.d(tag, "onMapReady :");
 
         gMap = googleMap;
-
+        gMap.getUiSettings().setZoomControlsEnabled(true);
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
@@ -193,9 +192,11 @@ public class map_around_busstop extends AppCompatActivity
                         = new LatLng(location.getLatitude(), location.getLongitude());
 
 
-                String markerTitle = getCurrentAddress(currentPosition);
-                String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
-                        + " 경도:" + String.valueOf(location.getLongitude());
+                String markerTitle = "내 위치";
+
+                String markerSnippet = getCurrentAddress(currentPosition);
+                /*String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
+                        + " 경도:" + String.valueOf(location.getLongitude());*/
 
                 Log.d(tag, "onLocationResult : " + markerSnippet);
 
@@ -336,18 +337,18 @@ public class map_around_busstop extends AppCompatActivity
         markerOptions.title(markerTitle);
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
-
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow));
+        markerOptions.flat(true);
 
         currentMarker = gMap.addMarker(markerOptions);
+        currentMarker.showInfoWindow();
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
         gMap.moveCamera(cameraUpdate);
-
     }
 
 
     public void setDefaultLocation() {
-
 
         //디폴트 위치, Seoul
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
