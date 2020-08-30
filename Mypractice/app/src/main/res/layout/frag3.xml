@@ -25,8 +25,18 @@
             android:gravity="bottom|center_horizontal"
             android:text="The FACO 소개"
             android:textColor="#134563"
+            android:background="#91A8D2"
             android:textSize="24sp" />
+
     </LinearLayout>
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:translationX="170dp"
+        android:translationY="-120dp"
+        android:background="@drawable/back_1"
+        android:id="@+id/egg_1"></Button>
 
     <LinearLayout
         android:layout_width="match_parent"

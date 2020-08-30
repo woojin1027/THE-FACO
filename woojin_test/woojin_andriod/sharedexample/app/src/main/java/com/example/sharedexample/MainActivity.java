@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         check = findViewById(R.id.check);
 
         test = findViewById(R.id.test);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

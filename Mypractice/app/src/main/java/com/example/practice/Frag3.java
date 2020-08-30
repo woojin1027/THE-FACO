@@ -3,10 +3,13 @@ package com.example.practice;
 
 //마이페이지
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,11 +21,20 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag3, container, false);
 
+        Button egg_1 = view.findViewById(R.id.egg_1);
 
+        egg_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EggActivity.class);
+                startActivity(intent); // 액티비티 이동.
+            }
+        });
         return view;
+
     }
 }

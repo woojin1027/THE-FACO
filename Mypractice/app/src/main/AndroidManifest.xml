@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.practice">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
-        android:roundIcon="@mipmap/ic_logo_round"
         android:label="The FACO"
+        android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".EggActivity"></activity>
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <meta-data android:name="android.max_aspect" android:value="2.1" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
 
-        <activity android:name=".map_around_busstop"/><activity android:name=".result"/>
-
-        <activity android:name=".BaseActivity"/> <activity android:name=".BaseActivity2"/>
-
-        <activity android:name=".pathSetting_start"/> <activity android:name=".pathSetting_end"/>
-        <activity android:name=".pathset_mapshow_start"/> <activity android:name=".pathset_mapshow_end"/>
-        <activity android:name=".path_base"/>
+        <activity android:name=".map_around_busstop" />
+        <activity android:name=".result" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".BaseActivity2" />
+        <activity android:name=".pathSetting_start" />
+        <activity android:name=".pathSetting_end" />
+        <activity android:name=".pathset_mapshow_start" />
+        <activity android:name=".pathset_mapshow_end" />
+        <activity android:name=".path_base" />
         <activity android:name=".subActivity" />
         <activity android:name=".showActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".popupActivity" android:theme="@android:style/Theme.Dialog" />
-
-        <activity android:name=".splashActivity"
+        <activity
+            android:name=".popupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".splashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
