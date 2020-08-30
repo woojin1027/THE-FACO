@@ -11,14 +11,14 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/searchbox"
+            android:id="@+id/searchbox2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="6"
             android:fontFamily="@font/dream"
             android:gravity="left"
-            android:hint=" 정류장 검색"
+            android:hint="출발 정류장 검색"
             android:imeOptions="actionSearch"
             android:textColor="#000000"
             android:textSize="24sp">
@@ -26,7 +26,7 @@
         </EditText>
 
         <ImageView
-            android:id="@+id/icon_search"
+            android:id="@+id/icon_search2"
             android:layout_width="34dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -38,14 +38,14 @@
         android:layout_height="match_parent">
 
         <ListView
-            android:id="@+id/list_new"
+            android:id="@+id/list_new2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/dream"
             android:visibility="visible" />
 
         <Button
-            android:id="@+id/nearby_stop"
+            android:id="@+id/nearby_stop2"
             android:layout_width="117dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|right"

@@ -28,9 +28,9 @@ public class path_base extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.path_base);
 
-        setting1 = findViewById(R.id.textview_setting1); //출발지텍스트뷰
-        setting2 = findViewById(R.id.textview_setting2); //도착지텍스트뷰
-        search = findViewById(R.id.textView5); //조회
+//        setting1 = findViewById(R.id.textview_setting1); //출발지텍스트뷰
+//        setting2 = findViewById(R.id.textview_setting2); //도착지텍스트뷰
+//        search = findViewById(R.id.textView5); //조회
         Intent intent = getIntent();
         Intent intent2 = getIntent();
 

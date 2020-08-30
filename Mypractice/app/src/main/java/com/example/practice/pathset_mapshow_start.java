@@ -226,9 +226,9 @@ public class pathset_mapshow_start extends BaseActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //예 눌렀을때의 이벤트 처리
-                            toastshow("출발지를 설정하였습니다");
+                            toastshow("출발지를 설정하였습니다.\n도착지를 설정해주세요!");
 
-                            Intent intent = new Intent(pathset_mapshow_start.this, path_base.class);
+                            Intent intent = new Intent(pathset_mapshow_start.this, pathSetting_end.class);
                             intent.putExtra("출발지", aaaa) ;
 
                             startActivity(intent);

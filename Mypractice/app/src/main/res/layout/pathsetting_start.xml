@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".pathSetting_start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/searchbox1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="6"
+            android:fontFamily="@font/dream"
+            android:gravity="left"
+            android:hint="출발 정류장 검색"
+            android:imeOptions="actionSearch"
+            android:textColor="#000000"
+            android:textSize="24sp">
+
+        </EditText>
+
+        <ImageView
+            android:id="@+id/icon_search1"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_baseline_search_24" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/list_new1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/dream"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/nearby_stop1"
+            android:layout_width="117dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:alpha=".80"
+            android:background="@drawable/buttonshape"
+            android:clickable="true"
+            android:fontFamily="@font/dream"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="주변 정류장"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+
+</LinearLayout>

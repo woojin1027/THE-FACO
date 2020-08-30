@@ -119,7 +119,7 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), path_base.class);
+                Intent intent = new Intent(getActivity(), pathSetting_start.class);
                 startActivity(intent);
             }
         });

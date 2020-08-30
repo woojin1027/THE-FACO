@@ -233,7 +233,7 @@ public class pathset_mapshow_end extends BaseActivity2
                             //예 눌렀을때의 이벤트 처리
 
                             toastshow("도착지를 설정하였습니다");
-                            Intent intent = new Intent(pathset_mapshow_end.this, path_base.class);
+                            Intent intent = new Intent(pathset_mapshow_end.this, result.class);
                             intent.putExtra("도착지", aaaa) ;
                             startActivity(intent);
                             actFinish2();

@@ -22,13 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-//해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 public class pathSetting_start extends BaseActivity implements TextWatcher{
 
@@ -48,12 +45,12 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         actList.add(this);
-        setContentView(R.layout.activity_pathsetting);
+        setContentView(R.layout.pathsetting_start);
 
-        searchBox = (EditText) findViewById(R.id.searchbox);  //검색창
-        list_new = findViewById(R.id.list_new);  //정류장데이터
-        icon_search = (ImageView) findViewById(R.id.icon_search);  //돋보기 아이콘
-        nearby_stop = (Button) findViewById(R.id.nearby_stop);
+        searchBox = (EditText) findViewById(R.id.searchbox1);  //검색창
+        list_new = findViewById(R.id.list_new1);  //정류장데이터
+        icon_search = (ImageView) findViewById(R.id.icon_search1);  //돋보기 아이콘
+        nearby_stop = (Button) findViewById(R.id.nearby_stop1);
 
 
         data = new ArrayList<HashMap<String, String>>();
@@ -238,7 +235,7 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
         nearby_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(pathSetting_start.this, practice0829.class);
+                Intent intent = new Intent(pathSetting_start.this, map_around_busstop.class);
                 startActivity(intent);
             }
         });

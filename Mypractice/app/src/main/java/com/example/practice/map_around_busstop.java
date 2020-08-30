@@ -42,7 +42,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 //주변 정류장 띄우기 연습
-public class practice0829 extends AppCompatActivity
+public class map_around_busstop extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -150,7 +150,7 @@ public class practice0829 extends AppCompatActivity
                     public void onClick(View view) {
 
                         // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions(practice0829.this, REQUIRED_PERMISSIONS,
+                        ActivityCompat.requestPermissions(map_around_busstop.this, REQUIRED_PERMISSIONS,
                                 PERMISSIONS_REQUEST_CODE);
                     }
                 }).show();
@@ -460,7 +460,7 @@ public class practice0829 extends AppCompatActivity
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(practice0829.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(map_around_busstop.this);
         builder.setTitle("위치 서비스 비활성화");
         builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"
                 + "위치 설정을 수정하실래요?");

@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,12 +47,12 @@ public class pathSetting_end extends BaseActivity2 implements TextWatcher{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         actList.add(this);
-        setContentView(R.layout.activity_pathsetting);
+        setContentView(R.layout.pathsetting_end);
 
-        searchBox = (EditText) findViewById(R.id.searchbox);  //검색창
-        list_new = findViewById(R.id.list_new);  //정류장데이터
-        icon_search = (ImageView) findViewById(R.id.icon_search);  //돋보기 아이콘
-        nearby_stop = (Button) findViewById(R.id.nearby_stop);
+        searchBox = (EditText) findViewById(R.id.searchbox2);  //검색창
+        list_new = findViewById(R.id.list_new2);  //정류장데이터
+        icon_search = (ImageView) findViewById(R.id.icon_search2);  //돋보기 아이콘
+        nearby_stop = (Button) findViewById(R.id.nearby_stop2);
 
         data = new ArrayList<HashMap<String, String>>();
 
@@ -239,7 +238,7 @@ public class pathSetting_end extends BaseActivity2 implements TextWatcher{
         nearby_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(pathSetting_end.this, practice0829.class);
+                Intent intent = new Intent(pathSetting_end.this, map_around_busstop.class);
                 startActivity(intent);
             }
         });
