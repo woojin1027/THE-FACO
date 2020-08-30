@@ -33,10 +33,18 @@ public class result extends AppCompatActivity {
     TextView setting1;
     TextView setting2;
     Intent intent;
-    private String tag;
+    String str_time; //소요시간
 
-    //오디세이 API key
-    private final String key = "R5bpJwNRAixx4VHc0lP0BvI4bGQJAOn7s0CC0iNKads";
+    //파싱을 위한 필드 선언
+    private URL url;
+    private InputStream is;
+    private XmlPullParserFactory factory;
+    private XmlPullParser xpp;
+    private String tag;
+    private int eventType;
+
+    //대중교통환승경로 조회 서비스 API key
+    private final String key = "AGosnxF7ORMEFRnphkCbkve01B6SaEZpj5R2kD03%2B43HobZwgWC2BqRthRvHeMOEWK1M%2BAPASvsbGc3K7Z9V8A%3D%3D";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +68,8 @@ public class result extends AppCompatActivity {
         setting1.setText(str_1);setting2.setText(str_2);
 
         textView.setText("출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
-        searchPubTransPath(db_sx,db_sy,db_ex,db_ey);
+        init(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
+
 
 //
 //        // 싱글톤 생성, Key 값을 활용하여 객체 생성
@@ -95,30 +104,40 @@ public class result extends AppCompatActivity {
 //        odsayService.requestBusStationInfo("107475", onResultCallbackListener());
 
     }
-//
-//    private OnResultCallbackListener onResultCallbackListener() {
-//        return null;
-//    }
 
+    private void init(final String str_1, final String str_2, final Double db_sx, final Double db_sy, final Double db_ex, final Double db_ey) {
 
-    public String searchPubTransPath(Double a, Double b, Double c, Double d) //대중교통 길찾기 파싱
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(tag, "순서 3 : 쓰레드 내부");
+                searchPubTransPath(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
+                //순서 4 : 파싱
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(tag, "runOnUi쓰레드 내부");
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public String searchPubTransPath(String one, String two, Double a, Double b, Double c, Double d) //버스이용 경로 조회 파싱
     {
 
         Log.d(tag, "순서 4 : 파싱");
         StringBuffer buffer = new StringBuffer();
-        String queryUrl = "https://api.odsay.com/v1/api/searchPubTransPath"//요청 URL
-                + "?apiKey=" + key
-                + "?lang=0"
-                + "&SX=" + b
-                + "&SY=" + a
-                + "&EX=" + d
-                + "&EY=" + c;
+        String queryUrl = "http://ws.bus.go.kr/api/rest/pathinfo/getPathInfoByBus"//요청 URL
+                + "?ServiceKey=" + key
+                + "&startX=" + b
+                + "&startY=" + a
+                + "&endX=" + d
+                + "&endY=" + c;
 
-        Log.d(tag, queryUrl);
-
-        String str_x = null;
-        String str_y = null;
         try {
+            Log.d(tag, "들어옵니까???");
             URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
             InputStream is = url.openStream(); //url위치로 입력스트림 연결
             Log.d(tag, queryUrl);
@@ -139,26 +158,30 @@ public class result extends AppCompatActivity {
 
                     case XmlPullParser.START_TAG:
                         tag = xpp.getName();//태그 이름 얻어오기
-                        if (tag.equals("result")) ;// 첫번째 검색결과
-                        else if (tag.equals("totalTime")) {
+                        if(tag.equals("itemList"));// 첫번째 검색결과
+//                        else if (tag.equals("fname"))  //출발 정류장이름과 다르면
+//                        {
+//                            String p_fname = String.valueOf(xpp.next());
+//                            if(p_fname != one){break;}
+//                        }
+//                        else if (tag.equals("tname"))  //도착 정류장이름과 다르면
+//                        {
+//                            String p_fname2 = String.valueOf(xpp.next());
+//                            if(p_fname2 != two){break;}
+//                        }
+                        else if (tag.equals("routeId"))  //8100번과 m4102번 버스가 아니라면
+                        {
                             xpp.next();
-                            buffer.append(xpp.getText());
-                            str_x = xpp.getText();
-                            int int_a = Integer.parseInt(str_x);
-                            //buffer.append("\n");
-                        } else if (tag.equals("busNo")) {
-                            int int_b = xpp.next();
-                            str_y = Integer.toString(int_b);
-                            if (str_y == "8100" | str_y == "m4102") {
-                                xpp.next();
-                                buffer.append(xpp.getText());
-                                str_y = xpp.getText();
-                                Double double_x = Double.parseDouble(str_y);
-                            } else {
-                                break;
-                            }
-
+                            String p_routeId = xpp.getText();
+                            if(p_routeId != "234001159" || p_routeId != "234000878")
+                            {break;}
+                            //왜 마지막 값으로 받아오는거지ㅡㅡ
                         }
+                        else if (tag.equals("time")){
+                            xpp.next();
+                            //buffer.append(xpp.getText());
+                            str_time = xpp.getText();
+                        } // 첫번째 검색결과
                         break;
 
                     case XmlPullParser.TEXT:
@@ -166,7 +189,7 @@ public class result extends AppCompatActivity {
 
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
-                        if (tag.equals("busStationList")) ;// 첫번째 검색결과종료..줄바꿈
+                        if (tag.equals("itemList")) ;// 첫번째 검색결과종료..줄바꿈
                         break;
                 }
                 eventType = xpp.next();
@@ -175,7 +198,7 @@ public class result extends AppCompatActivity {
         } catch (Exception e) {
             Log.d(tag, "에러발생");
         }
-        Log.d(tag, str_x + " 와 " + str_y);
+        Log.d(tag, "이동 시간은 : " + str_time);
         Log.d(tag, "파싱종료");
 
         return buffer.toString();

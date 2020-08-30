@@ -335,19 +335,17 @@ public class pathset_mapshow_start extends BaseActivity
                         else if (tag.equals("mobileNo")) {
                             int a = xpp.next();
                             if (a != mytest_int) //mobileNo랑 다르면
-                            {break;                            }
+                            {break;}
                         } else if (tag.equals("x")) {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_x = xpp.getText();
                             double_y = Double.parseDouble(str_x);
-                            //buffer.append("\n");
                         } else if (tag.equals("y")) {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_y = xpp.getText();
                             double_x = Double.parseDouble(str_y);
-
                         }
                         break;
 
