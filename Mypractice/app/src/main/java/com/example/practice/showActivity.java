@@ -691,22 +691,26 @@ public class showActivity extends AppCompatActivity
     {
         for(int i = 0; i < liststation1.size(); i++)
         {
-            if(liststation1.get(i).toString().indexOf("분") == 1)
+            if(liststation1.get(i).toString().equals("출발대기") || liststation1.get(i).toString().equals("곧 도착") || liststation1.get(i).toString().equals("운행종료"))
             {
-                liststation1.set(i, liststation1.get(i).toString().substring(0,2));
+                liststation1.set(i,liststation1.get(i).toString());
             }
-            else if(liststation1.get(i).toString().indexOf("분") == 2)
+            else
             {
-                liststation1.set(i, liststation1.get(i).toString().substring(0,3));
+                int indx1 = 0;
+                indx1 = liststation1.get(i).toString().indexOf("분");
+                liststation1.set(i, liststation1.get(i).toString().substring(0,indx1+1));
             }
 
-            if(liststation2.get(i).toString().indexOf("분") == 1)
+            if(liststation2.get(i).toString().equals("출발대기") || liststation2.get(i).toString().equals("곧 도착") || liststation2.get(i).toString().equals("운행종료"))
             {
-                liststation2.set(i, liststation2.get(i).toString().substring(0,2));
+                liststation2.set(i, liststation2.get(i));
             }
-            else if(liststation2.get(i).toString().indexOf("분") == 2)
+            else
             {
-                liststation2.set(i, liststation2.get(i).toString().substring(0,3));
+                int indx2 = 0;
+                indx2 = liststation2.get(i).toString().indexOf("분");
+                liststation2.set(i, liststation2.get(i).toString().substring(0,indx2+1));
             }
         }
     }
