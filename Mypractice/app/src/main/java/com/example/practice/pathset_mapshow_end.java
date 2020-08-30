@@ -103,6 +103,7 @@ public class pathset_mapshow_end extends BaseActivity2
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        actList.add(this);
 
         textView = findViewById(R.id.textview_setting2);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
@@ -352,8 +353,6 @@ public class pathset_mapshow_end extends BaseActivity2
                             int a = xpp.next();
                             if (a != mytest_int) //mobileNo랑 다르면
                             {
-                                //append하지 않음
-                                //근데 append의 반대가 뭘까.......
                                 break;
                             }
                         } else if (tag.equals("x")) {

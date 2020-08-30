@@ -17,6 +17,6 @@
         android:id="@+id/action_third"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_info_white_24"
-        android:title="Info?뭐라할까요"/>
+        android:title="Infomation"/>
 
 </menu>
