@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -33,19 +34,28 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
-//주변 정류장 띄우기 연습
+//주변 정류장 띄우기
 public class map_around_busstop extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
 
+
     private GoogleMap gMap;
+    public Marker marker;
     private Marker currentMarker = null;
 
     private static final String tag = "googlemap_example";
@@ -53,6 +63,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
+    //주변정류소목록조회 api key
+    private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
 
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -73,6 +85,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
+    private String str_mobileNo,str_stationName,str_x,str_y;
+    private double double_x, double_y;
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
     @Override
@@ -116,7 +130,22 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(tag, "순서 3 : 쓰레드 내부");
+                busStationAroundList(); //순서 4 : 파싱
 
+                //정류장 위도경도 조회
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(tag, "runOnUi쓰레드 내부");
+                        makemarker(gMap);
+                    }
+                });
+            }
+        }).start();
 
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
@@ -207,12 +236,101 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 mCurrentLocation = location;
             }
 
-
         }
 
     };
 
+    private String busStationAroundList() {
+        Log.d(tag, "순서 4 : 파싱");
+        StringBuffer buffer = new StringBuffer();
+        String queryUrl = "http://openapi.gbis.go.kr/ws/rest/busstationservice/searcharound"//요청 URL
+                + "?serviceKey=" + key
+                + "&x=" + location.getLongitude()//경도
+                + "&y=" + location.getLatitude();//위도
+        //혹시 안되면 두개 바꿔서도 해보자
 
+        //null값임
+        //Frag2로부터 받아볼까
+
+
+        try {
+            URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
+            InputStream is = url.openStream(); //url위치로 입력스트림 연결
+            Log.d(tag, queryUrl);
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(is, "UTF-8")); //inputstream 으로부터 xml 입력받기
+
+            String tag = null;
+
+            xpp.next();
+            int eventType = xpp.getEventType();
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+                        Log.d(tag, "파싱시작");
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        tag = xpp.getName();//태그 이름 얻어오기
+                        if (tag.equals("busStationAroundList")) ;// 첫번째 검색결과
+
+                        else if (tag.equals("mobileNo")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            str_mobileNo = xpp.getText();
+                        } else if (tag.equals("stationName")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            str_stationName = xpp.getText();
+                        }else if (tag.equals("x")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            str_x = xpp.getText();
+                            double_x = Double.parseDouble(str_y);
+                        }else if (tag.equals("y")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            str_mobileNo = xpp.getText();
+                            double_x = Double.parseDouble(str_y);
+                        }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        tag = xpp.getName(); //태그 이름 얻어오기
+                        if (tag.equals("busStationAroundList")) ;// 첫번째 검색결과종료..줄바꿈
+                        buffer.append("\n");
+                        break;
+                }
+                eventType = xpp.next();
+            }
+
+        } catch (Exception e) {
+            Log.d(tag, "에러발생");
+        }
+        Log.d(tag, "정류장명 : " + str_stationName + "mobileNo : " + str_mobileNo +"위도 : " + double_y + " 경도 : " + double_x);
+        Log.d(tag, "파싱종료");
+        return buffer.toString();
+    }
+
+    private void makemarker(GoogleMap gMap) {
+
+        Log.d(tag, "순서 5 : 정류장 마커찍기");
+
+        LatLng busstopLocation = new LatLng(double_x, double_y);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(busstopLocation)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus));
+        marker = gMap.addMarker(markerOptions);
+        marker.showInfoWindow();
+
+        //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
+
+    }
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
@@ -288,7 +406,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         List<Address> addresses;
 
         try {
-
             addresses = geocoder.getFromLocation(
                     latlng.latitude,
                     latlng.longitude,
@@ -325,24 +442,27 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
 
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-
-
         if (currentMarker != null) currentMarker.remove();
-
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(currentLatLng);
-        markerOptions.title(markerTitle);
-        markerOptions.snippet(markerSnippet);
-        markerOptions.draggable(true);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow));
-        markerOptions.flat(true);
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(currentLatLng)
+                .title(markerTitle)
+                .snippet(markerSnippet)
+                .draggable(true)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+                .flat(true);
+
+        //반경 원 표시
+        CircleOptions circle200m = new CircleOptions().center(currentLatLng) //원점
+                .radius(200)      //반지름 단위 : m
+                .strokeWidth(0f)  //선너비 0f : 선없음
+                .fillColor(Color.parseColor("#8879C2F0")); //배경색
 
         currentMarker = gMap.addMarker(markerOptions);
         currentMarker.showInfoWindow();
-
+        gMap.addCircle(circle200m);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
         gMap.moveCamera(cameraUpdate);
     }

@@ -112,6 +112,7 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
         initArea(mMap);
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
+
         if (fusedLocationProviderClient != null) {
 
             if ((ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
