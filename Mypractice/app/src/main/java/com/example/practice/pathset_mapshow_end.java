@@ -23,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -64,8 +63,8 @@ public class pathset_mapshow_end extends BaseActivity2
     Double double_x; //경도
     Double double_y; //위도
     String str_x, str_y;
-    String aaaa = ((pathSetting_end) pathSetting_end.context).mytest_name;
-    String bbbb = ((pathSetting_end) pathSetting_end.context).mytest;
+    String aaaa = ((pathSetting_end) pathSetting_end.context).mytest_name2;
+    String bbbb = ((pathSetting_end) pathSetting_end.context).mytest2;
     int mytest_int = Integer.parseInt(bbbb);
 
     TextView textView;
@@ -98,6 +97,7 @@ public class pathset_mapshow_end extends BaseActivity2
 
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
+    Intent intent;
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
     @Override
@@ -233,9 +233,18 @@ public class pathset_mapshow_end extends BaseActivity2
                             //예 눌렀을때의 이벤트 처리
 
                             toastshow("도착지를 설정하였습니다");
-                            Intent intent = new Intent(pathset_mapshow_end.this, result.class);
-                            intent.putExtra("도착지", aaaa) ;
-                            startActivity(intent);
+
+                            intent = getIntent();
+                            Double db_1 = intent.getDoubleExtra("출발지위도",0);
+                            Double db_2 = intent.getDoubleExtra("출발지경도",0);
+
+                            Intent intent2 = new Intent(pathset_mapshow_end.this, result.class);
+                            intent2.putExtra("도착지위도", double_x);
+                            intent2.putExtra("도착지경도", double_y);
+                            intent2.putExtra("출발지위도", db_1);
+                            intent2.putExtra("출발지경도", db_2);
+
+                            startActivity(intent2);
                             actFinish2();
                         }
                     });
@@ -294,7 +303,7 @@ public class pathset_mapshow_end extends BaseActivity2
         Log.d(tag, "순서 5 : 정류장 마커찍기");
         Log.d(tag, "위도 : " + double_x + "\n경도 : " + double_y);
 
-        LatLng myLocation = new LatLng(double_x, double_y);
+        LatLng myLocation = new LatLng(double_x, double_y);//이 double값을 RESULT에 넘겨야함
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(myLocation)
                 .title(aaaa)

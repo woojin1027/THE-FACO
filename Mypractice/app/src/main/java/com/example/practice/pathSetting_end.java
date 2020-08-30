@@ -25,14 +25,13 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 //해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
 
 public class pathSetting_end extends BaseActivity2 implements TextWatcher{
     public String selected_item;
-    public String mytest;
-    public String mytest_name;
+    public String mytest2;
+    public String mytest_name2;
 
     public static Context context;
 
@@ -42,6 +41,7 @@ public class pathSetting_end extends BaseActivity2 implements TextWatcher{
     EditText searchBox;
     ImageView icon_search;
     Button nearby_stop;
+    Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -258,11 +258,18 @@ public class pathSetting_end extends BaseActivity2 implements TextWatcher{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HashMap<String, String> map = (HashMap<String,String>)list_new.getItemAtPosition(position);
-                Map.Entry<String,String> entry = map.entrySet().iterator().next();
-                mytest = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
-                mytest_name = map.get("정류장명");
-                Intent intent = new Intent(pathSetting_end.this, pathset_mapshow_end.class);
-                startActivity(intent);
+                //Map.Entry<String,String> entry = map.entrySet().iterator().next();
+                mytest2 = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
+                mytest_name2 = map.get("정류장명");
+
+                intent = getIntent();
+                Double db_1 = intent.getDoubleExtra("출발지위도",0);
+                Double db_2 = intent.getDoubleExtra("출발지경도",0);
+
+                Intent intent1 = new Intent(pathSetting_end.this, pathset_mapshow_end.class);
+                intent1.putExtra("출발지위도", db_1);
+                intent1.putExtra("출발지경도", db_2);
+                startActivity(intent1);
             }
         });
         context = this;

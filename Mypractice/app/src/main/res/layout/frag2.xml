@@ -14,9 +14,9 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/rounded_corner2"
         android:fontFamily="@font/dream"
-        android:text="조회"
+        android:text="예상 소요시간 조회"
         android:textColor="#ffffff"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:visibility="visible" />
 
     <com.google.android.gms.maps.MapView

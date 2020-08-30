@@ -230,7 +230,8 @@ public class pathset_mapshow_start extends BaseActivity
 
                             Intent intent = new Intent(pathset_mapshow_start.this, pathSetting_end.class);
                             intent.putExtra("출발지", aaaa) ;
-
+                            intent.putExtra("출발지위도", double_x);
+                            intent.putExtra("출발지경도", double_y);
                             startActivity(intent);
                             actFinish();
                             //돌아가기
@@ -334,11 +335,7 @@ public class pathset_mapshow_start extends BaseActivity
                         else if (tag.equals("mobileNo")) {
                             int a = xpp.next();
                             if (a != mytest_int) //mobileNo랑 다르면
-                            {
-                                //append하지 않음
-                                //근데 append의 반대가 뭘까.......
-                                break;
-                            }
+                            {break;                            }
                         } else if (tag.equals("x")) {
                             xpp.next();
                             buffer.append(xpp.getText());
