@@ -168,22 +168,35 @@
                 android:layout_alignParentRight="false"
                 android:layout_alignParentBottom="false"
                 android:layout_centerInParent="true"
-                android:layout_centerHorizontal="false"
                 android:fontFamily="@font/font_dream"
-                android:gravity="center"
+                android:gravity="left"
                 android:text="버스도착정보"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:translationX="-40dp"
+                android:translationX="60dp"
                 android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_dream"
+                android:gravity="left"
+                android:text="도착예정"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:translationX="60dp"
+                android:translationY="50dp" />
 
             <ImageView
                 android:id="@+id/lineinfo"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:translationX="260dp"
-                android:translationY="30dp"
-                app:srcCompat="@drawable/ticket_1" />
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                android:scaleY="0.6"
+                android:scaleX="0.8"
+                android:translationX="282dp"
+                android:translationY="60dp"
+                app:srcCompat="@drawable/lineinfobox" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -191,9 +204,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_dream"
                 android:gravity="center"
-                android:text="대기인원수"
+                android:text="대기현황"
                 android:textStyle="bold"
-                android:translationX="295dp"
+                android:translationX="303dp"
                 android:translationY="90dp" />
 
         </RelativeLayout>

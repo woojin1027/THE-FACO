@@ -3,6 +3,9 @@ package com.example.practice;
 //M4102 의 버스 아이템 셋팅
 
 import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 
 public class Bus_items
 {

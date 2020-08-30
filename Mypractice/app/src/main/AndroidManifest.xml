@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
