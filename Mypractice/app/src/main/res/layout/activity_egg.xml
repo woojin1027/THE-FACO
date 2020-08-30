@@ -36,10 +36,11 @@
         android:padding="20dp"
         android:orientation="vertical">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#C9DCFF"
+            android:background="@drawable/rounded_corner4"
             android:fontFamily="@font/dream"
             android:text="@string/egg_theday1"
             android:textColor="#4E6185"
@@ -49,23 +50,29 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:background="#C9DCFF"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_corner5"
             android:fontFamily="@font/dream"
             android:text="@string/egg_theday2"
             android:textColor="#4E6185"
-            android:textSize="15dp"
+            android:textSize="18dp"
             android:gravity="left"/>
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#C9DCFF"
-            android:fontFamily="@font/dream"
-            android:text="@string/egg_story"
-            android:textColor="#4E6185"
-            android:textSize="19dp"
-            android:gravity="left"/>
+            android:layout_height="match_parent"
+           >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner3"
+                android:fontFamily="@font/dream"
+                android:gravity="left"
+                android:text="@string/egg_story"
+                android:textColor="#4E6185"
+                android:textSize="19dp" />
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>
