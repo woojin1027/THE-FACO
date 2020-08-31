@@ -110,7 +110,7 @@ public class result extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(TAG, ""+ RouteId + RouteNm + Time);
+                        Log.d(TAG, ""+ Fname + Tname + RouteNm + Time);
                         DataSet();
                     }
                 });
@@ -203,18 +203,26 @@ public class result extends AppCompatActivity {
                 String settime = "시간";
                 Time.set(i,imodify + settime + imodify2);
             }
-            
+
             //리사이클러뷰 셋팅
-            String setting = "";
+            String Routesetting = new String();
+            String Fnamesetting = new String();
+            String Tnamesetting = new String();
+            Routesetting = "";
+            Fnamesetting = "";
+            Tnamesetting = "";
             adapter.addItem(new Path_items("","","",0));
 
             //조건문 달아서 다시 셋팅
             for(int j = 0; j < RouteNm.get(j).size(); j++)
             {
-                setting = setting + RouteNm.get(i).get(j) + "\n";
+                Routesetting = Routesetting + RouteNm.get(i).get(j) + "\n";
+                Fnamesetting = Fnamesetting + Fname.get(i).get(j) + "\n";
+
+
                 if(j == RouteNm.get(j).size() - 1)
                 {
-                    adapter.setItem(i,new Path_items("" + Time.get(i).toString() + "분","" + setting,"",0));
+                    adapter.setItem(i,new Path_items("" + Time.get(i).toString() + "분","" + Routesetting,"" + Fnamesetting + "(하차)" + Tname.get(i).get(j),0));
                 }
             }
         }

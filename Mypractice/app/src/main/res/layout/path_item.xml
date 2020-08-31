@@ -40,14 +40,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="버스지하철번호" />
+                    android:text="버스지하철번호"
+                    android:layout_gravity="left"/>
 
                 <TextView
                     android:id="@+id/StartEndPlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="출발도착지" />
+                    android:text="출발도착지"
+                    android:layout_gravity="left"/>
             </LinearLayout>
         </LinearLayout>
 
