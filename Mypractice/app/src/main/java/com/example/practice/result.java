@@ -219,6 +219,7 @@ public class result extends AppCompatActivity {
                 if (j > 0)
                 {
                     Fnamesetting = Fnamesetting + "(환승)" + Fname.get(i).get(j) + "\n";
+
                 }
                 else
                 {
@@ -240,7 +241,6 @@ public class result extends AppCompatActivity {
                 {
                     adapter.setItem(i, new Path_items("" + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), R.drawable.bus_4));
                 }
-
             }
         }
     }

@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EggActivity"></activity>
+        <activity android:name=".Reason" />
+        <activity android:name=".EggActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

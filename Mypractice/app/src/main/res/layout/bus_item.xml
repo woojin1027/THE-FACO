@@ -192,11 +192,11 @@
                 android:id="@+id/lineinfo"
                 android:layout_width="100dp"
                 android:layout_height="75dp"
-                android:scaleY="0.6"
-                android:scaleX="0.8"
+                android:scaleX="1.2"
+                android:scaleY="1.0"
                 android:translationX="282dp"
-                android:translationY="60dp"
-                app:srcCompat="@drawable/lineinfobox" />
+                android:translationY="80dp"
+                app:srcCompat="@drawable/lineinfobox2" />
 
             <TextView
                 android:id="@+id/textView7"

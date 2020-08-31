@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.security.cert.CertPathValidatorException;
+
 public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한다
 {
     private View view;
@@ -26,11 +28,19 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
         view = inflater.inflate(R.layout.frag3, container, false);
 
         Button egg_1 = view.findViewById(R.id.egg_1);
+        Button reason_1 = view.findViewById(R.id.reason1);
 
         egg_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EggActivity.class);
+                startActivity(intent); // 액티비티 이동.
+            }
+        });
+        reason_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Reason.class);
                 startActivity(intent); // 액티비티 이동.
             }
         });

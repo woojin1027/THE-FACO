@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
         view = inflater.inflate(R.layout.frag1,container,false);
         Button button8 = view.findViewById(R.id.busNum8);
         Button button9 = view.findViewById(R.id.busNum9);
+
 
         //버튼 클릭시 sub, showActivity로 이동
         button8.setOnClickListener(new View.OnClickListener() {
