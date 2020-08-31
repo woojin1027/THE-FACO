@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import com.odsay.odsayandroidsdk.API;
 import com.odsay.odsayandroidsdk.ODsayData;
@@ -32,6 +33,16 @@ import com.odsay.odsayandroidsdk.OnResultCallbackListener;
 public class result extends AppCompatActivity {
 
     private final String TAG = "myTag";
+    private int Count;
+    private ArrayList fname = new ArrayList();
+    private ArrayList tname = new ArrayList();
+    private ArrayList routeid = new ArrayList();
+    private ArrayList routenm = new ArrayList();
+    private ArrayList<ArrayList<String>> Fname = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String>> Tname = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String>> RouteId = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String>> RouteNm = new ArrayList<ArrayList<String>>();
+    private ArrayList Time = new ArrayList();
 
     TextView textView;
     TextView setting1;
@@ -66,19 +77,38 @@ public class result extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         intent = getIntent();
-        String str_1 = intent.getStringExtra("출발지"); //정류장명
-        String str_2 = intent.getStringExtra("도착지");
+        final String str_1 = intent.getStringExtra("출발지"); //정류장명
+        final String str_2 = intent.getStringExtra("도착지");
 
-        Double db_sx = intent.getDoubleExtra("출발지위도", 0);
-        Double db_sy = intent.getDoubleExtra("출발지경도", 0);
+        final Double db_sx = intent.getDoubleExtra("출발지위도", 0);
+        final Double db_sy = intent.getDoubleExtra("출발지경도", 0);
 
-        Double db_ex = intent.getDoubleExtra("도착지위도", 0);
-        Double db_ey = intent.getDoubleExtra("도착지경도", 0);
+        final Double db_ex = intent.getDoubleExtra("도착지위도", 0);
+        final Double db_ey = intent.getDoubleExtra("도착지경도", 0);
 
         setting1.setText(str_1);setting2.setText(str_2);
 
-        textView.setText("출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
+        //textView.setText("출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
         init(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Count = 0;
+                getPathInfoByBusNSubList(Double.toString(db_sy), Double.toString(db_sx), Double.toString(db_ey), Double.toString(db_ex));
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(TAG, ""+ RouteId + RouteNm);
+
+                    }
+                });
+            }
+        }).start();
+
+
 
 
 //
@@ -115,8 +145,13 @@ public class result extends AppCompatActivity {
 
     }
 
+
+    public void DataSet()
+    {
+
+    }
     //오퍼레이션 1 (버스위치정보목록조회)
-    private void getBusLocationList(String sX, String sY, String eX, String eY)
+    private void getPathInfoByBusNSubList(String sX, String sY, String eX, String eY)
     {
         String stationUrl = endPoint + "?ServiceKey=" + key + "&startX=" + sX + "&startY=" + sY + "&endX=" + eX + "&endY=" + eY;
         Log.d(TAG, "대중교통환승경로 조회 서비스 : " + stationUrl);
@@ -132,24 +167,49 @@ public class result extends AppCompatActivity {
                         break;
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
-                        if(tag.equals("itemList"));  //첫번째 검색 결과
+                        if(tag.equals("itemList")) //첫번째 검색 결과
+                        {
+                            fname = new ArrayList();
+                            tname = new ArrayList();
+                            routeid = new ArrayList();
+                            routenm = new ArrayList();
+                        }
                         if(tag.equals("pathList"));
                         else if(tag.equals("fname"))    //탑승지이름
                         {
                             xpp.next();
-
+                            fname.add(xpp.getText());
                         }
                         else if(tag.equals("tname"))    //하차지이름
                         {
                             xpp.next();
-
+                            tname.add(xpp.getText());
+                        }
+                        else if(tag.equals("routeId"))
+                        {
+                            xpp.next();
+                            routeid.add(xpp.getText());
+                        }
+                        else if(tag.equals("routeNm"))
+                        {
+                            xpp.next();
+                            routenm.add(xpp.getText());
+                        }
+                        else if(tag.equals("time"))
+                        {
+                            xpp.next();
+                            Time.add(xpp.getText());
+                            Fname.add(fname);
+                            Tname.add(tname);
+                            RouteId.add(routeid);
+                            RouteNm.add(routenm);
                         }
                         break;
                     case XmlPullParser.TEXT:            //xml 문서의 텍스트 만날시
                         break;
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
-                        if(tag.equals("itemList")); //첫번째 검색결과 종료
+                        if(tag.equals("itemList"));  //첫번째 검색결과 종료
                         break;
                 }
                 eventType = xpp.next();
