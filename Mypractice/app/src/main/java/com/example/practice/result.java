@@ -92,7 +92,6 @@ public class result extends AppCompatActivity {
         final Double db_ey = intent.getDoubleExtra("도착지경도", 0);
 
         setting1.setText(str_1);setting2.setText(str_2);
-        Log.d(TAG, "출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
         //textView.setText("출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
         //init(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
 
@@ -206,16 +205,18 @@ public class result extends AppCompatActivity {
             String Routesetting = new String();
             String Fnamesetting = new String();
             String Tnamesetting = new String();
+            int Imagesetting;
             Routesetting = "";
             Fnamesetting = "";
             Tnamesetting = "";
+            Imagesetting = 0;
             adapter.addItem(new Path_items("","","",0));
 
             //조건문 달아서 다시 셋팅
             for(int j = 0; j < RouteNm.get(i).size(); j++)
             {
                 Routesetting = Routesetting + RouteNm.get(i).get(j) + "\n";
-                if(j > 0)
+                if (j > 0)
                 {
                     Fnamesetting = Fnamesetting + "(환승)" + Fname.get(i).get(j) + "\n";
                 }
@@ -224,11 +225,22 @@ public class result extends AppCompatActivity {
                     Fnamesetting = Fnamesetting + Fname.get(i).get(j) + "\n";
                 }
 
-
-                if(j == RouteNm.get(j).size() - 1)
+                //이미지 셋팅
+                if (RouteNm.get(i).get(j).contains("선"))
                 {
-                    adapter.setItem(i,new Path_items("" + Time.get(i).toString() + "분","" + Routesetting,"" + Fnamesetting + "(하차)" + Tname.get(i).get(j),0));
+                    Imagesetting = R.drawable.bus_3;
                 }
+                else
+                {
+                    Imagesetting = R.drawable.bus_4;
+                }
+
+                //리사이클러뷰 최종 셋팅
+                if (j == RouteNm.get(j).size() - 1)
+                {
+                    adapter.setItem(i, new Path_items("" + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), R.drawable.bus_4));
+                }
+
             }
         }
     }
