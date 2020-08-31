@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -26,6 +27,10 @@ import com.odsay.odsayandroidsdk.API;
 import com.odsay.odsayandroidsdk.ODsayData;
 import com.odsay.odsayandroidsdk.ODsayService;
 import com.odsay.odsayandroidsdk.OnResultCallbackListener;
+
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
 
 //출발지와 도착지의 위도경도를 받아서 예측 소요시간(=이동시간 + 대기시간) 알려주기,,.????
 
@@ -89,25 +94,28 @@ public class result extends AppCompatActivity {
         setting1.setText(str_1);setting2.setText(str_2);
 
         //textView.setText("출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
-        init(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
+        //init(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
 
+        Time.clear();
+        Tname.clear();
+        Fname.clear();
+        RouteId.clear();
+        RouteNm.clear();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Count = 0;
                 getPathInfoByBusNSubList(Double.toString(db_sy), Double.toString(db_sx), Double.toString(db_ey), Double.toString(db_ex));
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(TAG, ""+ RouteId + RouteNm);
-
+                        Log.d(TAG, ""+ RouteId + RouteNm + Time);
+                        DataSet();
                     }
                 });
             }
         }).start();
-
 
 
 
@@ -145,10 +153,71 @@ public class result extends AppCompatActivity {
 
     }
 
+//    private void Excel()
+//    {
+//        Workbook wb = null;
+//        Sheet sheet = null;
+//        try{
+//            InputStream is = getBaseContext().getResources().getAssets().open("GGD_RouteInfo_M");
+//            wb = Workbook.getWorkbook(is);
+//
+//            if(wb != null)
+//            {
+//                sheet = wb.getSheet(0); //시트 불러오기
+//                if(sheet != null)
+//                {
+//                    int colTotal = sheet.getColumns();  //전체 컬럼
+//                    int rowIndexStart = 1;              //row 인텍스 시작
+//                    int rowTotal = sheet.getColumn(colTotal-1).length;
+//                    int col = 4;
+//                    StringBuilder sb;
+//                    for(int row = rowIndexStart; row < rowTotal; row++)
+//                    {
+//                        sb = new StringBuilder();
+//                        String contents = sheet.getCell(col, row).getContents();
+//
+//                    }
+//               }
+//            }
+//
+//        }catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (BiffException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void DataSet()
     {
 
+
+        for(int i = 0; i < Time.size(); i++)
+        {
+            //시간이 모두 분으로 나오기 때문에 시,분으로 나누어줌
+            if(Integer.parseInt(Time.get(i).toString()) >= 60)
+            {
+                int imodify = 0;
+                int imodify2 = 0;
+                imodify = Integer.parseInt(Time.get(i).toString()) / 60;    //시간
+                imodify2 = Integer.parseInt(Time.get(i).toString()) % 60;   //분
+                String settime = "시간";
+                Time.set(i,imodify + settime + imodify2);
+            }
+            
+            //리사이클러뷰 셋팅
+            String setting = "";
+            adapter.addItem(new Path_items("","","",0));
+
+            //조건문 달아서 다시 셋팅
+            for(int j = 0; j < RouteNm.get(j).size(); j++)
+            {
+                setting = setting + RouteNm.get(i).get(j) + "\n";
+                if(j == RouteNm.get(j).size() - 1)
+                {
+                    adapter.setItem(i,new Path_items("" + Time.get(i).toString() + "분","" + setting,"",0));
+                }
+            }
+        }
     }
     //오퍼레이션 1 (버스위치정보목록조회)
     private void getPathInfoByBusNSubList(String sX, String sY, String eX, String eY)
