@@ -15,6 +15,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,7 +47,9 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Member;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 //주변 정류장 띄우기
@@ -55,6 +58,24 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     private GoogleMap gMap;
     public Marker marker;
     private Marker currentMarker = null;
+    String no = null,name=null;
+    Double x = null,y = null;
+    private String str_mobileNo,str_stationName,str_x,str_y;
+    private double double_x, double_y;
+
+
+    //배열 만들기 시도
+    /*
+    String[] str_mobileNo = new String[20];
+    String[] str_stationName = new String[20];
+    String[] str_x = new String[20];
+    String[] str_y = new String[20];
+
+    Double[] double_x = new Double[20];
+    Double[] double_y = new Double[20];
+    int i =0;
+    */
+
 
     private static final String tag = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -82,10 +103,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     private Location location;
 
 
+    TextView textView; //데이터 확인용
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
-    private String str_mobileNo,str_stationName,str_x,str_y;
-    private double double_x, double_y;
-    // (참고로 Toast에서는 Context가 필요했습니다.)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,9 +114,10 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        setContentView(R.layout.mapview);
+        setContentView(R.layout.map_search);
 
-        mLayout = findViewById(R.id.map);
+        mLayout = findViewById(R.id.map_search);
+        textView = findViewById(R.id.textView5);
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -115,7 +135,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map_search);
         mapFragment.getMapAsync(this);
     }
 
@@ -178,7 +198,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
 
         gMap.getUiSettings().setMyLocationButtonEnabled(true);
-        gMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+        gMap.animateCamera(CameraUpdateFactory.zoomTo(13));
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
@@ -210,7 +230,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 /*String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
                         + " 경도:" + String.valueOf(location.getLongitude());*/
 
-                Log.d(tag, "onLocationResult : " + markerSnippet);
+                Log.d(tag, "onLocationResult 내 위치 : " + markerSnippet);
 
                 LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -219,17 +239,18 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                         .title(markerTitle)
                         .snippet(markerSnippet)
                         .draggable(true)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow2))
                         .flat(true);
+
                 //반경 원 표시
-                CircleOptions circle1KM = new CircleOptions().center(currentLatLng) //원점
-                        .radius(1000)      //반지름 단위 : m
+                CircleOptions circle700m = new CircleOptions().center(currentLatLng) //원점
+                        .radius(700)      //반지름 단위 : m
                         .strokeWidth(0f)  //선너비 0f : 선없음
-                        .fillColor(Color.parseColor("#2679C2F0")); //배경색
+                        .fillColor(Color.parseColor("#1A79C2F0")); //배경색
 
                 currentMarker = gMap.addMarker(markerOptions);
                 currentMarker.showInfoWindow();
-                gMap.addCircle(circle1KM);
+                gMap.addCircle(circle700m);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
                 gMap.moveCamera(cameraUpdate);
 
@@ -249,6 +270,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                             @Override
                             public void run() {
                                 Log.d(tag, "runOnUi쓰레드 내부");
+                                textView.setText(str_stationName + "\n" + str_mobileNo+ "\n" + double_x+ "\n" + double_y); //확인용
+                                textView.getVisibility();
                                 makemarker(gMap);
                             }
                         });
@@ -271,7 +294,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 .title(markerTitle)
                 .snippet(markerSnippet)
                 .draggable(true)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow2))
                 .flat(true);
 
         //반경 원 표시
@@ -294,10 +317,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 + "?serviceKey=" + key
                 + "&x=" + location.getLongitude()//경도
                 + "&y=" + location.getLatitude();//위도
-        //혹시 안되면 두개 바꿔서도 해보자
-
-        //null값임
-        //Frag2로부터 받아볼까
 
 
         try {
@@ -327,20 +346,23 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_mobileNo = xpp.getText();
+
                         } else if (tag.equals("stationName")) {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_stationName = xpp.getText();
-                        }else if (tag.equals("x")) {
+                        } else if (tag.equals("x")) //경도
+                        {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_x = xpp.getText();
-                            double_x = Double.parseDouble(str_y);
-                        }else if (tag.equals("y")) {
+                            double_x = Double.parseDouble(str_x);
+                        } else if (tag.equals("y")) //위도
+                        {
                             xpp.next();
                             buffer.append(xpp.getText());
-                            str_mobileNo = xpp.getText();
-                            double_x = Double.parseDouble(str_y);
+                            str_y = xpp.getText();
+                            double_y = Double.parseDouble(str_y);
                         }
                         break;
 
@@ -349,8 +371,18 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
-                        if (tag.equals("busStationAroundList")) ;// 첫번째 검색결과종료..줄바꿈
-                        buffer.append("\n");
+                        if (tag.equals("busStationAroundList"))
+//                            LatLng apidata = new LatLng(double_x, double_y);
+//                            MarkerOptions markerOptions = new MarkerOptions();
+//                            markerOptions.position(apidata)
+//                                    .title(str_stationName)
+//                                    .snippet(str_mobileNo)
+//                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus));
+//                            marker = gMap.addMarker(markerOptions);
+//                            marker.showInfoWindow();
+                            buffer.append("\n");
+                        // 첫번째 검색결과종료..줄바꿈
+
                         break;
                 }
                 eventType = xpp.next();
@@ -359,25 +391,32 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         } catch (Exception e) {
             Log.d(tag, "에러발생");
         }
-        Log.d(tag, "정류장명 : " + str_stationName + "mobileNo : " + str_mobileNo +"위도 : " + double_y + " 경도 : " + double_x);
+
         Log.d(tag, "파싱종료");
         return buffer.toString();
+
     }
+
 
     private void makemarker(GoogleMap gMap) {
 
         Log.d(tag, "순서 5 : 정류장 마커찍기");
 
-        LatLng busstopLocation = new LatLng(double_x, double_y);
+        double_x = Double.parseDouble(str_x);
+        double_y = Double.parseDouble(str_y);
+
+        LatLng busstopLocation = new LatLng(double_y, double_x);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(busstopLocation)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus));
+                .title(str_stationName)
+                .snippet(str_mobileNo)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
         marker = gMap.addMarker(markerOptions);
         marker.showInfoWindow();
 
         //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
-
     }
+
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
@@ -445,7 +484,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     }
 
 
-    public String getCurrentAddress(LatLng latlng) {
+    public String getCurrentAddress(LatLng latlng) //내위치(위도,경도)를 "대한민국 00시 00구"로 변환
+    {
 
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -488,9 +528,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     }
 
 
-
-
-
     public void setDefaultLocation() {
 
         //디폴트 위치, Seoul
@@ -499,7 +536,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         String markerSnippet = "위치 퍼미션과 GPS 활성 여부를 확인하세요";
 
 
-        if (currentMarker != null) currentMarker.remove();
+        //if (currentMarker != null) currentMarker.remove();
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(DEFAULT_LOCATION);
