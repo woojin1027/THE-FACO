@@ -215,7 +215,15 @@ public class result extends AppCompatActivity {
             for(int j = 0; j < RouteNm.get(i).size(); j++)
             {
                 Routesetting = Routesetting + RouteNm.get(i).get(j) + "\n";
-                Fnamesetting = Fnamesetting + Fname.get(i).get(j) + "\n";
+                if(j > 0)
+                {
+                    Fnamesetting = Fnamesetting + "(환승)" + Fname.get(i).get(j) + "\n";
+                }
+                else
+                {
+                    Fnamesetting = Fnamesetting + Fname.get(i).get(j) + "\n";
+                }
+
 
                 if(j == RouteNm.get(j).size() - 1)
                 {
