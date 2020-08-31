@@ -52,16 +52,14 @@ import java.util.Locale;
 //주변 정류장 띄우기
 public class map_around_busstop extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
-
-
     private GoogleMap gMap;
     public Marker marker;
     private Marker currentMarker = null;
 
     private static final String tag = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 60000;  // 내위치 업데이트 : 60초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 30000; // 30초 (필요없다길래)
 
     //주변정류소목록조회 api key
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
@@ -103,8 +101,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS)
-                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+                .setInterval(UPDATE_INTERVAL_MS);
+                //.setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
 
         LocationSettingsRequest.Builder builder =
@@ -130,22 +128,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(tag, "순서 3 : 쓰레드 내부");
-                busStationAroundList(); //순서 4 : 파싱
 
-                //정류장 위도경도 조회
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d(tag, "runOnUi쓰레드 내부");
-                        makemarker(gMap);
-                    }
-                });
-            }
-        }).start();
 
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
@@ -195,7 +178,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
 
         gMap.getUiSettings().setMyLocationButtonEnabled(true);
-        gMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        gMap.animateCamera(CameraUpdateFactory.zoomTo(12));
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
@@ -229,16 +212,80 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
                 Log.d(tag, "onLocationResult : " + markerSnippet);
 
+                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(currentLatLng)
+                        .title(markerTitle)
+                        .snippet(markerSnippet)
+                        .draggable(true)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+                        .flat(true);
+                //반경 원 표시
+                CircleOptions circle1KM = new CircleOptions().center(currentLatLng) //원점
+                        .radius(1000)      //반지름 단위 : m
+                        .strokeWidth(0f)  //선너비 0f : 선없음
+                        .fillColor(Color.parseColor("#2679C2F0")); //배경색
+
+                currentMarker = gMap.addMarker(markerOptions);
+                currentMarker.showInfoWindow();
+                gMap.addCircle(circle1KM);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+                gMap.moveCamera(cameraUpdate);
+
 
                 //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, markerTitle, markerSnippet);
+                //setCurrentLocation(location, markerTitle, markerSnippet);
 
                 mCurrentLocation = location;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(tag, "순서 3 : 쓰레드 내부");
+                        busStationAroundList(); //순서 4 : 파싱
+
+                        //정류장 위도경도 조회
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d(tag, "runOnUi쓰레드 내부");
+                                makemarker(gMap);
+                            }
+                        });
+                    }
+                }).start();
+
             }
 
         }
 
     };
+
+    public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
+        if (currentMarker != null) currentMarker.remove();
+
+        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(currentLatLng)
+                .title(markerTitle)
+                .snippet(markerSnippet)
+                .draggable(true)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+                .flat(true);
+
+        //반경 원 표시
+        CircleOptions circle200m = new CircleOptions().center(currentLatLng) //원점
+                .radius(200)      //반지름 단위 : m
+                .strokeWidth(0f)  //선너비 0f : 선없음
+                .fillColor(Color.parseColor("#8879C2F0")); //배경색
+
+        currentMarker = gMap.addMarker(markerOptions);
+        currentMarker.showInfoWindow();
+        gMap.addCircle(circle200m);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+        gMap.moveCamera(cameraUpdate);
+    }
 
     private String busStationAroundList() {
         Log.d(tag, "순서 4 : 파싱");
@@ -441,31 +488,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     }
 
 
-    public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-        if (currentMarker != null) currentMarker.remove();
 
-        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(currentLatLng)
-                .title(markerTitle)
-                .snippet(markerSnippet)
-                .draggable(true)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
-                .flat(true);
-
-        //반경 원 표시
-        CircleOptions circle200m = new CircleOptions().center(currentLatLng) //원점
-                .radius(200)      //반지름 단위 : m
-                .strokeWidth(0f)  //선너비 0f : 선없음
-                .fillColor(Color.parseColor("#8879C2F0")); //배경색
-
-        currentMarker = gMap.addMarker(markerOptions);
-        currentMarker.showInfoWindow();
-        gMap.addCircle(circle200m);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        gMap.moveCamera(cameraUpdate);
-    }
 
 
     public void setDefaultLocation() {
