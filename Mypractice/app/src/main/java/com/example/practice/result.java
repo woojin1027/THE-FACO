@@ -92,7 +92,7 @@ public class result extends AppCompatActivity {
         final Double db_ey = intent.getDoubleExtra("도착지경도", 0);
 
         setting1.setText(str_1);setting2.setText(str_2);
-
+        Log.d(TAG, "출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
         //textView.setText("출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
         //init(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
 
@@ -189,8 +189,6 @@ public class result extends AppCompatActivity {
 
     public void DataSet()
     {
-
-
         for(int i = 0; i < Time.size(); i++)
         {
             //시간이 모두 분으로 나오기 때문에 시,분으로 나누어줌
@@ -214,11 +212,10 @@ public class result extends AppCompatActivity {
             adapter.addItem(new Path_items("","","",0));
 
             //조건문 달아서 다시 셋팅
-            for(int j = 0; j < RouteNm.get(j).size(); j++)
+            for(int j = 0; j < RouteNm.get(i).size(); j++)
             {
                 Routesetting = Routesetting + RouteNm.get(i).get(j) + "\n";
                 Fnamesetting = Fnamesetting + Fname.get(i).get(j) + "\n";
-
 
                 if(j == RouteNm.get(j).size() - 1)
                 {
