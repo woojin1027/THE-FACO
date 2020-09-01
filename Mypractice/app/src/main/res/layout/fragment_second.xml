@@ -11,8 +11,15 @@
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EditText" />
+        android:text="EditText"
+        android:fontFamily="@font/font_dream"/>
 
+    <TextView
+        android:id="@+id/edit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="테스트 해보기456"
+        android:fontFamily="@font/font_dream"></TextView>
 
 </LinearLayout>
 

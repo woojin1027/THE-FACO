@@ -15,8 +15,8 @@ public class FgSecond extends Fragment {
     private int page;
 
     // newInstance constructor for creating fragment with arguments
-    public static FgFirst newInstance(int page, String title) {
-        FgFirst fragment = new FgFirst();
+    public static FgSecond newInstance(int page, String title) {
+        FgSecond fragment = new FgSecond();
         Bundle args = new Bundle();
         args.putInt("someInt", page);
         args.putString("someTitle", title);
