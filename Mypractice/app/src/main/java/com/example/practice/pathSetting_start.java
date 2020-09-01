@@ -235,7 +235,7 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
         nearby_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(pathSetting_start.this, map_around_busstop.class);
+                Intent intent = new Intent(pathSetting_start.this, map_around_busstop2.class);
                 startActivity(intent);
             }
         });

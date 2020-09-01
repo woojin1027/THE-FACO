@@ -30,6 +30,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
 
+        <activity android:name=".map_around_busstop2"/>
+
         <activity android:name=".map_around_busstop" />
         <activity android:name=".result" />
         <activity android:name=".BaseActivity" />
