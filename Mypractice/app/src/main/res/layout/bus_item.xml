@@ -206,7 +206,7 @@
                 android:gravity="center"
                 android:text="대기현황"
                 android:textStyle="bold"
-                android:translationX="303dp"
+                android:translationX="301dp"
                 android:translationY="90dp" />
 
         </RelativeLayout>
