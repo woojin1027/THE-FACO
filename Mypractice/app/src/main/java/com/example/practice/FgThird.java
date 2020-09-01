@@ -39,7 +39,7 @@ public class FgThird extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_third, container, false);
         EditText tvLabel = (EditText) view.findViewById(R.id.editText3);
-        tvLabel.setText(page + " -- " + title);
+        tvLabel.setText(title);
         return view;
     }
 }

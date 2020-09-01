@@ -38,11 +38,11 @@ public class Reason extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return FgFirst.newInstance(0, "노선에 번잡함을 강조 _ 공감대");
+                    return FgFirst.newInstance(1, "8100 노선을 선정한 이유");
                 case 1:
-                    return FgSecond.newInstance(1, "주요 목적지가 같은 두 노선");
+                    return FgSecond.newInstance(2, "M4102 노선을 선정한 이유");
                 case 2:
-                    return FgThird.newInstance(2, "등등");
+                    return FgThird.newInstance(3, "등등");
                 default:
                     return null;
             }

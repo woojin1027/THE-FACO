@@ -39,7 +39,7 @@ public class FgSecond extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         EditText tvLabel = (EditText) view.findViewById(R.id.editText2);
-        tvLabel.setText(page + " -- " + title);
+        tvLabel.setText(title);
         return view;
     }
 }

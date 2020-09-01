@@ -142,6 +142,11 @@
                 android:textStyle="bold"
                 android:padding="15dp"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
 
             <Button
                 android:id="@+id/reason1"
@@ -152,27 +157,27 @@
                 android:background="@drawable/back_3"
                 android:fontFamily="@font/font_dream"
                 android:padding="15dp"
-                android:text="1. 노선 상정 이유(버튼)"
+                android:text="1. 노선 상정 이유 : 왜 하필 이 노선들인가"
                 android:textColor="#ffffff"
                 android:textSize="16sp">
             </Button>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/reason1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="65dp"
+                android:background="@drawable/back_3"
                 android:fontFamily="@font/font_dream"
-                android:text="2. 자세한 활용방법"
+                android:padding="15dp"
+                android:text="2. 자세한 활용방법 : 이것만 보면 \n
+                               야, 너두 할수있어"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
-                android:padding="15dp"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ticket_1">
-            </ImageView>
+                android:gravity="left">
+            </Button>
+        </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
