@@ -117,7 +117,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         setContentView(R.layout.map_search);
 
         mLayout = findViewById(R.id.map_search);
-        textView = findViewById(R.id.textView5);
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -270,8 +269,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                             @Override
                             public void run() {
                                 Log.d(tag, "runOnUi쓰레드 내부");
-                                textView.setText(str_stationName + "\n" + str_mobileNo+ "\n" + double_x+ "\n" + double_y); //확인용
-                                textView.getVisibility();
+
                                 makemarker(gMap);
                             }
                         });

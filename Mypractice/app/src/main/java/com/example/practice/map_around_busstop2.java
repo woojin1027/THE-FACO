@@ -119,7 +119,7 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
         setContentView(R.layout.map_search);
 
         mLayout = findViewById(R.id.map_search);
-        textView = findViewById(R.id.textView5);
+        //textView = findViewById(R.id.textView5);
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
