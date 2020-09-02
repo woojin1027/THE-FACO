@@ -55,6 +55,12 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
 
         data = new ArrayList<HashMap<String, String>>();
 
+//테스트용
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기대후문");
+        data_hashmap.put("정류소번호", "04031");
+        data.add(data_hashmap);
+
         data_hashmap = new HashMap<String, String>();
         data_hashmap.put("정류장명", "단국대.치과병원");
         data_hashmap.put("정류소번호", "47682");
