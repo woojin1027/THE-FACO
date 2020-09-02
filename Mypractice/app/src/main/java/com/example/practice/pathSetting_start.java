@@ -255,7 +255,6 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HashMap<String,String> map =(HashMap<String,String>)list_new.getItemAtPosition(position);
-                //Map.Entry<String,String> entry = map.entrySet().iterator().next();
                 mytest = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
                 mytest_name = map.get("정류장명");
 

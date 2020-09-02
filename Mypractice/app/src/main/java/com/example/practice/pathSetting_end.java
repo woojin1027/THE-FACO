@@ -26,8 +26,6 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//해야할것 : 정류장 클릭 시 텍스트뷰에 띄우게 바꾸기
-
 public class pathSetting_end extends BaseActivity2 implements TextWatcher{
     public String selected_item;
     public String mytest2;
@@ -258,7 +256,6 @@ public class pathSetting_end extends BaseActivity2 implements TextWatcher{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HashMap<String, String> map = (HashMap<String,String>)list_new.getItemAtPosition(position);
-                //Map.Entry<String,String> entry = map.entrySet().iterator().next();
                 mytest2 = map.get("정류소번호"); //07333같은 5글자의 정류소 고유 숫자
                 mytest_name2 = map.get("정류장명");
 
