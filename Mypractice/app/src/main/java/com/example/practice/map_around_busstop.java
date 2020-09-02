@@ -52,35 +52,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-//주변 정류장 띄우기
+//출발 > 주변 정류장 띄우기
 public class map_around_busstop extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap gMap;
     public Marker marker;
     private Marker currentMarker = null;
-    String no = null,name=null;
-    Double x = null,y = null;
     private String str_mobileNo,str_stationName,str_x,str_y;
     private double double_x, double_y;
 
-
-    //배열 만들기 시도
-    /*
-    String[] str_mobileNo = new String[20];
-    String[] str_stationName = new String[20];
-    String[] str_x = new String[20];
-    String[] str_y = new String[20];
-
-    Double[] double_x = new Double[20];
-    Double[] double_y = new Double[20];
-    int i =0;
-    */
-
+    private ArrayList Double_x = new ArrayList();
+    private ArrayList Double_y = new ArrayList();
 
     private static final String tag = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 60000;  // 내위치 업데이트 : 60초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 30000; // 30초 (필요없다길래)
+    private static final int UPDATE_INTERVAL_MS = 60000000;  // 내위치 업데이트 : 60000초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 30000000; // 30초 (필요없다길래)
 
     //주변정류소목록조회 api key
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
@@ -102,8 +89,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     private LocationRequest locationRequest;
     private Location location;
 
-
-    TextView textView; //데이터 확인용
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
 
     @Override
@@ -121,8 +106,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS);
-                //.setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
-
 
         LocationSettingsRequest.Builder builder =
                 new LocationSettingsRequest.Builder();
@@ -242,22 +225,21 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                         .flat(true);
 
                 //반경 원 표시
-                CircleOptions circle700m = new CircleOptions().center(currentLatLng) //원점
-                        .radius(700)      //반지름 단위 : m
+                CircleOptions circle500m = new CircleOptions().center(currentLatLng) //원점
+                        .radius(500)      //반지름 단위 : m
                         .strokeWidth(0f)  //선너비 0f : 선없음
                         .fillColor(Color.parseColor("#1A79C2F0")); //배경색
 
                 currentMarker = gMap.addMarker(markerOptions);
                 currentMarker.showInfoWindow();
-                gMap.addCircle(circle700m);
+                gMap.addCircle(circle500m);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
                 gMap.moveCamera(cameraUpdate);
 
-
-                //현재 위치에 마커 생성하고 이동
-                //setCurrentLocation(location, markerTitle, markerSnippet);
-
                 mCurrentLocation = location;
+                
+                Double_x.clear();
+                Double_y.clear();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -281,32 +263,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         }
 
     };
-
-    public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-        if (currentMarker != null) currentMarker.remove();
-
-        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(currentLatLng)
-                .title(markerTitle)
-                .snippet(markerSnippet)
-                .draggable(true)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow2))
-                .flat(true);
-
-        //반경 원 표시
-        CircleOptions circle700m = new CircleOptions().center(currentLatLng) //원점
-                .radius(700)      //반지름 단위 : m
-                .strokeWidth(0f)  //선너비 0f : 선없음
-                .fillColor(Color.parseColor("#8879C2F0")); //배경색
-
-        currentMarker = gMap.addMarker(markerOptions);
-        currentMarker.showInfoWindow();
-        gMap.addCircle(circle700m);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        gMap.moveCamera(cameraUpdate);
-    }
 
     private String busStationAroundList() {
         Log.d(tag, "순서 4 : 파싱");
@@ -354,13 +310,15 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_x = xpp.getText();
-                            double_x = Double.parseDouble(str_x);
+                            //double_x = Double.parseDouble(str_x);
+                            Double_x.add(xpp.getText());
                         } else if (tag.equals("y")) //위도
                         {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_y = xpp.getText();
-                            double_y = Double.parseDouble(str_y);
+                            //double_y = Double.parseDouble(str_y);
+                            Double_y.add(xpp.getText());
                         }
                         break;
 
@@ -370,16 +328,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
                         if (tag.equals("busStationAroundList"))
-//                            LatLng apidata = new LatLng(double_x, double_y);
-//                            MarkerOptions markerOptions = new MarkerOptions();
-//                            markerOptions.position(apidata)
-//                                    .title(str_stationName)
-//                                    .snippet(str_mobileNo)
-//                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus));
-//                            marker = gMap.addMarker(markerOptions);
-//                            marker.showInfoWindow();
                             buffer.append("\n");
-                        // 첫번째 검색결과종료..줄바꿈
 
                         break;
                 }
@@ -403,16 +352,17 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         double_x = Double.parseDouble(str_x);
         double_y = Double.parseDouble(str_y);
 
-        LatLng busstopLocation = new LatLng(double_y, double_x);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(busstopLocation)
-                .title(str_stationName)
-                .snippet(str_mobileNo)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
-        marker = gMap.addMarker(markerOptions);
-        marker.showInfoWindow();
-
-        //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
+        for(int i = 0; i < Double_x.size(); i++)
+        {
+            LatLng busstopLocation = new LatLng(Double.parseDouble(Double_y.get(i).toString()), Double.parseDouble(Double_x.get(i).toString()));
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(busstopLocation)
+                    .title(str_stationName)
+                    .snippet(str_mobileNo)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
+            marker = gMap.addMarker(markerOptions);
+            marker.showInfoWindow();
+        }
     }
 
     private void startLocationUpdates() {
@@ -462,12 +412,9 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
             if (gMap != null)
                 gMap.setMyLocationEnabled(true);
-
         }
 
-
     }
-
 
     @Override
     protected void onStop() {
@@ -532,9 +479,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 여부를 확인하세요";
-
-
-        //if (currentMarker != null) currentMarker.remove();
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(DEFAULT_LOCATION);
