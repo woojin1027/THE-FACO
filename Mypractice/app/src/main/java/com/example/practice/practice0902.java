@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -14,14 +13,15 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -35,7 +35,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -51,9 +50,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-//주변 정류장 띄우기 연습2
-//열것:  Practice_items, practiceAdapter, 이거
-public class map_around_busstop2 extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+import java.util.TreeMap;
+
+public class practice0902 extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
+
 
     private GoogleMap gMap;
     public Marker marker;
@@ -61,14 +61,15 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
     private String str_mobileNo, str_stationName, str_x, str_y;
     private double double_x, double_y;
 
-    private ArrayList x_array = new ArrayList();
-    private ArrayList y_array = new ArrayList();
-    private ArrayList mobileNo_array = new ArrayList();
-    private ArrayList stationName_array = new ArrayList();
+    private ArrayList x_array;
+    private ArrayList y_array;
+    private ArrayList mobileNo_array;
+    private ArrayList stationName_array;
     private ArrayList<ArrayList<String>> X_ARRAY = new ArrayList<ArrayList<String>>();
     private ArrayList<ArrayList<String>> Y_ARRAY = new ArrayList<ArrayList<String>>();
     private ArrayList<ArrayList<String>> MOBILENO_ARRAY = new ArrayList<ArrayList<String>>();
     private ArrayList<ArrayList<String>> STATIONNAME_ARRAY = new ArrayList<ArrayList<String>>();
+
     private URL url;
     private InputStream is;
     private XmlPullParserFactory factory;
@@ -105,218 +106,111 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
     private Location location;
 
 
+
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //다소 배터리를 소모하지만 스크린이 켜진 상태로 유지시킨다
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        setContentView(R.layout.map_search);
-
+        setTitle("주변 정류장 조회 결과");
+        setContentView(R.layout.practice0902);
         mLayout = findViewById(R.id.map_search);
-        //textView = findViewById(R.id.textView5);
+        x_array= new ArrayList();
+        y_array= new ArrayList();
+        mobileNo_array= new ArrayList();
+        stationName_array= new ArrayList();
+
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS);
-        //.setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
-
 
         LocationSettingsRequest.Builder builder =
                 new LocationSettingsRequest.Builder();
 
         builder.addLocationRequest(locationRequest);
-        Y_ARRAY.clear();
-        X_ARRAY.clear();
-        MOBILENO_ARRAY.clear();
-        STATIONNAME_ARRAY.clear();
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_search);
         mapFragment.getMapAsync(this);
 
 
-    }
+        RecyclerView recyclerView = findViewById(R.id.recyclerview_practice);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter)   ;
 
-    @Override
-    public void onMapReady(final GoogleMap googleMap) {
-        Log.d(tag, "onMapReady :");
+        RecyclerViewSet();
 
-        gMap = googleMap;
-        gMap.getUiSettings().setZoomControlsEnabled(true);
-        //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
-        //지도의 초기위치를 서울로 이동
-        setDefaultLocation();
-
-
-        //런타임 퍼미션 처리
-        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
+        x_array.clear();
+        y_array.clear();
+        mobileNo_array.clear();
+        stationName_array.clear();
 
 
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
 
-            // 2. 이미 퍼미션을 가지고 있다면
-            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
-
-
-            startLocationUpdates(); // 3. 위치 업데이트 시작
-
-
-        } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
-
-            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
-
-                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-                Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
-                        Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-
-                        // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions(map_around_busstop2.this, REQUIRED_PERMISSIONS,
-                                PERMISSIONS_REQUEST_CODE);
-                    }
-                }).show();
-
-
-            } else {
-                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
-                        PERMISSIONS_REQUEST_CODE);
-            }
-
-        }
-
-
-        gMap.getUiSettings().setMyLocationButtonEnabled(true);
-        gMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
+        new Thread(new Runnable() {
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void run() {
+                Log.d(tag, "순서 3 : 쓰레드 내부");
+                Location test = location;
 
-                Log.d(tag, "onMapClick :");
-            }
-        });
-    }
+                busStationAroundList(test);
 
-    LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            super.onLocationResult(locationResult);
-
-            List<Location> locationList = locationResult.getLocations();
-
-            if (locationList.size() > 0) {
-                location = locationList.get(locationList.size() - 1);
-                //location = locationList.get(0);
-
-                currentPosition
-                        = new LatLng(location.getLatitude(), location.getLongitude());
-
-
-                String markerTitle = "내 위치";
-
-                String markerSnippet = getCurrentAddress(currentPosition);
-                /*String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
-                        + " 경도:" + String.valueOf(location.getLongitude());*/
-
-                Log.d(tag, "onLocationResult 내 위치 : " + markerSnippet);
-
-                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-                MarkerOptions markerOptions = new MarkerOptions()
-                        .position(currentLatLng)
-                        .title(markerTitle)
-                        .snippet(markerSnippet)
-                        .draggable(true)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow2))
-                        .flat(true);
-
-                //반경 원 표시
-                CircleOptions circle700m = new CircleOptions().center(currentLatLng) //원점
-                        .radius(700)      //반지름 단위 : m
-                        .strokeWidth(0f)  //선너비 0f : 선없음
-                        .fillColor(Color.parseColor("#1A79C2F0")); //배경색
-
-                currentMarker = gMap.addMarker(markerOptions);
-                currentMarker.showInfoWindow();
-                gMap.addCircle(circle700m);
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-                gMap.moveCamera(cameraUpdate);
-
-
-                //현재 위치에 마커 생성하고 이동
-                //setCurrentLocation(location, markerTitle, markerSnippet);
-
-                mCurrentLocation = location;
-
-                new Thread(new Runnable() {
+                //정류장 위도경도 조회
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(tag, "순서 3 : 쓰레드 내부");
-                        busStationAroundList(); //순서 4 : 파싱
+                        Log.d(tag, "runOnUi쓰레드 내부" + stationName_array);
+                        //어케 세팅하는지
+                        for(int i=0; i < stationName_array.size(); i++)
+                        {adapter.setItem(i,new Practice_items(stationName_array.get(i).toString(), mobileNo_array.get(i).toString(), x_array.get(i).toString(), y_array.get(i).toString(), 0)); }
 
-                        //정류장 위도경도 조회
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.d(tag, "runOnUi쓰레드 내부");
-
-                                //makemarker(gMap);
-                            }
-                        });
+                        //makemarker(gMap);
                     }
-                }).start();
+                });
             }
-
-        }
-
-    };
-
-    public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-        if (currentMarker != null) currentMarker.remove();
-
-        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(currentLatLng)
-                .title(markerTitle)
-                .snippet(markerSnippet)
-                .draggable(true)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow2))
-                .flat(true);
-
-        //반경 원 표시
-        CircleOptions circle700m = new CircleOptions().center(currentLatLng) //원점
-                .radius(700)      //반지름 단위 : m
-                .strokeWidth(0f)  //선너비 0f : 선없음
-                .fillColor(Color.parseColor("#8879C2F0")); //배경색
-
-        currentMarker = gMap.addMarker(markerOptions);
-        currentMarker.showInfoWindow();
-        gMap.addCircle(circle700m);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        gMap.moveCamera(cameraUpdate);
+        }).start();
+//
+//        init();
     }
 
-    private void busStationAroundList() {
-        Log.d(tag, "순서 4 : 파싱");
+    private void RecyclerViewSet() {
+        Log.d(tag,"RecyclerViewSet 내부");
+        for(int i = 0; i < stationName_array.size(); i++)
+        {
+            adapter.addItem(new Practice_items("정류장명","모바일넘버","경도","위도",0));
+        }
+    }
+
+//    private void init() {
+//        Log.d(tag,"init 내부");
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run()
+//            {
+//                busStationAroundList();
+//
+//                //UI setText 하는 곳
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run()
+//                    {
+//                        Log.d(tag,"runOnUiThread 내부");
+//                        for(int i=0; i < stationName_array.size(); i++)
+//                        {adapter.setItem(i,new Practice_items(stationName_array.get(i).toString(), mobileNo_array.get(i).toString(), x_array.get(i).toString(), y_array.get(i).toString(), 0)); }
+//                    }
+//                });
+//            }
+//
+//        });
+//    }
+
+
+    //주변 정류장 조회
+    private void busStationAroundList(Location location) {
+        Log.d(tag, "파싱");
         StringBuffer buffer = new StringBuffer();
 
         String stationUrl = endPoint + "?serviceKey=" + key + "&x=" + location.getLongitude() + "&y=" + location.getLatitude();
@@ -329,13 +223,13 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
                         break;
                     case XmlPullParser.START_TAG:       //xml 문서의 태그의 첫부분 만날시
                         tag = xpp.getName();    //태그이름 얻어오기
-                        if (tag.equals("busStationAroundList")) //첫번째 검색 결과
-                        {
-                            x_array = new ArrayList();
-                            y_array = new ArrayList();
-                            mobileNo_array = new ArrayList();
-                            stationName_array = new ArrayList();
-                        }
+                        if (tag.equals("busStationAroundList")); //첫번째 검색 결과
+//                        {
+//                            x_array = new ArrayList();
+//                            y_array = new ArrayList();
+//                            mobileNo_array = new ArrayList();
+//                            stationName_array = new ArrayList();
+//                        }
 //                        if (tag.equals("pathList")) ;
 
                         else if (tag.equals("mobileNo")) {
@@ -357,10 +251,10 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
                             xpp.next();
                             y_array.add(xpp.getText());
                             double_y = Double.parseDouble(xpp.getText());
-                            X_ARRAY.add(x_array);
-                            Y_ARRAY.add(y_array);
-                            MOBILENO_ARRAY.add(mobileNo_array);
-                            STATIONNAME_ARRAY.add(stationName_array);
+//                            X_ARRAY.add(x_array);
+//                            Y_ARRAY.add(y_array);
+//                            MOBILENO_ARRAY.add(mobileNo_array);
+//                            STATIONNAME_ARRAY.add(stationName_array);
 
                         }
                         break;
@@ -370,9 +264,7 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
 
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
-                        if (tag.equals("busStationAroundList")) {makemarker(gMap);}
-                        adapter.addItem(new Practice_items("","","","",0)); //첫번째 검색결과 종료
-
+                        if (tag.equals("busStationAroundList"));
                         break;
                 }
                 eventType = xpp.next();
@@ -399,104 +291,100 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
     }
 
 
-//
-//        try {
-//            URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
-//            InputStream is = url.openStream(); //url위치로 입력스트림 연결
-//            Log.d(tag, queryUrl);
-//            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-//            XmlPullParser xpp = factory.newPullParser();
-//            xpp.setInput(new InputStreamReader(is, "UTF-8")); //inputstream 으로부터 xml 입력받기
-//
-//            String tag = null;
-//
-//            xpp.next();
-//            int eventType = xpp.getEventType();
-//
-//            while (eventType != XmlPullParser.END_DOCUMENT) {
-//                switch (eventType) {
-//                    case XmlPullParser.START_DOCUMENT:
-//                        Log.d(tag, "파싱시작");
-//                        break;
-//
-//                    case XmlPullParser.START_TAG:
-//                        tag = xpp.getName();//태그 이름 얻어오기
-//                        if (tag.equals("busStationAroundList")) ;// 첫번째 검색결과
-//
-//                        else if (tag.equals("mobileNo")) {
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            str_mobileNo = xpp.getText();
-//
-//                        } else if (tag.equals("stationName")) {
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            str_stationName = xpp.getText();
-//                        } else if (tag.equals("x")) //경도
-//                        {
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            str_x = xpp.getText();
-//                            double_x = Double.parseDouble(str_x);
-//                        } else if (tag.equals("y")) //위도
-//                        {
-//                            xpp.next();
-//                            buffer.append(xpp.getText());
-//                            str_y = xpp.getText();
-//                            double_y = Double.parseDouble(str_y);
-//                        }
-//                        break;
-//
-//                    case XmlPullParser.TEXT:
-//                        break;
-//
-//                    case XmlPullParser.END_TAG:
-//                        tag = xpp.getName(); //태그 이름 얻어오기
-//                        if (tag.equals("busStationAroundList"))
-////                            LatLng apidata = new LatLng(double_x, double_y);
-////                            MarkerOptions markerOptions = new MarkerOptions();
-////                            markerOptions.position(apidata)
-////                                    .title(str_stationName)
-////                                    .snippet(str_mobileNo)
-////                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus));
-////                            marker = gMap.addMarker(markerOptions);
-////                            marker.showInfoWindow();
-//                            buffer.append("\n");
-//                        // 첫번째 검색결과종료..줄바꿈
-//
-//                        break;
-//                }
-//                eventType = xpp.next();
-//            }
-//
-//        } catch (Exception e) {
-//            Log.d(tag, "에러발생");
-//        }
-//
-//        Log.d(tag, "파싱종료");
-//        return buffer.toString();
-//
-//    }
 
 
-    private void makemarker(GoogleMap gMap) {
 
-        Log.d(tag, "순서 5 : 정류장 마커찍기");
-//
-//        double_x = Double.parseDouble(str_x);
-//        double_y = Double.parseDouble(str_y);
 
-        LatLng busstopLocation = new LatLng(double_y, double_x);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(busstopLocation)
-                .title(str_stationName)
-                .snippet(str_mobileNo)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
-        marker = gMap.addMarker(markerOptions);
-        marker.showInfoWindow();
 
-        //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
+
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
+        Log.d(tag, "onMapReady :");
+
+        gMap = googleMap;
+        gMap.getUiSettings().setZoomControlsEnabled(true);
+        //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
+
+
+        //런타임 퍼미션 처리
+        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+
+
+        // 2. 이미 퍼미션을 가지고 있다면
+        // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
+            startLocationUpdates(); // 3. 위치 업데이트 시작
+        }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
+
+            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
+
+                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
+                Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
+                        Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+
+                        // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                        ActivityCompat.requestPermissions(practice0902.this, REQUIRED_PERMISSIONS,
+                                PERMISSIONS_REQUEST_CODE);
+                    }
+                }).show();
+
+
+            } else {
+                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
+                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
+                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
+                        PERMISSIONS_REQUEST_CODE);
+            }
+
+
+
+        }
+
+
+        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                Log.d(tag, "onMapClick :");
+            }
+        });
     }
+
+    LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+
+            List<Location> locationList = locationResult.getLocations();
+
+            if (locationList.size() > 0) {
+                location = locationList.get(locationList.size() - 1);
+                //location = locationList.get(0);
+
+                currentPosition
+                        = new LatLng(location.getLatitude(), location.getLongitude());
+
+                String markerSnippet = getCurrentAddress(currentPosition);
+                Log.d(tag, "onLocationResult 내 위치 : " + markerSnippet);
+
+                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+                mCurrentLocation = location;
+            }
+
+
+        }
+    };
 
 
     private void startLocationUpdates() {
@@ -723,7 +611,7 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(map_around_busstop2.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(practice0902.this);
         builder.setTitle("위치 서비스 비활성화");
         builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"
                 + "위치 설정을 수정하실래요?");
