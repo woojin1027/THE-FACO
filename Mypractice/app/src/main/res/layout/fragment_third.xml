@@ -34,56 +34,67 @@
         android:layout_gravity="center">
     </TextView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:weightSum="2"
+        android:layout_height="wrap_content"
         android:background="@drawable/phone"
         android:scaleX="0.9"
-        android:padding="30dp">
+        android:padding="40dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="1dp"
-            android:translationY="100dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/r8"
-                android:scaleX="0.9"
-                android:adjustViewBounds="true"></ImageView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_width="1dp"
-            android:translationY="100dp"
             android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_dream"
+            android:layout_marginTop="50dp"
+            android:text="  알고있었어? 2.7억뷰인거?"
+            android:textSize="25dp"></TextView>
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleX="0.9"
-                android:src="@drawable/r8"></ImageView>
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=" 테스트\n 테스트"
-                android:textSize="30dp"
-                android:fontFamily="@font/font_dream"></TextView>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/r8"
+                        android:translationY="-330dp"></ImageView>
+                </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="100"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="test \n test"
+                        android:fontFamily="@font/font_dream"></TextView>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/r8"
+                        android:translationY="-210dp"></ImageView>
+                </LinearLayout>
+            </LinearLayout>
+
+
+</LinearLayout></ScrollView></LinearLayout></LinearLayout>
+
+
+
