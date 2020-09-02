@@ -8,9 +8,15 @@
     android:orientation="vertical">
 
     <LinearLayout
+<<<<<<< Updated upstream
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp">
+=======
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+>>>>>>> Stashed changes
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/youTubePlayerView"
@@ -19,6 +25,7 @@
             app:autoPlay="true"
             app:layout_constraintTop_toTopOf="parent"
             app:showYouTubeButton="false"
+<<<<<<< Updated upstream
             app:videoId="xxq9onugqUs"
             android:layout_marginBottom="0dp">
         </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
@@ -73,4 +80,59 @@
 
         </LinearLayout>
     </ScrollView>
+=======
+            app:videoId="xxq9onugqUs"></com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#95C8E8"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@+id/youTubePlayerView"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:background="#C9DCFF"
+            android:fontFamily="@font/dream"
+            android:gravity="center_horizontal"
+            android:text="@string/egg_theday1"
+            android:textColor="#4E6185"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="#C9DCFF"
+            android:fontFamily="@font/dream"
+            android:gravity="left"
+            android:text="@string/egg_theday2"
+            android:textColor="#4E6185"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="#C9DCFF"
+            android:fontFamily="@font/dream"
+            android:gravity="center"
+            android:text="@string/egg_story"
+            android:textColor="#4E6185"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+>>>>>>> Stashed changes
 </LinearLayout>

@@ -39,7 +39,6 @@
         android:translationY="-118dp"
         android:background="@drawable/back_1"
         android:id="@+id/egg_1">
-
     </Button>
 
     <ScrollView
@@ -60,43 +59,45 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/sidebar"
                 android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/font_dream"
-                android:text="앱 개발동기"
-                android:textColor="#134563"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintStart_toStartOf="parent"
-                android:padding="15dp"/>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="10dp"
-                card_view:cardCornerRadius="20dp"
-                card_view:cardUseCompatPadding="true"
-                android:padding="15dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/font_dream"
+                    android:padding="15dp"
+                    android:text="앱 개발동기"
+                    android:textColor="#134563"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/font_dream"
-                    android:text="@string/name_story"
-                    android:textColor="#2D1F6B"
-                    android:textSize="16sp"
-                    android:background="@drawable/sidebar2"/>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    card_view:cardCornerRadius="20dp"
+                    card_view:cardUseCompatPadding="true">
 
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/sidebar2"
+                        android:fontFamily="@font/font_dream"
+                        android:text="@string/name_story"
+                        android:textColor="#2D1F6B"
+                        android:textSize="16sp" />
+
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -175,20 +176,21 @@
                 card_view:cardCornerRadius="20dp"
                 card_view:cardUseCompatPadding="true"
                 android:padding="15dp">
-            <Button
-                android:id="@+id/reason1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/font_dream"
-                android:background="@drawable/back_3"
-                android:padding="15dp"
-                android:text="1. 노선 상정 이유 :\n
-                        왜 하필 이 노선들인가"
-                android:textColor="#134563"
-                android:textSize="16sp"
-                android:gravity="left">
-            </Button>
+                    <Button
+                        android:id="@+id/reason1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_dream"
+                        android:background="@drawable/back_3"
+                        android:padding="15dp"
+                        android:text="1. 노선 상정 이유 :\n
+                                왜 하필 이 노선들인가"
+                        android:textColor="#134563"
+                        android:textSize="16sp"
+                        android:gravity="left">
+                    </Button>
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -208,20 +210,21 @@
                 card_view:cardCornerRadius="20dp"
                 card_view:cardUseCompatPadding="true"
                 android:padding="15dp">
-            <Button
-            android:id="@+id/reason2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_dream"
-            android:background="@drawable/back_3"
-            android:padding="15dp"
-            android:text="2. 자세한 활용방법 : 이것만 보면 \n
-                           야, 너두 할수있어"
-            android:textColor="#134563"
-            android:textSize="16sp"
-            android:gravity="left">
-            </Button>
+                    <Button
+                    android:id="@+id/reason2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_dream"
+                    android:background="@drawable/back_3"
+                    android:padding="15dp"
+                    android:text="2. 자세한 활용방법 : 이것만 보면 \n
+                                   야, 너두 할수있어"
+                    android:textColor="#134563"
+                    android:textSize="16sp"
+                    android:gravity="left">
+                    </Button>
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"

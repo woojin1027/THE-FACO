@@ -15,7 +15,11 @@
         android:layout_gravity="center"
         android:layout_marginTop="180dp"
         android:scaleType="fitXY"
+<<<<<<< Updated upstream
         app:srcCompat="@drawable/logo_b_11" />
+=======
+        app:srcCompat="@drawable/logo_b_10" />
+>>>>>>> Stashed changes
 
     <!--<TextView
         android:id="@+id/textView8"
