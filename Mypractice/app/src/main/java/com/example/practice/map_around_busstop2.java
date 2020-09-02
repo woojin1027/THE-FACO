@@ -249,14 +249,14 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
                         .flat(true);
 
                 //반경 원 표시
-                CircleOptions circle700m = new CircleOptions().center(currentLatLng) //원점
-                        .radius(700)      //반지름 단위 : m
+                CircleOptions circle500m = new CircleOptions().center(currentLatLng) //원점
+                        .radius(500)      //반지름 단위 : m
                         .strokeWidth(0f)  //선너비 0f : 선없음
                         .fillColor(Color.parseColor("#1A79C2F0")); //배경색
 
                 currentMarker = gMap.addMarker(markerOptions);
                 currentMarker.showInfoWindow();
-                gMap.addCircle(circle700m);
+                gMap.addCircle(circle500m);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
                 gMap.moveCamera(cameraUpdate);
 
