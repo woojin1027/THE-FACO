@@ -63,6 +63,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
     private ArrayList Double_x = new ArrayList();
     private ArrayList Double_y = new ArrayList();
+    private ArrayList MobileNo = new ArrayList();
+    private ArrayList StationName = new ArrayList();
 
     private static final String tag = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -240,6 +242,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 
                 Double_x.clear();
                 Double_y.clear();
+                MobileNo.clear();
+                StationName.clear();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -300,24 +304,24 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_mobileNo = xpp.getText();
+                            MobileNo.add(xpp.getText());
 
                         } else if (tag.equals("stationName")) {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_stationName = xpp.getText();
+                            StationName.add(xpp.getText());
                         } else if (tag.equals("x")) //경도
                         {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_x = xpp.getText();
-                            //double_x = Double.parseDouble(str_x);
                             Double_x.add(xpp.getText());
                         } else if (tag.equals("y")) //위도
                         {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_y = xpp.getText();
-                            //double_y = Double.parseDouble(str_y);
                             Double_y.add(xpp.getText());
                         }
                         break;
@@ -357,8 +361,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
             LatLng busstopLocation = new LatLng(Double.parseDouble(Double_y.get(i).toString()), Double.parseDouble(Double_x.get(i).toString()));
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(busstopLocation)
-                    .title(str_stationName)
-                    .snippet(str_mobileNo)
+                    .title(StationName.get(i).toString())
+                    .snippet(MobileNo.get(i).toString())
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
             marker = gMap.addMarker(markerOptions);
             marker.showInfoWindow();
