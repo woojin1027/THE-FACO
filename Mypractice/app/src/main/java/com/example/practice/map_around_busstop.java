@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -50,11 +51,19 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Member;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 //출발 > 주변 정류장 띄우기
-public class map_around_busstop extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+public class map_around_busstop extends AppCompatActivity implements OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener,ActivityCompat.OnRequestPermissionsResultCallback {
 
+    pathSetting_start pathSetting_start = new pathSetting_start();
+    HashMap <String,String> aaa = ((pathSetting_start)pathSetting_start.context).data_hashmap;
+    ArrayList<HashMap<String,String>> bbb = ((pathSetting_start)pathSetting_start.context).data;
+
+    int i =0 ;
+    ArrayList<String> ccc = new ArrayList<String>();
     private GoogleMap gMap;
     public Marker marker;
     private Marker currentMarker = null;
@@ -105,6 +114,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
         mLayout = findViewById(R.id.map_search);
 
+        ccc.add(aaa.get("정류소번호"));
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS);
@@ -191,6 +201,8 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 Log.d(tag, "onMapClick :");
             }
         });
+
+        gMap.setOnMarkerClickListener(this);
     }
 
     LocationCallback locationCallback = new LocationCallback() {
@@ -202,7 +214,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
             if (locationList.size() > 0) {
                 location = locationList.get(locationList.size() - 1);
-                //location = locationList.get(0);
 
                 currentPosition
                         = new LatLng(location.getLatitude(), location.getLongitude());
@@ -211,9 +222,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 String markerTitle = "내 위치";
 
                 String markerSnippet = getCurrentAddress(currentPosition);
-                /*String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
-                        + " 경도:" + String.valueOf(location.getLongitude());*/
-
                 Log.d(tag, "onLocationResult 내 위치 : " + markerSnippet);
 
                 LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -345,7 +353,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
         Log.d(tag, "파싱종료");
         return buffer.toString();
-
     }
 
 
@@ -356,7 +363,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         double_x = Double.parseDouble(str_x);
         double_y = Double.parseDouble(str_y);
 
-        for(int i = 0; i < Double_x.size(); i++)
+        for(i = 0; i < Double_x.size(); i++)
         {
             LatLng busstopLocation = new LatLng(Double.parseDouble(Double_y.get(i).toString()), Double.parseDouble(Double_x.get(i).toString()));
             MarkerOptions markerOptions = new MarkerOptions();
@@ -366,9 +373,57 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
             marker = gMap.addMarker(markerOptions);
             marker.showInfoWindow();
+
+            /*
+            gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+
+                    for (int i = 0; i < MobileNo.size(); i++) {
+                        if (!MobileNo.get(i).toString().equals(aaa.get("정류소번호"))) {
+                            Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
+                                    "아직 제공하지 않는 서비스입니다.",     // 보여줄 메시지
+                                    Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
+                                    .show();
+                        } else {
+                            Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
+                                    "제공하는 서비스",     // 보여줄 메시지
+                                    Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
+                                    .show();
+                        }
+
+                    }return false;
+                }
+            });  */
         }
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        int treeHit = 0;
+
+        while (treeHit < ccc.size()) {
+
+            if (ccc.get(treeHit).equals(MobileNo.toString())){
+                Log.d(tag, "if : true일때");
+                Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
+                        "제공하는 서비스",     // 보여줄 메시지
+                        Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
+                        .show();
+            }
+            else {
+                Log.d(tag, "if : false일때");
+                Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
+                        "제공하지 않는 서비스입니다.",     // 보여줄 메시지
+                        Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
+                        .show();
+//                Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
+//                        "",     // 보여줄 메시지
+//                        Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
+//                        .show();
+            }treeHit++;
+        }return false;
+    }
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
@@ -634,4 +689,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 break;
         }
     }
+
+
 }

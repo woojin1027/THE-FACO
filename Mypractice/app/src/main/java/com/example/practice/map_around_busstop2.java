@@ -271,7 +271,6 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
                 + "&x=" + location.getLongitude()//경도
                 + "&y=" + location.getLatitude();//위도
 
-
         try {
             URL url = new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
             InputStream is = url.openStream(); //url위치로 입력스트림 연결
@@ -369,8 +368,8 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
                     .snippet(str_mobileNo)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
             marker = gMap.addMarker(markerOptions);
-            marker.showInfoWindow();
-        }
+
+        }marker.showInfoWindow();
     }
 
     private void startLocationUpdates() {
