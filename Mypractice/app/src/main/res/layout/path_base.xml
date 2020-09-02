@@ -85,11 +85,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@drawable/edge2"
-        android:layout_marginBottom="-5.1dp"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,9 +95,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 </LinearLayout>

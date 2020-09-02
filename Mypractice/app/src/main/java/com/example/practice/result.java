@@ -3,6 +3,7 @@ package com.example.practice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -167,7 +168,7 @@ public class result extends AppCompatActivity {
                 //리사이클러뷰 최종 셋팅
                 if (j == RouteNm.get(j).size() - 1)
                 {
-                    adapter.setItem(i, new Path_items("" + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), R.drawable.bus_4));
+                    adapter.setItem(i, new Path_items("" + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), 0));
                 }
             }
         }

@@ -44,7 +44,7 @@
                     android:id="@+id/BusTrainimage"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/bus_4" />
+                    app:srcCompat="@drawable/bus_4"/>
 
                 <TextView
                     android:id="@+id/BusTrainNum"
@@ -52,9 +52,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:fontFamily="@font/font_dream"
-                    android:text="버스지하철번호" />
-                    android:layout_gravity="left"
-                    android:text="버스지하철번호" />
+                    android:text="버스지하철번호"
+                    android:lineSpacingExtra="5dp"/>
+
 
 
                 <TextView
@@ -64,9 +64,8 @@
                     android:layout_weight="1"
                     android:text="출발도착지"
                     android:layout_gravity="start"
-                    android:fontFamily="@font/font_dream"/>
-
-                    android:text="출발도착지" />
+                    android:fontFamily="@font/font_dream"
+                    android:lineSpacingExtra="5dp"/>
 
             </LinearLayout>
         </LinearLayout>
