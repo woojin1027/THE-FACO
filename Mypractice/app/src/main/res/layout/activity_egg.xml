@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".EggActivity"
     android:orientation="vertical"
-    android:background="#96FFFF">
+    android:background="#C8FFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
