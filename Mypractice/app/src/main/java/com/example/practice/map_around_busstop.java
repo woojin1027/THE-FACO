@@ -261,6 +261,9 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                 //setCurrentLocation(location, markerTitle, markerSnippet);
 
                 mCurrentLocation = location;
+                
+                Double_x.clear();
+                Double_y.clear();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
