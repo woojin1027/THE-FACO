@@ -70,7 +70,6 @@ public class result extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.path_base);
-        textView = findViewById(R.id.textView4);
         setting1 = findViewById(R.id.textview_setting1);
         setting2 = findViewById(R.id.textview_setting2);
 
@@ -90,8 +89,6 @@ public class result extends AppCompatActivity {
         final Double db_ey = intent.getDoubleExtra("도착지경도", 0);
 
         setting1.setText(str_1);setting2.setText(str_2);
-        //textView.setText("출발지정보\n" + db_sx + "\n" + db_sy + "\n도착지정보\n" + db_ex + "\n" + db_ey);
-        //init(str_1,str_2,db_sx,db_sy,db_ex,db_ey);
 
         Time.clear();
         Tname.clear();
