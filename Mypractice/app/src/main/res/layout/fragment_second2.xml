@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FgFirst"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/editText22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_dream"
+            android:text="EditText"
+            android:gravity="center"></EditText>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_3"
+            android:translationY="-50dp"></Button>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 8100 버스와 많은 부분, 경로가 겹치는 광역버스! \n 비교를 통해, 더 빠른 경로를 추천할께요!"
+        android:translationY="-30dp"
+        android:fontFamily="@font/font_dream"
+        android:layout_gravity="center">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:background="@drawable/phone"
+        android:padding="40dp"
+        android:scaleX="0.9"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/map4102"></ImageView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_dream"
+            android:text="@string/bc_2"
+            android:translationY="-50dp"
+            android:layout_marginBottom="-100dp"></TextView>
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+

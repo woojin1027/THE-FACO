@@ -29,6 +29,7 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
 
         Button egg_1 = view.findViewById(R.id.egg_1);
         Button reason_1 = view.findViewById(R.id.reason1);
+        Button reason_2 = view.findViewById(R.id.reason2);
 
         egg_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,13 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Reason.class);
+                startActivity(intent); // 액티비티 이동.
+            }
+        });
+        reason_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Reason2.class);
                 startActivity(intent); // 액티비티 이동.
             }
         });
