@@ -1,6 +1,8 @@
 package com.example.practice;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -112,6 +114,7 @@ public class result extends AppCompatActivity {
             }
         }).start();
 
+
     }
 
 
@@ -155,14 +158,15 @@ public class result extends AppCompatActivity {
                     Fnamesetting = Fnamesetting + Fname.get(i).get(j) + "\n";
                 }
 
+
                 //이미지 셋팅
                 if (RouteNm.get(i).get(j).contains("선"))
                 {
-                    Imagesetting = R.drawable.bus_3;
+                    Imagesetting = Imagesetting + R.drawable.bus_3;
                 }
                 else
                 {
-                    Imagesetting = R.drawable.bus_4;
+                    Imagesetting = Imagesetting +  R.drawable.bus_4;
                 }
 
                 //리사이클러뷰 최종 셋팅

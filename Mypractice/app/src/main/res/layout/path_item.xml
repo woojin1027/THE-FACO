@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -15,24 +14,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/edge">
+            android:background="@drawable/edge"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 예상시간 : "
-                    android:fontFamily="@font/font_dream" />
+                    android:fontFamily="@font/font_dream"
+                    android:text=" 예상시간 : " />
+
                 <TextView
                     android:id="@+id/timeinfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="소요시간"
-                    android:fontFamily="@font/font_dream"/>
+                    android:fontFamily="@font/font_dream"
+                    android:text="소요시간" />
             </LinearLayout>
 
             <LinearLayout
@@ -44,7 +45,7 @@
                     android:id="@+id/BusTrainimage"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/bus_4"/>
+                    app:srcCompat="@drawable/bus_4" />
 
                 <TextView
                     android:id="@+id/BusTrainNum"
@@ -52,20 +53,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:fontFamily="@font/font_dream"
-                    android:text="버스지하철번호"
-                    android:lineSpacingExtra="5dp"/>
-
+                    android:lineSpacingExtra="5dp"
+                    android:text="버스지하철번호" />
 
 
                 <TextView
                     android:id="@+id/StartEndPlace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="출발도착지"
                     android:layout_gravity="start"
+                    android:layout_weight="1"
                     android:fontFamily="@font/font_dream"
-                    android:lineSpacingExtra="5dp"/>
+                    android:lineSpacingExtra="5dp"
+                    android:text="출발도착지" />
+
 
             </LinearLayout>
         </LinearLayout>
