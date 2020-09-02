@@ -52,7 +52,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-//주변 정류장 띄우기
+//출발 > 주변 정류장 띄우기
 public class map_around_busstop extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap gMap;
