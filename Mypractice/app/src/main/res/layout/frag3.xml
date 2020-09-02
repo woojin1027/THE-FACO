@@ -184,7 +184,7 @@
                         android:background="@drawable/back_3"
                         android:padding="15dp"
                         android:text="1. 노선 상정 이유 :\n
-                                왜 하필 이 노선들인가"
+                        왜 하필 이 노선들인가"
                         android:textColor="#134563"
                         android:textSize="16sp"
                         android:gravity="left">
@@ -218,7 +218,7 @@
                     android:background="@drawable/back_3"
                     android:padding="15dp"
                     android:text="2. 자세한 활용방법 : 이것만 보면 \n
-                                   야, 너두 할수있어"
+                              야, 너두 할수있어"
                     android:textColor="#134563"
                     android:textSize="16sp"
                     android:gravity="left">

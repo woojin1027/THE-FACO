@@ -15,24 +15,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="180dp"
         android:scaleType="fitXY"
-<<<<<<< Updated upstream
         app:srcCompat="@drawable/logo_b_11" />
-=======
-        app:srcCompat="@drawable/logo_b_10" />
->>>>>>> Stashed changes
-
-    <!--<TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/goyangilsan"
-        android:gravity="center"
-        android:text="The FaCo"
-        android:textColor="#FFFFFF"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        tools:visibility="visible" />-->
 
 
 </LinearLayout>
