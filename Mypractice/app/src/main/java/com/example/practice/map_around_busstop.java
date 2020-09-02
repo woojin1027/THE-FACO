@@ -63,6 +63,9 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     private String str_mobileNo,str_stationName,str_x,str_y;
     private double double_x, double_y;
 
+    private ArrayList Double_x = new ArrayList();
+    private ArrayList Double_y = new ArrayList();
+
 
     //배열 만들기 시도
     /*
@@ -354,13 +357,15 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_x = xpp.getText();
-                            double_x = Double.parseDouble(str_x);
+                            //double_x = Double.parseDouble(str_x);
+                            Double_x.add(xpp.getText());
                         } else if (tag.equals("y")) //위도
                         {
                             xpp.next();
                             buffer.append(xpp.getText());
                             str_y = xpp.getText();
-                            double_y = Double.parseDouble(str_y);
+                            //double_y = Double.parseDouble(str_y);
+                            Double_y.add(xpp.getText());
                         }
                         break;
 
@@ -403,13 +408,24 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
         double_x = Double.parseDouble(str_x);
         double_y = Double.parseDouble(str_y);
 
-        LatLng busstopLocation = new LatLng(double_y, double_x);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(busstopLocation)
-                .title(str_stationName)
-                .snippet(str_mobileNo)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
-        marker = gMap.addMarker(markerOptions);
+        for(int i = 0; i < Double_x.size(); i++)
+        {
+            LatLng busstopLocation = new LatLng(Double.parseDouble(Double_y.get(i).toString()), Double.parseDouble(Double_x.get(i).toString()));
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(busstopLocation)
+                    .title(str_stationName)
+                    .snippet(str_mobileNo)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
+            marker = gMap.addMarker(markerOptions);
+        }
+//        LatLng busstopLocation = new LatLng(double_y, double_x);
+//        MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.position(busstopLocation)
+//                .title(str_stationName)
+//                .snippet(str_mobileNo)
+//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
+//        marker = gMap.addMarker(markerOptions);
+
         marker.showInfoWindow();
 
         //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(double_x, double_y), 17));
