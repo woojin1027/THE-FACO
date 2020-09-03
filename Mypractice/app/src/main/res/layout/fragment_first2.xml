@@ -10,68 +10,75 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="53dp"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/editText12"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_dream"
-            android:text="EditText"
-            android:gravity="center"></EditText>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_3"
-            android:translationY="-50dp"></Button>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:src="@drawable/finger1" />
+
+            <TextView
+                android:id="@+id/textView_first2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_dream"
+
+                android:text="TextView"
+                android:textColor="#cc000000"
+                android:textSize="24sp"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" 많은 인원들이 , 수도권에서 이용하는 광역버스! \n 더 많은 분들의 우리의 아이디어를 이해해주시길"
-        android:translationY="-30dp"
-        android:fontFamily="@font/font_dream"
-        android:layout_gravity="center">
-    </TextView>
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/phone"
-        android:padding="40dp"
-        android:scaleX="0.9">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#b391A8D2"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:scaleX="0.7"
-            android:scaleY="0.7"
-            android:translationX="-40dp"
-            android:translationY="-30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_corner3"
+            android:fontFamily="@font/font_dream"
+            android:gravity="center"
+            android:text="The FACO가\n이전 정류장의\n대기 인원 수를 파악해서\n탑승 가능 여부를 안내해드릴게요!"
+            android:textColor="#cc000000"
+            android:textSize="18sp">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:src="@drawable/r1">
 
         </ImageView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_dream"
-            android:text="@string/bc_1"
-            android:translationY="-50dp"></TextView>
     </LinearLayout>
-    </ScrollView>
-    </LinearLayout>
+
 </LinearLayout>
 
 
