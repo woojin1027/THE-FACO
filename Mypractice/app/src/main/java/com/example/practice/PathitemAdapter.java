@@ -19,6 +19,7 @@ public class PathitemAdapter extends RecyclerView.Adapter<PathitemAdapter.ViewHo
     {
         //외부에서 item 을 추가시킬 함수
         items.add(item);
+
     }
 
     public void setItems(ArrayList<Path_items> items)

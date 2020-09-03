@@ -23,12 +23,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/font_dream"
-                    android:text=" 예상시간 : " />
-
-                <TextView
                     android:id="@+id/timeinfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,7 +39,7 @@
                     android:id="@+id/BusTrainimage"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/bus_4" />
+                    app:srcCompat="@drawable/path_line" />
 
                 <TextView
                     android:id="@+id/BusTrainNum"

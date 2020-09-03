@@ -98,6 +98,7 @@ public class result extends AppCompatActivity {
         }).start();
 
 
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -119,12 +120,8 @@ public class result extends AppCompatActivity {
             //리사이클러뷰 셋팅
             String Routesetting = new String();
             String Fnamesetting = new String();
-            String Tnamesetting = new String();
-            int Imagesetting;
             Routesetting = "";
             Fnamesetting = "";
-            Tnamesetting = "";
-            Imagesetting = 0;
             adapter.addItem(new Path_items("","","",0));
 
             //조건문 달아서 다시 셋팅
@@ -145,17 +142,14 @@ public class result extends AppCompatActivity {
                 //이미지 셋팅
                 if (RouteNm.get(i).get(j).contains("선"))
                 {
-                    Imagesetting = Imagesetting + R.drawable.bus_3;
+
                 }
-                else
-                {
-                    Imagesetting = Imagesetting +  R.drawable.bus_4;
-                }
+
 
                 //리사이클러뷰 최종 셋팅
                 if (j == RouteNm.get(j).size() - 1)
                 {
-                    adapter.setItem(i, new Path_items("" + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), 0));
+                    adapter.setItem(i, new Path_items("예상시간 : " + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), R.drawable.path_line));
                 }
             }
         }
