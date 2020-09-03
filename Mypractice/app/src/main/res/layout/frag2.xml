@@ -16,7 +16,7 @@
         android:fontFamily="@font/dream"
         android:text=" 길찾기 "
         android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:visibility="visible"
         />
 

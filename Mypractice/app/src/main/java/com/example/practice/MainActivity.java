@@ -1,17 +1,15 @@
 package com.example.practice;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        /*getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
-
         backPressCloseHandler = new BackPressCloseHandler(this);
 
 
@@ -84,14 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     // 프레그먼트 교체
-    private void setFrag(int n)
-    {
+    private void setFrag(int n) {
         fm = getSupportFragmentManager();
-        ft= fm.beginTransaction();
-        switch (n)
-        {
+        ft = fm.beginTransaction();
+        switch (n) {
             case 0:
-                ft.replace(R.id.Main_Frame,frag1);
+                ft.replace(R.id.Main_Frame, frag1);
                 ft.commit();
                 break;
 
@@ -101,116 +94,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case 2:
-                ft.replace(R.id.Main_Frame,frag3);
+                ft.replace(R.id.Main_Frame, frag3);
                 ft.commit();
                 break;
         }
-
-
-        /* 원래있던거
-
-        //상태바 없애기
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        backPressCloseHandler = new BackPressCloseHandler(this);
-        setContentView(R.layout.activity_main_1);
-        TextView textView3 = (TextView) findViewById(R.id.textView3);
-        TextView textView4 = (TextView) findViewById(R.id.textView4);
-        TextView textView5 = (TextView) findViewById(R.id.textView5);
-        TextView textView6 = (TextView) findViewById(R.id.textView6);
-
-
-
-        //텍스트뷰4 클릭에 대한 이벤트 처리
-        textView4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            //텍스트뷰4 = 추천경로
-            public void onClick(View view) {
-                setContentView(R.layout.activity_main_2);
-            }
-        });
-
-
-        Button busbutton1 = (Button)findViewById(R.id.busNum4); //버튼1에 대한 참조획득
-        Button busbutton2 = (Button)findViewById(R.id.busNum5); //버튼2에 대한 참조획득
-        //버튼1 클릭에 대한 이벤트 처리
-        busbutton1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            //버튼1
-            {
-            public void onClick(View view)
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
-                TextView text = layout.findViewById(R.id.text);
-                Toast toast = new Toast(getApplicationContext());
-                text.setText("8100번 버스를 조회합니다");
-                text.setTextSize(15);
-                text.setTextColor(Color.WHITE);
-                toast.setGravity(Gravity.BOTTOM,0,0);
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
-
-                Intent intent = new Intent(MainActivity.this, subActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        //버튼2 클릭에 대한 이벤트 처리
-        busbutton2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            //버튼2
-            public void onClick(View view)
-            {
-                LayoutInflater inflater = getLayoutInflater();
-                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup)findViewById(R.id.toast_layout));
-                TextView text = layout.findViewById(R.id.text);
-                Toast toast = new Toast(getApplicationContext());
-                text.setText("M4102번 버스를 조회합니다");
-                text.setTextSize(15);
-                text.setTextColor(Color.WHITE);
-                toast.setGravity(Gravity.BOTTOM,0,0);
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
-
-                Intent intent = new Intent(MainActivity.this, showActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        */
-        }
-
-
-    //우측 상단 메뉴는 지웁니다!
-        /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) { //우측상단 메뉴가 보이도록 설정
-        getMenuInflater().inflate(R.menu.menu_right, menu);
-        return true;
     }
-
-    public boolean onOptionsItemSelected(MenuItem item) { // 우측상단 메뉴 설정
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.navigation_menu1://즐겨찾기
-                return true;
-            case R.id.navigation_menu2: //TheFaCo란?
-                //데이터 담아서 팝업(액티비티) 호출
-                Intent intent = new Intent(this, popupActivity.class);
-                intent.putExtra("data", "'THE FAstest COurse' 의 줄임말 입니다. \n 이 앱의 취지는 현재의 대중교통 서비스앱과 비교하여, 사용자에게 가장 빠른 길을 알려주고픈 마음으로 시작하였습니다. \n 이러한 생각을 알려드리기위해 위와 같은 명칭으로 앱을 제작하였습니다. ");
-                //value에 설명할 내용을 적으면 됨
-
-                startActivityForResult(intent, 1);
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-*/
 }
