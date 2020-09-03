@@ -35,7 +35,6 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
             @Override
             public void onClick(View v) {
                 toastshow8100(container);
-
                 Intent intent = new Intent(getActivity(),subActivity.class);
                 startActivity(intent);
         }});
@@ -51,7 +50,6 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
 
         return view;
     }
-
 
     //custom toast띄우기
    private void toastshow8100(ViewGroup container) {
@@ -81,4 +79,5 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
         toast.setView(layout);
         toast.show();
     }
+
 }

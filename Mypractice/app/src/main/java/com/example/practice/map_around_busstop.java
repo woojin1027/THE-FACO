@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,7 +13,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +50,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Member;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,7 +79,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     private static final String tag = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 60000000;  // 내위치 업데이트 : 60000초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 30000000; // 30초 (필요없다길래)
 
     //주변정류소목록조회 api key
     private final String key = "d6tEeUjm3AQ5KdyZhb2TVkcsfbM88hHVzwSaYUb4qRYG7N2Pzc9yw71hTeHUNmz7IUrf7GyX%2Ffe5hmgmn7qVqA%3D%3D";
@@ -100,7 +100,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     private LocationRequest locationRequest;
     private Location location;
 
-    private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
+    private View mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -374,27 +374,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
             marker = gMap.addMarker(markerOptions);
             marker.showInfoWindow();
 
-            /*
-            gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-
-                    for (int i = 0; i < MobileNo.size(); i++) {
-                        if (!MobileNo.get(i).toString().equals(aaa.get("정류소번호"))) {
-                            Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
-                                    "아직 제공하지 않는 서비스입니다.",     // 보여줄 메시지
-                                    Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
-                                    .show();
-                        } else {
-                            Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
-                                    "제공하는 서비스",     // 보여줄 메시지
-                                    Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
-                                    .show();
-                        }
-
-                    }return false;
-                }
-            });  */
         }
     }
 
@@ -406,24 +385,29 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
             if (ccc.get(treeHit).equals(MobileNo.toString())){
                 Log.d(tag, "if : true일때");
-                Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
-                        "제공하는 서비스",     // 보여줄 메시지
-                        Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
-                        .show();
+                //toastshow("제공하는 서비스");
             }
             else {
                 Log.d(tag, "if : false일때");
-                Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
-                        "제공하지 않는 서비스입니다.",     // 보여줄 메시지
-                        Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
-                        .show();
-//                Toast.makeText(map_around_busstop.this,   // 현재 화면의 제어권자
-//                        "",     // 보여줄 메시지
-//                        Toast.LENGTH_SHORT)                        // 보여줄 기간 (길게, 짧게)
-//                        .show();
+                toastshow("제공하지 않는 서비스입니다.");
             }treeHit++;
         }return false;
     }
+
+    private void toastshow(String string) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate( R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_layout));
+        TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(this);
+        text.setText(string);
+        text.setTextSize(15);
+        text.setTextColor(Color.WHITE);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {

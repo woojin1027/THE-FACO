@@ -46,9 +46,6 @@
         <activity android:name=".showActivity" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".popupActivity"
-            android:theme="@android:style/Theme.Dialog" />
-        <activity
             android:name=".splashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
