@@ -177,7 +177,7 @@ public class result extends AppCompatActivity {
             }
         }
     }
-    //오퍼레이션 1 (버스위치정보목록조회)
+    //오퍼레이션 4 (대중교통환승경로조회)
     private void getPathInfoByBusNSubList(String sX, String sY, String eX, String eY)
     {
         String stationUrl = endPoint + "?ServiceKey=" + key + "&startX=" + sX + "&startY=" + sY + "&endX=" + eX + "&endY=" + eY;
