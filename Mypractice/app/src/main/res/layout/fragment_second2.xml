@@ -1,63 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FgFirst2"
+    tools:context=".FgSecond2"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="53dp"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/editText22"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_dream"
-            android:text="EditText"
-            android:gravity="center"></EditText>
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back_3"
-            android:translationY="-50dp"></Button>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:src="@drawable/finger2" />
+
+            <TextView
+                android:id="@+id/textView_second2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_dream"
+
+                android:text="TextView2"
+                android:textColor="#cc000000"
+                android:textSize="24sp"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" 8100 버스와 많은 부분, 경로가 겹치는 광역버스! \n 비교를 통해, 더 빠른 경로를 추천할께요!"
-        android:translationY="-30dp"
-        android:fontFamily="@font/font_dream"
-        android:layout_gravity="center">
-    </TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/phone"
-        android:padding="40dp"
-        android:scaleX="0.9"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#b391A8D2"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/map4102"></ImageView>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="308dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_corner3"
             android:fontFamily="@font/font_dream"
-            android:text="@string/bc_2"
-            android:translationY="-50dp"
-            android:layout_marginBottom="-100dp"></TextView>
-    </LinearLayout>
+            android:gravity="center"
+            android:text="대기 인원이 많아 곤란하다면\nTheFACO가 추천하는 경로를\n사용해보세요!"
+            android:textColor="#cc000000"
+            android:textSize="18sp">
 
+        </TextView>
+
+        <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/r2">
+
+        </ImageView>
+    </LinearLayout>
 
 </LinearLayout>
 

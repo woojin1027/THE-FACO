@@ -46,19 +46,25 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ScrollView>
+            android:layout_height="wrap_content">
+
+        </ScrollView>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/map8100"></ImageView>
+            android:src="@drawable/map8100">
+
+        </ImageView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="-100dp"
             android:fontFamily="@font/font_dream"
             android:text="@string/bc_1"
-            android:translationY="-50dp"
-            android:layout_marginBottom="-100dp"></TextView>
+            android:translationY="-50dp">
+
+        </TextView>
     </LinearLayout>
 </LinearLayout>
 

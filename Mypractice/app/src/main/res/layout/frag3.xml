@@ -103,7 +103,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/edge3"
-                android:scaleX="10"></LinearLayout>
+                android:scaleX="10">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,14 +132,17 @@
                     android:padding="15dp"
                     app:autoPlay="false"
                     app:showYouTubeButton="false"
-                    app:videoId="8a7wWv0QtYw"></com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+                    app:videoId="8a7wWv0QtYw">
+                </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@drawable/edge3"
-                android:scaleX="10"></LinearLayout>
+                android:scaleX="10">
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -161,7 +166,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:background="@drawable/edge4"
-                    android:scaleX="100"></LinearLayout>
+                    android:scaleX="100">
+
+                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -184,17 +191,21 @@
                         android:fontFamily="@font/font_dream"
                         android:gravity="left"
                         android:padding="15dp"
-                        android:text="1. 노선 상정 이유 :\n
+                        android:text="1. 노선 선정 이유 :\n
                         왜 하필 이 노선들인가"
                         android:textColor="#134563"
-                        android:textSize="16sp"></Button>
+                        android:textSize="16sp">
+
+                    </Button>
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:background="@drawable/edge4"
-                    android:scaleX="10"></LinearLayout>
+                    android:scaleX="10">
+
+                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -217,10 +228,12 @@
                         android:fontFamily="@font/font_dream"
                         android:gravity="left"
                         android:padding="15dp"
-                        android:text="2. 자세한 활용방법 : 이것만 보면 \n
-                              야, 너두 할수있어"
+                        android:text="2. 자세한 사용법 : 이것만 보면 \n
+                              야, 너두 할수있어 !"
                         android:textColor="#134563"
-                        android:textSize="16sp"></Button>
+                        android:textSize="16sp">
+
+                    </Button>
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
@@ -228,14 +241,18 @@
                     android:layout_height="30dp"
                     android:layout_marginBottom="50dp"
                     android:background="@drawable/edge4"
-                    android:scaleX="10"></LinearLayout>
+                    android:scaleX="10">
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@drawable/edge4"
-                android:scaleX="10"></LinearLayout>
+                android:scaleX="10">
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
