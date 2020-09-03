@@ -98,47 +98,46 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:scaleX="10"
-                android:background="@drawable/edge3">
-            </LinearLayout>
-
+                android:background="@drawable/edge3"
+                android:scaleX="10"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/sidebar"
                 android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
-                android:fontFamily="@font/font_dream"
-                android:text="사용방법"
-                android:textColor="#134563"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="15dp"/>
 
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:videoId="vRXZj0DzXIA"
-                app:autoPlay="false"
-                app:showYouTubeButton="false"
-                android:layout_marginBottom="30dp"
-                android:padding="15dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/font_dream"
+                    android:padding="15dp"
+                    android:text="사용방법"
+                    android:textColor="#134563"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:padding="15dp"
+                    app:autoPlay="false"
+                    app:showYouTubeButton="false"
+                    app:videoId="8a7wWv0QtYw"></com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@drawable/edge3"
-                android:scaleX="10">
-            </LinearLayout>
+                android:scaleX="10"></LinearLayout>
 
 
             <LinearLayout
@@ -146,100 +145,97 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/sidebar"
                 android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/font_dream"
-                android:text="상세 설명"
-                android:textColor="#134563"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="15dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/edge4"
-                android:scaleX="100">
-            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/font_dream"
+                    android:padding="15dp"
+                    android:text="상세 설명"
+                    android:textColor="#134563"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="10dp"
-                card_view:cardCornerRadius="20dp"
-                card_view:cardUseCompatPadding="true"
-                android:padding="15dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/edge4"
+                    android:scaleX="100"></LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="15dp"
+                    card_view:cardCornerRadius="20dp"
+                    card_view:cardUseCompatPadding="true">
+
                     <Button
                         android:id="@+id/reason1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/font_dream"
                         android:background="@drawable/back_3"
+                        android:fontFamily="@font/font_dream"
+                        android:gravity="left"
                         android:padding="15dp"
                         android:text="1. 노선 상정 이유 :\n
                         왜 하필 이 노선들인가"
                         android:textColor="#134563"
-                        android:textSize="16sp"
-                        android:gravity="left">
-                    </Button>
-            </androidx.cardview.widget.CardView>
+                        android:textSize="16sp"></Button>
+                </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/edge4"
-                android:scaleX="10">
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/edge4"
+                    android:scaleX="10"></LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="10dp"
-                card_view:cardCornerRadius="20dp"
-                card_view:cardUseCompatPadding="true"
-                android:padding="15dp">
-                    <Button
-                    android:id="@+id/reason2"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/font_dream"
-                    android:background="@drawable/back_3"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="10dp"
                     android:padding="15dp"
-                    android:text="2. 자세한 활용방법 : 이것만 보면 \n
+                    card_view:cardCornerRadius="20dp"
+                    card_view:cardUseCompatPadding="true">
+
+                    <Button
+                        android:id="@+id/reason2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/back_3"
+                        android:fontFamily="@font/font_dream"
+                        android:gravity="left"
+                        android:padding="15dp"
+                        android:text="2. 자세한 활용방법 : 이것만 보면 \n
                               야, 너두 할수있어"
-                    android:textColor="#134563"
-                    android:textSize="16sp"
-                    android:gravity="left">
-                    </Button>
-            </androidx.cardview.widget.CardView>
+                        android:textColor="#134563"
+                        android:textSize="16sp"></Button>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/edge4"
+                    android:scaleX="10"></LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@drawable/edge4"
-                android:layout_marginBottom="50dp"
-                android:scaleX="10">
-            </LinearLayout>
-        </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/edge4"
-                android:scaleX="10">
-            </LinearLayout>
+                android:scaleX="10"></LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
