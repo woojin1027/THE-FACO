@@ -92,7 +92,7 @@
                         android:background="@drawable/sidebar2"
                         android:fontFamily="@font/font_dream"
                         android:text="@string/name_story"
-                        android:textColor="#092F4F"
+                        android:textColor="#0C3F69"
                         android:textSize="16sp" />
 
                 </androidx.cardview.widget.CardView>
