@@ -170,34 +170,26 @@
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <Button
+                    android:id="@+id/reason1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/sidebar2"
+                    android:fontFamily="@font/font_dream"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="10dp"
+                    android:gravity="left"
                     android:padding="15dp"
-                    card_view:cardCornerRadius="20dp"
-                    card_view:cardUseCompatPadding="true">
+                    android:text="1. 노선 선정 이유 :\n
+                    왜 하필 이 노선들인가"
+                    android:textColor="#092F4F"
+                    android:textSize="16sp">
 
-                    <Button
-                        android:id="@+id/reason1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/back_3"
-                        android:fontFamily="@font/font_dream"
-                        android:gravity="left"
-                        android:padding="15dp"
-                        android:text="1. 노선 선정 이유 :\n
-                        왜 하필 이 노선들인가"
-                        android:textColor="#092F4F"
-                        android:textSize="16sp">
-
-                    </Button>
-                </androidx.cardview.widget.CardView>
+                </Button>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -207,34 +199,27 @@
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+
+                <Button
+                    android:id="@+id/reason2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/sidebar2"
+                    android:fontFamily="@font/font_dream"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="10dp"
+                    android:gravity="left"
                     android:padding="15dp"
-                    card_view:cardCornerRadius="20dp"
-                    card_view:cardUseCompatPadding="true">
+                    android:text="2. 자세한 사용법 : 이것만 보면 \n
+                        야, 너두 할수있어 !"
+                    android:textColor="#092F4F"
+                    android:textSize="16sp">
 
-                    <Button
-                        android:id="@+id/reason2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/back_3"
-                        android:fontFamily="@font/font_dream"
-                        android:gravity="left"
-                        android:padding="15dp"
-                        android:text="2. 자세한 사용법 : 이것만 보면 \n
-                            야, 너두 할수있어 !"
-                        android:textColor="#092F4F"
-                        android:textSize="16sp">
-
-                    </Button>
-                </androidx.cardview.widget.CardView>
+                </Button>
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
@@ -32,8 +31,35 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
         view = inflater.inflate(R.layout.frag3, container, false);
 
         Button egg_1 = view.findViewById(R.id.egg_1);
-        Button reason_1 = view.findViewById(R.id.reason1);
-        Button reason_2 = view.findViewById(R.id.reason2);
+        final Button reason_1 = view.findViewById(R.id.reason1);
+        final Button reason_2 = view.findViewById(R.id.reason2);
+
+        scaleUp = AnimationUtils.loadAnimation(getContext(),R.anim.scale_up2);
+        scaleDown = AnimationUtils.loadAnimation(getContext(),R.anim.scale_down2);
+
+        reason_1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == motionEvent.ACTION_DOWN)
+                    reason_1.startAnimation(scaleUp);
+                else if(motionEvent.getAction()==motionEvent.ACTION_UP){
+                    reason_1.startAnimation(scaleDown);
+                } return false;
+            }
+        });
+
+        reason_2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == motionEvent.ACTION_DOWN)
+                    reason_2.startAnimation(scaleUp);
+                else if(motionEvent.getAction()==motionEvent.ACTION_UP){
+                    reason_2.startAnimation(scaleDown);
+                } return false;
+            }
+        });
 
         egg_1.setOnClickListener(new View.OnClickListener() {
             @Override

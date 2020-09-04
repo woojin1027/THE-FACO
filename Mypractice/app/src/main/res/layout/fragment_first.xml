@@ -19,7 +19,7 @@
             android:fontFamily="@font/font_dream"
             android:text="EditText"
             android:gravity="center"
-            android:textSize="20dp"></EditText>
+            android:textSize="25dp"></EditText>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

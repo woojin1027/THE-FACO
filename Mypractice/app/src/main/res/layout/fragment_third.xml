@@ -17,13 +17,14 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_dream"
             android:text="EditText"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textSize="25dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:translationY="-50dp"
             android:background="@drawable/back_3"
-            android:textSize="20dp"></Button>
+            ></Button>
     </LinearLayout>
 
     <TextView
