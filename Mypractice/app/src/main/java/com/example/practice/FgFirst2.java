@@ -39,7 +39,6 @@ public class FgFirst2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
 
@@ -52,8 +51,8 @@ public class FgFirst2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_first2, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.textView_first2);
         tvLabel.setText("버스를 선택해보세요!");
-        ImageView iv = (ImageView) view.findViewById(R.id.iv);
 
+        ImageView iv = (ImageView) view.findViewById(R.id.iv);
         Glide.with(this).load(R.raw.gif1).into(iv);
         return view;
     }

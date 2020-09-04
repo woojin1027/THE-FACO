@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
@@ -43,6 +46,9 @@ public class FgSecond2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_second2, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.textView_second2);
         tvLabel.setText("대중교통 경로를 검색하세요!");
+
+        ImageView iv = (ImageView) view.findViewById(R.id.iv2);
+        Glide.with(this).load(R.raw.gif2).into(iv);
         return view;
     }
 }
