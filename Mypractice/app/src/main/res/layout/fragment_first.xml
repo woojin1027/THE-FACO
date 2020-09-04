@@ -13,12 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/editText12"
+            android:id="@+id/editText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_dream"
             android:text="EditText"
-            android:gravity="center"></EditText>
+            android:gravity="center"
+            android:textSize="20dp"></EditText>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
