@@ -360,9 +360,6 @@ public class map_around_busstop2 extends AppCompatActivity implements OnMapReady
 
         Log.d(tag, "순서 5 : 정류장 마커찍기");
 
-        double_x = Double.parseDouble(str_x);
-        double_y = Double.parseDouble(str_y);
-
         for(i = 0; i < Double_x.size(); i++)
         {
             LatLng busstopLocation = new LatLng(Double.parseDouble(Double_y.get(i).toString()), Double.parseDouble(Double_x.get(i).toString()));
