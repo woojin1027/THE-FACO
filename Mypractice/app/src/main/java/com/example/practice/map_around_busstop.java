@@ -63,7 +63,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
     HashMap <String,String> aaa = ((pathSetting_start)pathSetting_start.context).data_hashmap;
     ArrayList<HashMap<String,String>> bbb = ((pathSetting_start)pathSetting_start.context).data;
 
-    int i =0 ;
     ArrayList<String> ccc = new ArrayList<String>();
     private GoogleMap gMap;
     public Marker marker;
