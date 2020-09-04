@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +48,7 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
     private FusedLocationProviderClient fusedLocationProviderClient;
     Button button;
     MapView mapView;
+    Animation scaleUp,scaleDown;
 
 
     @Override
@@ -53,7 +57,20 @@ public class Frag2 extends Fragment implements OnMapReadyCallback {
         final View view = inflater.inflate(R.layout.frag2, container,false);
 
         button = view.findViewById(R.id.frag_button);
+        scaleUp = AnimationUtils.loadAnimation(getContext(),R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(getContext(),R.anim.scale_down);
 
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == motionEvent.ACTION_DOWN)
+                    button.startAnimation(scaleUp);
+                else if(motionEvent.getAction()==motionEvent.ACTION_UP){
+                    button.startAnimation(scaleDown);
+                } return false;
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() //조회 버튼 누르면
         {
             @Override

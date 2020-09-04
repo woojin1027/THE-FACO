@@ -3,12 +3,16 @@ package com.example.practice;
 
 //마이페이지
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -20,7 +24,7 @@ import java.security.cert.CertPathValidatorException;
 public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한다
 {
     private View view;
-
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
 
@@ -39,7 +43,6 @@ public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한�
             }
         });
         reason_1.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Reason.class);
                 startActivity(intent); // 액티비티 이동.

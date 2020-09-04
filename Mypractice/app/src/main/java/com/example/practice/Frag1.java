@@ -5,8 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,14 +23,40 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
 {
 
     private View view;
+    Animation scaleUp,scaleDown;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.frag1,container,false);
-        Button button8 = view.findViewById(R.id.busNum8);
-        Button button9 = view.findViewById(R.id.busNum9);
+        final Button button8 = view.findViewById(R.id.busNum8);
+        final Button button9 = view.findViewById(R.id.busNum9);
+        scaleUp = AnimationUtils.loadAnimation(getContext(),R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(getContext(),R.anim.scale_down);
+
+        button8.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == motionEvent.ACTION_DOWN)
+                    button8.startAnimation(scaleUp);
+                else if(motionEvent.getAction()==motionEvent.ACTION_UP){
+                    button8.startAnimation(scaleDown);
+                } return false;
+            }
+        });
+        button9.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == motionEvent.ACTION_DOWN)
+                    button9.startAnimation(scaleUp);
+                else if(motionEvent.getAction()==motionEvent.ACTION_UP){
+                    button9.startAnimation(scaleDown);
+                } return false;
+            }
+        });
 
 
         //버튼 클릭시 sub, showActivity로 이동
