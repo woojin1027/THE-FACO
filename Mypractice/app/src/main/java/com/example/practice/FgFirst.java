@@ -40,7 +40,7 @@ public class FgFirst extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
 
-        EditText tvLabel = (EditText) view.findViewById(R.id.editText12);
+        EditText tvLabel = (EditText) view.findViewById(R.id.editText1);
         tvLabel.setText(title);
         return view;
     }

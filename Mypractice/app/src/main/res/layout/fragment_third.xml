@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:translationY="-50dp"
-            android:background="@drawable/back_3"></Button>
+            android:background="@drawable/back_3"
+            android:textSize="20dp"></Button>
     </LinearLayout>
 
     <TextView
