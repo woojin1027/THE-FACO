@@ -44,8 +44,11 @@ public class FgThird extends Fragment {
         EditText tvLabel = (EditText) view.findViewById(R.id.editText3);
         tvLabel.setText(title);
 
-        ImageView iv = (ImageView) view.findViewById(R.id.ivwoo);
+        ImageView iv = (ImageView) view.findViewById(R.id.ivWoo);
         Glide.with(this).load(R.raw.gifwoo).into(iv);
+
+        ImageView iv2 = (ImageView) view.findViewById(R.id.ivWoo2);
+        Glide.with(this).load(R.raw.gif2).into(iv2);
 
         return view;
     }

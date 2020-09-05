@@ -42,35 +42,52 @@
         android:layout_height="wrap_content"
         android:background="@drawable/phone"
         android:scaleX="0.9"
-        android:padding="40dp">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_dream"
-            android:layout_marginTop="50dp"
-            android:text="  네이버, 카카오와 함께 비교\n"
+            android:text="  \n 네이버, 카카오와 함께 비교 "
+            android:gravity="center"
             android:textSize="25dp"></TextView>
 
-        <ImageView
-            android:id="@+id/ivwoo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/r1">
-        </ImageView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="2">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp">
+            <ImageView
+                android:id="@+id/ivWoo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:src="@drawable/r1">
+            </ImageView></LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp">
+            <ImageView
+                android:id="@+id/ivWoo2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:src="@drawable/r1">
+            </ImageView></LinearLayout></LinearLayout>
 
-</LinearLayout></ScrollView></LinearLayout></LinearLayout>
+</LinearLayout></LinearLayout></LinearLayout>
 
 
 
