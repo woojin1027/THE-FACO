@@ -19,18 +19,21 @@
             android:fontFamily="@font/font_dream"
             android:text="EditText"
             android:gravity="center"
-            android:textSize="25dp"></EditText>
+            android:textSize="25dp">
+
+        </EditText>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/back_3"
-            android:translationY="-50dp"></Button>
+            android:translationY="-50dp">
+        </Button>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" 많은 인원들이 , 수도권에서 이용하는 광역버스! \n 더 많은 분들의 우리의 아이디어를 이해해주시길"
+        android:text=" 많은 인원들이 , 수도권에서 이용하는 광역버스! \n                [많은 이용객 = 긴 대기 줄]"
         android:translationY="-30dp"
         android:fontFamily="@font/font_dream"
         android:layout_gravity="center">

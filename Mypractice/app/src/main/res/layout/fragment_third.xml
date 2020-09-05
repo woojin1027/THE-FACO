@@ -57,43 +57,17 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/font_dream"
             android:layout_marginTop="50dp"
-            android:text="  알고있었어? 2.7억뷰인거?"
+            android:text="  네이버, 카카오와 함께 비교\n"
             android:textSize="25dp"></TextView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/r8"
-                        android:translationY="-330dp"></ImageView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_marginTop="100dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="test \n test"
-                        android:fontFamily="@font/font_dream"></TextView>
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/r8"
-                        android:translationY="-120dp"></ImageView>
-                </LinearLayout>
-            </LinearLayout>
+        <ImageView
+            android:id="@+id/ivwoo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/r1">
+        </ImageView>
 
 
 </LinearLayout></ScrollView></LinearLayout></LinearLayout>

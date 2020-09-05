@@ -42,7 +42,7 @@ public class Reason extends AppCompatActivity {
                 case 1:
                     return FgSecond.newInstance(2, "M4102 노선을 선정한 이유");
                 case 2:
-                    return FgThird.newInstance(3, "등등");
+                    return FgThird.newInstance(3, "다른앱들과의 비교");
                 default:
                     return null;
             }

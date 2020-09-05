@@ -27,7 +27,6 @@
             android:text="The FACO 소개"
             android:layout_marginTop="-3dp"
             android:textColor="#092F4F"
-
             android:textSize="24sp" />
 
     </LinearLayout>

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
@@ -23,6 +24,7 @@ import java.security.cert.CertPathValidatorException;
 public class Frag3 extends Fragment // Fragment 클래스를 상속받아야한다
 {
     private View view;
+    Animation scaleUp,scaleDown;
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
