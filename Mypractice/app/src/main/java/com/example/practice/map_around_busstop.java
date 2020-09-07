@@ -229,7 +229,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                         .position(currentLatLng)
                         .title(markerTitle)
                         .snippet(markerSnippet)
-                        .draggable(true)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow2))
                         .flat(true);
 
@@ -357,8 +356,7 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
 
     private void makemarker(GoogleMap gMap) {
 
-        Log.d(tag, "순서 5 : 정류장 마커찍기");
-
+        Log.d(tag, "정류장 마커찍기");
 
         for(int i = 0; i < Double_x.size(); i++)
         {
@@ -370,7 +368,6 @@ public class map_around_busstop extends AppCompatActivity implements OnMapReadyC
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_bus3));
             marker = gMap.addMarker(markerOptions);
             marker.showInfoWindow();
-
         }
     }
 
