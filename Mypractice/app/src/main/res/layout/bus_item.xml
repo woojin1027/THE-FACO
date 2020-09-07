@@ -97,6 +97,23 @@
                     app:srcCompat="@drawable/seatnote" />
 
                 <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/note"
+                    android:layout_alignTop="@id/note"
+                    android:layout_alignRight="@id/note"
+                    android:layout_alignBottom="@id/note"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/font_dream"
+                    android:gravity="center"
+                    android:text="좌석수"
+                    android:textColor="#FF0000"
+                    android:textSize="12sp"
+                    android:typeface="sans" />
+
+                <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

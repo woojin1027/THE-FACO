@@ -29,6 +29,11 @@ public class Bus_items
         return LineInfo;
     }
 
+    public String getBusInfo_R()
+    {
+        return BusInfo_R;
+    }
+
     public int getImage()
     {
         return Image;
@@ -94,6 +99,11 @@ public class Bus_items
         this.LineInfo = lineinfo;
     }
 
+    public void setBusInfo_R(String busInfo_R)
+    {
+        this.BusInfo_R = busInfo_R;
+    }
+
     public void setImage(int image)
     {
         this.Image = image;
@@ -139,10 +149,11 @@ public class Bus_items
         this.LineInfobox = lineinfobox;
     }
 
-    public Bus_items(String busstopname, String businfo, String businfo2, int image, int image2, int rail1, int rail2, int returnrail, int railstop, int textrail, int textinfobox, String lineinfo, int lineinfobox)
+    public Bus_items(String busstopname, String businfo, String businfo2, String businfo_R, int image, int image2, int rail1, int rail2, int returnrail, int railstop, int textrail, int textinfobox, String lineinfo, int lineinfobox)
     {
         this.Busstopname = busstopname;
         this.BusInfo = businfo;
+        this.BusInfo_R = businfo_R;
         this.BusInfo2 = businfo2;
         this.Image = image;
         this.Image2 = image2;
@@ -166,6 +177,7 @@ public class Bus_items
     int TextInfobox; //버스도착정보 텍스트박스
     int LineInfobox; //대기인원수 텍스트박스
     String BusInfo; //버스좌석정보
+    String BusInfo_R;   //버스좌석정보(빨강)
     String BusInfo2;    //버스도착정보
     String Busstopname; //버스정류장이름
     String LineInfo;    //정류장대기인원수
