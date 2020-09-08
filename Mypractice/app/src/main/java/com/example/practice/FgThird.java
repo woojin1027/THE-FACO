@@ -48,7 +48,7 @@ public class FgThird extends Fragment {
         Glide.with(this).load(R.raw.gifwoo).into(iv);
 
         ImageView iv2 = (ImageView) view.findViewById(R.id.ivWoo2);
-        Glide.with(this).load(R.raw.gif2).into(iv2);
+        Glide.with(this).load(R.raw.gifwoo2).into(iv2);
 
         return view;
     }
