@@ -681,7 +681,12 @@ public class showActivity extends AppCompatActivity
                                         CalculData.set(i,"(" + firstinfo1 + "명 탑승가능)");
                                         CalculData2.set(i,"(" + secondinfo1 + "명 탑승가능)");
                                     }
-                                    else
+                                    else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) + first1 < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt1.get(i).toString()) + first1 > 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second1 <= 0)
+                                    {
+                                        CalculData.set(i,"(" + firstinfo1 + "명 탑승가능)");
+                                        CalculData2.set(i,"(탑승불가)");
+                                    }
+                                    else if(first1 + Integer.parseInt(DBSeatcnt1.get(i).toString()) <= 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second1 <= 0)
                                     {
                                         CalculData.set(i,"(탑승불가)");
                                         CalculData2.set(i,"(탑승불가)");
@@ -811,7 +816,21 @@ public class showActivity extends AppCompatActivity
                                             CalculData2.set(i,"(" + secondinfo2 + "명 탑승가능)");
                                         }
                                     }
-                                    else
+                                    else if(Integer.parseInt(DBSeatcnt1.get(i).toString()) + first1 < Integer.parseInt(DBLineCnt.get(i).toString()) && Integer.parseInt(DBSeatcnt1.get(i).toString()) + first1 > 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second1 <= 0)
+                                    {
+
+                                        if(Integer.parseInt(listBusseq.get(listseatCnt.indexOf(DBSeatcnt1.get(i))).toString()) >= 22 && Integer.parseInt(listBusseq.get(listseatCnt.indexOf(DBSeatcnt2.get(i))).toString()) < 22)
+                                        {
+                                            CalculData.set(i,"(" + firstinfo1 + "명 탑승가능)");
+                                            CalculData2.set(i, "");
+                                        }
+                                        else if(Integer.parseInt(listBusseq.get(listseatCnt.indexOf(DBSeatcnt2.get(i))).toString()) >= 22)
+                                        {
+                                            CalculData.set(i,"(" + firstinfo1 + "명 탑승가능)");
+                                            CalculData2.set(i,"(탑승불가)");
+                                        }
+                                    }
+                                    else if(first1 + Integer.parseInt(DBSeatcnt1.get(i).toString()) <= 0 && Integer.parseInt(DBSeatcnt2.get(i).toString()) + second1 <= 0)
                                     {
                                         if(Integer.parseInt(listBusseq.get(listseatCnt.indexOf(DBSeatcnt1.get(i))).toString()) >= 22 && Integer.parseInt(listBusseq.get(listseatCnt.indexOf(DBSeatcnt2.get(i))).toString()) < 22)
                                         {
