@@ -60,7 +60,7 @@
             android:gravity="center"
             android:text="대기 인원이 많아 곤란하다면\nTheFACO가 추천하는 경로를\n사용해보세요!"
             android:textColor="#cc000000"
-            android:textSize="18sp">
+            android:textSize="16sp">
 
         </TextView>
 

@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="  역시 애매하고, 부담스러우면 \n 음악를 통해, (사)용자님 머리좀 식히고 가실께요!"
+        android:text="  다른 대중교통 서비스 앱과 비교해 볼께요. \n 네O버 , 카O오 와 살펴볼께요."
         android:translationY="-30dp"
         android:fontFamily="@font/font_dream"
         android:layout_gravity="center">
