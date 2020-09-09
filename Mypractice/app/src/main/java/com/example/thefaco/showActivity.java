@@ -232,17 +232,18 @@ public class showActivity extends AppCompatActivity
             @Override
             public void run()
             {
-                //오퍼레이션 1  버스위치정보조회
-                getBusLocationList();
-
-                //오퍼레이션 3 버스도착정보조회
-                getArrInfoByRouteAllList();
 
                 //rest api 호출
                 getLineData();
 
                 //호출한 rest api JSON 값을 변환
                 JSONParser();
+
+                //오퍼레이션 1  버스위치정보조회
+                getBusLocationList();
+
+                //오퍼레이션 3 버스도착정보조회
+                getArrInfoByRouteAllList();
 
                 //대기인원 계산
                 DataCalculate();
@@ -490,10 +491,10 @@ public class showActivity extends AppCompatActivity
                     DBStaOrder.add(obj.getString("Staorder"));
                 }
             }
-            DBStaOrder.set(1,2);
-            DBStaOrder.set(2,4);
-            DBStaOrder.set(4,26);
-            DBStaOrder.set(5,25);
+            DBStaOrder.set(1,"2");
+            DBStaOrder.set(2,"4");
+            DBStaOrder.set(4,"26");
+            DBStaOrder.set(5,"25");
 
             Log.d(TAG, "JSON Parsing: " + DBStationId + " " + DBLineCnt + " " + DBStaOrder);
         }catch(JSONException e){e.printStackTrace();}
