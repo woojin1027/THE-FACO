@@ -69,7 +69,7 @@ public class showActivity extends AppCompatActivity
 
     BusitemAdapter adapter = new BusitemAdapter();
 
-    int []BusstopArr = new int[]{2,4,5,16,17,18,19,22,23,24,35,36,37};
+    int []BusstopArr = new int[]{1,3,5,6,17,18,19,20,22,23,24,25,37,38,39,40};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -490,8 +490,8 @@ public class showActivity extends AppCompatActivity
                     DBStaOrder.add(obj.getString("Staorder"));
                 }
             }
-            DBStaOrder.set(1,4);
-            DBStaOrder.set(2,2);
+            DBStaOrder.set(1,2);
+            DBStaOrder.set(2,4);
             DBStaOrder.set(4,26);
             DBStaOrder.set(5,25);
 
