@@ -123,7 +123,7 @@ public class subActivity extends AppCompatActivity {
         listBus.add("종로2가사거리(중)");
         listBus.add("을지로입구역.광교");
         listBus.add("북창동.남대문시장");
-        listBus.add("서울역버스환승센터(6번승강장)(중)");
+        listBus.add("서울역버스환승센터(5번승강장)(중)");
         listBus.add("서울역교차로(미정차)");
         listBus.add("숭례문");
         listBus.add("남대문로3가(미정차)");
