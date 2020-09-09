@@ -130,7 +130,7 @@
                     android:layout_marginBottom="30dp"
                     android:padding="15dp"
                     app:autoPlay="false"
-                    app:showYouTubeButton="false"
+                    app:showYouTubeButton="true"
                     app:videoId="fXRoWjmCc-w">
                 </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
             </LinearLayout>
