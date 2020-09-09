@@ -1,74 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FgFirst2"
+    tools:context=".FgSecond2"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="53dp"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/editText32"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/font_dream"
-            android:text="EditText"
-            android:gravity="center"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:translationY="-50dp"
-            android:background="@drawable/back_3"></Button>
-    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  역시 애매하고, 부담스러우면 \n 음악를 통해, (사)용자님 머리좀 식히고 가실께요!"
-        android:translationY="-30dp"
-        android:fontFamily="@font/font_dream"
-        android:layout_gravity="center">
-    </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:src="@drawable/finger3" />
+
+            <TextView
+                android:id="@+id/textView_third2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_dream"
+
+                android:text="TextView2"
+                android:textColor="#cc000000"
+                android:textSize="24sp"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/phone"
-        android:scaleX="0.9"
-        android:padding="40dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#b391A8D2"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <TextView
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_corner3"
+            android:fontFamily="@font/font_dream"
+            android:gravity="center"
+            android:text="직접 정류장에 가지 않고도,\n 해당 노선을 기다리는 사람들을\n 알아 볼 수가 있어요."
+            android:textColor="#cc000000"
+            android:textSize="16sp">
 
-                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
-                    android:screenOrientation="landscape"
-                    app:autoPlay="false"
-                    app:videoId="gdZLi9oWNZg"></com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+        </TextView>
 
+        <ImageView
+            android:id="@+id/iv3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/r2">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:fontFamily="@font/font_dream"
-                    android:text="  알고있었어? 2.7억뷰인거?"></TextView>
+        </ImageView>
+    </LinearLayout>
 
-            </LinearLayout>
-        </ScrollView></LinearLayout>
 </LinearLayout>
 
 

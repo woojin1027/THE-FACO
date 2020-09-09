@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 
 public class FgThird2 extends Fragment {
     // Store instance variables
@@ -38,8 +41,11 @@ public class FgThird2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_third2, container, false);
-        EditText tvLabel = (EditText) view.findViewById(R.id.editText32);
-        tvLabel.setText(title);
+        TextView tvLabel = (TextView) view.findViewById(R.id.textView_third2);
+        tvLabel.setText("직접가지 않고 대기인원을 봐요");
+
+        ImageView iv = (ImageView) view.findViewById(R.id.iv3);
+        Glide.with(this).load(R.raw.gif3).into(iv);
         return view;
     }
 }

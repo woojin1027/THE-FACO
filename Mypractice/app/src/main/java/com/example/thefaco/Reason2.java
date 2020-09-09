@@ -21,7 +21,7 @@ public class Reason2 extends AppCompatActivity {
         indicator.setViewPager(vpPager);
     }
     public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 3;
+        private static int NUM_ITEMS = 4;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -43,6 +43,8 @@ public class Reason2 extends AppCompatActivity {
                     return FgSecond2.newInstance(2, "M4102 노선을 선정한 이유");
                 case 2:
                     return FgThird2.newInstance(3, "등등");
+                case 3:
+                    return FgFourth2.newInstance(4, "등등");
                 default:
                     return null;
             }
