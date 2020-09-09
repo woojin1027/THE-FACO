@@ -42,6 +42,7 @@ public class FgFirst extends Fragment {
 
         EditText tvLabel = (EditText) view.findViewById(R.id.editText1);
         tvLabel.setText(title);
+        
         return view;
     }
 }
