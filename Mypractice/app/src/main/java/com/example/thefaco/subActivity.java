@@ -754,7 +754,8 @@ public class subActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                    } else if(Integer.parseInt(DBStaOrder.get(i).toString()) == 26)
+                    }
+                    else if(Integer.parseInt(DBStaOrder.get(i).toString()) == 26)
                     {
                         CalculData.set(i,"");
                         CalculData2.set(i,"");
