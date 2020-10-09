@@ -32,6 +32,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
     public void addItem(Bus_items item)
     {
         //외부에서 item 을 추가시킬 함수
+
         items.add(item);
     }
 
