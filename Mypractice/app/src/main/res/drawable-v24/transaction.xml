@@ -9,6 +9,6 @@
 
     <item
         android:drawable="@drawable/son3"
-        android:duration="700"/>
+        android:duration="800"/>
 
 </animation-list>
