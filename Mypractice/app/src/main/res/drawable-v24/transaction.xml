@@ -1,6 +1,6 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/son"
+        android:drawable="@drawable/son2"
         android:duration="700"/>
 
     <item
@@ -8,7 +8,7 @@
         android:duration="700"/>
 
     <item
-        android:drawable="@drawable/son"
+        android:drawable="@drawable/son3"
         android:duration="700"/>
 
 </animation-list>
