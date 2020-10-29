@@ -72,6 +72,7 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
 
         data = new ArrayList<HashMap<String, String>>();
 
+        //신도시-서울 출퇴근용//
         data_hashmap = new HashMap<String, String>();
         data_hashmap.put("정류장명", "단국대.치과병원");
         data_hashmap.put("정류소번호", "47682");
@@ -226,6 +227,466 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
         data_hashmap.put("정류장명", "남대문시장앞.이회영활동터");
         data_hashmap.put("정류소번호", "02219");
         data.add(data_hashmap);
+
+        //경기대학생 등하교용//
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "사색의광장");
+        data_hashmap.put("정류소번호", "29059");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "생명과학대.산업대학");
+        data_hashmap.put("정류소번호", "29050");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경희대체육대학.외대");
+        data_hashmap.put("정류소번호", "29044");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경희대학교");
+        data_hashmap.put("정류소번호", "04241");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "살구골.서광아파트");
+        data_hashmap.put("정류소번호", "04144");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "살구골동아아파트");
+        data_hashmap.put("정류소번호", "04129");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "살구골현대아파트.영통역4번출구");
+        data_hashmap.put("정류소번호", "04135");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "영통역");
+        data_hashmap.put("정류소번호", "04150");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "쳥명역3번출구");
+        data_hashmap.put("정류소번호", "04160");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "황골벽산아파트");
+        data_hashmap.put("정류소번호", "04169");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "영통빌리지");
+        data_hashmap.put("정류소번호", "29023");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "삼성전자입구");
+        data_hashmap.put("정류소번호", "04123");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "원천주공2단지");
+        data_hashmap.put("정류소번호", "04108");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "광교호반베르디움");
+        data_hashmap.put("정류소번호", "04377");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "KT동수원지사");
+        data_hashmap.put("정류소번호", "04056");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "구법원사거리");
+        data_hashmap.put("정류소번호", "04042");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "아주대학교입구");
+        data_hashmap.put("정류소번호", "04238");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "아주대.아주대학교병원");
+        data_hashmap.put("정류소번호", "04237");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "효성초등학교");
+        data_hashmap.put("정류소번호", "03117");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "수원월드컵경기장.동성중학교");
+        data_hashmap.put("정류소번호", "03105");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "여권민원실.풍림아파트");
+        data_hashmap.put("정류소번호", "03096");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "우만동4단지");
+        data_hashmap.put("정류소번호", "03088");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기남부지방경찰청.봉녕사입구");
+        data_hashmap.put("정류소번호", "04002");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기대수원캠퍼스후문.수원박물관");
+        data_hashmap.put("정류소번호", "04178");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "의왕톨게이트");
+        data_hashmap.put("정류소번호", "27113");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "관문사거리부대앞");
+        data_hashmap.put("정류소번호", "21013");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "남태령역");
+        data_hashmap.put("정류소번호", "27026");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "사당역");
+        data_hashmap.put("정류소번호", "22028");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "사당역4번출구");
+        data_hashmap.put("정류소번호", "21161");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "남태령역");
+        data_hashmap.put("정류소번호", "21163");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "관문사거리부대앞");
+        data_hashmap.put("정류소번호", "21014");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "의왕톨게이트");
+        data_hashmap.put("정류소번호", "27112");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기대수원캠퍼스후문.수원박물관");
+        data_hashmap.put("정류소번호", "04181");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기남부지방경찰청.봉녕사입구");
+        data_hashmap.put("정류소번호", "01257");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "연무동");
+        data_hashmap.put("정류소번호", "01236");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "수원시평생학습관.우만주공아파트");
+        data_hashmap.put("정류소번호", "03082");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "여권민원실.풍림아파트");
+        data_hashmap.put("정류소번호", "03095");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "수원월드컵경기장.동성중학교");
+        data_hashmap.put("정류소번호", "03102");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "효성초등학교");
+        data_hashmap.put("정류소번호", "03119");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "아주대.아주대학교병원");
+        data_hashmap.put("정류소번호", "03126");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "아주대학교입구");
+        data_hashmap.put("정류소번호", "03129");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "구법원사거리");
+        data_hashmap.put("정류소번호", "04179");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "KT동수원지사");
+        data_hashmap.put("정류소번호", "04058");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "광교호수공원입구.원천교사거리");
+        data_hashmap.put("정류소번호", "04086");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "원천주공2단지");
+        data_hashmap.put("정류소번호", "04105");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "삼성전자입구");
+        data_hashmap.put("정류소번호", "04124");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "프리미엄아울렛");
+        data_hashmap.put("정류소번호", "29024");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "황골주공.벽산아파트");
+        data_hashmap.put("정류소번호", "04165");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "청명역4번출구");
+        data_hashmap.put("정류소번호", "04157");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "훼미리타워");
+        data_hashmap.put("정류소번호", "04384");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "영통역8번출구");
+        data_hashmap.put("정류소번호", "04141");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "극동.풍림아파트");
+        data_hashmap.put("정류소번호", "04131");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "e편한세상아파트");
+        data_hashmap.put("정류소번호", "04126");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서그내");
+        data_hashmap.put("정류소번호", "29003");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경희대정문");
+        data_hashmap.put("정류소번호", "29038");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "외국어대학");
+        data_hashmap.put("정류소번호", "29040");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "생명과학대");
+        data_hashmap.put("정류소번호", "29049");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "사색의광장");
+        data_hashmap.put("정류소번호", "29058");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "수원버스터미널");
+        data_hashmap.put("정류소번호", "02219");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "수원버스터미널");
+        data_hashmap.put("정류소번호", "02224");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "수원아이파크시티.선일초교");
+        data_hashmap.put("정류소번호", "02252");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "우남아파트");
+        data_hashmap.put("정류소번호", "02265");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "평생교육학습관.남수원중학교");
+        data_hashmap.put("정류소번호", "02267");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기소방본부");
+        data_hashmap.put("정류소번호", "04233");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "임광아파트");
+        data_hashmap.put("정류소번호", "04234");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "매탄위브하늘채.경기아트센터");
+        data_hashmap.put("정류소번호", "04235");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "자유총연맹");
+        data_hashmap.put("정류소번호", "04236");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "삼성1차아파트");
+        data_hashmap.put("정류소번호", "04007");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "삼성2차아파트");
+        data_hashmap.put("정류소번호", "04012");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "시민의숲.양재꽃시장");
+        data_hashmap.put("정류소번호", "22297");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "양재역.서초문화예술회관");
+        data_hashmap.put("정류소번호", "22004");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "뱅뱅사거리");
+        data_hashmap.put("정류소번호", "22006");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "우성아파트");
+        data_hashmap.put("정류소번호", "22008");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "강남역.역삼세무서");
+        data_hashmap.put("정류소번호", "23287");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "강남역나라빌딩앞");
+        data_hashmap.put("정류소번호", "91200");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "역삼역.역삼동.우성아파트");
+        data_hashmap.put("정류소번호", "90159");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서초문화예술정보학교");
+        data_hashmap.put("정류소번호", "22132");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "양재역커피빈앞");
+        data_hashmap.put("정류소번호", "90256");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "시민의숲.양재꽃시장");
+        data_hashmap.put("정류소번호", "90256");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "서초포레스타입구");
+        data_hashmap.put("정류소번호", "22399");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "광교역사공원.광교카페거리");
+        data_hashmap.put("정류소번호", "04232");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "매탄주공4단지.매탄1동주민센터");
+        data_hashmap.put("정류소번호", "04009");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "자유총연맹");
+        data_hashmap.put("정류소번호", "03120");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기아트센터.매탄위브하늘채");
+        data_hashmap.put("정류소번호", "03116");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "임광아파트.야외음악당");
+        data_hashmap.put("정류소번호", "03112");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "경기소방본부");
+        data_hashmap.put("정류소번호", "02856");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "평생교육학습관.남수원중학교.온수골");
+        data_hashmap.put("정류소번호", "02266");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "대원아파트");
+        data_hashmap.put("정류소번호", "02264");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "선일초등학교");
+        data_hashmap.put("정류소번호", "02256");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "이마트");
+        data_hashmap.put("정류소번호", "02232");
+        data.add(data_hashmap);
+
+        data_hashmap = new HashMap<String, String>();
+        data_hashmap.put("정류장명", "수원버스터미널");
+        data_hashmap.put("정류소번호", "02221");
+        data.add(data_hashmap);
+        //여기까지//
+
+
 
         SimpleAdapter adapter = new SimpleAdapter(
                 getApplicationContext(), data,
