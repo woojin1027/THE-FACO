@@ -33,7 +33,7 @@ public class showActivity extends AppCompatActivity
     private final String endPoint1 = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice"; //버스도착정보목록조회 앞 주소
     private final String endPoint2 = "http://openapi.gbis.go.kr/ws/rest/buslocationservice"; //버스위치정보조회서비스 앞 주소
     private final String endPoint3 = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll"; //버스도착정보조회 앞 주소
-    private final String AWSendPoint = " https://w5yp3bwer4.execute-api.ap-northeast-2.amazonaws.com/project/projectFunction"; //AWS api gateway 의 엔드포인트
+    private final String AWSendPoint = "https://nime89vfc5.execute-api.ap-northeast-2.amazonaws.com/prod/ride"; //AWS api gateway 의 엔드포인트
     private final String route = "234001159";
 
     //파싱을 위한 필드 선언
