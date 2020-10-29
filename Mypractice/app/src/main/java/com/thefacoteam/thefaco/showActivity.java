@@ -69,7 +69,7 @@ public class showActivity extends AppCompatActivity
 
     BusitemAdapter adapter = new BusitemAdapter();
 
-    int []BusstopArr = new int[]{1,3,5,6,17,18,19,20,22,23,24,25,37,38,39,40};
+    int []BusstopArr = new int[]{1,3,5,6,17,18,19,20,22,23,24,25,36,37,38,39,40};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
