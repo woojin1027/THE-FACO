@@ -149,7 +149,7 @@ public class result extends AppCompatActivity {
                 //리사이클러뷰 최종 셋팅
                 if (j == RouteNm.get(i).size() - 1)
                 {
-                    adapter.setItem(i, new Path_items("예상시간 : " + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), R.drawable.path_line));
+                    adapter.setItem(i, new Path_items("예상시간 : " + Time.get(i).toString() + "분", "" + Routesetting, "" + Fnamesetting + "(하차)" + Tname.get(i).get(j), R.drawable.line2));
                 }
             }
         }
