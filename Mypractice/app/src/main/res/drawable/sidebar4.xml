@@ -4,7 +4,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 android:shape="rectangle">
 
 <!-- 테두리 내부 색상 설정 : <solid android:color=""/>-->
-    <solid android:color="#6d7e9e"/>
+    <solid android:color="#f57910"/>
     <!-- 테두리 내부 여백 설정 -->
     <padding
         android:bottom="8dp"
@@ -17,5 +17,5 @@ android:shape="rectangle">
     <!-- 테두리 설정: 두께, 색상 -->
     <stroke
         android:width="3dp"
-        android:color="#6d7e9e" />
+        android:color="#f57910" />
 </shape>
