@@ -43,7 +43,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/phone"
+        android:background="@drawable/phone2"
         android:padding="40dp"
         android:scaleX="0.9"
         android:orientation="vertical">
