@@ -1,17 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#B50A01</item>
-        <item name="colorPrimaryDark">#361211</item>
-        <item name="colorAccent">#B50A01</item>
+<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+<!-- Customize your theme here. -->
+<item name="colorPrimary">#B50A01</item>//로고 배경
+<item name="colorPrimaryDark">#361211</item>//시간 배경
+<item name="colorAccent">#B50A01</item>
 
 
-        <!-- To change the background of options menu-->
-        <item name="android:itemBackground">#B50A01</item>
+<!-- To change the background of options menu-->
+<item name="android:itemBackground">#B50A01</item>
 
-    </style>
+</style>
 
 
-</resources>
+    </resources>
