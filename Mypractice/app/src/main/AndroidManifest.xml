@@ -46,6 +46,7 @@
         <activity android:name="com.thefacoteam.thefaco.subActivity" />
         <activity android:name="com.thefacoteam.thefaco.showActivity" />
         <activity android:name="com.thefacoteam.thefaco.MainActivity" />
+        <activity android:name="com.thefacoteam.thefaco.bus3Activity"/>
         <activity
             android:name="com.thefacoteam.thefaco.splashActivity"
             android:screenOrientation="portrait">

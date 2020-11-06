@@ -1,5 +1,6 @@
 package com.thefacoteam.thefaco;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
         view = inflater.inflate(R.layout.frag1,container,false);
         final Button button8 = view.findViewById(R.id.busNum8);
         final Button button9 = view.findViewById(R.id.busNum9);
+        final Button button10 = view.findViewById(R.id.busNum10);
+
         scaleUp = AnimationUtils.loadAnimation(getContext(),R.anim.scale_up);
         scaleDown = AnimationUtils.loadAnimation(getContext(),R.anim.scale_down);
 
@@ -56,6 +59,17 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
                 } return false;
             }
         });
+        button10.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == motionEvent.ACTION_DOWN)
+                    button10.startAnimation(scaleUp);
+                else if(motionEvent.getAction()==motionEvent.ACTION_UP){
+                    button10.startAnimation(scaleDown);
+                } return false;
+            }
+        });
 
 
         //버튼 클릭시 sub, showActivity로 이동
@@ -73,6 +87,14 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
             public void onClick(View v) {
                 toastshowM4102(container);
                 Intent intent = new Intent(getActivity(),showActivity.class);
+                startActivity(intent);
+            }});
+
+        button10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastshowM4102(container);
+                Intent intent = new Intent(getActivity(),bus3Activity.class);
                 startActivity(intent);
             }});
 
