@@ -1,0 +1,130 @@
+$(function(){	
+	loadFaceBookApi();
+	
+
+});
+	
+var req;
+
+function loadBlog(title, date, content) {
+
+	$(".tab_pannel .snsf").hide();
+	$(".tab_pannel .snsy").hide();
+	$(".tab_pannel .snsb").show();
+	
+	$("#snsf").attr('class','sns_facebook');
+	$("#snsb").attr('class','sns_blog on');
+	$("#snsy").attr('class','sns_youtube');
+	
+	
+	html = "";
+	html += "<h5 class='sns_tit'><a href='https://blog.naver.com/kordi_seniorjob' target='_blank'>"+title+"</a></h5>";
+	html += "<span class='sns_date'>"+date+"</span>";
+	html += "<p class='sns_con'>"+content.substring(0,80)+"</p>";
+	
+	$('.tab_pannel .snsy').empty();
+	$('.tab_pannel .snsf').empty();
+	$('.tab_pannel .snsb').empty();
+	$('.tab_pannel .snsb').append(html);
+	
+	
+}
+
+
+function loadYouTube() {
+
+	$(".tab_pannel .snsf").hide();
+	$(".tab_pannel .snsb").hide();
+	$(".tab_pannel .snsy").show();
+	
+	$("#snsf").attr('class','sns_facebook');
+	$("#snsb").attr('class','sns_blog');
+	$("#snsy").attr('class','sns_youtube on');
+	
+	var url = "https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UCE2ll9PlDk38VJlEIc8yhnA&maxResults=1&key=AIzaSyC74BJCDDu29zoUeQbORqPSWhHKvV9PK9U";
+
+	$.ajax({
+		type		: "POST",
+		url			: url,
+		dataType	: "jsonp",
+		jsonpCallback	: "youtubeApi",
+		success	: function(data){
+		},error : function(xhr) {
+		}
+	});
+}
+
+function youtubeApi (data) {
+	var result = eval(data)
+	var html = "";
+	var items = result.items;
+	
+	$.each(items, function(idx){
+		var item = items[idx];
+		
+		var snippet = item.snippet;		
+		
+		var thumbnail = snippet.thumbnails.default.url; //$(item).find('thumbnail').find('sqDefault');
+		var id = item.id.videoId; //$(item).find('player').find('sqDefault');
+		var player = "https://www.youtube.com/watch?v="+id;
+		var title = snippet.title; //$(item).find('title');
+		var description = snippet.description;//$(item).find('description');
+		var uploaded = snippet.publishedAt.substring(0, 10);
+		
+		html += '<div class="sns_video"><a href="' + player + '" target="_blank" class="img"><img src="' + thumbnail + '" alt="' + title + '"/></a></div>';
+		html += '<span class="sns_video_tit"><a href="' + player + '" target="_blank" class="title">' + title + '</a></span>';
+
+		
+	});
+
+	$('.tab_pannel .snsf').empty();
+	$('.tab_pannel .snsy').empty();
+	$('.tab_pannel .snsb').empty();
+	$('.tab_pannel .snsy').append(html);
+
+}
+
+function loadFaceBookApi(){
+	$(".tab_pannel .snsf").show();
+	$(".tab_pannel .snsb").hide();
+	$(".tab_pannel .snsy").hide();
+	
+	$("#snsf").attr('class','sns_facebook on');
+	$("#snsb").attr('class','sns_blog');
+	$("#snsy").attr('class','sns_youtube');
+	
+	var token = "EAAJPpKIN4OQBAPZCDCoBCn0jXLjTCxOned7m25SL3YnBbZBsLhNMZC7LeP2YctfvSZBOuZC641r9XH0NW13ZCOfDm296tfipjd2XjdRNO5zKHKRVI4p1n9ZCOZA3H51mRw1vszZAXPDdsYPE7PWw3IZCFtz64GTILPewCC3PnnRANV3IVX4aFwHDwa"; 
+	$.ajax({ 
+	url:"https://graph.facebook.com/v4.0/kordiseniorjob/feed?access_token=" + token, 
+	type:"GET", 
+	success:function(msg){ 
+	
+	console.log(msg.data[0]);
+	
+	$.ajax({ 
+	url:"https://graph.facebook.com/v4.0/" + msg.data[0].id + "?access_token=" 
+	+ token + "&fields=message,updated_time", 
+	type:"GET", 
+	success:function(msg){ 
+	var obj = msg; 
+	var message = obj['message'];
+
+	if(typeof message == "undefined"){
+		message = "";
+	}
+	var html = ""; 
+	html += "<span class='sns_date'>" + obj['updated_time'].substring(0,10) + "</span>"; 
+	html += "<p class='sns_con'><a href='https://facebook.com/kordiseniorjob' target='_blank'>" + message + "</a></p>"; 
+
+	$('.tab_pannel .snsy').empty();
+	$('.tab_pannel .snsf').empty();
+	$('.tab_pannel .snsb').empty();
+	$('.tab_pannel .snsf').append(html);
+	}, 
+	error:function(request,status,error){ 
+	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); } }); }, 
+	error:function(request,status,error){ 
+	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); } });
+	
+
+};
