@@ -17,7 +17,7 @@
             android:id="@+id/imageView6"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            card_view:srcCompat="@drawable/logo_b_9" />
+            card_view:srcCompat="@drawable/logo_b_12" />
 
         <TextView
             android:layout_width="match_parent"
@@ -26,19 +26,17 @@
             android:gravity="bottom|center_horizontal"
             android:text="The FACO 소개"
             android:layout_marginTop="-3dp"
-            android:textColor="#092F4F"
             android:textSize="24sp" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/egg_1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/back_1"
+            android:translationX="180dp"
+            android:translationY="-118dp"></Button>
 
-    <Button
-        android:layout_width="10dp"
-        android:layout_height="20dp"
-        android:translationX="180dp"
-        android:translationY="-118dp"
-        android:background="@drawable/back_1"
-        android:id="@+id/egg_1">
-    </Button>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -66,7 +64,6 @@
                     android:fontFamily="@font/font_dream"
                     android:padding="15dp"
                     android:text="앱 개발동기"
-                    android:textColor="#092F4F"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     card_view:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +88,6 @@
                         android:background="@drawable/sidebar2"
                         android:fontFamily="@font/font_dream"
                         android:text="@string/name_story"
-                        android:textColor="#0C3F69"
                         android:textSize="16sp" />
 
                 </androidx.cardview.widget.CardView>
@@ -120,7 +116,6 @@
                     android:fontFamily="@font/font_dream"
                     android:padding="15dp"
                     android:text="사용방법"
-                    android:textColor="#092F4F"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -157,7 +152,6 @@
                     android:fontFamily="@font/font_dream"
                     android:padding="15dp"
                     android:text="상세 설명"
-                    android:textColor="#092F4F"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -185,7 +179,6 @@
                     android:padding="15dp"
                     android:text="1. 노선 선정 이유 :\n
                     왜 하필 이 노선들인가"
-                    android:textColor="#092F4F"
                     android:textSize="16sp">
 
                 </Button>
@@ -215,7 +208,6 @@
                     android:padding="15dp"
                     android:text="2. 자세한 사용법 : 이것만 보면 \n
                         야, 너두 할수있어 !"
-                    android:textColor="#092F4F"
                     android:textSize="16sp">
 
                 </Button>
