@@ -59,7 +59,6 @@
             android:fontFamily="@font/font_dream"
             android:gravity="center"
             android:text="직접 정류장에 가지 않고도,\n 해당 노선을 기다리는 사람들을\n 알아 볼 수가 있어요."
-            android:textColor="#cc000000"
             android:textSize="16sp">
 
         </TextView>
