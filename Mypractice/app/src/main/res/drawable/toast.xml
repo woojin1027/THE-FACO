@@ -4,16 +4,16 @@
 
     <stroke
         android:width="2dp"
-        android:color="#91A8D2"/>
+        android:color="#cc4D4D4D"/>
 
     <solid
-        android:color="#91A8D2"/>
+        android:color="#cc4D4D4D"/>
 
     <padding
-        android:left="10dp"
-        android:top="10dp"
-        android:right="10dp"
-        android:bottom="10dp"/>
+        android:left="13dp"
+        android:top="13dp"
+        android:right="13dp"
+        android:bottom="13dp"/>
 
     <corners android:radius="15dp"/>
 </shape>
