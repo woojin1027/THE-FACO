@@ -59,7 +59,6 @@
             android:fontFamily="@font/font_dream"
             android:gravity="center"
             android:text="사용자위치를 중심으로 \n 정류장을 파악해 알려드릴수 있어요!"
-            android:textColor="#cc000000"
             android:textSize="16sp">
 
         </TextView>

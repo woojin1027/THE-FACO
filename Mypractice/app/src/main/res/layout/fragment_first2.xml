@@ -60,7 +60,6 @@
             android:fontFamily="@font/font_dream"
             android:gravity="center"
             android:text="The FACO가\n이전 정류장의\n대기 인원 수를 파악해서\n탑승 가능 여부를 안내해드릴게요!"
-            android:textColor="#cc000000"
             android:textSize="16sp">
 
         </TextView>
