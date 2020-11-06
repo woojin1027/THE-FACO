@@ -1,0 +1,272 @@
+
+/* Rise Demo Styles
+================================================== */
+
+	/* Page Fonts */
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800');
+	@import url('https://fonts.googleapis.com/css?family=Playfair+Display:700,700i,900,900i');
+
+	/* Body Options */
+	/* body{ font-family: 'Open Sans', sans-serif; letter-spacing: -0.6px; } */
+	body *{outline:none;}
+
+/* ANTARES COLORS
+================================================== */
+
+	/* Colored */
+	.colored, .colored-hover:hover, .soft-video-play-btn{ color:#2e52c2 !important; }
+	.bg-colored, .bg-colored-hover:hover{background-color:#2e52c2 !important; }
+	.border-colored, .border-colored-hover:hover{ border-color:#2e52c2 !important; }
+
+	/* Colored1 */
+	.colored1, .colored1-hover:hover{ color:#b73939 !important; }
+	.bg-colored1, .bg-colored1-hover:hover{ background-color:#b73939 !important; }
+	.border-colored1, .border-colored1-hover:hover{ border-color:#b73939 !important; }
+
+	/* Colored2 */
+	.colored2, .colored2-hover:hover{ color:#393c45 !important; }
+	.bg-colored2, .bg-colored2-hover:hover{ background-color:#393c45 !important; }
+	.border-colored2, .border-colored2-hover:hover{ border-color:#393c45 !important; }
+
+	/* ::selection{ background-color:#393c45 !important; } */
+
+	.bg-soft-colored:before{
+		background-color:rgba(33,34,35,0.95);
+	}
+
+	.bg-gradient,
+	.bg-soft-gradient:before{
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6d5ec0+0,3778c3+100 */
+		background: #264094; /* Old browsers */
+		background: -moz-linear-gradient(45deg,  #264094 0%, #345cd5 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(45deg,  #264094 0%,#345cd5 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(45deg,  #264094 0%,#345cd5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#264094', endColorstr='#345cd5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	}
+
+	.bg-gradient1,
+	.bg-soft-gradient1:before{
+		background: #322828; /* Old browsers */
+		background: -moz-linear-gradient(45deg,  #322828 0%, #2e333f 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(45deg,  #322828 0%,#2e333f 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(45deg,  #322828 0%,#2e333f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#322828', endColorstr='#2e333f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	}
+
+	.bg-gradient2,
+	.bg-soft-gradient2:before{
+		background: #1c1c1f; /* Old browsers */
+		background: -moz-linear-gradient(45deg,  #1c1c1f 0%, #272830 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(45deg,  #1c1c1f 0%,#272830 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(45deg,  #1c1c1f 0%,#272830 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1c1c1f', endColorstr='#272830',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	}
+
+	.bg-soft-gradient1:before,
+	.bg-soft-gradient2:before{ opacity: 0.95; }
+
+/* Other Colors */
+
+
+
+    /* Sliding hover type, background color */
+    .qdr-hover:before,
+    .custom-slider.strip-dots > .slick-dots li.slick-active button{
+    	background-color:#5578e3;
+    }
+    /* Services filters colors */
+	.services-with-tabs-1 .service-filters > div.cbp-filter-item-active:hover p,
+	.services-with-tabs-1 .service-filters > div.cbp-filter-item-active p{
+		background-color:#2e52c2;
+	}
+
+    /* Lightbox Background Color */
+    .ilightbox-overlay.metro-black{
+		background: #fff; /* Old browsers */
+    }
+
+    /* Prices Section Colors */
+	.interactive-packages .selector{border-bottom-color:#2e52c2;}
+	.interactive-packages .rise_title span.title_selector{ color:#2e52c2;}
+	.interactive-packages .step-titles .title.active{color:#2e52c2;}
+	.interactive-packages .bar .interactive_bar{ background:#2e52c2;}
+
+
+/* RISE VERSION MAIN STYLES
+================================================== */
+
+/* RISE NAVIGATION */
+	/* Navigation Colors - hover and active */
+	#navigation.modern .columns ul li a:hover,
+	#navigation.modern.scrolled .columns ul li a:hover,
+	#navigation.modern .columns ul.nav > li.active > a{
+		color:#4264d1 !important;
+	}
+	/* Navigation styles - You can see navigation hover and active colors in the content/antares/css/style.css file. */
+	#navigation.modern.white-nav .columns ul li a,
+	#navigation.modern.white-nav .columns ul li button{ font-size:12px; font-weight: 700; color:#222; }
+	/* Mega menu and dropdown styles */
+	#navigation.modern.white-nav .columns .nav-menu ul.dropdown-menu.mega-menu li a{ color:#222; font-size: 11px; letter-spacing: 0px; font-weight: 700; text-transform: uppercase; }
+	#navigation.modern.white-nav .columns .nav-menu ul.dropdown-menu li a{ color: #222; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0px; }
+
+/* RISE TITLES */
+	.page-title{ color:#393939; font-size:33px; font-weight: bold; letter-spacing: -2px; line-height: 38px; padding:0; margin:0 auto 20px;}
+	.page-subtitle{ color:#999; font-size:19px; padding:0; margin:10px 0; }
+	.page-subtitle.light-title{ color:#ddd; }
+	.page-title.light-title{ color:#d5d5d5; }
+	.page-description{ color:#999; line-height: 30px; font-size:16px; margin:20px auto 0; max-width: 1000px; }
+	.page-description.light-title{ color:#d1d1d1; }
+
+		@media only screen and (max-width: 960px){
+			.page-description{max-width: 95% !important;}
+		}
+
+
+/* RISE HOME */
+	.slide-title{ letter-spacing: -3px; }
+		@media only screen and (max-width: 640px){
+			.slide-title{ letter-spacing: -0.5px; }
+		}
+	/* Buttons on mobile devices */
+	.mobile-button{ display: block; width: 50px; height: 50px; line-height: 50px; text-align: center; }
+		/* Change button sizes for mobile screens */
+		@media only screen and (max-width: 800px){ .mobile-button{ width: 40px; height: 40px; line-height: 40px; }}
+		@media only screen and (max-width: 641px){ .mobile-button{ width: 35px; height: 35px; line-height: 35px; font-size: 11px; }}
+	.home .popover{ border: none; box-shadow: 2px 20px 45px 5px rgba(0,0,0,0.4); max-width: 320px; background-color:#17181b; color: #aaa; border-radius: 15px; }
+	.home .popover.top>.arrow:after{ border-top-color:#17181b; }
+	.home .popover-title{ background-color:transparent; border-bottom:none; padding:10px 14px 5px; }
+
+
+/* RISE LAYERED ITEMS */
+	.layered-items{ padding: 120px 0 70px; }
+	.layered-items .layer-container{ position: relative; display: block; margin: 0; padding: 0; }
+	.layered-items .layer-container .layer{ position: absolute; left:0; top:0; width: 100%; height: 100%; }
+	.layered-items .layer-container .layer img{ display: block; max-width: 100%; margin:0; width: 100%; }
+	/* arrow effect */
+	.layered-items .layer-container .arrow-layer{ -ms-transform: translateX(-140px); -webkit-transform: translateX(-140px); transform: translateX(-140px); -webkit-transition: all 0.4s; -moz-transition: all 0.4s; transition: all 0.4s; }
+	.layered-items .layer-container:hover .arrow-layer{ -ms-transform: translateX(-20px); -webkit-transform: translateX(-20px); transform: translateX(-20px); }
+	/* image effect */
+	.layered-items .layer-container .image-layer{ -ms-transform: translateX(0); -webkit-transform: translateX(0); transform: translateX(0); -webkit-transition: all 0.4s; -moz-transition: all 0.4s; transition: all 0.4s; }
+	.layered-items .layer-container:hover .image-layer{ -ms-transform: translateX(-20px); -webkit-transform: translateX(-20px); transform: translateX(-20px); }
+
+
+/* RISE WORKS */
+	.works #items{margin:70px auto 0;}
+	/* Hover color */
+	.works .cbp-caption-activeWrap{ background-color:rgba(27,27,27,0.5); }
+	/* Blur and scale effect for images  */
+	.works .cbp-item:hover .cbp-caption-defaultWrap{ -ms-transform: scale(1.1); -webkit-transform: scale(1.1); transform: scale(1.03); }
+	.works .cbp-item .cbp-caption-defaultWrap,
+	.works .cbp-item .cbp-caption-defaultWrap img{ -webkit-transition: all 1s; -moz-transition: all 1s; transition: all 1s; }
+	.works .cbp-item:hover .cbp-caption-defaultWrap img{ -webkit-filter: blur(3px); -moz-filter: blur(3px); -o-filter: blur(3px); -ms-filter: blur(3px); filter: blur(3px); }
+	/* Text Styles */
+	.works .cbp-caption-activeWrap h2{ color:#fff; font-size:16px; text-transform: uppercase; margin:0; padding:0; font-weight: 900; }
+	.works .cbp-caption-activeWrap p{ font-size:13px; margin:0; padding:0; color:#ccc; line-height: 16px; text-transform: capitalize;}
+		/* Blur effect for large screen devices */
+		@media only screen and (min-width: 769px){
+			.works .cbp-caption-activeWrap h2,
+			.works .cbp-caption-activeWrap p{ -webkit-filter: blur(3px); -moz-filter: blur(3px); -o-filter: blur(3px); -ms-filter: blur(3px); filter: blur(3px); -webkit-transition: all 1s; -moz-transition: all 1s; transition: all 1s; }
+			.works .cbp-item:hover .cbp-caption-activeWrap h2,
+			.works .cbp-item:hover .cbp-caption-activeWrap p{ -webkit-filter: blur(0px); -moz-filter: blur(0px); -o-filter: blur(0px); -ms-filter: blur(0px); filter: blur(0px); }
+		}
+	/* filters on icon navigation */
+	#filters li.cbp-filter-item{ position: relative; }
+	#filters.works-visible li.cbp-filter-item:before{
+		position: absolute; left:0; top:0; width: 100%; height: 100%; content: ''; background: #26292b; display: block;
+		/* Animate Settings */
+		-webkit-animation: filteranimate 1.5s linear; -moz-animation: filteranimate 1.5s linear; -ms-animation: filteranimate 1.5s; -webkit-animation-fill-mode: forwards;
+	}
+	@-webkit-keyframes filteranimate { 0% { opacity: 0.7;} 12% { opacity: 0.5;} 13% { opacity: 0.7;} 100% { opacity: 0;}}
+	@keyframes filteranimate { 0% { opacity: 0.7;} 12% { opacity: 0.5;} 13% { opacity: 0.7;} 100% { opacity: 0;}}
+
+		/* Visible Item texts on mobile */
+		@media only screen and (max-width: 769px){
+			.works .cbp-caption-activeWrap{ display: block; position: relative; opacity: 1; height: auto; background-color:#373742; }
+		}
+
+
+
+	/* RISE SERVICES */
+	.services-with-tabs-1 .service-filters>div{font-size: 18px; text-transform: uppercase; font-weight: 300; cursor: pointer; }
+	.services-with-tabs-1 .service-filters>div p{display: inline-block; width: 95%; padding:15px 21px; color:#575757; letter-spacing: 1px; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
+	.services-with-tabs-1 .service-filters>div.cbp-filter-item-active p{color:white; }
+	.services-with-tabs-1 .service-filters>div:hover p{background-color:#f3f3f3; }
+	.services-with-tabs-1 .service-filters>div i{display: block; font-size: 25px; margin-bottom: 10px; }
+	.services-with-tabs-1 .service-tabs .strip-btn-container{margin-top:30px; font-family: inherit;}
+	.services-with-tabs-1 .service-tabs a.strip-button{ font-size:16px; }
+	.services-with-tabs-1 .service-tabs .cbp-item{ max-width: 100%; }
+	.services-with-tabs-1 .service-tabs .cbp-item.cbp-item-off{ display: block; visibility: hidden; opacity: 0; }
+	.services-with-tabs-1 .service-tabs .cbp-item .slick-slide>img{ display: block; width: 100%; }
+	.services-with-tabs-1 .service-tabs .cbp-item.cbp-item-off iframe {display: none;}
+		@media only screen and (max-width: 800px){
+			.services-with-tabs-1 .service-filters>div{width: 33.3% !important;}
+		}
+		@media only screen and (max-width: 470px){
+			.services-with-tabs-1 .service-filters>div{width: 50% !important;}
+		}
+	/* Service With Tabs Colors */
+	.services-with-tabs-1.light-type .service-filters>div.cbp-filter-item-active p{color:white; }
+	.services-with-tabs-1.light-type .service-filters>div:hover p{background-color:#474747; }
+	.services-with-tabs-1.light-type .service-tabs .cbp-item{ color:white; }
+	.services-with-tabs-1.light-type .service-filters>div p{ font-size: 14px; font-weight: 300; color:white; letter-spacing: -0.4px;}
+	.services-with-tabs-1.light-type .service-filters>div p i{ font-size: 30px; margin-bottom:15px; }
+	.services-with-tabs-1.light-type .service-filters>div:hover p{background-color:#26272a; }
+	.services-with-tabs-1 .service-filters > div.cbp-filter-item-active:hover p,
+	.services-with-tabs-1 .service-filters > div.cbp-filter-item-active p{ background-color:#2e52c2; color:white; }
+
+
+
+
+	/* RISE SKILLS - You can find all styles in theme.css file for skills. */
+	.skills-type-1 .item h3{ font-size: 15px; text-transform: uppercase; padding: 0; margin: 0 0 16px 0; color: #ddd; font-weight: 900; }
+	.skills-type-1 .item{ margin-top:19px; }
+	.skills-type-1 .item .progress{ background-color:#282828; height: 7px; }
+
+
+
+
+	/* RISE TEAM - You can find all styles in theme.css file for team types. */
+	.team-type-2 .member .member-description{ padding: 30px;}
+	.team-type-2 .member .member-description h2{ font-size: 14px; font-weight: 900; }
+	.team-type-2 .member .member-description h4{ font-size: 14px; margin: 10px auto 8px; padding: 0; text-transform: uppercase; font-weight: 600; }
+	.team-type-2 .member .team-progress{ bottom:18px; }
+	.team-type-2 .member .team-progress h3{ font-size: 14px; font-weight: bold; }
+
+
+
+
+
+	/* RISE COMPANY NOTES */
+	.company-notes .recommended-links{ padding:20px 0; margin:0; }
+	.company-notes .recommended-links li{ display: inline-block; }
+	.company-notes .recommended-links li a{ font-size: 15px; font-weight: 600; letter-spacing: -1px; padding:10px 20px 10px 30px; position: relative; color:#666; display: block; }
+	.company-notes .recommended-links li a span{ position: absolute; left:0; width: 22px; height: 22px; line-height: 22px; background-color:#ddd; color:#444; text-align: center; font-size: 10px; font-weight: 400; border-radius: 100%; top:50%; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); }
+
+
+
+
+
+	/* RISE CONTACT TYPE 1 - You can find all styles in theme.css file for team types. */
+	.contact-type-1 .contact-title{ font-size: 25px; margin:0 0 40px; font-weight: 900; letter-spacing: -1.5px; }
+	.contact-type-1 p{ color:#8c949a; line-height: 25px; }
+	.contact-type-1 p *{ color:#9c9c9c; }
+	/* edititons to form. */
+	.contact-type-1 input, .contact-type-1 textarea{ color:#9c9c9c; font-size: 14px; }
+	.contact-type-1 .contact #contact_form{ margin-top:20px; }
+
+	.contact-type-1 ::-webkit-input-placeholder {color: #9c9c9c;}
+	.contact-type-1 :-moz-placeholder {color: #9c9c9c;}
+	.contact-type-1 ::-moz-placeholder {color: #9c9c9c;  }
+	.contact-type-1 :-ms-input-placeholder {color: #9c9c9c;}
+
+
+
+
+
+
+
+
+
+
+
+	/* filters */
