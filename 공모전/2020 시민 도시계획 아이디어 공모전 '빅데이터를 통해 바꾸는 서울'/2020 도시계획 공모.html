@@ -1,0 +1,976 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0058)http://kpa1959.or.kr/?menuno=2663&ev_idx=1663&evt_act=view -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>주요행사 &gt; 학회행사 &gt; 대한국토 도시계획학회</title>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=10">
+
+<link rel="shortcut icon" href="http://kpa1959.or.kr/images/common/kpa.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="http://kpa1959.or.kr/images/common/ico.png">
+<link rel="icon" href="http://kpa1959.or.kr/images/common/kpa.ico" type="image/x-icon">
+<link rel="shortcut icon" href="http://kpa1959.or.kr/images/common/ico.png">
+<link rel="apple-touch-icon-precomposed" href="http://kpa1959.or.kr/images/common/ico.png">
+<link rel="apple-touch-startup-image" href="http://kpa1959.or.kr/images/common/ico.png">
+<script async="" src="./2020 도시계획 공모_files/analytics.js.다운로드"></script><script type="text/javascript" src="./2020 도시계획 공모_files/jquery-1.11.1.min.js.다운로드"></script>
+<script type="text/javascript"> 
+  
+// 접속 핸드폰 정보 
+var userAgent = navigator.userAgent.toLowerCase(); 
+  
+// 모바일 홈페이지 바로가기 링크 생성 
+if(userAgent.match('iphone')) { 
+document.write('<link rel="apple-touch-icon" href="http://kpa1959.zsol.co.kr/images/common/ico.png" />') 
+} else if(userAgent.match('ipad')) { 
+document.write('<link rel="apple-touch-icon" href="http://kpa1959.zsol.co.kr/images/common/ico.png" />') 
+} else if(userAgent.match('ipod')) { 
+document.write('<link rel="apple-touch-icon" href="http://kpa1959.zsol.co.kr/images/common/ico.png" />') 
+} else if(userAgent.match('android')) { 
+document.write('<link rel="shortcut icon" href="http://kpa1959.zsol.co.kr/images/common/ico.png" />') 
+} 
+</script> 
+<link rel="stylesheet" href="./2020 도시계획 공모_files/20140704_3090680450533111.css" type="text/css">
+<script type="text/javascript" src="./2020 도시계획 공모_files/20140704_3090836397829049.js.다운로드"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+<script>
+function chkForm(type){
+  $("#searchType").val(type);
+
+  if(type == "base"){
+    if($("#keyword").val() == ""){
+      alert("검색어를 입력하세요.");
+      $("#keyword").focus();
+      return;
+    }
+  }else if(type == "detail"){
+    if($("#dKeyword").val() == ""){
+      alert("키워드를 입력하세요.");
+      $("#dKeyword").focus();
+      return;
+    }
+    if($("#sYear").val() != ""){
+	if($("#sMonth").val() == ""){
+		alert("시작 월을 선택하세요.");
+		$("#sMonth").focus();
+                return;
+	}	
+	
+	if($("#eYear").val() == ""){
+		alert("종료 년도를 선택하세요.");
+		$("#eYear").focus();
+                return;
+	}	
+	
+	if($("#eMonth").val() == ""){
+		alert("종료 월을 선택하세요.");
+		$("#eMonth").focus();
+                return;
+	}
+	
+}
+
+if($("#sMonth").val() != ""){
+	if($("#sYear").val() == ""){
+		alert("시작 년도를 선택하세요.");
+		$("#sYear").focus();
+                return;
+	}	
+	
+	if($("#eYear").val() == ""){
+		alert("종료 년도를 선택하세요.");
+		$("#eYear").focus();
+                return;
+	}	
+	
+	if($("#eMonth").val() == ""){
+		alert("종료 월을 선택하세요.");
+		$("#eMonth").focus();
+                return;
+	}
+}
+
+if($("#eYear").val() != ""){
+	
+	if($("#sYear").val() == ""){
+		alert("시작 년도를 선택하세요.");
+		$("#sYear").focus();
+                return;
+	}	
+	
+	if($("#sMonth").val() == ""){
+		alert("시작 월을 선택하세요.");
+		$("#sMonth").focus();
+                return;
+	}	
+	
+	if($("#eMonth").val() == ""){
+		alert("종료 월을 선택하세요.");
+		$("#eMonth").focus();
+                return;
+	}	
+}
+
+if($("#eMonth").val() != ""){
+	
+	if($("#sYear").val() == ""){
+		alert("시작 년도를 선택하세요.");
+		$("#sYear").focus();
+                return;
+	}	
+	
+	if($("#sMonth").val() == ""){
+		alert("시작 월을 선택하세요.");
+		$("#sMonth").focus();
+                return;
+	}	
+	
+	if($("#eYear").val() == ""){
+		alert("종료 년도를 선택하세요.");
+		$("#eYear").focus();
+                return;
+	}	
+      }
+
+  }		
+ 	
+  document.searchForm.submit();
+}
+
+
+$(function() {
+	$(".details-search").hide();
+	$(".search .search02").click(function(){
+		$(".details-search").show();
+	});
+	$(".close").click(function(){
+		$(".details-search").hide();
+	});
+})
+</script>
+<div id="wrap">
+		<div id="skipNavi">
+			<h1>컨텐츠 바로기기</h1>
+			<ul>
+				<li><a href="http://kpa1959.or.kr/?menuno=2663&amp;ev_idx=1663&amp;evt_act=view#container">본문으로 바로가기</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2663&amp;ev_idx=1663&amp;evt_act=view#gnb">주메뉴로 바로가기</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2663&amp;ev_idx=1663&amp;evt_act=view#footer">하단 홈페이지정보 바로가기</a></li>
+			</ul>
+		</div>
+		<div id="header">
+			<div class="head">
+				<h1><a href="http://kpa1959.or.kr/?menuno=668"><img src="./2020 도시계획 공모_files/logo_.gif" alt="(사)대한국토·도시계획학회"></a></h1>
+				<fieldset class="search">
+					<legend>검색</legend>
+					<form id="frontSearchVO" name="searchForm" accept-charset="UTF-8" action="http://kpa1959.or.kr/" method="get">
+                                        <input type="hidden" name="menuno" value="2092">
+                                        <input type="hidden" name="searchType" id="searchType">
+                                        <input type="hidden" name="sort" value="d">
+						<div class="search-box">
+							<input type="text" name="keyword" id="keyword" class="text" title="검색어 입력" style="width:250px;height:24px;" value="" onkeypress="if (event.keyCode==13){ chkForm(&#39;base&#39;);event.returnValue=false}">
+							<a href="javascript:chkForm(&#39;base&#39;);"><img src="./2020 도시계획 공모_files/btn_search_new.gif" alt="검색"></a>
+						</div>
+						<a href="javascript:;" class="search02"><img src="./2020 도시계획 공모_files/btn_search_new02.gif" alt="상세검색"></a>
+
+<div class="details-search" style="display:none;">
+					<div class="search-box box-width">
+						<h3>상세검색</h3>
+						<div class="search-cont">
+							<ul>
+                                                                <li>
+									<label for="title">전 체</label>
+									<input type="text" class="text" name="dTotal" id="dTotal" title="제목 입력" style="width:318px;height:22px;">
+								</li>
+								<li>
+									<label for="title">제 목</label>
+									<input type="text" class="text" name="dSubject" id="dSubject" title="제목 입력" style="width:318px;height:22px;">
+								</li>
+								<li>
+									<label for="author">저 자</label>
+									<input type="text" class="text" name="dAuthor" id="dAuthor" title="저자 입력" style="width:318px;height:22px;">
+								</li>
+								<li>
+									<label for="proce">자료구분</label>
+									<select name="dJournal" id="dJournal" class="text" style="width:318px;height:26px;font-size:12px;line-height:20px;">
+										<option value="">-------------------선택------------------</option>
+										<option value="925">국토계획</option>
+										<option value="924">도시정보</option>
+										<option value="1001">학술발표논문집</option>
+										<option value="1002">APPR</option>
+										<option value="1003">세미나자료집</option>
+									</select>
+								</li>
+								<li>
+									<label for="keywords">키워드</label>
+									<input type="text" class="text" name="dKeyword" id="dKeyword" title="키워드 입력" style="width:318px;height:22px;">
+								</li>
+							</ul>
+							<div class="select">
+								<label for="period">기간설정</label>
+								<select name="sYear" id="sYear" style="width:62px;">
+									<option value="">년도</option>
+									
+										<option value="1966">1966</option>
+									
+										<option value="1967">1967</option>
+									
+										<option value="1968">1968</option>
+									
+										<option value="1969">1969</option>
+									
+										<option value="1970">1970</option>
+									
+										<option value="1971">1971</option>
+									
+										<option value="1972">1972</option>
+									
+										<option value="1973">1973</option>
+									
+										<option value="1974">1974</option>
+									
+										<option value="1975">1975</option>
+									
+										<option value="1976">1976</option>
+									
+										<option value="1977">1977</option>
+									
+										<option value="1978">1978</option>
+									
+										<option value="1979">1979</option>
+									
+										<option value="1980">1980</option>
+									
+										<option value="1981">1981</option>
+									
+										<option value="1982">1982</option>
+									
+										<option value="1983">1983</option>
+									
+										<option value="1984">1984</option>
+									
+										<option value="1985">1985</option>
+									
+										<option value="1986">1986</option>
+									
+										<option value="1987">1987</option>
+									
+										<option value="1988">1988</option>
+									
+										<option value="1989">1989</option>
+									
+										<option value="1990">1990</option>
+									
+										<option value="1991">1991</option>
+									
+										<option value="1992">1992</option>
+									
+										<option value="1993">1993</option>
+									
+										<option value="1994">1994</option>
+									
+										<option value="1995">1995</option>
+									
+										<option value="1996">1996</option>
+									
+										<option value="1997">1997</option>
+									
+										<option value="1998">1998</option>
+									
+										<option value="1999">1999</option>
+									
+										<option value="2000">2000</option>
+									
+										<option value="2001">2001</option>
+									
+										<option value="2002">2002</option>
+									
+										<option value="2003">2003</option>
+									
+										<option value="2004">2004</option>
+									
+										<option value="2005">2005</option>
+									
+										<option value="2006">2006</option>
+									
+										<option value="2007">2007</option>
+									
+										<option value="2008">2008</option>
+									
+										<option value="2009">2009</option>
+									
+										<option value="2010">2010</option>
+									
+										<option value="2011">2011</option>
+									
+										<option value="2012">2012</option>
+									
+										<option value="2013">2013</option>
+									
+										<option value="2014">2014</option>
+									
+										<option value="2015">2015</option>
+									
+								</select>
+								<select name="sMonth" id="sMonth">
+									<option value="">월</option>
+									
+										<option value="1">1</option>
+									
+										<option value="2">2</option>
+									
+										<option value="3">3</option>
+									
+										<option value="4">4</option>
+									
+										<option value="5">5</option>
+									
+										<option value="6">6</option>
+									
+										<option value="7">7</option>
+									
+										<option value="8">8</option>
+									
+										<option value="9">9</option>
+									
+										<option value="10">10</option>
+									
+										<option value="11">11</option>
+									
+										<option value="12">12</option>
+									
+								</select>
+								부터
+								<select name="eYear" id="eYear" style="width:62px;">
+									<option value="">년도</option>
+									
+										<option value="1966">1966</option>
+									
+										<option value="1967">1967</option>
+									
+										<option value="1968">1968</option>
+									
+										<option value="1969">1969</option>
+									
+										<option value="1970">1970</option>
+									
+										<option value="1971">1971</option>
+									
+										<option value="1972">1972</option>
+									
+										<option value="1973">1973</option>
+									
+										<option value="1974">1974</option>
+									
+										<option value="1975">1975</option>
+									
+										<option value="1976">1976</option>
+									
+										<option value="1977">1977</option>
+									
+										<option value="1978">1978</option>
+									
+										<option value="1979">1979</option>
+									
+										<option value="1980">1980</option>
+									
+										<option value="1981">1981</option>
+									
+										<option value="1982">1982</option>
+									
+										<option value="1983">1983</option>
+									
+										<option value="1984">1984</option>
+									
+										<option value="1985">1985</option>
+									
+										<option value="1986">1986</option>
+									
+										<option value="1987">1987</option>
+									
+										<option value="1988">1988</option>
+									
+										<option value="1989">1989</option>
+									
+										<option value="1990">1990</option>
+									
+										<option value="1991">1991</option>
+									
+										<option value="1992">1992</option>
+									
+										<option value="1993">1993</option>
+									
+										<option value="1994">1994</option>
+									
+										<option value="1995">1995</option>
+									
+										<option value="1996">1996</option>
+									
+										<option value="1997">1997</option>
+									
+										<option value="1998">1998</option>
+									
+										<option value="1999">1999</option>
+									
+										<option value="2000">2000</option>
+									
+										<option value="2001">2001</option>
+									
+										<option value="2002">2002</option>
+									
+										<option value="2003">2003</option>
+									
+										<option value="2004">2004</option>
+									
+										<option value="2005">2005</option>
+									
+										<option value="2006">2006</option>
+									
+										<option value="2007">2007</option>
+									
+										<option value="2008">2008</option>
+									
+										<option value="2009">2009</option>
+									
+										<option value="2010">2010</option>
+									
+										<option value="2011">2011</option>
+									
+										<option value="2012">2012</option>
+									
+										<option value="2013">2013</option>
+									
+										<option value="2014">2014</option>
+									
+										<option value="2015">2015</option>
+									
+								</select>
+								<select name="eMonth" id="eMonth">
+									<option value="">월</option>
+									
+										<option value="1">1</option>
+									
+										<option value="2">2</option>
+									
+										<option value="3">3</option>
+									
+										<option value="4">4</option>
+									
+										<option value="5">5</option>
+									
+										<option value="6">6</option>
+									
+										<option value="7">7</option>
+									
+										<option value="8">8</option>
+									
+										<option value="9">9</option>
+									
+										<option value="10">10</option>
+									
+										<option value="11">11</option>
+									
+										<option value="12">12</option>
+									
+								</select>
+								까지
+							</div>
+							<div class="btn-c02"><a href="javascript:chkForm(&#39;detail&#39;);"><img src="./2020 도시계획 공모_files/btn_search04.gif" alt="검색"></a></div>
+						</div>
+						<a href="javascript:;" class="close"><img src="./2020 도시계획 공모_files/btn_close.gif" alt="닫기"></a>
+					</div>
+				</div>
+
+
+					</form>
+                                       <!-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+<div class="tag">
+	<strong><img src="/images/common/icon/icon_tag.png" alt="TAG" /></strong>
+	
+		
+		
+		
+	
+		<a href="/?menuno=2092&keyword=%EB%8F%84%EC%8B%9C%EF%BF%BD%EF%BF%BD%EF%BF%BD%EC%83%9D&sort=d">도시���생</a>
+		
+		 / 
+		
+	
+		
+		
+		
+	
+		<a href="/?menuno=2092&keyword=%EA%B5%AD%ED%86%A0&sort=d">국토</a>
+		
+		 / 
+		
+	
+		
+		
+		
+	
+		<a href="/?menuno=2092&keyword=%ED%86%A0%EC%A7%80&sort=d">토지</a>
+		
+		 / 
+		
+	
+		
+		
+		
+	
+		<a href="/?menuno=2092&keyword=%EC%9E%84%EB%8C%80%EF%BF%BD%EF%BF%BD%EF%BF%BD%ED%83%9D&sort=d">임대���택</a>
+		
+		 / 
+		
+	
+		
+		
+		
+	
+		<a href="/?menuno=2092&keyword=%ED%95%99%ED%9A%8C&sort=d">학회</a>
+		
+		
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+</div>-->
+<div class="tag">
+						<strong><img src="./2020 도시계획 공모_files/icon_tag.png" alt="TAG"></strong>
+      <a href="http://kpa1959.or.kr/?menuno=2092&amp;searchType=base&amp;sort=d&amp;keyword=%ED%86%A0%EC%A7%80&amp;dTotal=&amp;dSubject=&amp;dAuthor=&amp;dJournal=&amp;dKeyword=&amp;sYear=&amp;sMonth=&amp;eYear=&amp;eMonth=">토지</a> / 
+			<a href="http://kpa1959.or.kr/?menuno=2092&amp;searchType=base&amp;sort=d&amp;keyword=%EA%B5%AD%ED%86%A0&amp;dTotal=&amp;dSubject=&amp;dAuthor=&amp;dJournal=&amp;dKeyword=&amp;sYear=&amp;sMonth=&amp;eYear=&amp;eMonth=">국토</a> / 
+			<a href="http://kpa1959.or.kr/?menuno=2092&amp;searchType=base&amp;sort=d&amp;keyword=%EB%8F%84%EC%8B%9C%EC%9E%AC%EC%83%9D&amp;dTotal=&amp;dSubject=&amp;dAuthor=&amp;dJournal=&amp;dKeyword=&amp;sYear=&amp;sMonth=&amp;eYear=&amp;eMonth=">도시재생</a> / 
+			<a href="http://kpa1959.or.kr/?menuno=2092&amp;searchType=base&amp;sort=d&amp;keyword=%ED%95%99%ED%9A%8C&amp;dTotal=&amp;dSubject=&amp;dAuthor=&amp;dJournal=&amp;dKeyword=&amp;sYear=&amp;sMonth=&amp;eYear=&amp;eMonth=">학회</a> / 
+			<a href="http://kpa1959.or.kr/?menuno=2092&amp;searchType=base&amp;sort=d&amp;keyword=%EC%9E%84%EB%8C%80%EC%A3%BC%ED%83%9D&amp;dTotal=&amp;dSubject=&amp;dAuthor=&amp;dJournal=&amp;dKeyword=&amp;sYear=&amp;sMonth=&amp;eYear=&amp;eMonth=">임대주택</a>
+					</div>				</fieldset>
+				<div class="utill">
+					<ul>
+
+						<li><a href="http://kpa1959.or.kr/?menuno=2083">LOGIN</a></li>
+
+
+						<li><a href="http://kpa1959.or.kr/?menuno=2461">SITEMAP</a></li>
+						<li><a href="http://kpa1959.or.kr/eng/index.html?menuno=2562">ENGLISH</a></li>
+
+
+
+	
+	
+		<a href="http://kpa1959.or.kr/?menuno=2083&amp;type=project" class="adm"><img src="./2020 도시계획 공모_files/btn_adm.gif" alt="연구용역관리"></a>
+	
+
+
+				</ul></div>
+				<div class="gnb-box">
+					<ul id="gnb">
+						<li>
+							<a href="http://kpa1959.or.kr/?menuno=2454">문헌DB+</a>
+							 <ul style="display:none;">
+								<li><a href="http://kpa1959.or.kr/?menuno=2454">국토계획</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2456">도시정보지</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2561">IJUS</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2457">학술대회 논문집</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2455">APPR</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2458">세미나자료집</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2459">교재</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2460">도서</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2691">발간물구독신청</a></li>
+							</ul>
+						</li>
+						<li><a href="http://kpa1959.or.kr/?menuno=2077">논문투고</a>
+							<ul style="display: none;">
+								<li><a href="http://kpa1959.or.kr/?menuno=2077">투고안내</a></li>
+								<li><a href="https://dbpiaone.com/jkpa/index.do" target="_blank">논문투고</a></li>
+							</ul>
+						</li>
+						<li><a href="http://kpa1959.or.kr/?menuno=2935">학술대회</a>
+							<ul style="display: none;">
+								<li><a href="http://kpa1959.or.kr/?menuno=2898">춘계산학학술대회</a></li>
+                                                                <li><a href="http://kpa1959.or.kr/?menuno=2769">하계학술대회</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2935">추계학술대회</a></li>
+								<!--<li><a href="/?menuno=2358">자료실</a></li>-->
+								<!--<li><a href="/?menuno=2359">알려드립니다.</a></li>-->
+								<li><a href="http://kpa1959.or.kr/?menuno=2921">ICAPPS</a></li>
+
+							</ul>
+						</li>
+						<li class="on">
+							<a href="http://kpa1959.or.kr/?menuno=2131">주요행사</a>
+							<ul style="display: none;">
+								<li><a href="http://kpa1959.or.kr/?menuno=2131">학술행사</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2134">도시의 날</a></li>
+                                <li><a href="http://kpa1959.or.kr/?menuno=2132">대한민국 도시대상</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2865">창립60주년 행사</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2763">통일국토의미래과제<br>공모전</a></li>
+								<li><a href="http://www.lcdc.kr/" target="_blank" title="새창으로 열림">대한민국 국토대전</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2135">정기총회</a></li>
+                                                                <li><a href="http://kpa1959.or.kr/?menuno=2906">도시계획 명예의 전당</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2663">행사참가신청</a></li>
+								<!--li><a href="/?menuno=2913">선거</a></li-->
+							</ul>
+						</li>
+						<li>
+							<a href="http://kpa1959.or.kr/?menuno=2116">알림마당</a>
+							<ul style="display: none;">
+								<li><a href="http://kpa1959.or.kr/?menuno=2116">공지사항</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2117">캘린더</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2118">학회소식</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2119">회원동정</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2120">기관회원소식</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2121">Q&amp;A</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2542">모집</a></li>
+								<!--<li><a href="/?menuno=2543">학술행사</a></li>-->
+								<!--<li><a href="/?menuno=2606">정책토론방</a></li>-->
+								<li><a href="http://kpa1959.or.kr/?menuno=2625">정책토론방</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2831">소식지</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2621">설문조사</a></li>
+                                                                <li><a href="http://kpa1959.or.kr/?menuno=2912">자료실</a></li>
+
+								<!--<li><a href="/?menuno=2705">웹진</a></li>-->
+								<!--<li><a href="/?menuno=2696">선거권확인</a></li>-->
+							</ul>
+						</li>
+						<li>
+							<a href="http://kpa1959.or.kr/?menuno=2113">입회안내</a>
+							<ul style="display: none;">
+								<li><a href="http://kpa1959.or.kr/?menuno=2113">개인회원</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2114">단체회원</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2115">특별회원</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="http://kpa1959.or.kr/?menuno=2093">학회소개</a>
+							<ul style="display: none;">
+								<li><a href="http://kpa1959.or.kr/?menuno=2093">인사말</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2095">정관 및 규정</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2099">연혁</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2104">연구실적</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2106">조직</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2110">역대회장</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2435">수상자명단</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2111">로고</a></li>
+								<li><a href="http://kpa1959.or.kr/?menuno=2112">사무국/오시는 길</a></li>
+							</ul>
+						</li>
+					</ul>
+					<div class="bg-box" style="display: none;"></div>
+				</div>
+			</div>
+		</div>		<div id="sub-container">
+			<div id="contents" class="clear">
+<div class="location"><img src="./2020 도시계획 공모_files/icon_home.gif" alt="HOME"> &gt; 주요행사 &gt; 학회행사</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+<div id="lnb">
+	<h2>
+		<em>Korea Planning Association</em>
+		<strong>주요행사</strong>
+	</h2>
+	<ul class="lnb">
+		<li><a href="http://kpa1959.or.kr/?menuno=2131">학술행사</a></li>
+		<li>
+			<a href="http://kpa1959.or.kr/?menuno=2134">도시의 날</a>
+			<ul style="display: none;">
+				<li><a href="http://kpa1959.or.kr/?menuno=2943">- 제14회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2890">- 제13회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2840">- 제12회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2796">- 제11회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2743">- 제10회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2677">- 제9회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2225">- 제7회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2238">- 제6회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2248">- 제5회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2258">- 제4회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2271">- 제3회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2286">- 제2회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2295">- 제1회 도시의 날</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2221">- 알려드립니다</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2223">- 도시의 날 소개</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="http://kpa1959.or.kr/?menuno=2873">대한민국 도시대상</a>
+			<ul style="display: none;">
+				<li><a href="http://kpa1959.or.kr/?menuno=2930">- 2020 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2873">- 2019 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2825">- 2018 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2779">- 2017 대한민국 도시대상</a></li>						
+				<li><a href="http://kpa1959.or.kr/?menuno=2728">- 2016 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2628">- 2015 대한민국 도시대상</a></li>							
+				<li><a href="http://kpa1959.or.kr/?menuno=2139">- 2014 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2147">- 2013 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2154">- 2012 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2161">- 2011 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2169">- 2010 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2176">- 2009 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2186">- 2008 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2196">- 2007 대한민국 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2203">- 2000년~2006년 도시대상</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2205">- 역대 선정 지자체</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2208">- 자료실</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2209">- 알려드립니다</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2211">- 연혁 및 관련연구</a></li>
+			</ul>
+		</li>
+		<li><a href="http://kpa1959.or.kr/?menuno=2865">창립60주년 행사</a></li>
+		<li>
+			<a href="http://kpa1959.or.kr/?menuno=2792">통일국토의<br>미래과제 공모전</a>
+			<ul style="display: none;">
+				<li><a href="http://kpa1959.or.kr/?menuno=2764">- 제1회 통일국토의<br>미래과제 공모전(2016)</a></li>
+				<li><a href="http://kpa1959.or.kr/?menuno=2792">- 제2회 통일국토의<br>미래과제 공모전(2017)</a></li>
+			</ul>
+		</li>
+		
+		<li><a href="http://www.lcdc.kr/" target="_blank" title="새창으로 열림">대한민국 국토대전</a></li>
+		<li><a href="http://kpa1959.or.kr/?menuno=2135">정기총회</a></li>
+		<li><a href="http://kpa1959.or.kr/?menuno=2906">도시계획 명예의 전당</a></li>
+		<li><a href="http://kpa1959.or.kr/?menuno=2663" class="on">행사참가신청</a></li>
+		<!--li><a href="/?menuno=2913">선거</a></li-->
+		
+		<!--li>
+			<a href="/?menuno=2792">통일국토의<br />미래과제 공모전</span></a>
+			<ul>
+				<li><a href="/?menuno=2764">- 제1회 통일국토의<br />미래과제 공모전(2016)</span></a></li>
+				<li><a href="/?menuno=2792">- 제2회 통일국토의<br />미래과제 공모전(2017)</span></a></li>
+			</ul>
+		</li-->
+	</ul>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+<script type="text/javascript">
+	$(function () {
+		/* gnb */
+		$("#gnb > li").eq(3).addClass("on");
+	});
+	var lnbnum=8;
+	var lnbsubnum=0;
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+<link rel="stylesheet" href="./2020 도시계획 공모_files/jquery-1.10.3-ui.css">
+<script src="./2020 도시계획 공모_files/jquery-1.10.3-ui.js.다운로드"></script>
+<script src="./2020 도시계획 공모_files/regform.js.다운로드"></script>
+		
+		
+
+
+<div class="cont-right">
+	<h3 class="ctit">2020 시민 도시계획 아이디어 공모전 '빅데이터를 통해 바꾸는 서울'</h3>
+		<table class="board-write mgtype50" summary="행사안내, 행사정보">
+			<caption>행사 안내</caption>
+			<colgroup>
+				<col style="width:20%;">
+				<col>
+			</colgroup>
+			<tbody>
+			
+				
+				<tr>
+					<th scope="row">행사분류</th>
+					<td>기타</td>
+				</tr>
+				<tr>
+					<th scope="row">게재일</th>
+					<td>2020-10-22</td>
+				</tr>
+				<tr>
+					<th scope="row">행사기간</th>
+					<td>2020-10-23 ~ 2020-11-20</td>
+				</tr>
+				<tr>
+					<th scope="row">사전 등록기간</th>
+					<td>2020-10-23 09:00 ~ 2020-11-21 00:00</td>
+				</tr>
+				<tr>
+					<th scope="row">개최장소</th>
+					<td>서울특별시</td>
+				</tr>
+				
+					<tr>
+						<th scope="row">첨부파일</th>
+						<td class="normal_txt"><a href="http://kpa1959.or.kr/events/entryMainDownload.html?evIdx=1663">응모신청서.hwp</a></td>
+					</tr>
+				
+				<tr>
+					<td colspan="2" style="word-break:break-all;border-left:none;">
+						<p style="line-height:22px;">
+						1. 공 모 명 :「‘빅데이터를 통해 바꾸는 서울’ 공모전 」<br><br>2. 응모자격 : 서울과 서울의 도시문제에 관심있는 사람 누구나 (개인 / 5인이하 단체)<br><br>3. 공모부문 : 다양한 도시문제 해결을 위한 빅데이터 활용 아이디어 공모<br>              미래인재와 시민을 구분하여 공모 진행<br>• 부문1 : 미래인재 – 아이디어를 영상으로 제작가능한 학생 및 전문가<br>• 부문2 : 일반시민 – 서울과 서울의 도시문제에 관심있는 사람 누구나<br>※ 응모수량의 제한은 없으나, 중복수상 방지 위해 2개 중 1개 주제만 참가 가능<br><br>4. 공모기간 및 결과발표<br>- 접수기간 : 2020. 10.23.(금) 09:00 ~ 11.20.(금) 자정 마감<br>- 결과발표 : 2020. 11.30(월)<br><br>5. 응모방법 및 제출서류<br>- 응모방법<br>① 미래인재 : 아이디어 설명 동영상<br>   일반시민 : 아이디어 설명서<br>② (사)대한국토 도시계획학회홈페이지(www.kpa1959.or.kr)에서온라인 접수<br>   (※ 응모신청서에 작품정보 기재 와 함께 출품작 제출)<br>   (※ 제출서류 : 접수페이지에서 공모전 응모신청서, 개인정보수집․이용동의서, 권리양도동의서받아작성후업로드)<br>③ 원본파일은 이메일(seoulitecontest@gmail.com)로 접수<br>④ 접수완료<br><br>6. 기타 공모전 관련 문의처<br>- 공모전 관련 문의사항이 있을 경우, (사)대한국토․도시계획학회(☎02-6490-5516, 공모전 담당자)에 문의
+						</p>
+					</td>
+				</tr>
+				
+				
+			
+				
+			</tbody>
+		</table>
+		<div class="btn-c04">
+			<a href="http://kpa1959.or.kr/?menuno=2663&amp;ev_idx=1663&amp;evt_act=submit" class="btn_blue">참가신청하기</a>
+			<a href="http://kpa1959.or.kr/?menuno=2663&amp;ev_idx=1663&amp;evt_act=participants" class="btn_gray">신청 확인</a>
+		</div>
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+			</div>
+		</div>
+<div id="footer">
+			<div class="foot">
+				<strong><img src="./2020 도시계획 공모_files/flogo.gif" alt="(사)대한국토·도시계획학회"></strong>
+				<div>
+					<p>Copyright@대한국토·도시계획학회. All Rights Reserved.</p>
+					<address> [우:06130] 서울시 강남구 테헤란로7길 22 과학기술회관 신관 602호<br>상호명:(사)대한국토·도시계획학회 사업자등록번호 220-82-01818 대표자:김현수개인정보책임자:김성현</address>
+				</div>
+				<a href="http://kpa1959.or.kr/?menuno=2563" class="policy"><img src="./2020 도시계획 공모_files/btn_privacy.gif" alt="개인정보처리방침"></a>
+			</div>
+		</div>	
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64162332-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+</body></html>

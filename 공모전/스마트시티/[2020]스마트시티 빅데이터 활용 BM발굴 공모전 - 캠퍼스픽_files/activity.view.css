@@ -1,0 +1,286 @@
+@charset "utf-8";
+
+section.title, section.tab {
+  position: static; width: 100%; box-sizing: border-box; font-size: 0; background-color: #fff;
+}
+section.title.fixed, section.tab.fixed {
+  position: fixed; z-index: 5; transition: transform 0.5s;
+}
+section.tab.fixed {
+  border-bottom: 1px solid #d6d6d6;
+}
+
+section.title {
+  padding: 16px 16px 0 16px;
+}
+section.title > div.wrap {
+  margin: 0 auto; max-width: 720px;
+}
+section.title > div.wrap > p.badges {
+  margin-bottom: 16px;
+}
+section.title > div.wrap > p.badges > span {
+  display: inline-block; margin: 0 4px 4px 0; padding: 0 8px; line-height: 20px; border-radius: 10px; color: #737373; font-size: 12px; background-color: #f2f2f2;
+}
+section.title > div.wrap > figure {
+  position: absolute; display: block; width: 80px; height: 114px; background-color: #f9f9f9; background-position: center top; background-size: cover;
+}
+section.title > div.wrap > div.content {
+  padding-left: 96px; min-height: 114px;
+}
+section.title > div.wrap > div.content > h1 {
+  line-height: 27px; color: #292929; font-size: 18px; font-weight: bold; word-wrap: break-word;
+}
+section.title > div.wrap > div.content > p.company {
+  margin-bottom: 4px; line-height: 20px; color: #4c4c4c; font-size: 14px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+section.title > div.wrap > div.content > p.info > span {
+  display: inline-block; margin-right: 8px; line-height: 18px; color: #a6a6a6; font-size: 12px; letter-spacing: 0;
+}
+section.title > div.wrap > div.content > p.info > span.viewcount {
+  padding-left: 14px; background: transparent url('/images/viewcount2.png') no-repeat left center; background-size: 12px 8px;
+}
+
+section.tab > div.wrap {
+  margin: 0 auto; max-width: 720px;
+}
+section.tab > div.wrap > a {
+  display: inline-block; width: 33.3%; height: 56px; line-height: 56px; box-sizing: border-box; border-bottom: 3px solid transparent; text-align: center;
+}
+section.tab > div.wrap > a > span.text {
+  color: #292929; font-size: 14px;
+}
+section.tab > div.wrap > a > span.count {
+  margin-left: 4px; color: #a6a6a6; font-size: 10px; font-weight: bold; letter-spacing: 0;
+}
+section.tab > div.wrap > a > span.count.highlight {
+  color: #ffa81f;
+}
+section.tab > div.wrap > a.active {
+  border-bottom-color: #1dcdff;
+}
+section.tab > div.wrap > a.active > span.text {
+  color: #0aafdf; font-weight: bold;
+}
+section.tab > div.wrap > a.active > span.count {
+  color: #0aafdf;
+}
+
+#container {
+  margin: 8px auto 64px auto; max-width: 720px; font-size: 0;
+}
+@media only screen and (min-width: 720px) {
+  #container {
+    position: relative; margin: 16px auto;
+  }
+}
+
+#container p.info > span {
+  display: inline-block; margin-right: 8px; line-height: 18px; color: #a6a6a6; font-size: 12px; letter-spacing: 0;
+}
+#container p.info > span.highlight {
+  color: #0aafdf;
+}
+#container p.info > span.dday {
+  font-weight: bold;
+}
+#container p.info > span.viewcount {
+  padding-left: 14px; background: transparent url('/images/viewcount2.png') no-repeat left center; background-size: 12px 8px;
+}
+#container p.info > span.commentcount {
+  padding-left: 12px; background: transparent url('/images/commentcount.png') no-repeat left center; background-size: 9px 9px;
+}
+#container p.info > span.secret {
+  padding-left: 14px; background: transparent url('/images/secret.png') no-repeat left center; background-size: 12px 12px;
+}
+#container p.info > span.manager,
+#container p.info > span.writer {
+  color: #0aafdf; font-weight: bold;
+}
+#container p.info > span.remove {
+  padding: 0 8px; border-radius: 9px; color: #fff; font-weight: bold; background-color: #a6a6a6; cursor: pointer;
+}
+
+#container > div.section {
+  padding: 16px; background-color: #fff;
+}
+#container > div.section > h2 {
+  margin-bottom: 8px; line-height: 24px; color: #292929; font-size: 16px; font-weight: bold;
+}
+#container > div.section > h3 {
+  position: absolute; line-height: 20px; color: #a6a6a6; font-size: 14px; font-weight: normal;
+}
+#container > div.section > p.indent {
+  padding-left: 80px; line-height: 20px; color: #4c4c4c; font-size: 14px; word-wrap: break-word;
+}
+#container > div.section > p.dday {
+  position: absolute; padding: 0 8px; line-height: 20px; border-radius: 10px; color: #fff; font-size: 14px; font-weight: bold; background-color: #a6a6a6;
+}
+#container > div.section > p.dday.highlight {
+  background-color: #1dcdff;
+}
+#container > div.section > article.description {
+  line-height: 20px; color: #4c4c4c; font-size: 14px; word-wrap: break-word;
+}
+#container > div.section > article.description > a {
+  color: #3b5a99; text-decoration: underline;
+}
+
+#container > div.poster {
+  margin: 8px 0; background-color: #fff;
+}
+#container > div.poster > img {
+  margin: 0 auto; max-width:100%; height: auto;
+}
+@media only screen and (min-width: 720px) {
+  #container > div.poster {
+    margin: 16px 0;
+  }
+}
+
+#container > div.more {
+  margin-top: 16px; background-color: #fff;
+}
+#container > div.more > h2 {
+  padding: 24px 0 16px 16px; line-height: 27px; color: #292929; font-size: 18px; font-weight: bold;
+}
+#container > div.more > div.items {
+  padding: 0 16px 24px 16px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; white-space: nowrap;
+}
+#container > div.more > div.items::-webkit-scrollbar {
+  display: none; background-color: transparent;
+}
+#container > div.more > div.items > a.item {
+  display: inline-block; margin-right: 8px; width: 160px;
+}
+#container > div.more > div.items > a.item:last-of-type {
+  margin-right: 0;
+}
+#container > div.more > div.items > a.item > figure {
+  display: block; width: 160px; height: 160px; background: #f9f9f9 url('/images/thumb.png') center center; background-size: cover;
+}
+#container > div.more > div.items > a.item > h3 {
+  display: -webkit-box; margin: 8px 8px 4px 8px; height: 40px; line-height: 20px; color: #292929; font-size: 14px; white-space: normal; word-wrap: break-word; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+#container > div.more > div.items > a.item > p.info {
+  margin-left: 8px;
+}
+@media only screen and (min-width: 896px) {
+  #container > div.more > div.items {
+    overflow-x: hidden;
+  }
+  #container > div.more > div.items > a.item {
+    margin-right: 16px;
+  }
+}
+
+#container > div.bottombar {
+  position: fixed; bottom: 0; left: 0; width: 100%; border-top: 1px solid #d6d6d6; background-color: #fff;
+}
+#container > div.bottombar > a {
+  display: inline-block; width: 50%; text-align: center; cursor: pointer;
+}
+#container > div.bottombar.threecols > a.scrap,
+#container > div.bottombar.threecols > a.share {
+  width: 25%;
+}
+#container > div.bottombar > a > span {
+  display: inline-block; padding-left: 26px; line-height: 56px; color: #292929; font-size: 14px; background-repeat: no-repeat; background-size: 18px 18px; background-position: left center;
+}
+#container > div.bottombar > a.website > span {
+  background-image: url('/images/bottombar.website.png');
+}
+#container > div.bottombar > a.scrap > span {
+  background-image: url('/images/bottombar.scrap.png');
+}
+#container > div.bottombar > a.scrap.active > span {
+  color: #ff5d57; background-image: url('/images/bottombar.scrap.active.png');
+}
+#container > div.bottombar > a.share > span {
+  background-image: url('/images/bottombar.share.png');
+}
+@media only screen and (min-width: 720px) {
+  #container > div.bottombar {
+    position: relative; margin-top: 16px; border-top: 0; text-align: left; background-color: transparent;
+  }
+  #container > div.bottombar > a {
+    margin-right: 8px; padding: 0 12px; width: auto !important; border: 1px solid #d6d6d6; border-radius: 3px; background-color: #fff;
+  }
+  #container > div.bottombar > a > span {
+    line-height: 36px;
+  }
+}
+
+#container > a.floating {
+  position: fixed; z-index: 5; right: 24px; bottom: 24px; display: block; width: 56px; height: 56px; border-radius: 28px; color: transparent; font-size: 0; background-color: #1dcdff; background-repeat: no-repeat; background-position: center center; background-size: 24px 24px; cursor: pointer;
+}
+#container > a.floating.write {
+  background-image: url('/images/floating.write.png');
+}
+#container > a.floating.comment {
+  background-image: url('/images/floating.comment.png');
+}
+@media only screen and (min-width: 720px) {
+  #container > a.floating {
+    position: static; display: inline-block; margin-bottom: 16px; padding: 0 12px 0 38px; width: auto; height: 36px; line-height: 36px; border-radius: 3px; color: #fff; font-size: 14px; font-weight: bold; background-position: 12px center; background-size: 18px 18px;
+  }
+}
+
+#container > div.loading {
+  margin: 96px auto; width: 36px; height: 36px; background: transparent url('/images/community.loading.svg') no-repeat; background-size: 36px 36px;
+}
+
+#container > div.empty {
+  padding: 96px 0; text-align: center;
+}
+#container > div.empty > p {
+  line-height: 27px; color: #a6a6a6; font-size: 18px;
+}
+
+#container > div.teamarticles > a.item {
+  display: block; margin-bottom: 1px; padding: 12px 16px; background-color: #fff;
+}
+#container > div.teamarticles > a.item > h3 {
+  margin-bottom: 4px; line-height: 20px; color: #292929; font-size: 14px; font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+
+#container > div.comments > div.item {
+  display: block; background-color: #fff;
+}
+#container > div.comments > div.item.parent {
+  margin-top: 1px; padding: 16px;
+}
+#container > div.comments > div.item.child {
+  padding: 0 16px 16px 48px; background-image: url('/images/comment.child.png'); background-repeat: no-repeat; background-position: left 24px top; background-size: 11px 11px;
+}
+#container > div.comments > div.item > p.text {
+  margin-bottom: 4px; line-height: 20px; color: #4c4c4c; font-size: 14px; word-wrap: break-word;
+}
+#container > div.comments > div.item > p.text.disabled {
+  color: #d6d6d6;
+}
+#container > div.comments > div.item > p.text > a {
+  color: #3b5a99; text-decoration: underline;
+}
+#container > div.comments > div.item > p.write {
+  padding: 0 12px; max-width: 440px; line-height: 36px; border-radius: 18px; color: #a6a6a6; font-size: 12px; background: #f9f9f9 url('/images/comment.write.png') no-repeat right 12px center; background-size: 18px 18px; cursor: text;
+}
+
+#container > form.comment {
+  position: fixed; z-index: 12; left: 0; top: 0; padding: 8px; width: 100%; height: 100%; box-sizing: border-box;
+}
+#container > form.comment::before {
+  content: ''; position: absolute; z-index: 12; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
+}
+#container > form.comment > div.wrap {
+  position: relative; z-index: 13; left: 50%; top: 50%; padding: 16px 0; width: 100%; max-width: 440px; box-sizing: border-box; border-radius: 3px; transform: translate(-50%, -50%); background-color: #fff;
+}
+#container > form.comment > div.wrap > textarea {
+  margin-bottom: 16px; padding: 0 16px; width: 100%; height: 96px; line-height: 24px; box-sizing: border-box; color: #292929; font-size: 16px;
+}
+#container > form.comment > div.wrap > input.cancel {
+  float: right; margin-right: 8px; padding: 0 16px; height: 36px; line-height: 36px; border: 1px solid #d6d6d6; border-radius: 18px; color: #737373; font-size: 14px; font-weight: bold; background-color: #fff;
+}
+#container > form.comment > div.wrap > input.submit {
+  float: right; margin-right: 16px; padding: 0 16px; height: 36px; line-height: 36px; border: 1px solid transparent; border-radius: 18px; color: #fff; font-size: 14px; font-weight: bold; background-color: #1dcdff;
+}

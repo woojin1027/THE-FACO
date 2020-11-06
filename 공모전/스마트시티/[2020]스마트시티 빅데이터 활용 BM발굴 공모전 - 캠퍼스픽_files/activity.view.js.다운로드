@@ -1,0 +1,681 @@
+cp.activityview = {
+  target: 0,
+  targetPath: undefined,
+  id: 0,
+  menu: undefined,
+  isScrapped: false,
+  scrollTop: 0,
+  titleTop: 0,
+  titleHeight: 0,
+  tabHeight: 0,
+  isScrolling: false,
+  isRendered: false,
+  isCommentSubmitted: false,
+  isMoreItemsRequested: false,
+  init: function () {
+    if (typeof cp.activityview.data !== 'object' || typeof cp.activityview.data.activity !== 'object') {
+      return;
+    }
+
+    cp.activityview.target = cp.el['#container'].data('target');
+    cp.activityview.targetPath = cp.el['#container'].data('target-path');
+    cp.activityview.id = cp.el['#container'].data('id');
+    cp.activityview.menu = cp.el['#container'].data('menu') || undefined;
+    cp.activityview.isScrapped = cp.activityview.data.isScrapped;
+
+    _.each(cp.activityview.data.activity.categories, function (categoryId) {
+      var categoryName = _.findWhere(cp.data.activityCategoryNames, {id: categoryId}).value;
+      $('<span></span>').html(categoryName).appendTo(cp.el['title'].find('p.badges'));
+    });
+    var viewCount = cp.fn.formatNumber(cp.activityview.data.activity.viewCount);
+    cp.el['title'].find('div.content > p.info > span.viewcount').text(viewCount);
+    if (cp.activityview.data.activity.teamCount > 0) {
+      var teamCount = cp.fn.formatNumber(cp.activityview.data.activity.teamCount);
+      cp.el['tab'].find('a > span.teamcount').addClass('highlight').text(teamCount);
+    }
+    if (cp.activityview.data.activity.commentCount > 0) {
+      var commentCount = cp.fn.formatNumber(cp.activityview.data.activity.commentCount);
+      cp.el['tab'].find('a > span.commentcount').addClass('highlight').text(commentCount);
+    }
+
+    cp.activityview.titleTop = cp.el['title'].offset().top;
+    cp.activityview.titleHeight = cp.el['title'].outerHeight();
+    cp.activityview.tabHeight = cp.el['tab'].outerHeight();
+    cp.el['title'].css('top', -cp.activityview.titleHeight);
+    cp.el['tab'].css('top', 0);
+
+    cp.activityview.initMenu();
+
+    if (_appName === '' && _osName !== '' && _pageView === '1') {
+      var targetName = {1: '공모전', 2: '대외활동'}[cp.activityview.target];
+      var fullPopupTitle = '대학생 ' + targetName + '은 캠퍼스픽';
+      var fullPopupText = _.sample(['모바일에서 더 편하게 보는 방법!', '최신 ' + targetName + '부터 팀원 모집까지!']);
+      cp.fn.appendFullPopup(fullPopupTitle, fullPopupText);
+    }
+
+    new ClipboardJS('#container div.bottombar > a.share', {
+      text: function() {
+        return location.origin + '/' + cp.activityview.targetPath + '/view?id=' + cp.activityview.id;
+      }
+    }).on('success', function () {
+      alert('URL이 복사되었습니다.\n공유할 곳에 붙여넣기 해주세요.');
+    });
+  },
+  onScroll: function () {
+    var scrollTop = $(window).scrollTop();
+    var scrollDirection = scrollTop - cp.activityview.scrollTop;
+    if (scrollTop > (cp.activityview.titleTop + cp.activityview.titleHeight)) {
+      if (cp.activityview.isScrolling === false) {
+        cp.activityview.isScrolling = true;
+        setTimeout(function () {
+          cp.activityview.isScrolling = false;
+        }, 600);
+        var translateY = (scrollDirection > 0) ? 0 : cp.activityview.titleHeight;
+        cp.el['title'].addClass('fixed').css('transform', 'translateY(' + translateY.toString() + 'px)');
+        cp.el['tab'].addClass('fixed').css('transform', 'translateY(' + translateY.toString() + 'px)');
+        cp.el['#container'].css('padding-top', cp.activityview.titleHeight + cp.activityview.tabHeight);
+      }
+    } else if (scrollTop <= cp.activityview.titleTop) {
+      cp.el['title'].removeClass('fixed').css('transform', 'none');
+      cp.el['tab'].removeClass('fixed').css('transform', 'none');
+      cp.el['#container'].css('padding-top', 0);
+    }
+    cp.activityview.scrollTop = scrollTop;
+
+    if (!cp.activityview.isMoreItemsRequested && cp.activityview.menu === undefined) {
+      cp.activityview.isMoreItemsRequested = true;
+      var $moreActivities = $('<div></div>').addClass('more');
+      var $moreContests = $('<div></div>').addClass('more');
+      var $moreClubs = $('<div></div>').addClass('more');
+      if (cp.activityview.target === 1) {
+        cp.el['#container'].find('div.bottombar').before($moreContests, $moreActivities, $moreClubs);
+      } else if (cp.activityview.target === 2) {
+        cp.el['#container'].find('div.bottombar').before($moreActivities, $moreContests, $moreClubs);
+      }
+      var searchQuery = location.search.replace(/^\?/, '').split(/&/).reduce(function (searchQuery, row) {
+        var keyValue = row.split(/=/);
+        searchQuery[keyValue[0]] = keyValue[1];
+        return searchQuery;
+      }, {});
+      if (_appName === 'everytime') {
+        if (searchQuery.utm_source === 'everytime' && searchQuery.utm_medium === 'home') {
+          cp.activityview.getMoreActivities($moreActivities);
+          cp.activityview.getMoreContests($moreContests);
+          cp.activityview.getMoreClubs($moreClubs);
+        } else if (searchQuery.utm_source === 'everytime' && searchQuery.utm_medium === 'campuspickcard') {
+          if (cp.activityview.target === 1) {
+            cp.activityview.getMoreContests($moreContests);
+          } else if (cp.activityview.target === 2) {
+            cp.activityview.getMoreActivities($moreActivities);
+          }
+        }
+      } else if (_appName === 'campuspick') {
+        if (searchQuery.utm_source === 'campuspick' && searchQuery.utm_medium === 'homecard') {
+          if (cp.activityview.target === 1) {
+            cp.activityview.getMoreContests($moreContests);
+          } else if (cp.activityview.target === 2) {
+            cp.activityview.getMoreActivities($moreActivities);
+          }
+        }
+      } else {
+        cp.activityview.getMoreActivities($moreActivities);
+        cp.activityview.getMoreContests($moreContests);
+        cp.activityview.getMoreClubs($moreClubs);
+      }
+    }
+  },
+  onClickTab: function ($a) {
+    if (cp.activityview.isRendered === false) {
+      return;
+    }
+    cp.activityview.isRendered = false;
+    cp.activityview.menu = $a.data('menu');
+    cp.fn.replaceHistoryState($a.attr('href'));
+    cp.activityview.initMenu();
+  },
+  onClickScrap: function ($a) {
+    if (_isLogged === false) {
+      if (confirm('로그인 후 정보를 스크랩할 수 있습니다.')) {
+        location.href = '/login';
+      }
+      return;
+    }
+    if (cp.activityview.isScrapped === true) {
+      $.ajax({
+        url: window._apiServerUrl + '/remove/activity/scrap',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          activityId: cp.activityview.id
+        },
+        xhrFields: { withCredentials: true },
+        success: function (response) {
+          if (response.status === "success") {
+            cp.activityview.isScrapped = false;
+            $a.removeClass('active');
+          } else {
+            alert('스크랩을 취소할 수 없습니다.');
+          }
+        }
+      });
+    } else {
+      $.ajax({
+        url: window._apiServerUrl + '/save/activity/scrap',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          activityId: cp.activityview.id
+        },
+        xhrFields: { withCredentials: true },
+        success: function (response) {
+          if (response.status === "success") {
+            cp.activityview.isScrapped = true;
+            $a.addClass('active');
+          } else {
+            alert('스크랩할 수 없습니다.');
+          }
+        }
+      });
+    }
+  },
+  onClickCommentWrite: function () {
+    if (_isLogged === false) {
+      if (confirm('로그인 후 댓글을 작성할 수 있습니다.')) {
+        location.href = '/login';
+      }
+      return;
+    }
+    var $form = $('<form></form>').addClass('comment');
+    var $wrap = $('<div></div>').addClass('wrap').appendTo($form);
+    var $textarea = $('<textarea></textarea>').attr('placeholder', '댓글을 입력하세요.').appendTo($wrap);
+    $('<input>').addClass('submit').attr('type', 'submit').val('완료').appendTo($wrap);
+    $('<input>').addClass('cancel').attr('type', 'button').val('취소').appendTo($wrap);
+    $('<input>').attr({type: 'hidden', name: 'parentId'}).val('0').appendTo($wrap);
+    $('<hr>').appendTo($wrap);
+    $form.appendTo(cp.el['#container']);
+    $textarea.focus();
+  },
+  onClickChildCommentWrite: function ($write) {
+    if (_isLogged === false) {
+      if (confirm('로그인 후 대댓글을 작성할 수 있습니다.')) {
+        location.href = '/login';
+      }
+      return;
+    }
+    var $form = $('<form></form>').addClass('comment');
+    var $wrap = $('<div></div>').addClass('wrap').appendTo($form);
+    var $textarea = $('<textarea></textarea>').attr('placeholder', '대댓글을 입력하세요.').appendTo($wrap);
+    $('<input>').addClass('submit').attr('type', 'submit').val('완료').appendTo($wrap);
+    $('<input>').addClass('cancel').attr('type', 'button').val('취소').appendTo($wrap);
+    $('<input>').attr({type: 'hidden', name: 'parentId'}).val($write.data('parentId')).appendTo($wrap);
+    $('<hr>').appendTo($wrap);
+    $form.appendTo(cp.el['#container']);
+    $textarea.focus();
+  },
+  onSubmitComment: function ($form) {
+    if (cp.activityview.isCommentSubmitted === true) {
+      return;
+    }
+    var parentId = Number($form.find('input[name="parentId"]').val()) || 0;
+    var text = $form.find('textarea').val();
+    if (text.replace(/(\s|\n)/g, '') === '') {
+      alert('내용을 입력해주세요.');
+      return;
+    }
+    cp.activityview.isCommentSubmitted = true;
+    $.ajax({
+      url: window._apiServerUrl + '/save/activity/comment',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        activityId: cp.activityview.id,
+        parentId: parentId,
+        text: text
+      },
+      xhrFields: { withCredentials: true },
+      success: function (response) {
+        if (response.status === 'need_to_auth') {
+          alert('학교 인증 후 댓글을 작성할 수 있습니다.');
+        } else if (response.status !== 'success') {
+          alert('댓글을 작성할 수 없습니다.');
+        }
+        location.reload();
+        if (parentId === 0) {
+          $(window).scrollTop($(document).height());
+        }
+      }
+    });
+  },
+  onClickCommentRemove: function ($span) {
+    var commentId = $span.parents('div.item').data('id');
+    $.ajax({
+      url: window._apiServerUrl + '/remove/activity/comment',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        id: commentId
+      },
+      xhrFields: { withCredentials: true },
+      success: function (response) {
+        if (response.status !== 'success') {
+          alert('댓글을 삭제할 수 없습니다.');
+        }
+        location.reload();
+      }
+    });
+  },
+  initMenu: function () {
+    cp.el['tab'].find('a').filter(function () {
+      return $(this).data('menu') === cp.activityview.menu;
+    }).addClass('active').siblings().removeClass('active');
+
+    cp.el['#container'].empty();
+    $(window).scrollTop(0);
+
+    if (cp.activityview.menu === 'team') {
+      cp.activityview.initTeam();
+    } else if (cp.activityview.menu === 'comment') {
+      cp.activityview.initComment();
+    } else {
+      cp.activityview.initIndex();
+    }
+  },
+  initIndex: function () {
+    var activity = cp.activityview.data.activity;
+    var dday = cp.fn.getDday(activity.endDate);
+    var dateValue = cp.fn.formatDate(activity.startDate) + ' ~ ' + cp.fn.formatDate(activity.endDate);
+    var prizeTop = cp.fn.formatPrice(activity.prizeTop);
+    var prizeTotal = _.findWhere(cp.data.activityPrizeTotals, {id: activity.prizeTotal}).value;
+    var prizeBenefits = _.chain(activity.prizeBenefit).map(function (value, index) {
+      if (value === 1) {
+        return _.findWhere(cp.data.activityPrizeBenefits, {id: index}).value;
+      } else {
+        return;
+      }
+    }).compact().value();
+    var description = cp.fn.formatLink(activity.description, true, 'activity', activity.id).replace(/\n/g, '<br>');
+
+    var $section1 = $('<div></div>').addClass('section');
+    $('<h2></h2>').text('접수 기간').appendTo($section1);
+    var $dday = $('<p></p>').addClass('dday').text(dday.value).appendTo($section1);
+    if (dday.count >= 0 && dday.count <= 14) {
+      $dday.addClass('highlight');
+    }
+    $('<p></p>').addClass('indent').text(dateValue).appendTo($section1);
+    $section1.appendTo(cp.el['#container']);
+
+    var $section2 = $('<div></div>').addClass('section');
+    $('<h2></h2>').text('기관').appendTo($section2);
+    $('<h3></h3>').text('주최').appendTo($section2);
+    $('<p></p>').addClass('indent').html(activity.company).appendTo($section2);
+    if (activity.company2) {
+      $('<h3></h3>').text('주관').appendTo($section2);
+      $('<p></p>').addClass('indent').html(activity.company2).appendTo($section2);
+    }
+    if (activity.company3) {
+      $('<h3></h3>').text('후원/협찬').appendTo($section2);
+      $('<p></p>').addClass('indent').html(activity.company3).appendTo($section2);
+    }
+    $section2.appendTo(cp.el['#container']);
+
+    if (activity.prizeTop > 0 || activity.prizeTotal > 0 || prizeBenefits.length > 0) {
+      var $section3 = $('<div></div>').addClass('section');
+      $('<h2></h2>').text('시상').appendTo($section3);
+      if (activity.prizeTop > 0) {
+        $('<h3></h3>').text('1등시상금').appendTo($section3);
+        $('<p></p>').addClass('indent').html(prizeTop).appendTo($section3);
+      }
+      if (activity.prizeTotal > 0) {
+        $('<h3></h3>').text('총시상금').appendTo($section3);
+        $('<p></p>').addClass('indent').html(prizeTotal).appendTo($section3);
+      }
+      if (prizeBenefits.length > 0) {
+        $('<h3></h3>').text('특전').appendTo($section3);
+        $('<p></p>').addClass('indent').html(prizeBenefits.join(', ')).appendTo($section3);
+      }
+      $section3.appendTo(cp.el['#container']);
+    }
+
+    if (activity.image) {
+      var $poster = $('<div></div>').addClass('poster').appendTo(cp.el['#container']);
+      $('<img>').attr('src', activity.image).appendTo($poster);
+    }
+
+    var $section4 = $('<div></div>').addClass('section');
+    $('<article></article>').addClass('description').html(description).appendTo($section4);
+    $section4.appendTo(cp.el['#container']);
+
+    cp.activityview.createBottombar();
+    cp.activityview.isRendered = true;
+  },
+  initTeam: function () {
+    var writeUrl = '/' + cp.activityview.targetPath + '/team/write?activityId=' + cp.activityview.id;
+    $('<a></a>').addClass('floating write').attr('href', writeUrl).text('팀원 모집 글쓰기').appendTo(cp.el['#container']);
+    cp.activityview.loadTeamArticles(function (result) {
+      cp.activityview.appendTeamArticles(result);
+      cp.activityview.isRendered = true;
+    });
+  },
+  initComment: function () {
+    $('<a></a>').addClass('floating comment').text('댓글 쓰기').appendTo(cp.el['#container']);
+    cp.activityview.loadComments(function (result) {
+      cp.activityview.appendComments(result);
+      cp.activityview.isRendered = true;
+    });
+  },
+  createBottombar: function () {
+    var activity = cp.activityview.data.activity;
+
+    var $bottombar = $('<div></div>').addClass('bottombar');
+    if (activity.website) {
+      var website = 'https://www.campuspick.com/linkclick?referrer_type=activity&referrer_id=' + activity.id + '&url=' + encodeURIComponent(activity.website);
+      var $websiteBottomButton = $('<a></a>').addClass('website').attr({href: website, target: '_blank', rel: 'nofollow'}).appendTo($bottombar);
+      $('<span></span>').text('웹사이트 바로가기').appendTo($websiteBottomButton);
+      $bottombar.addClass('threecols');
+    }
+    var $scrapBottomButton = $('<a></a>').addClass('scrap').appendTo($bottombar);
+    $('<span></span>').text('스크랩').appendTo($scrapBottomButton);
+    if (cp.activityview.isScrapped === true) {
+      $scrapBottomButton.addClass('active');
+    }
+    var $shareBottomButton = $('<a></a>').addClass('share').appendTo($bottombar);
+    $('<span></span>').text('공유').appendTo($shareBottomButton);
+    $bottombar.appendTo(cp.el['#container']);
+  },
+  loadTeamArticles: function (callback) {
+    $('<div></div>').addClass('loading').appendTo(cp.el['#container']);
+    $.ajax({
+      url: window._apiServerUrl + '/find/activity/teamarticles',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        activityId: cp.activityview.id
+      },
+      xhrFields: { withCredentials: true },
+      success: function (response) {
+        if (response.status === 'success') {
+          callback(response.result);
+        } else {
+          callback();
+        }
+      }
+    });
+  },
+  appendTeamArticles: function (result) {
+    cp.el['#container'].find('div.loading').remove();
+    if (result === undefined || result.teamArticles.length === 0) {
+      var $empty = $('<div></div>').addClass('empty').appendTo(cp.el['#container']);
+      $('<p></p>').html('아직 글이 없습니다.<br>가장 먼저 팀원을 모집해보세요!').appendTo($empty);
+      return;
+    }
+    var teamArticles = result.teamArticles;
+    var $teamArticles = $('<div></div>').addClass('teamarticles');
+    _.each(teamArticles, function (teamArticle) {
+      var url = '/' + cp.activityview.targetPath + '/team/view?id=' + teamArticle.id;
+      var date = cp.fn.formatArticleShortDate(teamArticle.createdAt);
+      var viewCount = cp.fn.formatNumber(teamArticle.viewCount);
+      var commentCount = cp.fn.formatNumber(teamArticle.commentCount);
+
+      var $item = $('<a></a>').addClass('item').attr('href', url).appendTo($teamArticles);
+      $('<h3></h3>').html(teamArticle.title).appendTo($item);
+      var $info = $('<p></p>').addClass('info').appendTo($item);
+      $('<span></span>').text(date).appendTo($info);
+      $('<span></span>').addClass('viewcount').text(viewCount).appendTo($info);
+      $('<span></span>').addClass('commentcount').text(commentCount).appendTo($info);
+    });
+    $teamArticles.appendTo(cp.el['#container']);
+  },
+  loadComments: function (callback) {
+    $('<div></div>').addClass('loading').appendTo(cp.el['#container']);
+    $.ajax({
+      url: window._apiServerUrl + '/find/activity/comments',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        activityId: cp.activityview.id
+      },
+      xhrFields: { withCredentials: true },
+      success: function (response) {
+        if (response.status === 'success') {
+          callback(response.result);
+        } else {
+          callback();
+        }
+      }
+    });
+  },
+  appendComments: function (result) {
+    cp.el['#container'].find('div.loading').remove();
+    if (result === undefined || result.comments.length === 0) {
+      var $empty = $('<div></div>').addClass('empty').appendTo(cp.el['#container']);
+      $('<p></p>').html('아직 작성된 댓글이 없습니다.').appendTo($empty);
+      return;
+    }
+    var comments = result.comments;
+    var $comments = $('<div></div>').addClass('comments');
+    _.each(comments, function (comment) {
+      var text = cp.fn.formatLink(comment.text, true, 'activitycomment', comment.id).replace(/\n/g, '<br>');
+      var date = cp.fn.formatArticleDate(comment.createdAt);
+
+      var $item = $('<div></div>').addClass('item').data({
+        id: comment.id,
+        parentId: comment.parentId,
+        isSecret: comment.isSecret,
+        ableToRead: comment.ableToRead
+      }).appendTo($comments);
+      if (comment.parentId === 0) {
+        $item.addClass('parent');
+      } else {
+        $item.addClass('child');
+      }
+      var $text = $('<p></p>').addClass('text').html(text).appendTo($item);
+      if (comment.ableToRead === false) {
+        $text.addClass('disabled');
+      }
+      var $info = $('<p></p>').addClass('info').appendTo($item);
+      if (comment.isSecret === true) {
+        $('<span></span>').addClass('secret').text('비밀').prependTo($info);
+      }
+      if (comment.isManager === true) {
+        $('<span></span>').addClass('manager').text('담당자').appendTo($info);
+      } else if (comment.isCommentWriter === true) {
+        $('<span></span>').addClass('writer').text('댓쓴이').appendTo($info);
+      }
+      $('<span></span>').text(date).appendTo($info);
+      if (comment.isMine === true) {
+        $('<span></span>').addClass('remove').text('삭제').appendTo($info);
+      }
+    });
+    $comments.find('div.item.parent').filter(function () {
+      return $(this).data('ableToRead') === true;
+    }).each(function () {
+      var $parentItem = $(this);
+      var $lastChildItem = $comments.find('div.item.child').filter(function () {
+        return $(this).data('parentId') === $parentItem.data('id');
+      }).last();
+      var $writeItem = $('<div></div>').addClass('item child');
+      $('<p></p>').addClass('write').text('대댓글을 입력하세요.').data({
+        parentId: $parentItem.data('id'),
+        parentIsSecret: $parentItem.data('isSecret')
+      }).appendTo($writeItem);
+      if ($lastChildItem.length > 0) {
+        $writeItem.insertAfter($lastChildItem);
+      } else {
+        $writeItem.insertAfter($parentItem);
+      }
+    });
+    $comments.appendTo(cp.el['#container']);
+  },
+  getMoreActivities: function ($moreActivities) {
+    var title = '인기 대외활동';
+    var data = {
+      target: 2
+    };
+    if (cp.activityview.target === 2) {
+      title = '다른 대외활동';
+      data.categoryIds = cp.activityview.data.activity.categories;
+    }
+    $.ajax({
+      url: window._apiServerUrl + '/find/activity/popularlist',
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+      xhrFields: { withCredentials: true },
+      success: function (response) {
+        if (response.status === "success") {
+          var popularActivities = _.reject(response.result.popularActivities, function (activity) {
+            return activity.id === cp.activityview.id;
+          });
+          if (popularActivities.length === 0) {
+            return;
+          }
+          $('<h2></h2>').text(title).appendTo($moreActivities);
+          var $items = $('<div></div>').addClass('items').appendTo($moreActivities);
+          _.each(popularActivities, function (activity) {
+            var url = '/activity/view?id=' + activity.id;
+            var dday = cp.fn.getDday(activity.endDate);
+            var $item = $('<a></a>').addClass('item').attr('href', url).appendTo($items);
+            var $figure = $('<figure></figure>').appendTo($item);
+            if (activity.image !== '') {
+              $figure.attr('data-image', activity.image);
+              $('<img>').attr('src', activity.image).on('load', function () {
+                $figure.css('background-image', 'url("' + activity.image + '")');
+              });
+            }
+            $('<h3></h3>').html(activity.title).appendTo($item);
+            var $info = $('<p></p>').addClass('info').appendTo($item);
+            var $dday = $('<span></span>').addClass('dday').text(dday.value).appendTo($info);
+            if (dday.count >= 0 && dday.count <= 14) {
+              $dday.addClass('highlight');
+            }
+            $('<span></span>').addClass('viewcount').text(cp.fn.formatNumber(activity.viewCount)).appendTo($info);
+          });
+        }
+      }
+    });
+  },
+  getMoreContests: function ($moreContests) {
+    var title = '인기 공모전';
+    var data = {
+      target: 1
+    };
+    if (cp.activityview.target === 1) {
+      title = '다른 공모전';
+      data.categoryIds = cp.activityview.data.activity.categories;
+    }
+    $.ajax({
+      url: window._apiServerUrl + '/find/activity/popularlist',
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+      xhrFields: { withCredentials: true },
+      success: function (response) {
+        if (response.status === "success") {
+          var popularActivities = _.reject(response.result.popularActivities, function (activity) {
+            return activity.id === cp.activityview.id;
+          });
+          if (popularActivities.length === 0) {
+            return;
+          }
+          $('<h2></h2>').text(title).appendTo($moreContests);
+          var $items = $('<div></div>').addClass('items').appendTo($moreContests);
+          _.each(popularActivities, function (activity) {
+            if (activity.id === cp.activityview.id) {
+              return;
+            }
+            var url = '/contest/view?id=' + activity.id;
+            var dday = cp.fn.getDday(activity.endDate);
+            var $item = $('<a></a>').addClass('item').attr('href', url).appendTo($items);
+            var $figure = $('<figure></figure>').appendTo($item);
+            if (activity.image !== '') {
+              $figure.attr('data-image', activity.image);
+              $('<img>').attr('src', activity.image).on('load', function () {
+                $figure.css('background-image', 'url("' + activity.image + '")');
+              });
+            }
+            $('<h3></h3>').html(activity.title).appendTo($item);
+            var $info = $('<p></p>').addClass('info').appendTo($item);
+            var $dday = $('<span></span>').addClass('dday').text(dday.value).appendTo($info);
+            if (dday.count >= 0 && dday.count <= 14) {
+              $dday.addClass('highlight');
+            }
+            $('<span></span>').addClass('viewcount').text(cp.fn.formatNumber(activity.viewCount)).appendTo($info);
+          });
+        }
+      }
+    });
+  },
+  getMoreClubs: function ($moreClubs) {
+    var title = '인기 동아리';
+    var data = {};
+    $.ajax({
+      url: window._apiServerUrl + '/find/club/popularrecruits',
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+      xhrFields: { withCredentials: true },
+      success: function (response) {
+        if (response.status === "success") {
+          var popularRecruits = response.result.popularRecruits;
+          if (popularRecruits.length === 0) {
+            return;
+          }
+          $('<h2></h2>').text(title).appendTo($moreClubs);
+          var $items = $('<div></div>').addClass('items').appendTo($moreClubs);
+          _.each(popularRecruits, function (recruit) {
+            var url = '/club/view?id=' + recruit.id;
+            var dday = cp.fn.getDday(recruit.endDate);
+            var $item = $('<a></a>').addClass('item').attr('href', url).appendTo($items);
+            var $figure = $('<figure></figure>').appendTo($item);
+            if (recruit.image !== '') {
+              $figure.attr('data-image', recruit.image);
+              $('<img>').attr('src', recruit.image).on('load', function () {
+                $figure.css('background-image', 'url("' + recruit.image + '")');
+              });
+            }
+            $('<h3></h3>').html(recruit.title).appendTo($item);
+            var $info = $('<p></p>').addClass('info').appendTo($item);
+            var $dday = $('<span></span>').addClass('dday').text(dday.value).appendTo($info);
+            if (dday.count >= 0 && dday.count <= 7) {
+              $dday.addClass('highlight');
+            }
+            $('<span></span>').addClass('viewcount').text(cp.fn.formatNumber(recruit.viewCount)).appendTo($info);
+          });
+        }
+      }
+    });
+  }
+};
+
+$().ready(function () {
+  cp.el['title'] = $('section.title');
+  cp.el['tab'] = $('section.tab');
+  cp.el['#container'] = $('#container');
+  cp.activityview.init();
+
+  $(window).on('scroll', function () {
+    cp.activityview.onScroll();
+  });
+  cp.el['tab'].on('click', 'a[href]', function () {
+    cp.activityview.onClickTab($(this));
+    return false;
+  });
+  cp.el['#container'].on('click', 'div.bottombar > a.scrap', function () {
+    cp.activityview.onClickScrap($(this));
+  }).on('click', 'a.floating.comment', function () {
+    cp.activityview.onClickCommentWrite();
+  }).on('click', 'div.comments > div.item > p.write', function () {
+    cp.activityview.onClickChildCommentWrite($(this));
+  }).on('click', 'div.comments > div.item > p.info > span.remove', function () {
+    cp.activityview.onClickCommentRemove($(this));
+  }).on('click', 'form.comment', function (event) {
+    if (event.target === event.currentTarget) {
+      $(this).remove();
+    }
+  }).on('click', 'form.comment input.cancel', function () {
+    $(this).parents('form.comment').remove();
+  }).on('submit', 'form.comment', function () {
+    cp.activityview.onSubmitComment($(this));
+    return false;
+  });
+});

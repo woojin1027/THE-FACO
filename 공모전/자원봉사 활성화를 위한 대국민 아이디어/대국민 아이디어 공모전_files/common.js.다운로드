@@ -1,0 +1,2287 @@
+// ?��?��?��?��?��?��?��?��?��?��?��?��?���? js
+
+/**
+ * ?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��
+ * @type {mainSlider}
+ */
+var mainSlider = {
+    init: function() {
+        this.slide();
+    },
+    slide: function() {
+        var join_wrap = $('#join-wrap'),
+            info_wrap = $('#info-wrap'),
+            join = $('#join'),
+            info = $('#info'),
+            btn = $('.slider-btn'),
+            lnb_04 = $('.lnb-04'),
+            lnb = $('#lnb'),
+            rnb = $('#rnb'),
+            lnb_02 = $('#lnb-02');
+
+        // bxslider ?��?��?��?��?��?��처占?��?��
+        info.hide();
+        info_wrap.hide();
+        // join.hide();
+        // join_wrap.hide();
+
+        btn.add(lnb_04).on('click', function(event) {
+            event.preventDefault();
+            
+            if (info.css('display') === 'none') {
+                // 1. ?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��.info block
+                join.hide(300);
+                join_wrap.hide(300);
+
+                info.show(300);
+                info_wrap.show(300);
+
+                // 2. ?��?��?��?��?��?��?��?���? ?��?��?���? ?��?��?��?��?��?��
+                // lnb.css({'right':'0','left':'auto'});
+                lnb.hide();
+                lnb_02.show();
+                rnb.css({'left':'0','right':'auto'});
+
+                // 3. btn ?��?��?��치占?��?��?��?��?��
+                btn.attr('class','slider-btn right');
+
+            } else {
+                // 1. ?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��.info none
+                info.hide(300);
+                info_wrap.hide(300);
+                join.show(300);
+                join_wrap.show(300);
+
+
+                // 2. ?��?��?��?��?��?��?��?���? ?��?��?���? ?��?��?��?��?��?��
+                // lnb.css({'left':'0','right':'auto'});
+                lnb_02.hide();
+                lnb.show();
+                rnb.css({'right':'0','left':'auto'});
+
+                // 3. btn ?��?��?��치占?��?��?��?��?��
+                btn.attr('class','slider-btn left');
+            }
+            
+        });
+    }
+};
+mainSlider.init();
+
+
+
+
+// ?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?�� 
+
+var sliderFun = {
+    init: function() {
+        this.slider_01();
+        this.slider_02();
+        this.slider_03();
+        this.slider_04();
+        this.slider_05();
+        this.slider_06();
+        this.slider_07();
+    },
+    slider_01: function() {
+         //?��?��?��?��?��?�� 첫占?��?���? ?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��
+         var mySwiper = new Swiper('#slider-01 .swiper-container',{
+          pagination: '#slider-01 .pagination',
+          loop:true,
+          grabCursor: true,
+          autoplay: 3000,
+          paginationClickable: true
+        });
+         
+        
+    },
+    slider_02: function() {
+         //?��?��?��?��?��?�� 첫占?��?���? ?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��
+         var mySwiper = new Swiper('#slider-02 .swiper-container',{
+          // pagination: '#slider-02 .pagination',
+          loop:true,
+          grabCursor: true,
+          // autoplay: 3000,
+          paginationClickable: true
+        });
+        $('#slider-02 .arrow-left').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipePrev();
+        });
+        $('#slider-02 .arrow-right').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipeNext();
+        });
+    },
+    slider_03: function() {
+         //?��?��?��?��?��?�� ?��?��뱄옙�? ?��?��?��?��?��게쏙?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��
+         var mySwiper = new Swiper('#slider-03 .swiper-container',{
+          // pagination: '#slider-03 .pagination',
+          loop:true,
+          grabCursor: true
+          // autoplay: 3000,
+          // paginationClickable: true
+        });
+        $('#slider-03 .arrow-left').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipePrev();
+        });
+        $('#slider-03 .arrow-right').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipeNext();
+        });
+    },
+    slider_04: function() {
+         //?��?��?��?��?��?�� ?��?��뱄옙�? ?��?��?��?��?��?��?��?��게쏙?��?��?��?�� 첫占?��?���? ?��?��?��?��?��?��?��?��?��?��
+         var mySwiper = new Swiper('#slider-04 .swiper-container',{
+          // pagination: '#slider-04 .pagination',
+          loop:true,
+          grabCursor: true
+          // autoplay: 3000,
+          // paginationClickable: true
+        });
+        $('#slider-04 .arrow-left').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipePrev();
+        });
+        $('#slider-04 .arrow-right').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipeNext();
+        });
+    },
+    slider_05: function() {
+         //?��?��?��?��?��?�� ?��?��뱄옙�? ?��?��?��?��?��?��?��?��게쏙?��?��?��?�� ?��?��뱄옙�? ?��?��?��?��?��?��?��?��?��?��
+         var mySwiper = new Swiper('#slider-05 .swiper-container',{
+          // pagination: '#slider-05 .pagination',
+          loop:true,
+          grabCursor: true
+          // autoplay: 3000,
+          // paginationClickable: true
+        });
+        $('#slider-05 .arrow-left').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipePrev();
+        });
+        $('#slider-05 .arrow-right').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipeNext();
+        });
+    },
+    slider_06: function() {
+         //?��?��?��?��?��?�� ?��?��뱄옙�? ?��?��?��?��?��?��?��?��게쏙?��?��?��?�� ?��?��?��?��?��?���? ?��?��?��?��?��?��?��?��?��?��
+         var mySwiper = new Swiper('#slider-06 .swiper-container',{
+          // pagination: '#slider-06 .pagination',
+          loop:true,
+          grabCursor: true
+          // autoplay: 3000,
+          // paginationClickable: true
+        });
+        $('#slider-06 .arrow-left').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipePrev();
+        });
+        $('#slider-06 .arrow-right').on('click', function(e){
+          e.preventDefault();
+          mySwiper.swipeNext();
+        });
+    },
+    
+    slider_07: function() {
+        //?��?��?��?��?��?�� ?��?��뱄옙�? ?��?��?��?��?��?��?��?��게쏙?��?��?��?�� ?��?��?��?��?��?���? ?��?��?��?��?��?��?��?��?��?��
+        var mySwiper = new Swiper('#slider-07 .swiper-container',{
+         // pagination: '#slider-06 .pagination',
+         loop:true,
+         grabCursor: true
+         // autoplay: 3000,
+         // paginationClickable: true
+       });
+       $('#slider-07 .arrow-left').on('click', function(e){
+         e.preventDefault();
+         mySwiper.swipePrev();
+       });
+       $('#slider-07 .arrow-right').on('click', function(e){
+         e.preventDefault();
+         mySwiper.swipeNext();
+       });
+   }
+};
+sliderFun.init();
+
+
+
+
+/**
+ * top ?��?��?��?�� ?��?��?��?��?��?��몌옙 ?��?��?��?��?��?�� ?��?��?��?��
+ */
+var scrollTop = {
+    init: function() {
+        this.scrollT();
+    },
+    scrollT: function() {
+        $('.rnb .rnb-12').on('click', function(event) {
+            event.preventDefault();
+            $('body,html').animate({
+                scrollTop: 0
+            }, 700);
+        });
+    }
+};
+scrollTop.init();
+
+
+
+
+
+ /* ?��?��?��?�� ?��?��?��?��?��?��?�� ?��?���?몌옙?��?��?��?��?��?��?��  */
+
+ var familyFunction = {
+     init: function() {
+         this.family_01();
+         this.family_02();
+         this.family_03();    //?��?��?��?��?��?�� ?��?���?몌옙 ?��?��?��?��?��?��?�� 
+         this.family_04();    //?��?��?��?��?��?�� ?��?���?몌옙 ?��?��?��?��?��?��?�� 
+     },
+     family_01: function() {
+         var dt = $('.footer-right .select-box-01 dt a'),
+           dd = $('.footer-right .select-box-01 dd');
+
+         dt.on('click', function() {
+           if ( dd.css('display') == 'none' ) {
+             dd.slideDown(200);
+           } else {
+             dd.slideUp(200);
+           }
+         });
+     },
+     family_02: function() {
+         var dt = $('.footer-right .select-box-02 dt a'),
+           dd = $('.footer-right .select-box-02 dd');
+
+         dt.on('click', function() {
+           if ( dd.css('display') == 'none' ) {
+             dd.slideDown(200);
+           } else {
+             dd.slideUp(200);
+           }
+         });
+     },
+     family_03: function() {
+         var dt = $('.footer-right-sub .select-box-01 dt a'),
+           dd = $('.footer-right-sub .select-box-01 dd');
+
+         dt.on('click', function() {
+           if ( dd.css('display') == 'none' ) {
+             dd.slideDown(200);
+           } else {
+             dd.slideUp(200);
+           }
+         });
+     },
+     family_04: function() {
+         var dt = $('.footer-right-sub .select-box-02 dt a'),
+           dd = $('.footer-right-sub .select-box-02 dd');
+
+         dt.on('click', function() {
+           if ( dd.css('display') == 'none' ) {
+             dd.slideDown(200);
+           } else {
+             dd.slideUp(200);
+           }
+
+         });
+     }
+ };
+ familyFunction.init();
+
+
+
+
+
+
+//  ?��?��?��?��?��?��?�� ?��?��?��?��?��?��?���? ?��?��?��?�� ?��?��븝옙
+
+var tabFun = {
+    init: function() {
+        this.showHide();
+    },
+    showHide: function() {
+        $tabmeno = $("div.sub-contert-box div.panel");
+        $("#tap01").show();
+
+        $tab = $("ul.panelul li a");
+        $tab.on('click', function(event) {
+            event.preventDefault();
+            $tab.removeClass("selected03");
+            $(this).addClass("selected03");
+            $tabmeno.hide();
+            $($(this).attr("href")).show();
+        });
+    }
+
+};
+tabFun.init();
+
+
+
+/**
+ *?��?��?��?��?��메댐?��, gnb
+ */
+/*
+var gnbFun = {
+    init: function() {
+        this.gnbHover();
+    },
+    gnbHover: function() {
+        var navBg = $('.header-gnb'),
+            gLi = $('.gnb > ul > li'),
+            gLiUl = $('.gnb > ul > li > ul'),
+            gLiUlUl = $('.gnb > ul > li > ul > li > ul');
+
+        gLi.on('focusin mouseenter', function(event) {
+            navBg.show();
+            gLiUl.hide();
+            $(this).find('ul').show();
+        });
+
+        gLi.on('focusOut mouseleave', function(event) {
+            $(this).find('ul').hide();
+            navBg.hide();
+        });
+
+    }
+};
+gnbFun.init();
+*/
+
+$(document).ready(function(){
+
+	//GNB
+	$(function(){
+		var setting;
+		$(".gnb > ul > li > a").hover(function(){
+			$(this).parent('li').parent('ul').find("ul").hide();
+			$(this).parent('li').find("ul").show();
+			$(".header-gnb").show();
+		});
+		$(".gnb > ul > li > ul").mouseleave(function(){
+			$(this).hide();
+			$(".header-gnb").hide();
+		});
+		$(".gnb > ul > li > a").focus(function(){
+			$(this).parent('li').parent('ul').find("ul").hide();
+			$(this).parent('li').find("ul").show();
+			$(".header-gnb").show();
+		  return false;
+		});		
+
+		// 190617
+		$(".gnb-06 .two_depth > li:last-child a").focusout(function(){
+			$(".gnb > ul > li > ul").hide();
+			$(".header-gnb").hide();
+		});
+
+		/*
+		$(".main-navigation-menu > ul > li:last-child a").focusout(function(){
+		  $(this).addClass("focused").parents('li').removeClass("active");
+		  return false;
+		});
+		*/
+		
+		/*
+		$("a").blur(function(){
+		  clearTimeout(setting);
+		  $(this).removeClass("focused");
+		  var $that = $(this)
+		  setting = setTimeout(function(){
+			if(!$that.parents(".main-navigation-menu ul li a").find(".focused").length){
+			  $that.parents(".main-navigation-menu ul li a").removeClass("active");
+			};
+		  },0);
+		  return false;
+		});
+
+		$("a").click(function(){
+		  if($(this).attr("href") == "#"){
+			return false;
+		  };
+		});
+		*/
+	});
+
+});
+
+
+$(document).ready(function() {
+    // ?��?��?��?��?��?��?��?���? ?��?��?��?��?��깍옙?��?��깍옙
+    // lnbFun.lnbHeight();
+
+    /**
+     * lnb ?��?��?��?��?��?��몌옙 ?��?��?��?��?��?��곤옙 ?��?��?��?��?��?��?��?��?��곤옙,
+     * ?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��곤옙, ?��?��몌옙?��?��?�� ?��?��?��?��?��깍옙
+     * @type {function}
+     */
+    var lnbFun = {
+        init: function() {
+            this.lnbClick();
+            this.lnbHeight();
+        },
+        lnbClick: function() {
+            var lnb = $('.sub-lnb .lnb-list a'),
+                lnb_ul = $('.sub-lnb .lnb-list ul');
+
+            lnb.on('click', function(event) {
+                // event.preventDefault();
+                var ul = $(this).next('ul');
+                if (ul.css('display') === 'block') {
+                    // ?��?��?��?���? ul ?��?��?��?��?��?��
+                    lnb_ul.slideUp(200);
+                } else {
+                    // ?��?��?��?��?��?�� ul ?��?��?��?��?��?��
+                    lnb_ul.slideUp(200);
+                    ul.slideDown(200);
+                    // ?��?��?��?��?��?�� ?��?��?��?�� ?��?��?��?��?��?��?�� ?��?��곤옙
+                    lnb.removeClass('on');
+                    $(this).addClass('on');
+                    // ?��?��?��?��?��?�� ul ?��?��?��?��?��?��?�� ?��?��곤옙
+                    ul.addClass('on');
+                }
+            });
+        },
+        lnbHeight: function() {
+            var lnb = $('.sub-main .sub-lnb'),
+                lnb_height = lnb.height(),
+                contents = $('.sub-main .contents'),
+                contents_height = contents.height();
+                wrap_main = $('#visualImgArea');
+                wrap_height = wrap_main.height();
+                korea_height = 1200;
+            // console.log('lnb_height: ' + lnb_height + ' contents_height: ' + contents_height);
+
+            if (lnb_height < contents_height) {
+                // contents ?��?��?�� ?��?��?��?��
+                    // console.log( contents_height );
+                if ( contents_height < '1400') {
+                  lnb.css("height", "1400px");
+                } else {
+                  lnb.css("height", contents_height + "px");
+                }
+                
+            } else {
+                // lnb ?��?��?�� ?��?��?��?��
+                lnb.css("height", "1400px");
+            }
+
+        }
+    };
+    lnbFun.init();
+
+
+
+    
+});
+
+
+
+// 채占?��?�� FAQ ?��?��븝옙
+var qnaFun = {
+    init: function() {
+        this.qnaShowHide();
+    },
+    qnaShowHide: function() {
+        var table = $('.t2'),
+            link = table.find('a');
+
+        link.on('click', function(event) {
+            event.preventDefault();
+            // console.log( $(this).parent().next().attr('class') );
+            if ( $(this).parent().next().css('display') === "none" ) {
+                // block
+                table.find('.faqnone').css('display','none');
+                $(this).parent().next().css('display','block');
+
+                //  class add
+                 link.attr('class','anchor');
+                 $(this).addClass('on');
+            } else {
+                // none
+                $(this).parent().next().css('display','none');
+
+                //  class add
+                $(this).removeClass('on');
+            }
+        });
+    }
+};
+qnaFun.init();
+    
+
+
+
+/**
+ * ?��?��?��?��?��?��?��?���? ?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?��?��?�� ?��?��?��?��?��?��?�� ?��?��곤옙
+ */
+var lnbLast = {
+    init: function() {
+        this.lnbAddClass();
+    },
+    lnbAddClass: function() {
+        var last = $('.sub-lnb .sub-lnb-inner .lnb-list li').last().children('a');
+        last.addClass('last');
+        // console.log(last.text());
+    }
+};
+lnbLast.init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(function(){
+	documentPageScriptInit();
+});
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+	var popWin = null;
+	popWin = window.open(theURL,winName,features);
+	popWin.focus();
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+	var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+	if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+	d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+String.prototype.trim=function()
+{
+	var str=(this==null || this==undefined ? "" : this).replace(/(\s+$)/g,"");
+	return str.replace(/(^\s*)/g,"");
+}
+String.prototype.replaceAll=function(p_search,p_replace)
+{
+	if(!this)return "";
+	if(!p_search)return "";
+	p_replace = (p_replace==null || p_replace==undefined) ? "" : p_replace+"";
+	
+	return replaceAll(this+"",p_search+"",p_replace);
+};
+String.prototype.right=function(plen)
+{
+	if(!this) return "";
+	if(!plen) return "";
+	if(isNaN(plen)) return "";
+	var vstr = this+"";
+	plen = parseInt(plen);
+	var vstart = vstr.length - plen;
+	return vstr.substr(vstart);
+};
+String.prototype.stripTags=function(allowed)
+{
+	return strip_tags((!this ? "" : this), allowed);
+};
+
+
+String.prototype.isEmail = function() {
+	return (/\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/).test(this.trim());
+};
+
+Array.prototype.valueIndex=function(pval)
+{
+	var idx = -1;
+	if(this==null || this==undefined || pval==null || pval==undefined){
+	}else{
+		for(var i=0;i<this.length;i++){
+			if(this[i]==pval){
+				idx = i;
+				break;
+			}
+		}
+	}
+	return idx
+};
+
+Array.prototype.removeDup=function()
+{
+	var resultArray = [];
+	if(this==null || this==undefined){
+	}else{
+		for(var i=0;i<this.length;i++){
+			var el = this[i];
+			if(resultArray.valueIndex(el) === -1) resultArray.push(el);
+		}
+	}
+	return resultArray;
+}
+
+Array.prototype.removeEmpty=function()
+{
+	var resultArray = [];
+	if(this==null || this==undefined){
+	}else{
+		for(var i=0;i<this.length;i++){
+			var el = this[i];
+			if(el)if($.trim(el)!="") resultArray.push(el);
+		}
+	}
+	return resultArray;
+}
+
+//alert(ajax_data(EV_PATH_ROOT+"resume/resume.php","aaa=bbb&ccc=ddd"));
+function ajax_data( purl,pdata ){
+	var result = "";
+	jQuery.ajax({
+		type: "POST",
+		async: false, // ?��?��?��?��?��?�� ?��?��?��?���?
+		url: purl,
+		data: pdata,
+		dataType: "text",
+		success: function(obj){
+			result = obj;
+		} ,
+		error: function(obj){
+			result = "error";
+		}
+	});
+	return result;
+}
+//alert(ajax_data_trim(EV_PATH_ROOT+"resume/resume.php","aaa=bbb&ccc=ddd"));
+function ajax_data_trim( purl,pdata ){
+	var result = ajax_data( purl,pdata );
+	result = replaceAll(result,"\n","");
+	result = replaceAll(result,"\r","");
+
+	return trimString(result);
+}
+
+function getobj(p_id){
+	return document.getElementById(p_id);
+}
+
+
+//?��?��깍옙?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?��?�� true, ?��?��?��?��?��?��?��?��?��?��?��?��?��?�� false ?��?��?��?��
+function isLoginNow(){
+	/*
+	var result = ajax_data_trim(EV_PATH_ROOT+"common/inc/loginCheck.php","");
+
+	if(!result) result=0;
+	if(isNaN(result)) result=0;
+	result = parseInt(result);
+
+	if(result==0){
+		return false;
+	}else{
+		return true;
+	}
+	*/
+}
+
+//<img src="" onerror="imageOnErrorProc(this);" />
+function imageOnErrorProc(pimg){
+	if(pimg){
+		var v_width = $(pimg).width();
+		var v_height = $(pimg).height();
+
+		$(pimg).width(v_width-2);
+		$(pimg).height(v_height-2);
+
+		pimg.src=EV_PATH_ROOT+'images/common/blank.png';
+		$(pimg).css('border','1px solid #d1d1d1');
+	}
+}
+
+//<img src="" onerror="imageOnErrorProc2(this);" />
+function imageOnErrorProc2(pimg){
+	if(pimg){
+		pimg.src=EV_PATH_ROOT+'images/common/blank.png';
+	}
+}
+
+function goLoginPage(){
+	//document.location.href = EV_PATH_ROOT+"customer/login.php?returl="+encodeURIComponent(THIS_PAGE_URL);
+}
+
+//if(!goLoginAlert()) return;
+//?��?��깍옙?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?��?��?��, ?��?��깍옙?��?��?�� 체크 ?��?��?��?�� ?��?��깍옙?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?��?�� ?��?��?��
+//?��?��깍옙?��?��?�� ?��?��?�� ?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?��?��?��?�� ?��?��?��~~
+function goLoginAlert(){
+	if(!isLoginNow()){
+		if(confirm("?��?��깍옙?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��.\n?��?��깍옙?��?��?�� ?��?��?��겠쏙?��?��?��깍옙?")){
+			goLoginPage();
+			return false;
+		}
+	}
+	return true;
+}
+
+function fnIsNull(pval){
+	if(pval==null || pval==undefined){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function fnNvl(pval){
+	if(fnIsNull(pval)){
+		return "";
+	}else{
+		return pval;
+	}
+}
+
+function fnNvl2(pval,prep){
+	if(fnIsNull(pval)){
+		return prep;
+	}else{
+		return pval;
+	}
+}
+
+//"00000" => fnRepStr("0",5);
+function fnRepStr(pStr,pCnt){
+	var result = "";
+	for(var i=0;i<pCnt;i++){
+		result += pStr;
+	}
+	return result;
+}
+
+//fail : 0, success : 1~9
+function fnMenuDepth(pagecode){
+	if(pagecode.length==20){
+		var sidxes = new Array(0,4,6, 8,10,12,14,16,18);
+		var eidxes = new Array(4,6,8,10,12,14,16,18,20);
+		
+		for(var i=0;i<sidxes.length;i++){
+			var sub_pagecode = pagecode.substring(sidxes[i],eidxes[i]);
+			if(sub_pagecode==fnRepStr("0",sub_pagecode.length)){
+				return i;
+			}
+		}
+	}
+	
+	return i;
+}
+
+//depth : 1~9
+function getMenuCode(pagecode,depth){
+	if(pagecode.length!=20) return "";
+	if(depth<1) return "";
+	
+	var sidxes = new Array(0,4,6, 8,10,12,14,16,18);
+	var eidxes = new Array(4,6,8,10,12,14,16,18,20);
+	
+	return pagecode.substring(sidxes[depth-1],eidxes[depth-1]);
+}
+
+function isLogin(){
+	var chkLogin = ajax_data_trim(EV_PATH_ROOT+"common/ajaxLoginChk.do","");
+	if(parseInt(chkLogin)==1){
+		return true;
+	}else{
+		return false;
+	}
+}
+function chkLogin(){
+	if(isLogin()){
+		return true;
+	}else{
+		alert("?��?��깍옙?��?��?�� ?��?��?��?��?��?��?��?��?��?��.");
+		return false;
+	}
+}
+function jpopup(p_id,p_title,p_width,p_height,p_func){
+	return $("#"+p_id).dialog(
+		{
+			title: p_title,
+			modal: true,
+			width: p_width,
+			height: p_height,
+			resizable: false,
+			show: "slide",
+			hide: "slide",
+			buttons: { 
+				"?��?��?��?��": p_func,
+				"?��?��?��?���?": function(){
+					$(this).dialog("close");
+				}
+			}
+		}
+	);
+}
+function jpopup2(p_id,p_title,p_width,p_height,p_btns){
+	return $("#"+p_id).dialog(
+		{
+			title: p_title,
+			modal: true,
+			width: p_width,
+			height: p_height,
+			resizable: false,
+			show: "slide",
+			hide: "slide",
+			buttons: p_btns
+		}
+	);
+}
+
+function fnCFloat(pVal){
+	if(pVal){
+		pVal = trimString(replaceAll(pVal,",",""));
+
+		if( pVal=="" ) {
+			return 0.0;
+		}else if( isNaN(pVal) ){
+			return 0.0;
+		}else{
+			return parseFloat(pVal);
+		}
+	}else{
+		return 0.0;
+	}
+}
+function isNanDef2(p_val,p_def){
+	var v_val = trimString(replaceAll(p_val,",",""));
+
+	if(v_val==""){
+		return p_def;
+	}else if( isNaN(v_val) ){
+		return p_def;
+	}
+
+	return p_val;
+}
+function isNanDef(p_obj,p_def){
+	if(p_obj){
+		var v_val = trimString(replaceAll(p_obj.value,",",""));
+
+		if(v_val==""){
+			p_obj.value = p_def;
+		}else if( isNaN(v_val) ){
+			p_obj.value = p_def;
+		}
+	}
+}
+function inputTextLock(p_obj){
+	if(p_obj){
+		p_obj.style.backgroundColor = "#fafafa";
+		p_obj.readOnly = true;
+	}
+}
+function inputTextUnLock(p_obj){
+	if(p_obj){
+		p_obj.style.backgroundColor = "#ffffff";
+		p_obj.readOnly = false;
+		$(p_obj).focus();
+	}
+}
+
+/*
+ * HTML ?��?��?��?��?��?��?��?��?��몌옙 ?��?��?��?��?��뱄옙?��?��뤄옙 ?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��븝옙
+ * ?��?��?��?��?��?��?��?��?�� true, ?��?��몌옙?��?��?�� false
+ * & ?��?��?�� &amp; ?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��뤄옙 ?��?��?��?��, " " ?��?��?�� &nbsp; ?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��뤄옙 ?��?��?��?��, ?��?��?��?���?
+ */
+function strCmpHtmlSpc(str1,str2){
+	if( strFromHtmlSpc(str1)==strFromHtmlSpc(str2) ){
+		return true;
+	}else{
+		return false;
+	}
+}
+function str2HtmlSpc(str1){
+	if(str1==null || str1==undefined || str1=="") return "";
+	
+	var arrSpc = ["&quot;","&amp;","&lt;","&gt;","&nbsp;"];
+	var arrStr = ["\"","&","<",">"," "];
+	
+	for(var i=0;i<arrStr.length;i++){
+		str1 = str1.replaceAll(arrStr[i],arrSpc[i]);
+	}
+
+	return str1;
+}
+function strFromHtmlSpc(str1){
+	if(str1==null || str1==undefined || str1=="") return "";
+
+	var arrSpc = ["&quot;","&amp;","&lt;","&gt;","&nbsp;"];
+	var arrStr = ["\"","&","<",">"," "];
+
+	for(var i=0;i<arrStr.length;i++){
+		str1 = str1.replaceAll(arrSpc[i],arrStr[i]);
+	}
+	
+	return str1;
+}
+function chkIdOnlyEng(obj){
+	var regExp =  new RegExp("^[a-z][a-z0-9\~|\(\)\!@#$%\^&\*-_+=]{3,15}$","g");
+	var match = regExp.exec(obj.value);
+
+	if(match == null ) {
+		alert("id?��?��?�� 4-16?��?��?�� ?��?��?��?��,?��?��?��?��?��?��,?��?��?��?��?��?��+?��?��?��?��?��?�� ?��?��?��?��?��몌옙 ?��?��?��?��?��?��?��?��?��?��?��.");
+		try{obj.focus();}catch(e){};
+		return false;
+	}
+
+	return true;
+}
+function chkPwd(obj){
+	var regExp =  new RegExp("^[a-z][a-z0-9\~|\(\)\!@#$%\^&\*-_+=]{5,15}$","g");
+	var match = regExp.exec(obj.value);
+
+	if(match == null ) {
+		alert("?��?��?��橘占?��ｏ옙?���? 6-16?��?��?�� ?��?��?��?��,?��?��?��?��?��?��,?��?��?��?��?��?��+?��?��?��?��?��?�� ?��?��?��?��?��몌옙 ?��?��?��?��?��?��?��?��?��?��?��.");
+		try{obj.focus();}catch(e){};
+		return false;
+	}
+
+	return true;
+}
+function documentPageScriptInit(){
+
+	$(":file").each(function(pi,po){
+		$(po).change(function(){
+			if(po.value.trim()!=""){
+				if( !checkFileExt(po.value,"txt,doc,docx,ppt,pptx,xls,xlsx,hwp,pdf,zip,alz,html,htm,erwin,jpg,gif,png,bmp,jpeg,img,csv,7z,avi,wmv,asf,flv,mov,mpeg,mpg,mp4,wav,mmf,mp3,wma,swf,dwg,egg") ){
+					alert("?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?��.");
+					return false;
+				}
+			}
+		});
+	});
+	
+	//?��?��?��?��?��?��????��?��?�� Input ?��?��?�� ?��?��?��?��?��몌옙 ?��?��?��곤옙?��?��?��?��?��곤옙 처占?��?��
+	$(".onlyNumber:text ").each(function(pi,po){
+		setOnlyNumber(po);
+	});
+	
+	//?��?��?��?��?��?��????��?��?�� Input ?��?��?�� ?��?��?��?��?��몌옙 ?��?��?��곤옙?��?��?��?��?��곤옙 ?��?��곤옙, ?��?��?��?��?��?��몌옙 처占?��?��
+	$(".onlyNumberComma:text ").each(function(pi,po){
+		setOnlyNumberComma(po);
+		$(po).css({"text-align":"right"});
+	});
+	
+	$("select").each(function(pi,po){
+		//selobj(po,$(po).attr("init_val"));
+	});
+	$(":input:checkbox[init_val]").each(function(pi,po){
+		if(po.form){
+			var obj = eval("document."+po.form.name+"."+po.name);
+			selchk(obj,$(po).attr("init_val"));
+		}else{
+			$(":check[name='"+po.name+"'][value='"+$(po).attr("init_val")+"']").first().attr("checked",true);
+		}
+	});
+	$(":input:radio[init_val]").each(function(pi,po){
+		if(po.form){
+			var obj = eval("document."+po.form.name+"."+po.name);
+			selrdo(obj,$(po).attr("init_val"));
+		}else{
+			$(":radio[name='"+po.name+"'][value='"+$(po).attr("init_val")+"']").first().attr("checked",true);
+		}
+	});
+
+	//try{$(".btnTypeJQ").button();}catch(e){}
+
+
+	try{
+		if( $("#ifrProc").length==0 ){
+			$("<iframe name='ifrProc' id='ifrProc' title='��������' src='about:blank' width='0' height='1' />").appendTo(document.body);	// 190617
+		}
+	}catch(e){}
+
+}
+
+function obj2str(data){
+	if(!data) return "";
+	
+	var result = [];
+	
+	if(data.length)result[result.length] = "[";
+	
+	//?��?��?��체占?��몌옙
+	if(typeof data=="object" && !data.length){
+		var itemArr = [];
+		var i=0;
+		
+		itemArr[itemArr.length] = "{";
+		
+		for(var key in data){
+			var val = eval("data."+key);
+			
+			if(val){
+				if(typeof val=="object"){
+					val = obj2str(val);
+				}else{
+					val = '"'+val+'"';
+				}
+				
+				if(i>0) itemArr[itemArr.length] = ',';
+				itemArr[itemArr.length] = '"'+key+'":';
+				itemArr[itemArr.length] = ''+val+'';
+			}else{
+				if(i>0) itemArr[itemArr.length] = ',';
+				itemArr[itemArr.length] = '"'+key+'":';
+				itemArr[itemArr.length] = '"'+(val==null || val==undefined ? "" : val)+'"';
+			}
+			
+			i++;
+		}
+		itemArr[itemArr.length] = "}";
+		
+		result[result.length] = itemArr.join("");
+	}else if(data.length){
+		for(var i=0,dataLen=data.length;i<dataLen;i++){
+			if(i>0)result[result.length] = ",";
+			result[result.length] = obj2str(data[i]);
+		}
+	}
+	
+	if(data.length)result[result.length] = "]";
+	return result.join("");
+}
+
+function fnParseInt(pstr){
+	if(!pstr)return 0;
+	pstr = replaceAll(pstr,",","");
+	pstr = replaceAll(pstr," ","");
+	pstr = replaceAll(pstr,"\t","");
+	if(isNaN(pstr))return 0;
+	return parseInt(pstr);
+}
+
+
+//?��?��?��?��?��?��?��?��?��?��?��?�� file ?��?��뤄옙?��?��?��?��?��?�� ?��?��?��?��?��?��?��체크?��?��?��?��, ?��?��?��?��?��?��곤옙 ?��?��몌옙?��?��?�� ?��?��몌옙 ?��?��?��?��?��?�� ?��?��?��?��
+//?��?��?��?��?��?��?��.length ?��?��?�� 체크.. ?��?��?��?��?��?��?��?��?�� ?��?��?�� ?��?��?��?��?��?�� ?��?��?��?��
+function docFileExtCheck(){
+	var arr = [];
+	
+	$(":file").each(function(pi,po){
+		$(po).change(function(){
+			if(po.value.trim()!=""){
+				if( !checkFileExt(po.value,"txt,doc,docx,ppt,pptx,xls,xlsx,hwp,pdf,zip,alz,html,htm,erwin,jpg,gif,png,bmp") ){
+					arr[arr.length] = po;
+				}
+			}
+		});
+	});
+	
+	return arr;
+}
+
+function chkresno(resno) {
+ 
+  // ?��?��민뱄?��?��?��?��?�� ?��?��?��?��?��?��?�� 7?��?��?���? ?��?��몌옙(?��?��?��?��?��?��) ?��?��?��?��?��?��?�� ?��?��?��?��
+   fmt = /^\d{6}-[1234]\d{6}$/;
+   if (!fmt.test(resno)) {
+      return false;
+   }
+ 
+  // ?��?��?���? ?��?��?��?��?��?��?�� ?��?��?��?��
+   birthYear = (resno.charAt(7) <= "2") ? "19" : "20";
+   birthYear += resno.substr(0, 2);
+   birthMonth = resno.substr(2, 2) - 1;
+   birthDate = resno.substr(4, 2);
+   birth = new Date(birthYear, birthMonth, birthDate);
+ 
+  if ( birth.getYear() % 100 != resno.substr(0, 2) ||
+        birth.getMonth() != birthMonth ||
+        birth.getDate() != birthDate) {
+		return false;
+   }
+ 
+  // Check Sum ?��?��?��?��?��?��?�� ?��?��?��?��?��?��?�� ?��?��?��?��
+   buf = new Array(13);
+   for (i = 0; i < 6; i++) buf[i] = parseInt(resno.charAt(i));
+   for (i = 6; i < 13; i++) buf[i] = parseInt(resno.charAt(i + 1));
+ 
+  multipliers = [2,3,4,5,6,7,8,9,2,3,4,5];
+   for (i = 0, sum = 0; i < 12; i++) sum += (buf[i] *= multipliers[i]);
+ 
+  if ((11 - (sum % 11)) % 10 != buf[12]) {
+		return false;
+   }
+	
+	return true;
+ }
+
+function fnAppendHidden(p_form, p_nm, p_val){
+	$(p_form).append("<input type='hidden' name='"+p_nm+"' value='"+p_val+"' />");
+}
+
+function fnFocusNext(thisObj , nextObj) {
+	if(thisObj.maxLength){
+		if(thisObj.maxLength == thisObj.value.length) nextObj.focus();
+	}
+}
+
+$.fn.extend({
+	kdhJoinAtt : function( attNm )
+	{
+		var str1 = "", str2 = "";
+
+		this.each( function(idx, obj)
+		{
+			str2 = $( obj ).attr(attNm);
+
+			if( str2 ) str1 += "," + $.trim(str2);
+		});
+
+		if( str1.length > 0 ) str1 = str1.substring(1);
+
+		return str1;
+	}
+});
+
+//if(!fnFirstCharAlphaCheck(f.inputname, "?��?��?��?��?��?��?��?��?��븝옙?���?")) return;
+function fnFirstCharAlphaCheck(p_input, p_title){
+	if(p_input){
+		if(p_input.value.length > 0){
+			var v_first_char = $.trim(p_input.value.substring(0,1));
+			if( !isNaN(v_first_char) || "~!@#$%^&*()_-+=`'\":;/?[]<>.,\\|".indexOf(v_first_char)!=-1 ){
+				alert(p_title+"?��?��?�� ?��?��?��?��?��뱄옙?��?��?��?�� ?��?��?��?��?��곤옙 ?��?��?��?�� ?��?��?��?��?��?��?��?��로몌?��(?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��) ?��?��?��?��?��?��?��?��?��?��.");
+				p_input.focus();
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+//########## ?��?��?��짜占?��?��?��?��?��?��?��?��?�� ##########
+
+//?��?��?��짜占?��?��?��?��?�� ?��?��?��?��?��, ?��?��?��?��?��?�� ?��?��?��/?��?��?��/?��?��?��/?��?��곤옙/?��?��?��/?��?��?�� ?��?��?��?��?��?�� ?��?��?��체占?��?�� ?��?��?��?��
+//?��?��?��?��?��?��?��?���? : obj.year, obj.month, obj.day, obj.hour, obj.minute, obj.second
+//var o_date = dateToObject("2010-11-12 12:43:13");
+//var o_date = dateToObject("20101112124313");
+//var o_date = dateToObject("20101112");
+//var o_date = dateToObject("2010/11/12");
+//var o_date = dateToObject("2010.11.12 18:33");
+//alert( "year : " + o_date.year + "\nmonth : " + o_date.month + "\nday : " + o_date.day + "\nhour : " + o_date.hour + "\nminute : " + o_date.minute + "\nsecond : " + o_date.second);
+function dateToObject(p_date){
+	// if p_date is date value of string type
+	var part_str_arr = ["-", "/", ":", "."];
+	var v_date = p_date ? trimString(p_date) : "";
+	var v_result = {
+		"year":"", "month":"", "day":"", "hour":"", "minute":"", "second":""
+		,"toString1" : function(p_date_div){
+			var v_result = "";
+			if(trimString(this.year)!="") v_result += this.year;
+			if(trimString(this.month)!="") v_result += p_date_div + this.month;
+			if(trimString(this.day)!="") v_result += p_date_div + this.day;
+			if(trimString(this.hour)!="") v_result += " " + this.hour;
+			if(trimString(this.minute)!="") v_result += ":" + this.minute;
+			if(trimString(this.second)!="") v_result += ":" + this.second;
+			return v_result;
+		}
+		,"toString2" : function(){
+			var v_result = "";
+			if(trimString(this.year)!="") v_result += ""+this.year;
+			if(trimString(this.month)!="") v_result += ""+this.month;
+			if(trimString(this.day)!="") v_result += ""+this.day;
+			if(trimString(this.hour)!="") v_result += ""+this.hour;
+			if(trimString(this.minute)!="") v_result += ""+this.minute;
+			if(trimString(this.second)!="") v_result += ""+this.second;
+			return v_result;
+		}
+	};
+
+	if(v_date=="") return v_result;
+
+	for(var i=0;i<part_str_arr.length;i++){
+		v_date = replaceAll(v_date, part_str_arr[i], " ");
+	}
+
+	for(var i=0;i<10;i++){
+		if(v_date.indexOf("  ")==-1) break;
+		v_date = replaceAll(v_date, "  ", " ");
+	}
+
+	if (v_date)
+	{
+		if (v_date.indexOf(" ")!=-1)
+		{
+			var v_date_arr = v_date.split(" ");
+			v_result.year = v_date_arr[0] ? v_date_arr[0] : "";
+			v_result.month = v_date_arr[1] ? v_date_arr[1] : "";
+			v_result.day = v_date_arr[2] ? v_date_arr[2] : "";
+			v_result.hour = v_date_arr[3] ? v_date_arr[3] : "";
+			v_result.minute = v_date_arr[4] ? v_date_arr[4] : "";
+			v_result.second = v_date_arr[5] ? v_date_arr[5] : "";
+		}
+		else
+		{
+			v_result.year = v_date.length>=4 ? v_date.substring(0,4) : "";
+			v_result.month = v_date.length>=6 ? v_date.substring(4,6) : "";
+			v_result.day = v_date.length>=8 ? v_date.substring(6,8) : "";
+			v_result.hour = v_date.length>=10 ? v_date.substring(8,10) : "";
+			v_result.minute = v_date.length>=12 ? v_date.substring(10,12) : "";
+			v_result.second = v_date.length>=14 ? v_date.substring(12,14) : "";
+		}
+	}
+
+	return v_result;
+}
+
+//p_format : yyyymmddhhmissms or yymmddhhmissms
+//fnGetNow("yyyymmddhhmissms")
+function fnGetNow(p_format){
+	var v_date = new Date();
+	var v_year = v_date.getYear();
+	v_year = v_year<1900 ? v_year+1900 : v_year;
+
+	p_format = p_format.toLowerCase();
+	p_format = replaceAll(p_format,"yyyy",v_year+"");
+	p_format = replaceAll(p_format,"yy",(v_year+"").substring(2,4));
+	p_format = replaceAll(p_format,"mm",nf(v_date.getMonth()+1));
+	p_format = replaceAll(p_format,"dd",nf(v_date.getDate()));
+	p_format = replaceAll(p_format,"hh",nf(v_date.getHours()));
+	p_format = replaceAll(p_format,"mi",nf(v_date.getMinutes()));
+	p_format = replaceAll(p_format,"ss",nf(v_date.getSeconds()));
+	p_format = replaceAll(p_format,"ms",v_date.getMilliseconds()+"");
+
+	return p_format;
+}
+
+//var v_date2 = new Date(2012, 2-1, 1);
+//alert( fnGetFormatDate("yyyymmddhhmissms", v_date2) );
+//alert( fnGetNow("yyyymmddhhmissms") );
+function fnGetFormatDate(p_format, p_date){
+	var v_date = p_date;
+	var v_year = v_date.getYear();
+	v_year = v_year<1900 ? v_year+1900 : v_year;
+
+	p_format = p_format.toLowerCase();
+	p_format = replaceAll(p_format,"yyyy",v_year+"");
+	p_format = replaceAll(p_format,"yy",(v_year +"").substring(2,4));
+	p_format = replaceAll(p_format,"mm",nf(v_date.getMonth()+1));
+	p_format = replaceAll(p_format,"dd",nf(v_date.getDate()));
+	p_format = replaceAll(p_format,"hh",nf(v_date.getHours()));
+	p_format = replaceAll(p_format,"mi",nf(v_date.getMinutes()));
+	p_format = replaceAll(p_format,"ss",nf(v_date.getSeconds()));
+	p_format = replaceAll(p_format,"ms",v_date.getMilliseconds()+"");
+
+	return p_format;
+}
+
+/*
+ * v_date_form : "y"-?��?��?��, "m"-?��?��?��, "d"-?��?��?��, "h"-?��?��곤옙, "i"-?��?��?��, "s"-?��?��?�� ==> ?��?��?��?��?��?��?�� ?��?��?��?��?��?��?�� ?��?��?��?��?��?�� ?��?��깍옙(?��?��?��?��?��깍옙 ?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��)
+ * v_day : +- ?��?��?��(?��?��?��?��?��?�� ?��?��?���? ?��?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?���?)
+ */
+function fnDateAdd(ymd, v_date_form, v_day){
+	var partStr = ymd.trim().substr(4,1);
+	partStr = (partStr=="-" || partStr=="." || partStr==" ") ? partStr : "";
+	
+	ymd = ymd.trim().replaceAll("-","").replaceAll(".","").replaceAll(" ","").replaceAll(":","");
+	v_date_form = v_date_form.trim();
+	
+	if( ymd.length < 8 ) return "";
+	if( !v_day ) return "";
+	if( v_date_form=="" ) return "";
+	
+	var yyyy = ymd.substr(0,4);
+	var mm = eval(ymd.substr(4,2) + "- 1") ;
+	var dd = ymd.substr(6,2);
+	var hh = ymd.substr(8,2);
+	var mi = ymd.substr(10,2);
+	var ss = ymd.substr(12,2);
+	
+	if(v_date_form.toLowerCase()=="y"){
+		yyyy = eval(yyyy + '+' + v_day);
+	}else if(v_date_form.toLowerCase()=="m"){
+		mm = eval(mm + '+' + v_day);
+	}else if(v_date_form.toLowerCase()=="d"){
+		dd = eval(dd + '+' + v_day);
+	}else if(v_date_form.toLowerCase()=="h"){
+		hh = hh.trim()!="" ? eval(hh + '+' + v_day) : null;
+	}else if(v_date_form.toLowerCase()=="i"){
+		mi = mi.trim()!="" ? eval(mi + '+' + v_day) : null;
+	}else if(v_date_form.toLowerCase()=="s"){
+		ss = ss.trim()!="" ? eval(ss + '+' + v_day) : null;
+	}else{
+		return "";
+	}
+	
+	var dt3 = new Date(yyyy, mm, dd);
+	
+	if(!fnIsNull2(hh)){
+		dt3 = new Date(yyyy, mm, dd, hh);
+	}else if(!fnIsNull2(hh) && !fnIsNull2(mi)){
+		dt3 = new Date(yyyy, mm, dd, hh, mi);
+	}else if(!fnIsNull2(hh) && !fnIsNull2(mi) && !fnIsNull2(ss)){
+		dt3 = new Date(yyyy, mm, dd, hh, mi, ss);
+	}
+	
+	yyyy = dt3.getYear();
+	mm = (dt3.getMonth()+1)<10? "0" + (dt3.getMonth()+1) : (dt3.getMonth()+1) ;
+	dd = dt3.getDate()<10 ? "0" + dt3.getDate() : dt3.getDate();
+	if(hh!=null && hh!="00")hh = dt3.getHours()<10 ? "0" + dt3.getHours() : dt3.getHours();
+	if(mi!=null && mi!="00")mi = dt3.getMinutes()<10 ? "0" + dt3.getMinutes() : dt3.getMinutes();
+	if(ss!=null && ss!="00")ss = dt3.getSeconds()<10 ? "0" + dt3.getSeconds() : dt3.getSeconds();
+	
+	yyyy = yyyy<1900 ? yyyy+1900 : yyyy;
+	
+	return yyyy + partStr + mm + partStr + dd + (hh!="00" && hh!=null ? partStr + hh : "")+ (mi!="00" && mi!=null ? partStr + mi : "")+ (ss!="00" && ss!=null ? partStr + ss : "");
+}
+
+// return value : 0 - Sunday, 1 - Monday ,2 - Tuesday ,3 - Wednesday ,4 - Thursday ,5 - Friday ,6 - Saturday 
+function getStartWeekDayOfMonth(p_year, p_month){
+	if(p_year && p_month){
+		try{
+			var dateObj = new Date(p_year, p_month-1, 1);
+			return dateObj.getDay();
+		}catch(e){
+			return -1;
+		}
+	}
+
+	return -1;
+}
+
+function getLastDayOfMonth(p_year, p_month){
+	if(p_year && p_month){
+		try{
+			var dateObj = new Date(p_year, p_month, 1);
+			dateObj.setDate(dateObj.getDate()-1);
+			//alert(1900+dateObj.getYear() + " : " + (dateObj.getMonth()+1) + " : " + dateObj.getDate());
+			return dateObj.getDate();
+		}catch(e){
+			return 0;
+		}
+	}
+
+	return 0;
+}
+
+function fnGetErrMsg(e){
+	if(e){
+		return e + " : " + (e.number & 0xFFFF) + " : " + e.description;
+	}
+	return "";
+}
+
+function fnMSelboxSelect(p_selbox, p_sel_idx){
+	if(p_selbox){
+		if(p_selbox.options){
+			if(p_sel_idx>-1){
+				for(var i=0;i<p_selbox.options.length;i++){
+					p_selbox[i].selected = false;
+				}
+
+				p_selbox[p_sel_idx].selected = true;
+			}
+		}
+	}
+}
+
+function fnMSelboxSelectAll(p_selbox){
+	if(p_selbox){
+		if(p_selbox.options){
+				for(var i=0;i<p_selbox.options.length;i++){
+					p_selbox[i].selected = true;
+				}
+		}
+	}
+}
+
+//rand(1,3)
+function rand(p_start,p_end){
+	var v_result = null;
+	var v_size = p_end - p_start + 1;
+
+	if(p_start < 0 || p_end < 0) return v_result;
+	if(v_size < 2) return v_result;
+
+	v_result = p_start + parseInt(Math.random() * v_size);
+
+	return v_result;
+}
+
+function formatString(p_str, p_format){
+	p_str = p_str+"";
+	p_format = p_format+"";
+	
+	if(p_str.length>=p_format.length){
+		return p_str;
+	}else{
+		return p_format.substring(0,p_format.length-p_str.length)+p_str;
+	}
+}
+
+function zf(p_format,p_str){
+	return formatString(p_str, p_format);
+}
+
+function nf(p_str){
+	return formatString(p_str, "00");
+}
+
+// pval ?��?��몌옙?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?��?��, ?��?��븝옙?��?��?�� ?��?��몌옙?��?��?��?���? ?��?��?��?��?��?��?��?��?�� ?��?��바깍?��?��?��?�� ?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��
+// alert( fnRemoveDup("1,,3,2,1,10,3") );
+function fnRemoveDup(pval){
+	if(pval){
+		var varr = pval.split(",");
+		var varr2 = [];
+		
+		for(var i=0;i<varr.length;i++){
+			var vcnt = 0;
+			for(var j=0;j<varr2.length;j++){
+				if( varr[i]==varr2[j] ) vcnt++;
+			}
+			if(vcnt==0) varr2[varr2.length] = varr[i];
+		}
+
+		var result = "";
+		for(var i=0;i<varr2.length;i++){
+			if( trimString(varr2[i])!="" ){
+				result += varr2[i] + ",";
+			}
+		}
+
+		return result;
+	}
+	return "";
+}
+
+
+// ?��?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?�� 
+function fnGetCookie(name) {
+	var strArg = new String(name + "=");
+	var nArgLen, nCookieLen, nEnd;
+	var i = 0, j;
+
+	nArgLen = strArg.length;
+	nCookieLen = document.cookie.length;
+
+	if (nCookieLen > 0) {
+		while (i < nCookieLen) {
+			j = i + nArgLen;
+			if (document.cookie.substring(i, j) == strArg) {
+				nEnd = document.cookie.indexOf (";", j);
+				if (nEnd == -1) nEnd = document.cookie.length;
+				return unescape(document.cookie.substring(j, nEnd));
+			}
+
+			i = document.cookie.indexOf(" ", i) + 1;
+			if (i == 0) break;
+		}
+	}
+	return("");
+}
+
+//?��?��?��?�� ?��?��?��?��?��?��?��?��깍옙
+function fnSetCookie(name, value, expiredays) {
+	var value = name+"="+escape(value)+"; path=/;";
+	if (typeof(expiredays) != "undefined") {
+		var todayDate = new Date();
+		todayDate.setDate(todayDate.getDate()+expiredays);
+		value += " expires="+todayDate.toGMTString()+";";
+	}
+	document.cookie = value;
+}
+
+function setOnlyAlphaDigit(p_obj){
+	if(p_obj){
+		p_obj.onkeydown = function(){ onlyAlphaDigit(p_obj); }
+		p_obj.onkeyup = function(){ onlyAlphaDigit(p_obj); }
+		p_obj.style.imeMode = "disabled";
+	}
+}
+
+function onlyAlphaDigit(){
+	var keyCode = event.keyCode;
+	var isAlpha = false;
+	var isDigit = false;
+	//alert(keyCode);
+
+	//a-z(65~90)
+	if( (65<=keyCode && keyCode<=90) || keyCode==20 || keyCode==8 || (37<=keyCode && keyCode<=40) || 
+		keyCode==16 || keyCode==9 || keyCode==36 || keyCode==35 || keyCode==46 || keyCode==116 || keyCode==188 || 
+		keyCode==190 || keyCode==191 || keyCode==32 || keyCode==219 || keyCode==221 || keyCode==220 || keyCode==189 || 
+		keyCode==186 || keyCode==187 || keyCode==222 )
+	{
+		isAlpha = true;
+	}else if( 48<=keyCode && keyCode<=57 ){
+		isDigit = true;
+	}
+
+	if( !isAlpha && !isDigit){
+		event.returnValue = false;
+	}
+}
+
+function fnCInt(pVal){
+	if(pVal){
+		pVal = trimString(replaceAll(pVal,",",""));
+
+		if( pVal=="" ) {
+			return 0;
+		}else if( isNaN(pVal) ){
+			return 0;
+		}else{
+			return parseInt(pVal);
+		}
+	}else{
+		return 0;
+	}
+}
+
+function setOnlyDate(p_obj){
+	if(p_obj){
+		p_obj.onkeydown = function(){ fncOnlyDate(this); };
+		p_obj.onkeyup = function(){ fncOnlyDate(this); };
+		p_obj.style.imeMode = "disabled";
+	}
+}
+
+function setOnlyNumberComma(p_obj){
+	if(p_obj){
+		p_obj.onkeydown = function(){ fncOnlyNumber2(this); };
+		//p_obj.onkeyup = function(){ fncNumComma(this); };
+		p_obj.onblur = function(){ fncNumComma(this); };
+		p_obj.onfocus = function(){ p_obj.value = p_obj.value.replaceAll(",",""); };
+		p_obj.style.imeMode = "disabled";
+	}
+}
+
+function setOnlyNumber(p_obj){
+	if(p_obj){
+		p_obj.onkeydown = function(){ fncOnlyNumber(this); };
+		p_obj.onkeyup = function(){ fncOnlyNumber(this); };
+		p_obj.style.imeMode = "disabled";
+	}
+}
+
+function fncNumComma(pobj){
+	var ekey = event.keyCode;
+	if((37!=ekey)&&(ekey!=39)&&(ekey!=36)&&(ekey!=35)){
+		if(pobj){
+			var v_str = replaceAll(pobj.value,",","");
+
+			var reg = /(^[+-]?\d+)(\d{3})/;
+			while(reg.test(v_str))
+				v_str = v_str.replace(reg,'$1'+','+'$2');
+			
+			pobj.value = v_str;
+		}
+	}
+}
+
+function fncOnlyDate()
+{
+	var ekey = event.keyCode;
+	if(event.srcElement)if(event.srcElement.readOnly)if(ekey==8)event.returnValue=false;
+	if((ekey==190)||(ekey==8)||(ekey==46)||(ekey==37)||(ekey==38)||(ekey==39)||(ekey==40)||(ekey==9)||(ekey==36)||(ekey==35)||(ekey==189)){
+	}else if(96<=ekey && ekey<=105){
+	}else if((ekey<48)||(ekey>57)){
+		event.returnValue=false;
+	}
+}
+
+function fncThreeComma(p_val){
+	var v_str = replaceAll(p_val+"",",","");
+
+	if( trimString(v_str)=="" ){
+		return "";
+	}
+
+	if(isNaN(v_str)){
+		return v_str;
+	}else{
+		var reg = /(^[+-]?\d+)(\d{3})/;
+		while(reg.test(v_str))
+			v_str = v_str.replace(reg,"$1"+","+"$2");
+
+		return v_str;
+	}
+}
+
+function openWinC2(p_url,p_target,p_option,p_offset_left,p_offset_top)
+{
+	var v_arr ;
+	var vwidth = 400;
+	var vheight = 300;
+
+	if (p_option.indexOf("width=") > -1)
+	{
+		v_arr = p_option.split(",");
+		for (i = 0; i < v_arr.length; i++)
+		{
+			if (v_arr[i].indexOf("width=") > -1)
+			{
+				vwidth = v_arr[i].substring(v_arr[i].indexOf("=") +1, v_arr[i].length);
+				break;
+			}
+		}
+	}
+
+	if (p_option.indexOf("height=") > -1)
+	{
+		v_arr = p_option.split(",");
+		for (i = 0; i < v_arr.length; i++)
+		{
+			if (v_arr[i].indexOf("height=") > -1)
+			{
+				vheight = v_arr[i].substring(v_arr[i].indexOf("=") +1, v_arr[i].length);
+				break;
+			}
+		}
+	}
+
+	var winl = ((screen.width - vwidth) / 2) + p_offset_left;
+	var wint = ((screen.height - vheight) / 2) + p_offset_top;
+
+	window.open(p_url,p_target,p_option +",top="+ wint +",left="+ winl);
+
+	p_url = null;
+	p_option = null;
+	p_target = null;
+
+	return;
+}
+
+function openPop(str, name, w, h, scroll, offsetLeft, offsetTop) {
+	var scrWd = screen.width;
+	var scrHt = screen.height - 92;
+
+	var winl = ((scrWd - w) / 2) + (offsetLeft ? offsetLeft : 0);
+	var wint = ((scrHt - h) / 2) + (offsetTop ? offsetTop : 0);
+
+	var vwin = null;
+	vwin = window.open (str, name, "status=no,width="+w+",height="+h+",scrollbars="+scroll+""+",top="+ wint +",left="+ winl);
+	vwin.focus();
+}
+
+//?��?��?��?��?��?��?��?��?��?�� ?��?��몌옙?��?��?�� ?��?��?��?��?��?��?��?��곤옙?���? ?��?��몌옙 ?��?��몌옙?��?��?��?���? ?��?��?��?���? ?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��..
+function sbx_removeNotMe(selbox){
+	if(selbox){
+		if(selbox.options){
+			var p_selbox_len = selbox.options.length;
+			var p_cur_val = selbox.value;
+			for(var i=(p_selbox_len-1);i>=0;i--){
+				if(p_cur_val!=selbox.options[i].value)
+				selbox.options[i].outerHTML = "";
+			}
+		}
+	}
+}
+
+//onkeydown="fncOnlyNumber2();" onkeyup="fncOnlyNumber2()"
+function fncOnlyNumber2()
+{
+	var ekey = event.keyCode;
+	if((ekey==8)||(ekey==46)||(ekey==37)||(ekey==38)||(ekey==39)||(ekey==40)||(ekey==9)||(ekey==188)||(ekey==36)||(ekey==35)||(ekey==189)){
+	}else if(96<=ekey && ekey<=105){
+	}else if((ekey<48)||(ekey>57)){
+		event.returnValue=false;
+	}
+}
+
+//?��?��?��?��?��몌옙 ?��?��뤄옙, onkeydown="fncOnlyNumber();" onkeyup="fncOnlyNumber()"
+function fncOnlyNumber()
+{
+	var ekey = event.keyCode;
+	
+	if(event.srcElement)if(event.srcElement.readOnly)if(ekey==8)event.returnValue=false;
+	
+	if((ekey==190)||(ekey==8)||(ekey==46)||(ekey==37)||(ekey==38)||(ekey==39)||(ekey==40)||(ekey==9)||(ekey==36)||(ekey==35)||(ekey==189)){
+	}else if(96<=ekey && ekey<=105){
+	}else if((ekey<48)||(ekey>57)){
+		event.returnValue=false;
+	}
+}
+
+//p_params : "aaa=aa&bbbb=bbb"
+function addUrlParams(p_url,p_params){
+	var v_url = p_url.trim();
+	var v_params = fnNvl(p_params).trim();
+	
+	if(v_params!=""){
+		var v_params = v_params.split("&");
+		
+		for(var i=0;i<v_params.length;i++){
+			var v_par_item = v_params[i].trim().split("=");
+			var v_par_name = v_par_item[0].trim();
+			var v_par_val = v_par_item[1].trim();
+			
+			v_url = addUrlParam(v_url,v_par_name,v_par_val);
+		}
+	}
+	
+	return v_url;
+}
+
+//url?��?��?�� ?��?��?��?��?��?��?��?��?���? ?��?��곤옙?��?��?��..
+function addUrlParam(p_url,p_param_name,p_param_val){
+	if(fnNvl(p_param_name).trim()!="" && fnNvl(p_param_val).trim()!=""){
+		var v_url_prefix = (p_url.indexOf("?")!=-1) ? "&" : "?";
+		var v_params = (p_url.indexOf(p_param_name+"=")!=-1) ? "" : v_url_prefix+p_param_name+"="+p_param_val;
+		return p_url+v_params;
+	}else{
+		return p_url;
+	}
+}
+
+//=========================================================================
+// about cookie
+//=========================================================================
+var ExpDate = new Date();
+
+function getCookieVal (offset) {
+   var endstr = document.cookie.indexOf ("=", offset);
+   if (endstr == -1) endstr = document.cookie.length;
+   return unescape(document.cookie.substring(offset, endstr));
+}
+
+function GetCookie (name) {
+  var nameOfCookie = name + "=";
+    var x = 0;
+    while ( x <= document.cookie.length ){
+        var y = (x+nameOfCookie.length);
+        if ( document.cookie.substring( x, y ) == nameOfCookie ) {
+            if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 ) {
+                endOfCookie = document.cookie.length;
+            }
+            return unescape( document.cookie.substring( y, endOfCookie ) );
+        }
+        x = document.cookie.indexOf( " ", x ) + 1;
+        if ( x == 0 )
+        break;
+    }
+    return "";
+}
+
+function SetCookie (name, value) {
+   var argv = SetCookie.arguments;
+   var argc = SetCookie.arguments.length;
+   var expires = (2 < argc) ? argv[2] : null;
+   var path = (3 < argc) ? argv[3] : null;
+   var domain = (4 < argc) ? argv[4] : null;
+   var secure = (5 < argc) ? argv[5] : false;
+   document.cookie = name + "=" + escape (value) +
+   ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) +
+      ((path == null) ? "" : ("; path=" + path)) +
+      ((domain == null) ? "" : ("; domain=" + domain)) +
+      ((secure == true) ? "; secure" : "");
+}
+
+function SetCookieVal (name, value) {
+   pathname = location.pathname;
+   var myDomain = pathname.substring(0, pathname.lastIndexOf('/')) +'/';
+   ExpDate.setTime(ExpDate.getTime() + 1000*60*60*24);
+   SetCookie(name, value, ExpDate, myDomain);
+}
+
+//?��?��?��?��?��?��?��?��?��?��?��?��?��?�� : expDay, 1(1?��?��?��), 2(2?��?��?��), ...
+function SetCookieVal2 (name, value, expDay) {
+   pathname = location.pathname;
+   var myDomain = pathname.substring(0, pathname.lastIndexOf('/')) +'/';
+   ExpDate.setTime(ExpDate.getTime() + 1000*60*60*24*expDay);
+   SetCookie(name, value, ExpDate, myDomain);
+}
+
+//?��?��?��?��?��?��?��?��?��?��챨占�?(?��?��?��?��?��?��?��) : expSec, 1(1?��?��?��), 2(2?��?��?��), ...
+function SetCookieVal3 (name, value, expSec) {
+   pathname = location.pathname;
+   var myDomain = pathname.substring(0, pathname.lastIndexOf('/')) +'/';
+   ExpDate.setTime(ExpDate.getTime() + 1000*expSec);
+   SetCookie(name, value, ExpDate, myDomain);
+}
+//=========================================================================
+
+function fnIsNull2(pval){
+	if(pval==null || pval==undefined){
+		return true;
+	}else{
+		if(pval.trim()==""){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+
+function addopt(p_sel,p_val,p_txt){
+	if(p_sel){
+		$(p_sel).append("<option value=\""+p_val+"\">"+p_txt+"</option>");
+		var v_opt = $(p_sel).find("option").last();
+		return v_opt;
+	}else{
+		return null;
+	}
+}
+
+function remove_cur_selopt(p_obj){
+	if(p_obj){
+		var cur_sel_idx = p_obj.options.selectedIndex;
+		remove_selopt(p_obj, cur_sel_idx);
+	}
+}
+
+function remove_selopt(p_obj, p_idx){
+	if(p_obj){
+		if(p_obj.options){
+			var p_obj_len = p_obj.options.length;
+			if(p_obj_len > 0){
+				if(p_idx>-1){
+					p_obj.options.remove(p_idx);
+				}
+			}
+		}
+	}
+}
+
+function clear_select(p_obj){
+	if(p_obj){
+		if(p_obj.options){
+			var p_obj_len = p_obj.options.length;
+			for(var i=0;i<p_obj_len;i++){
+				p_obj.options.remove(0);
+			}
+		}
+	}
+}
+
+//p_selobj : select box ?��?��?���?, ?��?��?��?��?��?�� ?��?��?��?��?��?��?�� ?��?��몌옙체占?��?�� ?��?��?��?��
+function curopt(p_selobj){
+	if(p_selobj){
+		if(p_selobj.options){
+			var v_seled_idx = p_selobj.options.selectedIndex;
+			if(v_seled_idx>-1){
+				return p_selobj.options[p_selobj.options.selectedIndex];
+			}
+		}
+	}
+	return null;
+}
+
+function initForm(f){
+	if(f){
+		if(f.childNodes){
+			if(f.childNodes.length){
+				var childNodesCnt = f.childNodes.length;
+
+				for(var i=(childNodesCnt-1);i>=0;i--){
+					v_child = f.childNodes[i];
+					if(v_child.tagName.toLowerCase()=="input"){
+						f.removeChild(v_child);
+					}
+				}
+			}
+		}
+		f.target = "";
+		f.action = "";
+	}
+}
+
+//if(!nullChk(f.mem_name,"?��?��몌옙?��?��?�� ?��?��뤄옙?��?��?��?��?��?��?��?��?��?��.")) return;
+function nullChk(p_obj,p_msg){
+	if(p_obj){
+		if(trimString(p_obj.value)==""){
+			alert(p_msg);
+			try{p_obj.focus();}catch(e){}
+			return false;
+		}else{
+			return true;
+		}
+	}
+	return false;
+}
+
+//selchk(f.chk1,"1,3");
+function selchk(p_obj,p_val){
+	if(p_obj){
+		if(p_obj.length){
+			for(var i=0;i<p_obj.length;i++){
+				if( (p_val+",").indexOf(p_obj[i].value+",")!=-1 ){
+					p_obj[i].checked=true;
+				}
+			}
+		}else{
+			if( (p_val+",").indexOf(p_obj.value+",")!=-1 ){
+				p_obj.checked = true;
+			}
+		}
+	}
+}
+
+function selrdo(p_obj,p_val){
+	if(p_obj){
+		if(p_obj.length){
+			for(var i=0;i<p_obj.length;i++){
+				if( p_obj[i].value==p_val ){
+					p_obj[i].checked=true;
+					return;
+				}
+			}
+		}else{
+			if(p_obj.value==p_val){
+				p_obj.checked = true;
+			}
+		}
+	}
+}
+
+function getFileExt(p_filename){
+ if(p_filename){
+  if(p_filename.length > 0){
+   var lidx = p_filename.lastIndexOf(".");
+   var p_filename_len = p_filename.length;
+   
+   if(lidx > -1){
+    return p_filename.substring(lidx+1);
+   }
+  }
+ }
+ return "";
+}
+
+//p_allow_exts : ?��?��?��?��?��?��?���? ?��?��?��?��?��?��?��?��?��?��?�� , ?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��, ex)txt,hwp,doc,xls, ....
+//p_filename ?��?��?�� ?��?��?��?��?��?��곤옙 ?��?��?��?��?��?��?���? ?��?��?��?��?��?��?�� ?��?��?��?��?���? ?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?�� true, ?��?��?��?��?��?��?��?��?�� false 
+function checkFileExt(p_filename,p_allow_exts){
+ if(p_allow_exts){
+  var exts = p_allow_exts.toLowerCase().split(",");
+  var fext = getFileExt(p_filename).toLowerCase();
+  
+  if(fext && fext.length > 0){
+   for(var i=0;i<exts.length;i++){
+    var ext = exts[i].toLowerCase();
+    if(fext==ext){
+     return true;
+    }
+   }
+  }
+ }
+ 
+ return false;
+}
+
+function selobj(obj,pval) {
+	if(obj){
+		if(obj.options){
+			if(obj.options.length > 0){
+				obj.options[0].selected = true;
+			}
+
+			for(var i=0;i<obj.options.length;i++){
+				if(obj.options[i].value==pval){
+					obj.options[i].selected=true;
+					return;
+				}
+			}
+		}
+	}
+}
+
+function replaceAll(p_org,p_sch,p_rep){
+	if( p_org!=null &&  p_org!=undefined ){
+		return (p_org+"").split(p_sch).join(p_rep);
+	}
+	return "";
+}
+function trimString (obj) 
+{
+    if(obj){
+		obj = obj+'';
+		obj = obj.replace(/(^\s*)|(\s*$)/g,"");
+		return obj;
+	}else{
+		return "";
+	}
+}
+
+function strip_tags(input, allowed){
+	allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
+	
+	var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+	var commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+	
+	return (input+"").replace(commentsAndPhpTags, '')
+		.replace(tags, 
+			function ($0, $1) { 
+				return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+			}
+		);
+}
+
+
+function obj2str(data){
+	if(!data) return "";
+	
+	var result = [];
+	
+	if(data.length)result[result.length] = "[";
+	
+	//?��?��?��체占?��몌옙
+	if(typeof data=="object" && !data.length){
+		var itemArr = [];
+		var i=0;
+		
+		itemArr[itemArr.length] = "{";
+		
+		for(var key in data){
+			var val = eval("data."+key);
+			
+			if(val){
+				if(typeof val=="object"){
+					val = obj2str(val);
+				}else{
+					val = '"'+val+'"';
+				}
+				
+				if(i>0) itemArr[itemArr.length] = ',';
+				itemArr[itemArr.length] = '"'+key+'":';
+				itemArr[itemArr.length] = ''+val+'';
+			}else{
+				if(i>0) itemArr[itemArr.length] = ',';
+				itemArr[itemArr.length] = '"'+key+'":';
+				itemArr[itemArr.length] = '"'+(val==null || val==undefined ? "" : val)+'"';
+			}
+			
+			i++;
+		}
+		itemArr[itemArr.length] = "}";
+		
+		result[result.length] = itemArr.join("");
+	}else if(data.length){
+		for(var i=0,dataLen=data.length;i<dataLen;i++){
+			if(i>0)result[result.length] = ",";
+			result[result.length] = obj2str(data[i]);
+		}
+	}
+	
+	if(data.length)result[result.length] = "]";
+	return result.join("");
+}
+
+function chr(code){  
+    return String.fromCharCode(code);   
+}   
+  
+function asc(ch){   
+    return ch.charCodeAt(0);   
+}
+
+/**
+ * ?��?��?��?��?��뤄옙 ?��?��?��?��?���? ?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��몌옙 ?��?��?��?��?���占?��?��?��?��뤄옙 ?��?��?��?���? ?��?��?��?��?��?��?��
+ * @param arrGroup: ?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?��?�� ?��?��?��, ex) [arr1,arr2,arr3, ...]
+ */
+function arraySync(arrGroup){
+	if(arrGroup){
+		
+		//?��?��?��?��?��?��?��見占�? ?��?��?��?��?��?��
+		var maxLength = 0;
+		for(var i=0;i<arrGroup.length;i++){
+			var arr1 = arrGroup[i];
+			maxLength = Math.max(arr1.length, maxLength);
+		}
+		
+		//?��?��?��?���? ?��?��?�� ?��?��?��?��?��몌옙 ?��?��?��?��?��?��?��?��?���? ?��?��?��?��?��?��?��
+		for(var i=0;i<arrGroup.length;i++){
+			var arr1 = arrGroup[i];
+			for(var j=0;j<maxLength;j++){
+				arr1[j] = arr1[j] ? arr1[j] : "";
+			}
+		}
+	}
+}
+
+function applySpecialChar(pstr){
+	pstr = pstr ? pstr : "";
+	pstr = pstr.replaceAll("\\n",chr(10));
+	pstr = pstr.replaceAll("\\r",chr(13));
+	pstr = pstr.replaceAll("\\t",chr(9));
+	return pstr;
+}
+
+function getBrowserName(){
+	var agt = navigator.userAgent.toLowerCase();
+	if (agt.indexOf("chrome") != -1) return 'Chrome'; 
+	if (agt.indexOf("opera") != -1) return 'Opera'; 
+	if (agt.indexOf("staroffice") != -1) return 'Star Office'; 
+	if (agt.indexOf("webtv") != -1) return 'WebTV'; 
+	if (agt.indexOf("beonex") != -1) return 'Beonex'; 
+	if (agt.indexOf("chimera") != -1) return 'Chimera'; 
+	if (agt.indexOf("netpositive") != -1) return 'NetPositive'; 
+	if (agt.indexOf("phoenix") != -1) return 'Phoenix'; 
+	if (agt.indexOf("firefox") != -1) return 'Firefox'; 
+	if (agt.indexOf("safari") != -1) return 'Safari'; 
+	if (agt.indexOf("skipstone") != -1) return 'SkipStone'; 
+	if (agt.indexOf("msie") != -1) return 'Internet Explorer'; 
+	if (agt.indexOf("netscape") != -1) return 'Netscape'; 
+	if (agt.indexOf("mozilla/5.0") != -1) return 'Mozilla'; 
+}
+
+function countWord(p_txt, p_word){
+	p_txt = p_txt ? p_txt : "";
+	p_word = p_word ? p_word : "";
+	
+	if (p_txt=="") return 0;
+	if (p_word=="") return 0;
+
+	var p_word_len = p_word.length;
+	var word_cnt = 0;
+
+	for(var i=0;i<p_txt.length;i++){
+		if (p_txt.substring(i,i+p_word_len)==p_word)
+		{
+			word_cnt++;
+			i += p_word_len;
+		}
+	}
+
+	return word_cnt;
+}
+
+function refreshThisPage(pos){
+	var curl = document.location.href;
+	var v_pos = "";
+	var v_pos_old = "";
+	
+	if(curl.indexOf("dummy=")!=-1){
+  curl = curl.substring(0,curl.indexOf("dummy=")-1);
+	}
+	
+	var posIdx = curl.indexOf("#");
+	if(posIdx!=-1){
+  v_pos_old = curl.substring(posIdx);
+  curl = curl.substring(0,posIdx-1);
+	}
+	
+	if(pos){
+  v_pos = "#"+pos;
+	}else if(v_pos_old){
+  v_pos = "#"+v_pos_old;
+	}
+	
+	if(curl.indexOf("?")!=-1){
+  document.location.href = curl + "&dummy="+fnGetNow("yyyymmddhhmissms")+v_pos;
+	}else{
+  document.location.href = curl + "?dummy="+fnGetNow("yyyymmddhhmissms")+v_pos;
+	}
+}
+
+//?��?��민뱄?��?�� ?��?��?��?��?��몌옙 ?��?��?��?��?�� ?��?��?��?��?��?�� ?��?��?��?��?��?��求占�? ?��?��?��?��
+function getUserAge (jumin1)
+{
+	var age=0;
+	var jcode=jumin1;
+	
+ if (jcode.length==6) {
+    var yy=jcode.substr(0,2);     //?��?��?��?��?��?��
+    var mm=jcode.substr(2,2);    //?��?��?��?��?��?��
+    var dd=jcode.substr(4,2);     //?��?��?��?��?��?��
+
+    //?��?��?��?��?��?�� ?��?��?��?���?(80?��?��?�� ?��?��?��?��?��?��?��?��?��?��?��?�� ?��?��?��?��?��?��?��?���?뤄옙 첫占?��곤옙 0~2?��?��?�� ?��?��?��몌옙 1900?��?��?��?���?/ ?��?��?��몌옙 2000?��?��?��?���?)
+    today=new Date();
+    var i=jcode.substr(0,1);
+    cc=(i>2) ? '19':'20';
+    var birthyear=cc+yy;
+    var m=today.getMonth()+8;
+    var d=today.getDate();
+	  var age= parseInt(today.getFullYear())- parseInt(birthyear) + 1;
+	
+ }
+ return age;
+}

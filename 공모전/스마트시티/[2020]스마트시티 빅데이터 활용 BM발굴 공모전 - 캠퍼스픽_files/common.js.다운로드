@@ -1,0 +1,576 @@
+var cp = {
+  el: {},
+  fn: {
+    analytics: {
+      logPageView: function (path) {
+        var pageTitle, pagePath, pageLocation;
+        if (path) {
+          pagePath = path.split('#')[0];
+          pageTitle = pagePath.split('?')[0];
+          pageLocation = location.origin + pagePath;
+        } else {
+          pageTitle = location.pathname;
+          pagePath = location.pathname + location.search;
+          pageLocation = location.origin + location.pathname + location.search;
+        }
+        if (window.AnalyticsWebInterface) { // Android
+          window.AnalyticsWebInterface.setCurrentScreen(pageTitle);
+        } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.firebase) { // iOS
+          window.webkit.messageHandlers.firebase.postMessage({
+            command: 'setCurrentScreen',
+            name: pageTitle
+          });
+        } else if (window.gtag) { // Web
+          window.gtag('event', 'page_view', {
+            page_title: pageTitle,
+            page_path: pagePath,
+            page_location: pageLocation
+          });
+        } else if (_appName === 'campuspick' && _osName === 'iOS' && /^[^12]/.test(_appVersion)) { // iOS 3.x
+          location.href = 'CampuspickWebview://setCurrentScreen?name=' + encodeURIComponent(pageTitle);
+        }
+      }
+    },
+    goLink: function (url, isExportable) {
+      var isInternalLink = (url[0] === '/');
+      if (isInternalLink) {
+        url = location.origin + url;
+      }
+      if (isExportable === undefined) {
+        isExportable = !isInternalLink;
+      }
+      if (typeof window.CampuspickWebview !== 'undefined') {
+        window.CampuspickWebview.open(url, isExportable);
+      } else {
+        if (isExportable) {
+          window.open(url, '_blank');
+        } else {
+          location.href = url;
+        }
+      }
+    },
+    goBack: function () {
+      if (typeof window.CampuspickWebview !== 'undefined') {
+        window.CampuspickWebview.close(false);
+      } else {
+        history.go(-1);
+      }
+    },
+    goBackAndRefresh: function () {
+      if (typeof window.CampuspickWebview !== 'undefined') {
+        window.CampuspickWebview.close(true);
+      } else {
+        history.go(-1);
+      }
+    },
+    getCommunityUrl: function (url) {
+      if (location.pathname === '/community' && location.search !== '') {
+        var params = {};
+        var a = location.search.substr(1).split('&');
+        _.each(a, function (i) {
+          var b = i.split('=');
+          if (b.length === 2) {
+            params[b[0]] = b[1];
+          }
+        });
+        if (params.id) {
+          url = '/community?id=' + params.id + '&url=' + encodeURIComponent(url);
+        }
+      }
+      return url;
+    },
+    getDday: function (endDate) {
+      var endYear = new Date(endDate).getFullYear();
+      var endMonth = new Date(endDate).getMonth();
+      var endDay = new Date(endDate).getDate();
+      var count = Math.floor((new Date().getTime() - new Date(endYear, endMonth, endDay, 0, 0, 0).getTime()) / 86400000) * -1;
+      var value;
+      if (count > 0) {
+        value = 'D-' + count.toString();
+      } else if (count === 0) {
+        value = 'D-DAY';
+      } else {
+        value = '마감';
+      }
+      return {
+        count: count,
+        value: value
+      };
+    },
+    getPageCache: function (location) {
+      if (typeof Storage === 'undefined' || $('body').hasClass('app')) {
+        return null;
+      }
+      try {
+        var key = 'page_' + location.pathname + location.search;
+        var value = sessionStorage.getItem(key);
+        var data = JSON.parse(value);
+        return data;
+      } catch (e) {
+        return null;
+      }
+    },
+    setPageCache: function (location, data) {
+      if (typeof Storage === 'undefined' || $('body').hasClass('app')) {
+        return;
+      }
+      try {
+        var key = 'page_' + location.pathname + location.search;
+        var value = JSON.stringify(data);
+        sessionStorage.setItem(key, value);
+      } catch (e) {
+      }
+    },
+    formatNumber: function (text) {
+      return text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+    formatPrice: function (text) {
+      return text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원';
+    },
+    formatDate: function (text) {
+      var yearString = text.slice(0, 4);
+      var monthString = text.slice(5, 7);
+      var dayString = text.slice(8, 10);
+      var year = Number(yearString);
+      var month = Number(monthString);
+      var day = Number(dayString);
+      var nowYear = new Date().getFullYear();
+      var date = '';
+      if (year !== nowYear) {
+        date += year.toString() + '년 ';
+      }
+      date += month.toString() + '월 ' + day.toString() + '일';
+      var weekArray = ['일', '월', '화', '수', '목', '금', '토'];
+      date += '(' + weekArray[new Date(year, month - 1, day).getDay()] + ')';
+      return date;
+    },
+    formatArticleDate: function (text) {
+      var year = Number(text.slice(0, 4));
+      var nowYear = new Date().getFullYear();
+      var date = text.slice(5, 7) + '/' + text.slice(8, 10) + ' ' + text.slice(11, 16);
+      if (year !== nowYear) {
+        date = text.slice(2, 4) + '/' + date;
+      }
+      return date;
+    },
+    formatArticleShortDate: function (text) {
+      var yearString = text.slice(0, 4);
+      var monthString = text.slice(5, 7);
+      var dayString = text.slice(8, 10);
+      var year = Number(yearString);
+      var month = Number(monthString);
+      var day = Number(dayString);
+      var now = new Date();
+      var nowYear = now.getFullYear();
+      var nowMonth = now.getMonth() + 1;
+      var nowDay = now.getDate();
+      var date;
+      if (year === nowYear && month === nowMonth && day === nowDay) {
+        date = '오늘 ' + text.slice(11, 16);
+      } else if (year === nowYear) {
+        date = monthString + '/' + dayString;
+      } else {
+        date = text.slice(2, 4) + '/' + monthString + '/' + dayString;
+      }
+      return date;
+    },
+    formatRelativeDate: function (text) {
+      if (!text) {
+        return '';
+      }
+      var yearString = text.slice(0, 4);
+      var yearShortString = text.slice(2, 4);
+      var monthString = text.slice(5, 7);
+      var dayString = text.slice(8, 10);
+      var timeString = text.slice(11, 16);
+      var year = Number(yearString);
+      var month = Number(monthString);
+      var day = Number(dayString);
+      var hour = Number(timeString.slice(0, 2));
+      var minute = Number(timeString.slice(3, 5));
+      var second = Number(timeString.slice(6, 8));
+      var date;
+      var now = _diffTime ? new Date(new Date().getTime() - _diffTime) : new Date();
+      var target = new Date(year, month - 1, day, hour, minute, second);
+      var diff = (now.getTime() - target.getTime()) / 1000;
+      if (diff < 120) {
+        date = '방금';
+      } else if (diff < 3600) {
+        date = Math.floor(diff / 60) + '분 전';
+      } else {
+        date = monthString + '/' + dayString + ' ' + timeString;
+        if (now.getFullYear() !== target.getFullYear()) {
+          date = yearShortString + '/' + date;
+        }
+      }
+      return date;
+    },
+    formatLink: function (text, isNewWindow, referrerType, referrerId) {
+      var target = (isNewWindow === true) ? ' target="_blank"' : '';
+      var referrerUrl = location.origin + '/linkclick?referrer_type=' + referrerType + '&referrer_id=' + referrerId + '&url=';
+      return text.replace(/(https?:\/\/[a-zA-Z0-9:&#@=_~%;?/.,+-]+)/g, function (match) {
+        return '<a href="' + referrerUrl + encodeURIComponent(match) + '"' + target + ' rel="nofollow">' + match + '</a>';
+      });
+    },
+    pushHistoryState: function (url) {
+      if (typeof history.pushState !== 'undefined') {
+        history.pushState(null, null, url);
+        cp.fn.analytics.logPageView(url);
+      } else {
+        location.href = url;
+      }
+    },
+    replaceHistoryState: function (url) {
+      if (typeof history.replaceState !== 'undefined') {
+        history.replaceState(null, null, url);
+      } else {
+        location.href = url;
+      }
+    },
+    createBottomSheet: function (data) {
+      var $bottomsheet = $('<div></div>').attr('id', 'bottomsheet');
+      var $wrap = $('<div></div>').addClass('wrap').appendTo($bottomsheet);
+      var $ol = $('<ol></ol>').appendTo($wrap);
+      _.each(data, function (i) {
+        var $li = $('<li></li>').data({
+          id: i.id,
+          value: i.value
+        }).html(i.value).appendTo($ol);
+        if (i.isSelected) {
+          $li.addClass('active');
+        }
+      });
+      $bottomsheet.on('click', function (event) {
+        if (event.target !== event.currentTarget) {
+          return;
+        }
+        $bottomsheet.remove();
+      }).appendTo('body');
+      return $bottomsheet;
+    },
+    createDialog: function (title, $content) {
+      var $dialog = $('<div></div>').attr('id', 'dialog');
+      var $wrap = $('<div></div>').addClass('wrap').appendTo($dialog);
+      $('<h2></h2>').html(title).appendTo($wrap);
+      $content.appendTo($wrap);
+      var $buttons = $('<ol></ol>').addClass('buttons').appendTo($wrap);
+      $('<li></li>').addClass('cancel').text('취소').appendTo($buttons);
+      $('<li></li>').addClass('submit').text('확인').appendTo($buttons);
+      $dialog.on('click', function (event) {
+        if (event.target !== event.currentTarget) {
+          return;
+        }
+        $dialog.remove();
+      }).appendTo('body');
+      return $dialog;
+    },
+    createJpeg: function (base64data, callback) {
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+      var oc = document.createElement('canvas');
+      var octx = oc.getContext('2d');
+      var img = new Image();
+      img.onload = function () {
+        var drawWidth = img.width;
+        while (drawWidth > 1440) {
+          drawWidth = Math.floor(drawWidth / 2);
+        }
+        var drawHeight = drawWidth * (img.height / img.width);
+        canvas.width = drawWidth;
+        canvas.height = drawHeight;
+        if (drawWidth === img.width) {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        } else {
+          var curWidth = Math.floor(img.width * 0.5);
+          var curHeight = Math.floor(img.height * 0.5);
+          oc.width = curWidth;
+          oc.height = curHeight;
+          octx.drawImage(img, 0, 0, curWidth, curHeight);
+          while (curWidth * 0.5 > drawWidth) {
+            curWidth = Math.floor(curWidth * 0.5);
+            curHeight = Math.floor(curHeight * 0.5);
+            octx.drawImage(oc, 0, 0, curWidth * 2, curHeight * 2, 0, 0, curWidth, curHeight);
+          }
+          ctx.drawImage(oc, 0, 0, curWidth, curHeight, 0, 0, drawWidth, drawHeight);
+        }
+        callback(canvas.toDataURL('image/jpeg', 0.8));
+      };
+      img.src = base64data;
+    },
+    createJpegThumb: function (base64data, callback) {
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+      var oc = document.createElement('canvas');
+      var octx = oc.getContext('2d');
+      var img = new Image();
+      img.onload = function () {
+        var drawWidth = 480;
+        var drawHeight = drawWidth * (img.height / img.width);
+        if (drawWidth >= img.width) {
+          canvas.width = img.width;
+          canvas.height = (img.height > img.width * 1.5) ? (img.width * 1.5) : img.height;
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+        } else {
+          canvas.width = drawWidth;
+          canvas.height = (drawHeight > 684) ? 684 : drawHeight;
+          var curWidth = Math.floor(img.width * 0.5);
+          var curHeight = Math.floor(img.height * 0.5);
+          oc.width = curWidth;
+          oc.height = curHeight;
+          octx.drawImage(img, 0, 0, curWidth, curHeight);
+          while (curWidth * 0.5 > drawWidth) {
+            curWidth = Math.floor(curWidth * 0.5);
+            curHeight = Math.floor(curHeight * 0.5);
+            octx.drawImage(oc, 0, 0, curWidth * 2, curHeight * 2, 0, 0, curWidth, curHeight);
+          }
+          ctx.drawImage(oc, 0, 0, curWidth, curHeight, 0, 0, drawWidth, drawHeight);
+        }
+        callback(canvas.toDataURL('image/jpeg', 0.8));
+      };
+      img.src = base64data;
+    },
+    createLoading: function (text) {
+      var $loading = $('<div></div>').attr('id', 'loading');
+      var $wrap = $('<div></div>').addClass('wrap').appendTo($loading);
+      $('<img>').attr('src', '/images/community.loading.svg').appendTo($wrap);
+      $('<p></p>').text(text).appendTo($wrap);
+      $loading.appendTo('body');
+      return $loading;
+    },
+    appendFullPopup: function (title, text) {
+      title = title.replace(/(캠퍼스픽)/g, '<strong>$1</strong>');
+      var $full = $('<div></div>').attr('id', 'fullpopup');
+      var $box = $('<div></div>').addClass('box').appendTo($full);
+      $('<img>').addClass('logo').attr('src', '/images/fullpopup.logo.png').appendTo($box);
+      $('<p></p>').addClass('title').html(title).appendTo($box);
+      $('<p></p>').addClass('text').html(text).appendTo($box);
+      $('<hr>').appendTo($box);
+      $('<a></a>').addClass('button').attr('href', '/download?lid=web_fullpopup').text('앱에서 보기').appendTo($box);
+      $('<a></a>').addClass('skip').text('모바일 웹으로 보기').on('click', function () {
+        $('html, body').css({
+          height: 'auto',
+          overflow: 'auto'
+        });
+        $full.remove();
+      }).appendTo($full);
+      $full.appendTo('body');
+      $('html, body').css({
+        height: '100%',
+        overflow: 'hidden'
+      });
+    },
+  },
+  data: {
+    activityTargetNames: [
+      {id: 1, value: '공모전'},
+      {id: 2, value: '대외활동'}
+    ],
+    activityCategoryNames: [
+      {id: 101, value: '기획/아이디어'},
+      {id: 102, value: '브랜드/네이밍'},
+      {id: 103, value: '광고/마케팅'},
+      {id: 104, value: '사진/영상/UCC'},
+      {id: 105, value: '디자인'},
+      {id: 106, value: '예체능'},
+      {id: 107, value: '문학/수기/시나리오'},
+      {id: 108, value: 'IT/소프트웨어/게임'},
+      {id: 109, value: '기타'},
+      {id: 201, value: '국내봉사'},
+      {id: 202, value: '해외봉사/탐방'},
+      {id: 203, value: '서포터즈'},
+      {id: 204, value: '기자단'},
+      {id: 205, value: '마케터'},
+      {id: 206, value: '강연/행사'},
+      {id: 207, value: '기타'}
+    ],
+    activityCompanyTypes: [
+      {id: 1, value: '중앙정부/기관'},
+      {id: 2, value: '지자체/기관'},
+      {id: 3, value: '학교/재단/협회'},
+      {id: 4, value: '비영리단체'},
+      {id: 5, value: '공기업'},
+      {id: 6, value: '일반기업'},
+      {id: 7, value: '신문/방송/언론'},
+      {id: 8, value: '기타'}
+    ],
+    activityPrizeTotals: [
+      {id: 0, value: '없음'},
+      {id: 1, value: '5천만원이상'},
+      {id: 2, value: '5천만원~3천만원'},
+      {id: 3, value: '3천만원~1천만원'},
+      {id: 4, value: '1천만원이하'}
+    ],
+    activityPrizeBenefits: [
+      {id: 0, value: '입사가산점'},
+      {id: 1, value: '인턴채용'},
+      {id: 2, value: '정규직채용'},
+      {id: 3, value: '해외연수'},
+      {id: 4, value: '작품전시'},
+      {id: 5, value: '기타'}
+    ],
+    clubCategoryNames: [
+      {id: 1, value: '문화/예술/공연'},
+      {id: 2, value: '봉사/사회활동'},
+      {id: 3, value: '학술/교양'},
+      {id: 4, value: '창업/취업'},
+      {id: 5, value: '어학'},
+      {id: 6, value: '체육'},
+      {id: 7, value: '친목'},
+      {id: 8, value: '기타'}
+    ],
+    clubLocalNames: [
+      {id: 99, value: '전국'},
+      {id: 1, value: '수도권'},
+      {id: 3, value: '충북/충남/대전'},
+      {id: 4, value: '전북'},
+      {id: 5, value: '전남/광주'},
+      {id: 6, value: '경북/대구'},
+      {id: 7, value: '경남/부산/울산'},
+      {id: 8, value: '강원'},
+      {id: 9, value: '제주'},
+      {id: 10, value: '기타'}
+    ],
+    clubSizes: [
+      {id: 1, value: '10명 미만'},
+      {id: 2, value: '10~30명'},
+      {id: 3, value: '30~50명'},
+      {id: 4, value: '50명 이상'}
+    ],
+    cultureCategoryNames: [
+      {id: 1, value: '영화'},
+      {id: 2, value: '공연'},
+      {id: 3, value: '전시'},
+      {id: 4, value: '할인'},
+      {id: 5, value: '기타'}
+    ],
+    jobCareers: [
+      {id: 1, value: '신입'},
+      {id: 2, value: '경력'}
+    ],
+    jobEducations: [
+      {id: 0, value: '학력 무관'},
+      {id: 1, value: '2·3년제 졸업 이상'},
+      {id: 2, value: '4년제 졸업 이상'},
+      {id: 3, value: '석사 졸업 이상'},
+      {id: 4, value: '박사 졸업 이상'}
+    ],
+    jobRegions: [
+      {id: 1, value: '서울'},
+      {id: 2, value: '경기'},
+      {id: 3, value: '광주'},
+      {id: 4, value: '대구'},
+      {id: 5, value: '대전'},
+      {id: 6, value: '부산'},
+      {id: 7, value: '세종'},
+      {id: 8, value: '울산'},
+      {id: 9, value: '인천'},
+      {id: 10, value: '강원'},
+      {id: 11, value: '경남'},
+      {id: 12, value: '경북'},
+      {id: 13, value: '전남'},
+      {id: 14, value: '전북'},
+      {id: 15, value: '충남'},
+      {id: 16, value: '충북'},
+      {id: 17, value: '제주'},
+      {id: 18, value: '해외'},
+      {id: 0, value: '기타'}
+    ],
+    jobTypes: [
+      {id: 1, value: '영업·영업관리'},
+      {id: 2, value: '전략·기획'},
+      {id: 3, value: '마케팅·광고·홍보'},
+      {id: 4, value: '회계·재무'},
+      {id: 5, value: '인사·노무'},
+      {id: 6, value: '유통·물류'},
+      {id: 7, value: 'IT·SW'},
+      {id: 8, value: '연구개발·설계'},
+      {id: 9, value: '생산·생산관리'},
+      {id: 10, value: '건축·인테리어'},
+      {id: 11, value: '토목·환경'},
+      {id: 12, value: '의료·보건'},
+      {id: 13, value: '교육'},
+      {id: 14, value: '미디어'},
+      {id: 15, value: '디자인'},
+      {id: 0, value: '기타'}
+    ],
+    jobWorkTypes: [
+      {id: 1, value: '정규직'},
+      {id: 2, value: '계약직'},
+      {id: 3, value: '전환형 인턴'},
+      {id: 4, value: '체험형 인턴'},
+      {id: 0, value: '기타'}
+    ],
+    studyCategoryNames: [
+      {id: 1, value: '어학'},
+      {id: 2, value: '취업'},
+      {id: 3, value: '고시/공무원'},
+      {id: 4, value: '취미/교양'},
+      {id: 5, value: '프로그래밍'},
+      {id: 6, value: '자율'},
+      {id: 7, value: '기타'}
+    ],
+    studyLocalNames: [
+      {id: 100, value: '서울'},
+      {id: 201, value: '수원'},
+      {id: 202, value: '인천'},
+      {id: 301, value: '대구'},
+      {id: 302, value: '부산'},
+      {id: 303, value: '울산'},
+      {id: 401, value: '광주'},
+      {id: 402, value: '전주'},
+      {id: 501, value: '대전'},
+      {id: 502, value: '세종'},
+      {id: 503, value: '천안'},
+      {id: 504, value: '청주'},
+      {id: 601, value: '원주'},
+      {id: 602, value: '춘천'},
+      {id: 700, value: '제주'},
+      {id: 0, value: '기타'}
+    ]
+  }
+};
+
+$().ready(function () {
+  setTimeout(function () {
+    $(window).on('popstate', function () {
+      cp.fn.analytics.logPageView();
+    });
+  }, 0);
+  $('#container').find('a[data-community-url]').each(function () {
+    $(this).attr('href', cp.fn.getCommunityUrl($(this).data('community-url')));
+  });
+  $('#container').on('click', 'a[href]', function (event) {
+    event.stopPropagation();
+    if (typeof window.CampuspickWebview !== 'undefined') {
+      event.preventDefault();
+      var url = $(this).attr('href');
+      cp.fn.goLink(url);
+    }
+  });
+  if ($('#container').is(':has(input[type="date"])')) {
+    var $dateInput = $('#container input[type="date"]');
+    if ($dateInput.attr('type') !== $dateInput[0].type) {
+      var placeholder = '예) ' + new Date().getFullYear().toString() + '-03-30';
+      $dateInput.attr({
+        placeholder: placeholder,
+        maxlength: 10
+      });
+      $dateInput.on('change', function (e) {
+        var value = $(this).val();
+        if (!value) {
+          return;
+        }
+        if (!new RegExp('^2([0-9]{3})-([0-1]{1})([0-9]{1})-([0-3]{1})([0-9]{1})$').test(value)) {
+          alert('날짜 형식에 맞게 입력해주세요.\n예) 2017-03-30');
+        }
+      });
+    }
+  }
+  if (typeof Storage !== 'undefined' && !$('body').hasClass('app')) {
+    var currentpageCache = sessionStorage.getItem('currentpage');
+    if (currentpageCache) {
+      sessionStorage.setItem('previouspage', currentpageCache);
+    }
+    sessionStorage.setItem('currentpage', location.pathname + location.search);
+  }
+});

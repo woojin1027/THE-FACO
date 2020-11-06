@@ -1,0 +1,768 @@
+$(function(){
+	$('.date-pick').datepicker({
+		 dateFormat : "yymmdd"
+		,showMonthAfterYear : true
+		,changeMonth: true // True if month can be selected directly, false if only prev/next
+		,changeYear: true // True if year can be selected directly, false if only prev/next
+		,dayNamesMin : ['월', '화', '수', '목', '금', '토', '일']
+		,monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		,monthNamesShort : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		,yearRange: "c-90:c"
+		//,defaultDate: new Date(1980, 00, 01)
+	});
+	//숫자만 입력
+	 $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
+	
+	if($('#email2').val() == ""){
+		$('#email2').attr('readonly', false);
+	}
+	
+	$('#session').change(function(){
+		 if($('#session option:selected').val() == "Oral"){
+			 $("#cpitrack1").show();
+			 //$("#cpitrack2").hide();
+			 $("#cpitrack3").prop("checked", true);
+		 }else{
+			 $("#cpitrack1").hide();
+			 $("#cpitrack2").show();
+			 $("#cpitrack4").prop("checked", true);
+			 
+		 }
+    });
+	
+	 insert_submit = function(f, type) {
+		 
+		var form = $(f);
+		
+		var name =  $('#name').val().trim();
+		if (typeof(name) == 'undefined' || name == '') {
+			$('#name').focus();
+			alert('이름을 입력하십시오.');
+			return false;
+		}
+		
+		if(type == "guest"){
+			var passwd =  $('#passwd').val().trim();
+			if (passwd == '') {
+				$('#passwd').focus();
+				alert('비밀번호를 입력하십시오.');
+				return false;
+			}else{
+				if(passwd.length < 4){
+					$('#passwd').focus();
+					alert('비밀번호를 4자리이상 입력하십시오.');
+					return false;
+				}
+			}
+		}
+		
+		var years =  $('#years').val().trim();
+		if (typeof(years) == 'undefined' || years == '') {
+			$('#years').focus();
+			alert('생년월일을 선택하십시오.');
+			return false;
+		}
+		
+		var company =  $('#company').val().trim();
+		if (typeof(company) == 'undefined' || company == '') {
+			$('#company').focus();
+			alert('회사(학교)명을 입력하십시오.');
+			return false;
+		}
+		
+		var department =  $('#department').val().trim();
+		if (typeof(department) == 'undefined' || department == '') {
+			$('#department').focus();
+			alert('부서(학과)명을 입력하십시오.');
+			return false;
+		}
+		
+		var position =  $('#position').val().trim();
+		if (typeof(position) == 'undefined' || position == '') {
+			$('#position').focus();
+			alert('직위(급)를 입력하십시오.');
+			return false;
+		}
+		
+		var email1 =  $('#email1').val().trim();
+		if (typeof(email1) == 'undefined' || email1 == '') {
+			$('#email1').focus();
+			alert('이메일을 입력하십시오.');
+			return false;
+		}
+		
+		var email2 =  $('#email2').val().trim();
+		var email3 =  $('#email3').val().trim();
+		
+		if (typeof(email3) == 'undefined' || email3 == '') {
+			if (typeof(email2) == 'undefined' || email2 == '') {
+				$('#email2').focus();
+				alert('이메일을 입력하십시오.');
+				return false;
+			}
+		}
+		
+		var phone1 =  $('#phone1').val();
+		var phone2 =  $('#phone2').val();
+		var phone3 =  $('#phone3').val();
+		
+		
+		
+		if ($('#phone1').length > 0) {
+			if(phone1 == ''){
+				$('#phone1').focus();
+				alert('전화번호를 입력하십시오.');
+				return false;
+			}
+			
+		}
+		if ($('#phone1').length > 0) {
+			if(phone2 == ''){
+				$('#phone2').focus();
+				alert('전화번호를 입력하십시오.');
+				return false;
+			}
+			
+		}
+		if ($('#phone1').length > 0) {
+			if(phone3 == ''){
+				$('#phone3').focus();
+				alert('전화번호를 입력하십시오.');
+				return false;	
+			}
+			
+		}
+		
+		var hand1 =  $('#hand1').val().trim();
+		var hand2 =  $('#hand2').val().trim();
+		var hand3 =  $('#hand3').val().trim();
+		
+		
+		if (typeof(hand1) == 'undefined' || hand1 == '') {
+			$('#hand1').focus();
+			alert('휴대전화를 입력하십시오.');
+			return false;
+		}
+		if (typeof(hand2) == 'undefined' || hand2 == '') {
+			$('#hand2').focus();
+			alert('휴대전화를 입력하십시오.');
+			return false;
+		}
+		if (typeof(hand3) == 'undefined' || hand3 == '') {
+			$('#hand3').focus();
+			alert('휴대전화를 입력하십시오.');
+			return false;
+		}
+		
+		/*var pa_useraddrno1 =  $('#pa_useraddrno1').val().trim();
+		if (typeof(pa_useraddrno1) == 'undefined' || pa_useraddrno1 == '') {
+			$('#pa_useraddrno1').focus();
+			alert('우편번호를 입력하십시오.');
+			return false;
+		}*/
+		
+		/*var pa_useraddrno2 =  $('#pa_useraddrno2').val().trim();
+		if (typeof(pa_useraddrno2) == 'undefined' || pa_useraddrno2 == '') {
+			$('#pa_useraddrno2').focus();
+			alert('우편번호를 입력하십시오.');
+			return false;
+		}*/
+		
+		var session = $('#session').val().trim();
+		if (typeof(session) == 'undefined' || session == '') {
+			$('#session').focus();
+			alert('세션을 선택하십시오.');
+			return false;
+		}
+		var field =  $('#field').val().trim();
+		if (typeof(field) == 'undefined' || field == '') {
+			$('#field').focus();
+			alert('분야를 선택하십시오.');
+			return false;
+		}
+		var receipt =  $('#receipt').val().trim();
+		if (typeof(receipt) == 'undefined' || receipt == '') {
+			$('#receipt').focus();
+			alert('접수논문을 선택하십시오.');
+			return false;
+		}
+		var paper_title =  $('#paper_title').val().trim();
+		if (typeof(paper_title) == 'undefined' || paper_title == '') {
+			$('#paper_title').focus();
+			alert('논문제목을하십시오.');
+			return false;
+		}
+		/*
+		var summation =  $('#summation').val().trim();
+		if (typeof(summation) == 'undefined' || summation == '') {
+			$('#summation').focus();
+			alert('요약을 입력하십시오.');
+			return false;
+		}
+		*/
+		
+		if(type != "update"){
+			var file =  $('#file').val().trim();
+			if (typeof(file) == 'undefined' || file == '') {
+				$('#file').focus();
+				alert('첨부파일을 입력하십시오.');
+				return false;
+			}
+		}
+		
+		if(confirm("참가신청을 하시겠습니까?")){
+			return true;
+		}else{
+			return false;
+		}
+		
+	};
+	insert_pa_submit = function(f) {
+		var form = $(f);
+		var fee = $('#fee').val().trim();
+		if (typeof(fee) == 'undefined' || fee == '') {
+			$('#fee').focus();
+			alert('결제비를 선택하십시오.');
+			return false;
+		}
+		var payments =  $('#payments').val().trim();
+		if (typeof(payments) == 'undefined' || payments == '') {
+			$('#payments').focus();
+			alert('결제방법을 선택하십시오.');
+			return false;
+		}
+		var name =  $('#name').val().trim();
+		if (typeof(name) == 'undefined' || name == '') {
+			$('#name').focus();
+			alert('이름을 입력하십시오.');
+			return false;
+		}
+		var phone1 =  $('#phone1').val().trim();
+		if (typeof(phone1) == 'undefined' || phone1 == '') {
+			$('#phone1').focus();
+			alert('전화번호를 입력하십시오.');
+			return false;
+		}
+		var phone2 =  $('#phone2').val().trim();
+		if (typeof(phone2) == 'undefined' || phone2 == '') {
+			$('#phone2').focus();
+			alert('전화번호를 입력하십시오.');
+			return false;
+		}
+		var phone3 =  $('#phone3').val().trim();
+		if (typeof(phone3) == 'undefined' || phone3 == '') {
+			$('#phone3').focus();
+			alert('전화번호를 입력하십시오.');
+			return false;
+		}
+		var email1 =  $('#email1').val().trim();
+		if (typeof(email1) == 'undefined' || email1 == '') {
+			$('#email1').focus();
+			alert('이메일을 입력하십시오.');
+			return false;
+		}
+		var email2 =  $('#email2').val().trim();
+		if (typeof(email2) == 'undefined' || email2 == '') {
+			$('#email2').focus();
+			alert('이메일을 입력하십시오.');
+			return false;
+		}
+		return true;
+		
+	};
+	
+	
+	insert_ap_submit = function(f) {
+		var form = $(f);
+		
+		if($('#paper_title').length > 0){
+			var paper_title =  $('#paper_title').val().trim();	
+			if (typeof(paper_title) == 'undefined' || paper_title == '') {
+				$('#paper_title').focus();
+				alert('논문제목을하십시오.');
+				return false;
+			}
+		}
+		
+		/*
+		var file =  $('#file').val().trim();
+		if (typeof(file) == 'undefined' || file == '') {
+			$('#file').focus();
+			alert('첨부파일을 입력하십시오.');
+			return false;
+		}*/
+		
+		var cptorgfilename =  $('#cptorgfilename').val();
+		if (typeof(cptorgfilename) == 'undefined' || cptorgfilename == '') {
+			$('#cptorgfilename').focus();
+			alert('첨부파일을 입력하십시오.');
+			return false;
+		}
+		return true;
+		
+	};	
+	
+	
+});
+function insert_mo_submit (f) {
+	var form = $(f);
+	
+	var name =  $('#name').val().trim();
+	if (typeof(name) == 'undefined' || name == '') {
+		$('#name').focus();
+		alert('이름을 입력하십시오.');
+		return false;
+	}
+	var years =  $('#years').val().trim();
+	if (typeof(years) == 'undefined' || years == '') {
+		$('#years').focus();
+		alert('생년월일을 선택하십시오.');
+		return false;
+	}
+	
+	var company =  $('#company').val().trim();
+	if (typeof(company) == 'undefined' || company == '') {
+		$('#company').focus();
+		alert('회사(학교)명을 입력하십시오.');
+		return false;
+	}
+	
+	var department =  $('#department').val().trim();
+	if (typeof(department) == 'undefined' || department == '') {
+		$('#department').focus();
+		alert('부서(학과)명을 입력하십시오.');
+		return false;
+	}
+	
+	var position =  $('#position').val().trim();
+	if (typeof(position) == 'undefined' || position == '') {
+		$('#position').focus();
+		alert('직위(급)를 입력하십시오.');
+		return false;
+	}
+	
+	var email1 =  $('#email1').val().trim();
+	if (typeof(email1) == 'undefined' || email1 == '') {
+		$('#email1').focus();
+		alert('이메일을 입력하십시오.');
+		return false;
+	}
+	
+	var email2 =  $('#email2').val().trim();
+	var email3 =  $('#email3').val().trim();
+	
+	if (typeof(email3) == 'undefined' || email3 == '') {
+		if (typeof(email2) == 'undefined' || email2 == '') {
+			$('#email2').focus();
+			alert('이메일을 입력하십시오.');
+			return false;
+		}
+	}
+	
+	var phone1 =  $('#phone1').val().trim();
+	var phone2 =  $('#phone2').val().trim();
+	var phone3 =  $('#phone3').val().trim();
+	if (typeof(phone1) == 'undefined' || phone1 == '') {
+		$('#phone1').focus();
+		alert('전화번호를 입력하십시오.');
+		return false;
+	}
+	if (typeof(phone2) == 'undefined' || phone2 == '') {
+		$('#phone2').focus();
+		alert('전화번호를 입력하십시오.');
+		return false;
+	}
+	if (typeof(phone3) == 'undefined' || phone3 == '') {
+		$('#phone3').focus();
+		alert('전화번호를 입력하십시오.');
+		return false;
+	}
+	
+	var hand1 =  $('#hand1').val().trim();
+	var hand2 =  $('#hand2').val().trim();
+	var hand3 =  $('#hand3').val().trim();
+	if (typeof(hand1) == 'undefined' || hand1 == '') {
+		$('#hand1').focus();
+		alert('휴대전화를 입력하십시오.');
+		return false;
+	}
+	if (typeof(hand2) == 'undefined' || hand2 == '') {
+		$('#hand2').focus();
+		alert('휴대전화를 입력하십시오.');
+		return false;
+	}
+	if (typeof(hand3) == 'undefined' || hand3 == '') {
+		$('#hand3').focus();
+		alert('휴대전화를 입력하십시오.');
+		return false;
+	}
+	
+	var session = $('#session').val().trim();
+	if (typeof(session) == 'undefined' || session == '') {
+		$('#session').focus();
+		alert('세션을 선택하십시오.');
+		return false;
+	}
+	var field =  $('#field').val().trim();
+	if (typeof(field) == 'undefined' || field == '') {
+		$('#field').focus();
+		alert('분야를 선택하십시오.');
+		return false;
+	}
+	var recipies ='';
+	var checked_i = 0;
+	for(var i =1; i<=13; i++){
+		if($('input[name=receipt'+i+']').is(":checked") == true){
+			checked_i++;
+			var lab = $('input[name=receipt'+i+']').attr('id');
+			var title = $('label[for='+lab+']').text();
+			recipies += title +',';
+		}
+	}
+	if(checked_i != 3){
+		alert('전공선택은 3개를 선택하셔야합니다.')
+		return false;
+	}
+	
+	
+	$('#receipt').val(recipies);
+	
+	if(confirm("좌장 및 토론신청을 하시겠습니까?")){
+		return true;
+	}else{
+		return false;
+	}
+		
+}
+//사전 참가자 insert- 후 결제로 넘김
+function insert_pa_submit_ajax(form,type,idx){
+	
+	var name =  $('#name').val();
+	if (typeof(name) == 'undefined' || name == '') {
+		$('#name').focus();
+		alert('이름을 입력하십시오.');
+		return false;
+	}
+	
+	var years =  $('#years').val();
+	if (typeof(years) == 'undefined' || years == '') {
+		$('#years').focus();
+		alert('생년월일을 선택하십시오.');
+		return false;
+	}
+	
+	
+	var company =  $('#company').val();
+	if (typeof(company) == 'undefined' || company == '') {
+		$('#company').focus();
+		alert('회사(학교)명을 입력하십시오.');
+		return false;
+	}
+	
+	var department =  $('#department').val();
+	if (typeof(department) == 'undefined' || department == '') {
+		$('#department').focus();
+		alert('부서(학과)명을 입력하십시오.');
+		return false;
+	}
+	
+	var position =  $('#position').val();
+	if (typeof(position) == 'undefined' || position == '') {
+		$('#position').focus();
+		alert('직위(급)를 입력하십시오.');
+		return false;
+	}
+	
+	var email1 =  $('#email1').val();
+	if (typeof(email1) == 'undefined' || email1 == '') {
+		$('#email1').focus();
+		alert('이메일을 입력하십시오.');
+		return false;
+	}
+	
+	var email2 =  $('#email2').val();
+	var email3 =  $('#email3').val();
+	
+	if (typeof(email3) == 'undefined' || email3 == '') {
+		if (typeof(email2) == 'undefined' || email2 == '') {
+			$('#email2').focus();
+			alert('이메일을 입력하십시오.');
+			return false;
+		}
+	}
+	
+	var phone1 =  $('#phone1').val();
+	var phone2 =  $('#phone2').val();
+	var phone3 =  $('#phone3').val();
+	
+	if($('#phone1').length > 0){
+		if (typeof(phone1) == 'undefined' || phone1 == '') {
+			$('#phone1').focus();
+			alert('전화번호를 입력하십시오.');
+			return false;
+		}
+	}
+	if($('#phone2').length > 0){
+		if (typeof(phone2) == 'undefined' || phone2 == '') {
+			$('#phone2').focus();
+			alert('전화번호를 입력하십시오.');
+			return false;
+		}
+	}
+	
+	if($('#phone3').length > 0){
+		if (typeof(phone3) == 'undefined' || phone3 == '') {
+			$('#phone3').focus();
+			alert('전화번호를 입력하십시오.');
+			return false;
+		}
+	}
+	
+	
+	var hand1 =  $('#hand1').val();
+	var hand2 =  $('#hand2').val();
+	var hand3 =  $('#hand3').val();
+	if (typeof(hand1) == 'undefined' || hand1 == '') {
+		$('#hand1').focus();
+		alert('휴대전화를 입력하십시오.');
+		return false;
+	}
+	if (typeof(hand2) == 'undefined' || hand2 == '') {
+		$('#hand2').focus();
+		alert('휴대전화를 입력하십시오.');
+		return false;
+	}
+	if (typeof(hand3) == 'undefined' || hand3 == '') {
+		$('#hand3').focus();
+		alert('휴대전화를 입력하십시오.');
+		return false;
+	}
+	
+	if($('#pa_useraddrno1').length > 0){
+		var pa_useraddrno1 =  $('#pa_useraddrno1').val();
+		if (typeof(pa_useraddrno1) == 'undefined' || pa_useraddrno1 == '') {
+			$('#pa_useraddrno1').focus();
+			alert('우편번호를 입력하십시오.');
+			return false;
+		}
+	}
+	
+	
+	/*var pa_useraddrno2 =  $('#pa_useraddrno2').val();
+	if (typeof(pa_useraddrno2) == 'undefined' || pa_useraddrno2 == '') {
+		$('#pa_useraddrno2').focus();
+		alert('우편번호를 입력하십시오.');
+		return false;
+	}*/
+	
+	if($("#title").length>0){
+		if($("input[name=app]:checked").val() == "Y"){
+			var title =  $('#title').val();
+			if (typeof(title) == 'undefined' || title == '') {
+				$('#title').focus();
+				alert('논문제목을 입력하십시오.');
+				return false;
+			}
+		}
+	}
+	
+
+	if($("#humantype").length>0){
+		
+		var fee = 0;
+		var feenm = "";
+		
+		if($("input[name=humantype]:checked").val() == "G"){
+			
+			var cheCnt = $("input[name=enfee1]:checkbox:checked").length;
+		    if(cheCnt < 1){
+		         alert('결제금액을 한 개 이상을 선택하셔야 합니다');
+		         return false;
+		    }
+			
+			var cnt = $("input[name=enfee1]").length;
+			
+			for (var i = 1; i <= cnt; i++) {
+				if($('#enfee'+i).is(':checked')){
+					fee += Number($('#enfee'+i).val());
+					feenm += $('#enfeenm'+i).val();
+					
+					if(i != cnt){
+						feenm += ",";
+					}
+				}
+			}	
+			
+		}else{
+			
+			var cheCnt = $("input[name=enfee2]:checkbox:checked").length;
+		    if(cheCnt < 1){
+		         alert('결제금액을 한 개 이상을 선택하셔야 합니다');
+		         return false;
+		    }
+			
+			var cnt = $("input[name=enfee2]").length;
+			
+			for (var i = 5; i <= (cnt+4); i++) {
+				if($('#enfee'+i).is(':checked')){
+					
+					fee += Number($('#enfee'+i).val());
+					feenm += $('#enfeenm'+i).val();
+					
+					if(i != cnt){
+						feenm += ",";
+					}
+				}
+			}	
+		}
+		
+		$("#fee").val(fee);
+		$("#enfeenm").val(feenm);
+		
+	}
+	
+	var fee = $('#fee').val();
+	if (typeof(fee) == 'undefined' || fee == '') {
+		$('#fee').focus();
+		alert('참가비를 선택하십시오.');
+		return false;
+	}
+	/*var payments =  $('#payments').val();
+	if (typeof(payments) == 'undefined' || payments == '') {
+		$('#payments').focus();
+		alert('결제방법을 선택하십시오.');
+		return false;
+	}*/
+	
+	var con_text = "사전 등록 하시겠습니까?";
+	if(idx==428 || idx==448) con_text = "당일 등록 하시겠습니까?";
+	
+	if(type == "isup") con_text = "Do you want to pre-register?";
+	if(confirm(con_text)){
+		$.ajax({
+			type: "POST",
+			url: "/conference/pre_registration_insert.html",
+			data: $(form).serialize(),
+			success: function(response){
+				
+				if(response.msg == 0){
+					 //결제 정보 넘기기
+					$('#paidx').val(response.paidx);
+					$('#oAmt').val(response.enfee);
+					$('#oProductCD').val(response.paidx);
+					$('#oMemberID').val(response.userno);
+					$('#oMemberNm').val(response.name);
+					$('#oRecpNM').val(response.name);
+					if(response.contype == "K") $('#oRecpAddr').val(response.address +" "+response.address2);
+					else $('#oRecpAddr').val(".");
+					$('#oMemberEmail').val(response.email);
+					if(response.userno==0 || response.userno=="0") $('#oMemberID').val("guest");
+					/*if(response.contype == "K"){
+						$('#payment_form').submit();
+					}else{
+						alert("신청되었습니다.");
+						location.href="/conference/pre_registration_view.html?conidx="+$("#fkconidx").val()+"&type=isup";	
+					}*/
+					$('#payment_form').submit();
+					
+				}else if(response.msg == 1){
+					
+				}else if(response.msg == 2){
+					alert("이미 신청하셨습니다.");
+				}else if(response.msg == 3){
+					
+					
+				}
+				
+	           
+				
+	        }
+		});
+	}
+	
+	return false;
+	
+}
+/*function postsearch(initial){
+    if(typeof initial === "undefined"){
+          initial ='';
+    }
+	var url = "/skin/post/post.html?initial="+initial;
+	var windowName = "search_post";
+	var windowWidth = 468;
+	var windowHeight = 400;
+	var windowLeft = parseInt((screen.availWidth/2) - (windowWidth/2));
+	var windowTop = parseInt((screen.availHeight/2) - (windowHeight/2));
+	var windowSize = "width=" + windowWidth + ",height=" + windowHeight + ",left=" + windowLeft + ",top=" + windowTop + ",screenX=" + windowLeft + ",screenY=" + windowTop;
+	window.open(url, windowName, windowSize);
+}*/
+//결제창 호출
+function popup_payment(order){
+    if(typeof initial === "undefined"){
+          initial ='';
+    }
+    //$('#encode').val(order);
+    
+    SLB('/Allat/approval.html?sOrderNo='+order+'&type=con','iframe', 600, 450, true, false);
+    
+	/*var url = "/Allat/approval.html?sOrderNo="+order;
+	var windowName = "search_post";
+	var windowWidth = 468;
+	var windowHeight = 450;
+	var windowLeft = parseInt((screen.availWidth/2) - (windowWidth/2));
+	var windowTop = parseInt((screen.availHeight/2) - (windowHeight/2));
+	var windowSize = "width=" + windowWidth + ",height=" + windowHeight + ",left=" + windowLeft + ",top=" + windowTop + ",screenX=" + windowLeft + ",screenY=" + windowTop;
+	window.open(url, windowName, windowSize);*/
+	return false;
+}
+//결제 완료 후 호출
+function orderResult(ret,no){
+	if(ret=="Y"){
+		alert("결제를 성공하였습니다.");
+		SLB("<img src='/images/conference/loading.gif' alt='HOME' />",'html',true);
+		$('#encode').val(no); //결제코드
+		//주문코드 등록
+		$('#insert').attr('action',"/conference/pre_registration_update.html")
+		$('#insert').attr('onsubmit',"")
+		$('#insert').submit();
+	}else{
+		alert('결제를 실패하였습니다.');
+	}
+}
+//첨부파일 확장자 체크
+function check_ext(e, filetype){
+	
+	var temp = $(e).val();
+	var ext = temp.substring(temp.lastIndexOf(".") + 1).toLowerCase();
+	
+	//var exts = ['pdf','hwp','excel'];
+	if (filetype.indexOf(ext) < 0) {
+		alert(filetype+' 파일종류만 첨부가 가능합니다');
+		$(e).val('');
+		return false;
+	}
+	if(e.files[0].size/1024/1024 > 50){// 단위는 M
+		$(e).val('');
+		alert('파일 용량이 50M이하의 파일만 첨부가 가능합니다');
+		return false;
+		
+	} 	
+}
+function check_email(e){
+	//이메일 입력
+	var res = $(e).val().split("@");
+   if(res.length > 1 ){
+   	alert('@domain.com을 제외한 아이디만 입력해주세요')
+   	$(e).val(res[0]);
+   	return false;
+   }
+}
+
+function changeEmail(obj){
+	$('#email2').val($(obj).val().trim());
+	if($(obj).val().trim() == ""){
+		$('#email2').show();
+		$('#email2').attr('readonly', false);
+	}else $('#email2').hide();
+	return false;
+}

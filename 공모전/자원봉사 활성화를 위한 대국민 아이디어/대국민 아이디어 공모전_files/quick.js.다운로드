@@ -1,0 +1,49 @@
+;(function($){
+	
+	$.fn.QuickMenu = function(options) {
+		
+		var settings = {
+				topMargin: '',
+				leftMargin: '',
+				setTime: '10'
+		};
+		$.extend(settings, options);
+		
+		settings.FloatingObj = this;
+		settings.topMargin = parseInt(settings.topMargin);
+		settings.leftMargin = parseInt(settings.leftMargin);
+		settings.Percentage = 20; 
+		settings.setTime = parseInt(settings.setTime); 
+		settings.FloatingObj.css('position','absolute');
+		settings.FloatingObj.css('left',settings.leftMargin);
+		settings.Body = null; 
+		settings.setTimeOut = null; 
+		
+		function run(){
+			if (($(document.documentElement).scrollLeft() + $(document.documentElement).scrollTop()) > ($(document.body).scrollLeft() + $(document.body).scrollTop() )) {		
+				settings.Body = $(document.documentElement);
+			} else {
+				settings.Body = $(document.body);
+			}
+			var FloatingObjTop = (settings.FloatingObj.css('top')) ? parseInt(settings.FloatingObj.css('top'),10) : settings.FloatingObj.offset().top;
+			var DocTop = settings.Body.scrollTop() + settings.topMargin;
+			var MoveY = Math.abs(FloatingObjTop - DocTop);
+			MoveY = Math.ceil(MoveY / settings.Percentage);
+			if (FloatingObjTop < DocTop) {
+				settings.FloatingObj.css('top',FloatingObjTop + MoveY);
+				
+			} else {
+				settings.FloatingObj.css('top',FloatingObjTop - MoveY );
+				
+			}
+			window.clearTimeout(settings.setTimeOut);
+			settings.setTimeOut = window.setTimeout(run ,settings.setTime);
+	   }
+	   
+	   run();
+	};
+	
+})(jQuery);
+
+
+
