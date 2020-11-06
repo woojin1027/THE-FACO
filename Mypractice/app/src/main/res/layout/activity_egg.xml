@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".EggActivity"
     android:orientation="vertical"
-    android:background="#C8FFFF">
+    android:background="#f89c4f">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +53,6 @@
                 android:background="@drawable/rounded_corner4"
                 android:fontFamily="@font/dream"
                 android:text="@string/egg_theday1"
-                android:textColor="#4E6185"
                 android:textSize="20dp"
                 android:gravity="center"/>
             <TextView
@@ -63,7 +62,6 @@
                 android:background="@drawable/rounded_corner5"
                 android:fontFamily="@font/dream"
                 android:text="@string/egg_theday2"
-                android:textColor="#4E6185"
                 android:textSize="18dp"
                 android:gravity="left"/>
             </LinearLayout>
@@ -75,7 +73,6 @@
                 android:fontFamily="@font/dream"
                 android:gravity="left"
                 android:text="@string/egg_story"
-                android:textColor="#4E6185"
                 android:textSize="19dp" />
             </LinearLayout>
 
