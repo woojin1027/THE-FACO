@@ -29,7 +29,6 @@
                 android:fontFamily="@font/font_dream"
 
                 android:text="TextView2"
-                android:textColor="#cc000000"
                 android:textSize="24sp"
                 android:textStyle="bold">
 
@@ -44,7 +43,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#b391A8D2"
+        android:background="#FF9600"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
