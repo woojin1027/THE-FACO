@@ -454,7 +454,7 @@ public class bus3Activity extends AppCompatActivity {
             for(int i = 0; i < jarray.length(); i++)
             {
                 JSONObject obj = jarray.getJSONObject(i);
-                if(Integer.parseInt(obj.getString("BusNumber")) == 8100 || Integer.parseInt(obj.getString("BusNumber")) == 81004102)
+                if(Integer.parseInt(obj.getString("BusNumber")) == 3007)
                 {
                     DBStationId.add(obj.getString("StationId"));
                     DBLineCnt.add(obj.getString("Detect_Number(People)"));

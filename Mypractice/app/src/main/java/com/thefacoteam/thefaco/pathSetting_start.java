@@ -700,7 +700,7 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
         list_new.setTextFilterEnabled(true);
         searchBox.addTextChangedListener(this);
 
-
+/*
         //엔터키막기
         final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         searchBox.setOnKeyListener(new View.OnKeyListener() {
@@ -713,7 +713,7 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
                 return false;
             }
         });
-
+*/
         //주변 정류장 클릭시 이벤트
         nearby_stop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -770,7 +770,7 @@ public class pathSetting_start extends BaseActivity implements TextWatcher{
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        list_new.setVisibility(View.INVISIBLE);
+        list_new.setVisibility(View.VISIBLE);
         list_new.setFilterText(searchBox.getText().toString());
     }
 
