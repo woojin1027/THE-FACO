@@ -43,10 +43,10 @@
         <activity android:name="com.thefacoteam.thefaco.pathset_mapshow_start" />
         <activity android:name="com.thefacoteam.thefaco.pathset_mapshow_end" />
         <activity android:name="com.thefacoteam.thefaco.path_base" />
-        <activity android:name="com.thefacoteam.thefaco.subActivity" />
-        <activity android:name="com.thefacoteam.thefaco.showActivity" />
+        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_8100" />
+        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_M4102" />
         <activity android:name="com.thefacoteam.thefaco.MainActivity" />
-        <activity android:name="com.thefacoteam.thefaco.bus3Activity"/>
+        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_3007"/>
         <activity
             android:name="com.thefacoteam.thefaco.splashActivity"
             android:screenOrientation="portrait">

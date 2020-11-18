@@ -1,4 +1,4 @@
-package com.thefacoteam.thefaco;
+package com.thefacoteam.thefaco.busBtn;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import com.thefacoteam.thefaco.Bus_items;
+import com.thefacoteam.thefaco.BusitemAdapter2;
+import com.thefacoteam.thefaco.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 //8100번 버스의 자바 파일
-public class bus3Activity extends AppCompatActivity {
+public class btnEvent_3007 extends AppCompatActivity {
 
     //final 변수는 한번만 할당한다. 두번이상 할당하려 할때 컴파일 오류!
     private final String TAG = "myTag";
