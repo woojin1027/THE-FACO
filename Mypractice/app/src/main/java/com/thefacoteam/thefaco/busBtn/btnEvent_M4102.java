@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.thefacoteam.thefaco.Bus_items;
-import com.thefacoteam.thefaco.BusitemAdapter;
+import com.thefacoteam.thefaco.adapter.BusitemAdapter;
 import com.thefacoteam.thefaco.R;
 
 import org.json.JSONArray;

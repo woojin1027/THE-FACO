@@ -1,4 +1,4 @@
-package com.thefacoteam.thefaco;
+package com.thefacoteam.thefaco.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.thefacoteam.thefaco.Path_items;
+import com.thefacoteam.thefaco.R;
 
 import java.util.ArrayList;
 

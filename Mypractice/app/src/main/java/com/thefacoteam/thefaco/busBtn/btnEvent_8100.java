@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.thefacoteam.thefaco.Bus_items;
-import com.thefacoteam.thefaco.BusitemAdapter2;
+import com.thefacoteam.thefaco.adapter.BusitemAdapter2;
 import com.thefacoteam.thefaco.R;
 
 import org.json.JSONArray;
