@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.thefacoteam.thefaco.Bus_items;
-import com.thefacoteam.thefaco.BusitemAdapter2;
+import com.thefacoteam.thefaco.BusitemAdapter3;
 import com.thefacoteam.thefaco.R;
 
 import org.json.JSONArray;
@@ -48,30 +48,30 @@ public class btnEvent_3007 extends AppCompatActivity {
     private int eventType;
     private String result; //rest api 호출한 값 담는 변수
 
-    private ArrayList listBus;
-    private ArrayList liststation1;
-    private ArrayList liststation2;
-    private ArrayList listBusseq;
-    private ArrayList liststationId;
-    private ArrayList listseatCnt;
-    private ArrayList listBusstop;
-    private ArrayList AllStationId;
-    private ArrayList AllStationNm;
-    private ArrayList DBStationId;
-    private ArrayList DBLineCnt;
-    private ArrayList DBStaOrder;
-    private ArrayList DBSeatcnt1;
-    private ArrayList DBSeatcnt2;
-    private ArrayList Buslocation1 = new ArrayList();
-    private ArrayList Buslocation2 = new ArrayList();
+    private ArrayList<String> listBus;
+    private ArrayList<String> liststation1;
+    private ArrayList<String> liststation2;
+    private ArrayList<String> listBusseq;
+    private ArrayList<String> liststationId;
+    private ArrayList<String> listseatCnt;
+    private ArrayList<Integer> listBusstop;
+    private ArrayList<String> AllStationId;
+    private ArrayList<String> AllStationNm;
+    private ArrayList<String> DBStationId;
+    private ArrayList<String> DBLineCnt;
+    private ArrayList<String> DBStaOrder;
+    private ArrayList<java.io.Serializable> DBSeatcnt1;
+    private ArrayList<java.io.Serializable> DBSeatcnt2;
+    private ArrayList<java.io.Serializable> Buslocation1 = new ArrayList<java.io.Serializable>();
+    private ArrayList<java.io.Serializable> Buslocation2 = new ArrayList<>();
 
     private ArrayList<Integer> CalStaOrder;
-    private ArrayList CalculData;
-    private ArrayList CalculData2;
+    private ArrayList<String> CalculData;
+    private ArrayList<String> CalculData2;
 
-    private ArrayList examine = new ArrayList();
+    private ArrayList<String> examine = new ArrayList<>();
 
-    BusitemAdapter2 adapter = new BusitemAdapter2();
+    BusitemAdapter3 adapter = new BusitemAdapter3();
 
     int []BusstopArr = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,30,31,32,33,37,38,39,40,41,42,43,50,
             51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69};
@@ -83,17 +83,17 @@ public class btnEvent_3007 extends AppCompatActivity {
         setTitle("3007");
         setContentView(R.layout.activity_bus3);
 
-        liststation1 = new ArrayList();
-        liststation2 = new ArrayList();
-        listBusseq = new ArrayList();
-        liststationId = new ArrayList();
-        listseatCnt = new ArrayList();
-        listBus = new ArrayList();
-        listBusstop = new ArrayList();
-        AllStationId = new ArrayList();
-        AllStationNm = new ArrayList();
-        DBSeatcnt1 = new ArrayList();
-        DBSeatcnt2 = new ArrayList();
+        liststation1 = new ArrayList<>();
+        liststation2 = new ArrayList<String>();
+        listBusseq = new ArrayList<>();
+        liststationId = new ArrayList<String>();
+        listseatCnt = new ArrayList<String>();
+        listBus = new ArrayList<String>();
+        listBusstop = new ArrayList<>();
+        AllStationId = new ArrayList<String>();
+        DBSeatcnt1 = new ArrayList<java.io.Serializable>();
+        DBSeatcnt2 = new ArrayList<>();
+        AllStationNm = new ArrayList<String>();
 
         for(int i = 0; i < BusstopArr.length; i++)
         {
@@ -106,13 +106,7 @@ public class btnEvent_3007 extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        for(int i = 0; i < AllStationNm.size(); i++)
-        {
-            listBus.add(AllStationNm.get(i));
-        }
-
-        //리사이클러뷰 셋팅
-        RecyclerViewSet();
+        Log.d(TAG,"테스트 " + listBus + AllStationNm);
 
         liststation1.clear();
         liststation2.clear();
@@ -153,6 +147,7 @@ public class btnEvent_3007 extends AppCompatActivity {
         });
 
     }
+
 
     //리사이클러뷰 셋팅
     public void RecyclerViewSet()
@@ -222,12 +217,15 @@ public class btnEvent_3007 extends AppCompatActivity {
 
                 TextSet();
 
+                listBus.addAll(AllStationNm);
+
                 //UI setText 하는 곳
                 runOnUiThread(new Runnable(){
                     @Override
                     public void run()
                     {
-                        Log.d(TAG, listBusseq + " " + liststationId + " " + liststation1);
+                        //리사이클러뷰 셋팅
+                        RecyclerViewSet();
                         //버스 리셋
                         for(int j = 0; j < listBus.size(); j++)
                         {
@@ -448,9 +446,9 @@ public class btnEvent_3007 extends AppCompatActivity {
     private void JSONParser()
     {
 
-        DBStationId = new ArrayList();
-        DBLineCnt = new ArrayList();
-        DBStaOrder = new ArrayList();
+        DBStationId = new ArrayList<>();
+        DBLineCnt = new ArrayList<>();
+        DBStaOrder = new ArrayList<>();
         try
         {
             JSONObject jObject = new JSONObject(result);
@@ -475,8 +473,8 @@ public class btnEvent_3007 extends AppCompatActivity {
     {
         Log.d(TAG, "버스도착정보항목조회 : " + DBStationId.size() + "번 호출");
 
-        CalculData = new ArrayList();
-        CalculData2 = new ArrayList();
+        CalculData = new ArrayList<String>();
+        CalculData2 = new ArrayList<String>();
         CalStaOrder = new ArrayList<>();
         CalStaOrder.clear();
         CalculData.clear();
