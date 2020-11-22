@@ -1,4 +1,4 @@
-package com.thefacoteam.thefaco;
+package com.thefacoteam.thefaco.adapter;
 
 import android.animation.ValueAnimator;
 import android.util.SparseBooleanArray;
@@ -12,11 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.thefacoteam.thefaco.Bus_items;
+import com.thefacoteam.thefaco.OnBusItemClickListener;
+import com.thefacoteam.thefaco.R;
+
 import java.util.ArrayList;
 
-
-//8100 의 버스정류장 어댑터
-public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHolder>
+//M4102 의 버스정류장 어댑터
+public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHolder>
 {
     ArrayList<Bus_items> items = new ArrayList<Bus_items>();
 
@@ -25,9 +28,15 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
     //직전에 클릭됐던 Item의 position
     private int prePosition = -1;
 
+    private int itemposition;
+    int []BusstopArr = new int[]{0,2,4,5,16,17,18,19,22,23,24,35,36,37,38};
+    private ArrayList listBusstop;
+
+
     public void addItem(Bus_items item)
     {
         //외부에서 item 을 추가시킬 함수
+
         items.add(item);
     }
 
@@ -44,7 +53,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
     public void setItem(int position, Bus_items item)
     {
         items.set(position, item);
-        //8100 버튼을 눌렀을때 바뀐 리스트를 그대로 보여주기위한 메서드
+        //M4102 버튼을 눌렀을때 바뀐 리스트를 그대로 보여주기위한 메서드
         notifyItemChanged(position);
     }
 
@@ -58,7 +67,6 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
         return new ViewHolder(itemView);    //뷰홀더 객체 반환
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,final int position)
     {
@@ -66,12 +74,12 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
         Bus_items item = items.get(position);
         holder.setItem(item);
 
-        ViewHolder viewHolder = (ViewHolder)holder;
+        final ViewHolder viewHolder = (ViewHolder)holder;
         viewHolder.onBind(items.get(position),position,selectedItems);
-        viewHolder.setOnBusItemClickListener2(new OnBusItemClickListener2(){
 
+        viewHolder.setOnBusItemClickListener(new OnBusItemClickListener() {
             @Override
-            public void onItemClick2() {
+            public void onItemClick() {
                 if (selectedItems.get(position)) {
                     // 펼쳐진 Item을 클릭 시
                     selectedItems.delete(position);
@@ -89,6 +97,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             }
         });
 
+
     }
 
     @Override
@@ -98,18 +107,20 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
         return items.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView textView;  //버스정류장 이름
         TextView textView2; //버스좌석정보
         TextView textView3; //버스도착정보
         TextView textView4; //버스좌석정보(빨강)
         TextView textView7; //정류장 대기인원 수
-        ImageView imageView; //버스이미지
+        ImageView imageView; //버스 이미지
         ImageView imageView2; //좌석수 이미지
         ImageView imageView3; //상행선 레일 이미지
         ImageView imageView4; //하행선 레일 이미지
-        ImageView imageView5; //회차 레일 이미지
+        ImageView imageView5; //회차 레일 이미지2
         ImageView imageView6;  //정차하는 정거장 이미지
         ImageView imageView7;   //버스도착정보 레일
         ImageView imageView8;   //버스도착정보 텍스트상자
@@ -117,7 +128,7 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
         LinearLayout linearlayout; //카드뷰 전체의 레이아웃
         LinearLayout linearlayout2; //접기펼치기 레이아웃
 
-        OnBusItemClickListener2 onBusItemClickListener2;
+        OnBusItemClickListener onBusItemClickListener;
 
         public ViewHolder(View itemView)
         {
@@ -140,13 +151,14 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             linearlayout = itemView.findViewById(R.id.linearlayout);
             linearlayout2 = itemView.findViewById(R.id.linearlayout2);
 
-            linearlayout.setOnClickListener(new View.OnClickListener(){
+            linearlayout.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    onBusItemClickListener2.onItemClick2();
+                    onBusItemClickListener.onItemClick();
                 }
             });
+
         }
 
         public void onBind(Bus_items item, int position, SparseBooleanArray selectedItems)
@@ -165,7 +177,9 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             imageView7.setImageResource(item.getTextrail());
             imageView8.setImageResource(item.getTextInfobox());
             imageView9.setImageResource(item.getLineInfobox());
+
             changeVisibility(selectedItems.get(position));
+
         }
 
         private void changeVisibility(final boolean isExpanded)
@@ -177,10 +191,10 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    // imageView의 높이 변경
+                    // 높이 변경
                     linearlayout2.getLayoutParams().height = (int) animation.getAnimatedValue();
                     linearlayout2.requestLayout();
-                    // imageView가 실제로 사라지게하는 부분
+                    // View가 실제로 사라지게하는 부분
                     linearlayout2.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
                 }
             });
@@ -188,10 +202,11 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             va.start();
         }
 
-        public void setOnBusItemClickListener2(OnBusItemClickListener2 onBusItemClickListener2)
+        public void setOnBusItemClickListener(OnBusItemClickListener onBusItemClickListener)
         {
-            this.onBusItemClickListener2 = onBusItemClickListener2;
+            this.onBusItemClickListener = onBusItemClickListener;
         }
+
         public void setItem(Bus_items item)
         {
             textView.setText(item.getBusstopname());
@@ -208,8 +223,9 @@ public class BusitemAdapter2 extends RecyclerView.Adapter<BusitemAdapter2.ViewHo
             imageView7.setImageResource(item.getTextrail());
             imageView8.setImageResource(item.getTextInfobox());
             imageView9.setImageResource(item.getLineInfobox());
-        }
-    }
 
+        }
+
+    }
 
 }

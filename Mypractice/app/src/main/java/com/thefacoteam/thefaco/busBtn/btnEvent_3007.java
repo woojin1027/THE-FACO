@@ -6,13 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 
 import com.thefacoteam.thefaco.Bus_items;
-import com.thefacoteam.thefaco.BusitemAdapter3;
+import com.thefacoteam.thefaco.adapter.BusitemAdapter3;
 import com.thefacoteam.thefaco.R;
 
 import org.json.JSONArray;

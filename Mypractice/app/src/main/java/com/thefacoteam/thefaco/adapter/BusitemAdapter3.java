@@ -1,4 +1,4 @@
-package com.thefacoteam.thefaco;
+package com.thefacoteam.thefaco.adapter;
 
 import android.animation.ValueAnimator;
 import android.util.SparseBooleanArray;
@@ -12,10 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.thefacoteam.thefaco.Bus_items;
+import com.thefacoteam.thefaco.OnBusItemClickListener;
+import com.thefacoteam.thefaco.R;
+
 import java.util.ArrayList;
 
-//M4102 의 버스정류장 어댑터
-public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHolder>
+//3007의 버스정류장 어댑터
+public class BusitemAdapter3 extends RecyclerView.Adapter<BusitemAdapter3.ViewHolder>
 {
     ArrayList<Bus_items> items = new ArrayList<Bus_items>();
 
@@ -23,11 +27,6 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
     private SparseBooleanArray selectedItems = new SparseBooleanArray();
     //직전에 클릭됐던 Item의 position
     private int prePosition = -1;
-
-    private int itemposition;
-    int []BusstopArr = new int[]{0,2,4,5,16,17,18,19,22,23,24,35,36,37,38};
-    private ArrayList listBusstop;
-
 
     public void addItem(Bus_items item)
     {
@@ -49,7 +48,7 @@ public class BusitemAdapter extends RecyclerView.Adapter<BusitemAdapter.ViewHold
     public void setItem(int position, Bus_items item)
     {
         items.set(position, item);
-        //M4102 버튼을 눌렀을때 바뀐 리스트를 그대로 보여주기위한 메서드
+        //3007 버튼을 눌렀을때 바뀐 리스트를 그대로 보여주기위한 메서드
         notifyItemChanged(position);
     }
 
