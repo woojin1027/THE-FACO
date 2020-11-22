@@ -1,6 +1,5 @@
 package com.thefacoteam.thefaco;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.thefacoteam.thefaco.busBtn.btnEvent_3007;
+import com.thefacoteam.thefaco.busBtn.btnEvent_8100;
+import com.thefacoteam.thefaco.busBtn.btnEvent_M4102;
 
 public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한다
 {
@@ -77,7 +80,7 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
             @Override
             public void onClick(View v) {
                 toastshow8100(container);
-                Intent intent = new Intent(getActivity(),subActivity.class);
+                Intent intent = new Intent(getActivity(), btnEvent_8100.class);
                 startActivity(intent);
         }});
 
@@ -86,7 +89,7 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
             @Override
             public void onClick(View v) {
                 toastshowM4102(container);
-                Intent intent = new Intent(getActivity(),showActivity.class);
+                Intent intent = new Intent(getActivity(), btnEvent_M4102.class);
                 startActivity(intent);
             }});
 
@@ -94,7 +97,7 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
             @Override
             public void onClick(View v) {
                 toastshowM4102(container);
-                Intent intent = new Intent(getActivity(),bus3Activity.class);
+                Intent intent = new Intent(getActivity(), btnEvent_3007.class);
                 startActivity(intent);
             }});
 
