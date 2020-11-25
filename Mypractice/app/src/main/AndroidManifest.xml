@@ -47,6 +47,7 @@
         <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_M4102" />
         <activity android:name="com.thefacoteam.thefaco.MainActivity" />
         <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_3007"/>
+        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_7000"/>
         <activity
             android:name="com.thefacoteam.thefaco.splashActivity"
             android:screenOrientation="portrait">
