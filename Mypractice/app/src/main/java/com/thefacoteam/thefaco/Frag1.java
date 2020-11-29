@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.thefacoteam.thefaco.busBtn.btnEvent_3007;
+import com.thefacoteam.thefaco.busBtn.btnEvent_7000;
 import com.thefacoteam.thefaco.busBtn.btnEvent_8100;
 import com.thefacoteam.thefaco.busBtn.btnEvent_M4102;
 
@@ -36,6 +37,7 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
         final Button button8 = view.findViewById(R.id.busNum8);
         final Button button9 = view.findViewById(R.id.busNum9);
         final Button button10 = view.findViewById(R.id.busNum10);
+        final Button button11 = view.findViewById(R.id.busNum11);
 
         scaleUp = AnimationUtils.loadAnimation(getContext(),R.anim.scale_up);
         scaleDown = AnimationUtils.loadAnimation(getContext(),R.anim.scale_down);
@@ -73,9 +75,20 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
                 } return false;
             }
         });
+        button11.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction() == motionEvent.ACTION_DOWN)
+                    button11.startAnimation(scaleUp);
+                else if(motionEvent.getAction()==motionEvent.ACTION_UP){
+                    button11.startAnimation(scaleDown);
+                } return false;
+            }
+        });
 
 
-        //버튼 클릭시 sub, showActivity로 이동
+        //버튼 클릭시 8100, 4102, 3007, 7000로 이동
         button8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,8 +109,16 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
         button10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastshowM4102(container);
+                toastshow3007(container);
                 Intent intent = new Intent(getActivity(), btnEvent_3007.class);
+                startActivity(intent);
+            }});
+
+        button11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastshow7000(container);
+                Intent intent = new Intent(getActivity(), btnEvent_7000.class);
                 startActivity(intent);
             }});
 
@@ -125,6 +146,34 @@ public class Frag1 extends Fragment// Fragment 클래스를 상속받아야한�
         TextView text = layout.findViewById(R.id.text);
         Toast toast = new Toast(getActivity());
         text.setText("M4102번 버스를 조회합니다");
+        text.setTextSize(15);
+        text.setTextColor(Color.WHITE);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private void toastshow3007(ViewGroup container) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout,container,false);
+        TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(getActivity());
+        text.setText("3007번 버스를 조회합니다");
+        text.setTextSize(15);
+        text.setTextColor(Color.WHITE);
+        toast.setGravity(Gravity.BOTTOM,0,0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private void toastshow7000(ViewGroup container) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout,container,false);
+        TextView text = layout.findViewById(R.id.text);
+        Toast toast = new Toast(getActivity());
+        text.setText("7000번 버스를 조회합니다");
         text.setTextSize(15);
         text.setTextColor(Color.WHITE);
         toast.setGravity(Gravity.BOTTOM,0,0);
