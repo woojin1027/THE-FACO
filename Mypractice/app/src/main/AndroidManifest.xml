@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.thefacoteam.thefaco">
+    package="com.thefacoteam.thefaco1">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,9 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.thefacoteam.thefaco.Reason" />
-        <activity android:name="com.thefacoteam.thefaco.Reason2"/>
-        <activity android:name="com.thefacoteam.thefaco.EggActivity" />
+        <activity android:name="com.thefacoteam.thefaco1.Reason" />
+        <activity android:name="com.thefacoteam.thefaco1.Reason2"/>
+        <activity android:name="com.thefacoteam.thefaco1.EggActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -32,24 +32,24 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDboufDm5Kqn7ORKEYas_JVfmKTVm0d7ko" />
 
-        <activity android:name="com.thefacoteam.thefaco.map_around_busstop2"/>
+        <activity android:name="com.thefacoteam.thefaco1.map_around_busstop2"/>
 
-        <activity android:name="com.thefacoteam.thefaco.map_around_busstop" />
-        <activity android:name="com.thefacoteam.thefaco.result" />
-        <activity android:name="com.thefacoteam.thefaco.BaseActivity" />
-        <activity android:name="com.thefacoteam.thefaco.BaseActivity2" />
-        <activity android:name="com.thefacoteam.thefaco.pathSetting_start" />
-        <activity android:name="com.thefacoteam.thefaco.pathSetting_end" />
-        <activity android:name="com.thefacoteam.thefaco.pathset_mapshow_start" />
-        <activity android:name="com.thefacoteam.thefaco.pathset_mapshow_end" />
-        <activity android:name="com.thefacoteam.thefaco.path_base" />
-        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_8100" />
-        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_M4102" />
-        <activity android:name="com.thefacoteam.thefaco.MainActivity" />
-        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_3007"/>
-        <activity android:name="com.thefacoteam.thefaco.busBtn.btnEvent_7000"/>
+        <activity android:name="com.thefacoteam.thefaco1.map_around_busstop" />
+        <activity android:name="com.thefacoteam.thefaco1.result" />
+        <activity android:name="com.thefacoteam.thefaco1.BaseActivity" />
+        <activity android:name="com.thefacoteam.thefaco1.BaseActivity2" />
+        <activity android:name="com.thefacoteam.thefaco1.pathSetting_start" />
+        <activity android:name="com.thefacoteam.thefaco1.pathSetting_end" />
+        <activity android:name="com.thefacoteam.thefaco1.pathset_mapshow_start" />
+        <activity android:name="com.thefacoteam.thefaco1.pathset_mapshow_end" />
+        <activity android:name="com.thefacoteam.thefaco1.path_base" />
+        <activity android:name="com.thefacoteam.thefaco1.busBtn.btnEvent_8100" />
+        <activity android:name="com.thefacoteam.thefaco1.busBtn.btnEvent_M4102" />
+        <activity android:name="com.thefacoteam.thefaco1.MainActivity" />
+        <activity android:name="com.thefacoteam.thefaco1.busBtn.btnEvent_3007"/>
+        <activity android:name="com.thefacoteam.thefaco1.busBtn.btnEvent_7000"/>
         <activity
-            android:name="com.thefacoteam.thefaco.splashActivity"
+            android:name="com.thefacoteam.thefaco1.splashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
