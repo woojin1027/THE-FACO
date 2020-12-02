@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        <kr.co.prnd.YouTubePlayerView
             android:id="@+id/youTubePlayerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,8 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showYouTubeButton="false"
             app:videoId="xxq9onugqUs"
-            android:layout_marginBottom="0dp">
-        </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+            android:layout_marginBottom="0dp"/>
 
     </LinearLayout>
 

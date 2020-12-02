@@ -119,15 +119,14 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+               <kr.co.prnd.YouTubePlayerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
                     android:padding="15dp"
                     app:autoPlay="false"
                     app:showYouTubeButton="true"
-                    app:videoId="fXRoWjmCc-w">
-                </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+                    app:videoId="fXRoWjmCc-w"/>
             </LinearLayout>
 
             <LinearLayout
