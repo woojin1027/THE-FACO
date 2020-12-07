@@ -27,7 +27,7 @@ def haar(frame):
         faces = face_cascade.detectMultiScale(roi_gray)
         for (ex,ey,ew,eh) in body:
             cv.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,255),3)
-    frame = cv.resize(frame,(900,500))
+    frame = cv.resize(frame,(500,900))
     cv.imshow('Haar',frame)
 
 def main():
@@ -38,12 +38,12 @@ def main():
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
-    cap = cv.VideoCapture('123.mp4')
+    cap = cv.VideoCapture('1207.mp4')
     while cap.isOpened():
         ret,img = cap.read()
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
         img1 = img.copy()
@@ -60,7 +60,7 @@ def main():
             draw_detections(img, found)
             draw_detections(img, found_filtered, 3)
             print('%d (%d)' % (len(found_filtered), len(found)),"명")
-        img = cv.resize(img,(900,500))
+        img = cv.resize(img,(500,900))
         cv.imshow('frame', img)
         
         ch = cv.waitKey(30)& 0xff

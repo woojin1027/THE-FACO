@@ -30,8 +30,8 @@ def draw_detections(img, rects, thickness = 1):
             a = abs(int(readc[i][0]) - int(readc[j][0]))
             b = abs(int(readc[i][1]) - int(readc[j][1]))
             if i != j:
-                if a < 200:
-                    if b < 100:
+                if a < 400:
+                    if b < 200:
                         readc2.append(( int(readc[i][0]),int(readc[i][1]) ))
                         readc2.append(( int(readc[j][0]),int(readc[j][1]) ))
                         readc2 = list(set(readc2))
@@ -48,8 +48,8 @@ def main(cap):
     import itertools as it
 
     checkT = 0
-    w = 640
-    h = 480
+    w = 1000
+    h = 1800
     hog = cv.HOGDescriptor()
     hog.setSVMDetector( cv.HOGDescriptor_getDefaultPeopleDetector() )
 
@@ -75,7 +75,7 @@ def main(cap):
             break
         frame = img
         rows, cols = frame.shape[:2]
-        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), -90 , 1)
+        rotation_matrix = cv.getRotationMatrix2D((cols/2, rows/2), 0 , 1)
         image_rotation = cv.warpAffine(frame, rotation_matrix, (cols, rows))
         img = np.array(image_rotation)
 
@@ -117,6 +117,6 @@ def main(cap):
     
 
 if __name__ == '__main__':
-    cap = cv.VideoCapture('125.MP4')
+    cap = cv.VideoCapture('1207.MP4')
     main(cap)
     cv.destroyAllWindows()
