@@ -1,0 +1,5 @@
+﻿  소스.cpp
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1213\1213\소스.cpp(1,20): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1213\1213\소스.cpp(1,6): error C2440: '초기화 중': 'const char [12]'에서 'int'(으)로 변환할 수 없습니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1213\1213\소스.cpp(1,6): message : 이 변환이 가능한 컨텍스트가 없습니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1213\1213\소스.cpp(2,1): fatal error C1004: 예기치 않은 파일의 끝이 나타났습니다.
