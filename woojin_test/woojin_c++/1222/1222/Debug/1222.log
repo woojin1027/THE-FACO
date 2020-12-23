@@ -1,0 +1,3 @@
+﻿  third.cpp
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\1222\third.cpp(5,6): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+  1222.vcxproj -> C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\Debug\1222.exe

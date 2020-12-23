@@ -1,0 +1,15 @@
+﻿  1222.cpp
+  first.cpp
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\1222\first.cpp(5,8): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\1222\first.cpp(12,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'size_t'입니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\1222\first.cpp(12,9): message : 서식 문자열에서 '%zd'을(를) 사용하는 것이 좋습니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\1222\first.cpp(13,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'size_t'입니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\1222\first.cpp(13,9): message : 서식 문자열에서 '%zd'을(를) 사용하는 것이 좋습니다.
+  second.cpp
+  third.cpp
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\1222\third.cpp(5,6): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+  코드를 생성하고 있습니다...
+first.obj : error LNK2005: main이(가) 1222.obj에 이미 정의되어 있습니다.
+second.obj : error LNK2005: main이(가) 1222.obj에 이미 정의되어 있습니다.
+third.obj : error LNK2005: main이(가) 1222.obj에 이미 정의되어 있습니다.
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\1222\x64\Debug\1222.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.
