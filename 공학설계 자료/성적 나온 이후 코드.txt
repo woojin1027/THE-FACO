@@ -1,0 +1,510 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="/resources/img/favicon.ico">
+
+    <title>성적관리시스템</title>
+    <!-- stylesheets -->
+    
+        <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
+    
+        <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap-social.css">
+    
+        <link rel="stylesheet" type="text/css" href="/resources/css/metisMenu.min.css">
+    
+        <link rel="stylesheet" type="text/css" href="/resources/css/sb-admin-2.css">
+    
+        <link rel="stylesheet" type="text/css" href="/resources/font-awesome/css/font-awesome.min.css">
+    
+        <link rel="stylesheet" type="text/css" href="/resources/rd/crownix-viewer.min.css">
+    
+    <!-- end stylesheets -->
+    <!-- scripts -->
+    
+        <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    
+        <script src="/resources/js/bootstrap.min.js"></script>
+    
+        <script src="/resources/js/metisMenu.min.js"></script>
+    
+        <script src="/resources/js/sb-admin-2.js"></script>
+    
+        <script src="/resources/rd/crownix-viewer.min.js"></script>
+    
+    <!-- end scripts -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        
+
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/main">성적관리시스템</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="small"> &#44608;&#50864;&#51652; 최종접속시간 : 2020&#45;12&#45;28&#32;23&#58;48</li>
+        <!-- /.dropdown -->
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+                <li>
+                    <a href="/main"></i>201512276 &#44608;&#50864;&#51652;</a>
+                </li>
+                
+                <li class="divider"></li>
+                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> 로그아웃</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="/main"><i class="fa fa-home fa-fw"></i> 홈</a>
+                </li>
+                
+                <li class="active">
+                    <a href="#"><i class="fa fa-files-o fa-fw"></i> 성적조회<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/grade/term/general">학기성적</a>
+                        </li>
+                        <li>
+                            <a href="/grade/term/basic">학기성적(기초)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#"><i class="fa fa-table fa-fw"></i> 수강정보<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/subject/survey">강의평가 설문응답</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
+        
+
+
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">성적조회</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseOne"><strong>이용안내</strong></a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p><strong>Q: 담당교수연락처 조회 방법 안내</strong></p>
+                    <p>담당교수명을 클릭하면 연락처를 확인할 수 있습니다.</p>
+                    <p>단, 담당교수의 연락처가 명시되어 있지 않을 경우는 해당 교수님이 연락처 정보를 KUTIS에 등록하지 않은 상태이므로 해당 교수님의 소속 전공 사무실으로 문의하셔야 확인이 가능합니다.</p>
+
+                    <hr class="style1">
+
+                    <p><strong>Q: 학기성적 조회 기간 안내</strong></p>
+                    <p>학기성적조회는 성적표 발송일부터 조회가능합니다.</p>
+
+                    <hr class="style1">
+
+                    <p><strong>Q: 석차가 0으로 나오거나 또는 석차가 안나오는 경우</strong></p>
+                    <p>학기성적조회 초기에는 석차가 0으로 나오거나 혹은 석차표기가 되어있지 않을 수 있습니다.</p>
+                    <p>이는 아직 학생의 해당 소속별 석차가 생성되지 않았기 때문인데, 석차는 학기성적정정기간이 지난 이후에 최종 결과를 가지고 생성을하므로 석차조회는 적어도 학사일정의 성적정정기간 이후에 조회가 가능합니다.</p>
+
+                    <hr class="style1">
+
+                    <p><strong>Q: 교수님께서 성적정정을 하셨다는데 반영이 안된경우</strong></p>
+                    <p>성적정정기간에 교수님들이 성적정정사항들을 해당 대학 교학팀에 정정기간이 끝날 무렵에 일괄적으로 정정사항들을 적용하므로 정정기간 중에는 곧바로 반영이 안 될 수 가 있습니다.</p>
+                    <p>정정여부를 미리 확인하시고자 할 경우에는 해당대학 교학팀으로 문의를 해 보시기 바랍니다.</p>
+
+                    <hr class="style1">
+
+                    <p><strong>Q: 연구활동종사자는 사이버 안전교육을 이수하지 않은 경우</strong></p>
+                    <p>연구활동종사자는 사이버 안전교육을 이수하지 않은 경우 교무처 학사기획팀에서 정한 특정기간 동안 2학기성적조회를 하실 수 없습니다. 이와 관련된 문의사항은 시설관리팀(☎031-249-8833)으로 하시기 바랍니다.</p>
+                    <p>[ 공과/자연과학 대학, 건설.산업/대체의학 대학원, 산학협력단 소속 연구원(연구보조원포함) ]</p>
+                    <p>경기대학교 안전정보망 주소 : http://safety.kyonggi.ac.kr</p>
+
+                    <hr class="style1">
+
+                    <p><strong>Q: 강의평가설문응답을 한과목이라도 하지 않은경우</strong></p>
+                    <p>전공 및 일부 대학원에서 강의평가 설문응답 실시를 하고 있습니다.</p>
+                    <p>강의평가 설문응답을 한 과목이라도 하지 않은 학생은 교무처 학사지원팀에서 정한 특정 기간   동안 학기성적조회를 하실 수 없습니다. 이와 관련된 문의사항은 학사지원팀(☎031-249-8753)이나 또는 대학원의 경우 해당 교학팀으로 하시기 바랍니다.</p>
+
+                    <hr class="style1">
+
+                    <p><strong>Q: 강의평가설문응답 방법</strong></p>
+                    <p>KUTIS로그인 → 학사 → 수강정보 → 강의평가질문응답 → 전 수강과목 평가 → 종료</p>
+
+                </div>
+            </div>
+        </div>
+        
+            
+            
+            
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="info">
+                                <th colspan=6 class="text-center">년도 : <b>2020 년</b> &nbsp;&nbsp;학기 : <b>2 학기</b></th>
+                            </tr>
+                            <tr class="info">
+                                <th class="text-center">이수구분</th>
+                                <th class="text-center">학수코드</th>
+                                <th class="text-center">교과목명</th>
+                                <th class="text-center">학점</th>
+                                <th class="text-center">성적</th>
+                                <th class="text-center">담당교수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                        
+                            <tr>
+                                <td class="text-center">미래</td>
+                                <td class="text-center">YA029</td>
+                                <td>창의적문제해결전략</td>
+                                <td class="text-center">3</td>
+                                
+                                    
+                                    
+                                        <td class="text-center">A+</td>
+                                    
+                                
+                                <td class="text-center">가상교육
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mySubjectModal" data-prof-id="20130597">보기</button>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td class="text-center">미래</td>
+                                <td class="text-center">AS719</td>
+                                <td>양성평등사회와성차</td>
+                                <td class="text-center">2</td>
+                                
+                                    
+                                    
+                                        <td class="text-center">P </td>
+                                    
+                                
+                                <td class="text-center">이수정
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mySubjectModal" data-prof-id="19990009">보기</button>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td class="text-center">전자</td>
+                                <td class="text-center">EF011</td>
+                                <td>마이크로프로세서응용</td>
+                                <td class="text-center">3</td>
+                                
+                                    
+                                    
+                                        <td class="text-center">A+</td>
+                                    
+                                
+                                <td class="text-center">김기용
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mySubjectModal" data-prof-id="20010259">보기</button>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td class="text-center">전자</td>
+                                <td class="text-center">EF726</td>
+                                <td>응용전자회로설계</td>
+                                <td class="text-center">3</td>
+                                
+                                    
+                                    
+                                        <td class="text-center">A+</td>
+                                    
+                                
+                                <td class="text-center">김상진
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mySubjectModal" data-prof-id="20200194">보기</button>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td class="text-center">전자</td>
+                                <td class="text-center">EF727</td>
+                                <td>초고주파회로설계</td>
+                                <td class="text-center">3</td>
+                                
+                                    
+                                    
+                                        <td class="text-center">A+</td>
+                                    
+                                
+                                <td class="text-center">성영제
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mySubjectModal" data-prof-id="20080153">보기</button>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td class="text-center">전필</td>
+                                <td class="text-center">AS620</td>
+                                <td>공학설계</td>
+                                <td class="text-center">2</td>
+                                
+                                    
+                                    
+                                        <td class="text-center">A+</td>
+                                    
+                                
+                                <td class="text-center">최상원
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mySubjectModal" data-prof-id="20200312">보기</button>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                <td class="text-center">전선</td>
+                                <td class="text-center">EF728</td>
+                                <td>통신공학</td>
+                                <td class="text-center">3</td>
+                                
+                                    
+                                    
+                                        <td class="text-center">A+</td>
+                                    
+                                
+                                <td class="text-center">박상준
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mySubjectModal" data-prof-id="20190087">보기</button>
+                                </td>
+                            </tr>
+                        
+                            <tr>
+                                
+                                    
+                                        
+                                            
+                                            
+                                                <td colspan="6">신청학점 : 19 취득학점 : 19 평점산출학점 : 17 평점평균 : 4.5</td>
+                                            
+                                        
+                                    
+                                    
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="mySubjectModal" tabindex="-1" role="dialog" aria-labelledby="myProfessorModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myProfessorModalLabel">담당교수 연락처/강의설문평가 조회</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>담당교수 연락처</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="info">소 속</th>
+                                            <td id="deptName"></td>
+                                            <th class="info">교수명</th>
+                                            <td id="name"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="info">전화번호</th>
+                                            <td id="tel"></td>
+                                            <th class="info">핸드폰번호</th>
+                                            <td id="hp"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="info">E-mail</th>
+                                            <td id="email" colspan=3></td>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            
+        
+    </div>
+</div>
+<script>
+    $('#mySubjectModal').on('show.bs.modal', function (e) {
+        var profId = $(e.relatedTarget).data('prof-id');
+        $.get( "/auth/prof.json?id=" + profId, function(data) {
+            console.log(data);
+            $('#deptName').html(data.deptName);
+            $('#name').html(data.name);
+            $('#tel').html(data.tel);
+            $('#hp').html(data.hp);
+            $('#email').html(data.email);
+        }, 'json');
+
+
+        $.get( "/grade/subject.json?profId=" + profId +"&hyear=" + 2020 + "&hakgi=" + 20, function(data) {
+            $('.modal-footer').hide();
+            $('#subjectList').empty();
+            $('#evaluationList').empty();
+            $.each(data, function(i, val){
+                var row = [];
+                row.push(
+                    "<tr>",
+                    "<td>" + val.JOJIK_NAME + "</td>",
+                    "<td>" + val.HAKSU_CD + "</td>",
+                    "<td>" + val.GWAMOK_NO + "</td>",
+                );
+                if(val.POOL_SHOW_YN == 'Y') {
+                    row.push(
+                        "<td>" + val.GWAMOK_KNAME + "  <button class='btn btn-primary btn-xs' onclick='javascript:evaluationDetailView(" + "\""+ val.JOJIK_GB + "\", \"" + val.GWAMOK_NO + "\", \"" + val.GWAMOK_KNAME +  "\", \"" + profId + "\", \"" + val.POOL_GIGAN_YN + "\")'>보기</button>" + "</td>"
+                    );
+                } else {
+                    row.push(
+                        "<td>" + val.GWAMOK_KNAME + "</td>"
+                    );
+                }
+                row.push("</tr>");
+
+                $('#subjectList').append(row.join(""));
+            });
+        }, 'json');
+    })
+</script>
+<script>
+    function evaluationDetailView(jojikGubun, gwamokNo, gwamokName, profId, isPoolGigan) {
+        if (isPoolGigan == 'Y') {
+            alert('현재 선택한 과목이 강의평가 설문응답기간이므로\n'+'강의평가설문응답 기간 중에는 평가결과를 조회하실 수 없습니다.');
+            return;
+        }
+
+        if(jojikGubun != 'A1000' && jojikGubun != 'A2000' && jojikGubun != 'A3000' && jojikGubun != 'A4000') {
+            alert('학부과목만 강의설문평가 결과를 조회할 수 있습니다.');
+            return;
+        }
+
+        $.get( "/grade/evaluation.json?hyear=" + 2020 + "&hakgi=" + 20 + "&jojikGubun=" + jojikGubun + "&gwamokNo=" + gwamokNo + "&profId=" + profId, function(data) {
+            $('.modal-footer').show();
+            $('#evaluationList').empty();
+            $('#surveyItem').empty();
+
+            // console.log(data);
+            $('#gwamokNo').text(data.gwamokNo);
+            $('#studentTotal').text(data.studentTotal);
+            $('#participantTotal').text(data.participantTotal);
+
+            $.each(data.evaluationGradeList, function(i, val){
+                var row = "<tr>"
+                    + "<td>" + convertIndexToKorean(i) + "</td>"
+                    + "<td>" + val.veryGood + "</td>"
+                    + "<td>" + val.good + "</td>"
+                    + "<td>" + val.normal + "</td>"
+                    + "<td>" + val.bad + "</td>"
+                    + "<td>" + val.veryBad + "</td>"
+                    + "</tr>";
+                $('#evaluationList').append(row);
+            });
+
+            var totalRow = '<tr>\n' +
+                '<td class="info">합계</td>\n' +
+                '<td>' + data.sumVeryGood + '</td>' +
+                '<td>' + data.sumGood + '</td>' +
+                '<td>' + data.sumNormal + '</td>' +
+                '<td>' + data.sumBad + '</td>' +
+                '<td>' + data.sumVeryBad + '</td>' +
+                '</tr>';
+            $('#evaluationList').append(totalRow);
+
+            var avgRow = '<tr>' +
+                '<td class="info">평점</td>' +
+                '<td colspan="5" class="text-center">' + data.total + '</td>' +
+                '</tr>';
+            $('#evaluationList').append(avgRow);
+
+            $.each(data.surveyItemList, function(i, val){
+                $('#surveyItem').append('<p class="text-left">' + convertIndexToKorean(i) + '. ' + val +'</p>');
+            });
+
+        }, 'json')
+        .fail(function(jqXHR) {
+            alert('현재 선택한 과목이 오류로 인하여 평가결과 조회가 어렵습니다.');
+        });
+
+
+    }
+
+    function convertIndexToKorean(idx) {
+        if(idx == 0) return '가'
+        if(idx == 1) return '나'
+        if(idx == 2) return '다'
+        if(idx == 3) return '라'
+        if(idx == 4) return '마'
+        if(idx == 5) return '바'
+        if(idx == 6) return '사'
+        if(idx == 7) return '아'
+    }
+</script>
+    </div>
+
+</body>
+
+</html>
