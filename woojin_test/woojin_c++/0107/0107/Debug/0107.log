@@ -1,2 +1,3 @@
-﻿  first.cpp
+﻿  third.cpp
+C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\0107\0107\third.cpp(13,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
   0107.vcxproj -> C:\Users\Woojin\Desktop\THE-FACO\woojin_test\woojin_c++\0107\Debug\0107.exe

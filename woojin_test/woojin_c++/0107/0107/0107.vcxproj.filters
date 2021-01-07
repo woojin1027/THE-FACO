@@ -18,5 +18,11 @@
     <ClCompile Include="first.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="second.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="third.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
