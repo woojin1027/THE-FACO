@@ -2,9 +2,7 @@
 ## 1-1. 객체인식 진행
 
 <!-- blank line -->
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="OpenCV/yolov3/test.jpg">
-    <source src="OpenCV/121.mp4" type="video/mp4">
-  </video>
-</figure>
+@[youtube](dQw4w9WgXcQ)
 <!-- blank line -->
+
+[![Watch the video](OpenCV/test.jpg)](https://youtu.be/vt5fpE0bzSY)
