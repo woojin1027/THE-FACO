@@ -5,4 +5,4 @@
 @[youtube](dQw4w9WgXcQ)
 <!-- blank line -->
 
-[![Watch the video](OpenCV/test.jpg)](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](OpenCV/DDcafe_test5.gif)](OpenCV/DDcafe_test5.avi)
